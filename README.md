@@ -1,4 +1,4 @@
-# CHESS GAME MANAGER
+# CHESS GAME TOURNAMENT MANAGER
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](#)[![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](#)[![forthebadge](https://forthebadge.com/images/badges/made-with-markdown.svg)](#)
 
 # POUR COMMENCER
