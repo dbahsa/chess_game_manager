@@ -26,7 +26,7 @@
 Avec `$ pip install` vous pouvez installer les paquets/modules requis pour le bon fonctionnement des sccripts. 
 
 ##### Installation _"automatique"_
-Ajouter dans votre repertoire local **Projet** une copie du fichier _"requirements.txt"_ (provenant du dossier compressé "P2_Nzimbi_Didier.zip"), ensuite exécuter la commande:
+Ajouter dans votre repertoire local **Projet** une copie du fichier _"requirements.txt"_ (provenant du dossier compressé "P4_Nzimbi_Didier.zip"), ensuite exécuter la commande:
 > `$ pip install -r requirements.txt`
 
 # DEMARRAGE
