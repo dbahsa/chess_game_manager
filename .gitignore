@@ -1,0 +1,18 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Dossier
+.DS_Store
+__pycache__/
+
+# Fichiers .py
+__init__.py
+
+# Fichiers .txt
+lien_GitHub.txt
