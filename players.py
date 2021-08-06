@@ -1,19 +1,15 @@
-class Players:
-    last_name: str
-    first_name: str
-    birth_date: str
-    gender: str
-    rating: int
-    score: list
-    tournament: list
-
 from dataclasses import dataclass, asdict, field
+
 
 @dataclass
 class Player:
     """Class to create player instance."""
     last_name: str
     first_name: str
+    gender: str
+    rating: int
+    score: list = field(init=False, repr=False, default=[])
+    tournament: list = field(init=False, repr=False, default=[])
     single_pl_info: dict = field(init=False, repr=False)
 
     def __post_init__(self):
