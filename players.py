@@ -2,13 +2,13 @@ from dataclasses import dataclass, asdict, field
 
 def player_score():
     """ return a list of player scores after each matchup """
-    score =[]
-    return score
+    scores =[]
+    return scores
 
 def player_t_in():
     """ to add tournaments in which a player participated in """
-    score =[]
-    return score
+    tournaments =[]
+    return tournaments
 
 @dataclass
 class Player:
@@ -17,8 +17,8 @@ class Player:
     first_name: str
     gender: str
     rating: int
-    score: list = field(init=False, repr=False, default_factory=player_score)
-    tournament: list = field(init=False, repr=False, default_factory=player_t_in)
+    scores: list = field(init=False, repr=False, default_factory=player_score)
+    tournaments: list = field(init=False, repr=False, default_factory=player_t_in)
     single_pl_info: dict = field(init=False, repr=False)
 
     def __post_init__(self):
@@ -27,8 +27,8 @@ class Player:
                                 "First Name": self.first_name,
                                 "Genre": self.gender,
                                 "Classement Général": self.rating,
-                                "Score": self.score,
-                                "Tournois": self.tournament}
+                                "Score": self.scores,
+                                "Tournois": self.tournaments}
         
 # pl_ref: list of all players data, exploited by data.py     
 pl_ref = []
@@ -36,6 +36,7 @@ pl_ref = []
 def add_players():
     """ function to instantiate players"""
     print("\n🚀 Procédons à l'enregistrement des 8 joueurs:")
+    # !!! DO NOT FORGET TO CHANGE THE RANGE BELOW TO REFLECT USER'S REQUIREMENTS OF 8 PLAYERS
     for i in range(1,3):
         print(f"\n🔥 Entrer les informations sur le joueur n°{i}")
         p = Player(input("- Nom de famille: "), 
