@@ -1,6 +1,7 @@
 import json
 from tinydb import TinyDB, Query
-# from players import players_db
+
+""" pl_ref is a list of all players data obtained from players.py"""
 from players import pl_ref
 
 
@@ -73,10 +74,6 @@ print(temp['t_players']['1']["Last Name"])
 
 with open(filename, "w") as f:
     json.dump(temp, f, indent=4)
-
-""" to get ids from table
-https://tinydb.readthedocs.io/en/stable/usage.html?highlight=doc_id#using-document-ids
-"""
 
 # print("\n-- DB Tableau des joueurs --\n")
 # print(players_table.all())

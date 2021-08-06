@@ -1,5 +1,6 @@
 from dataclasses import dataclass, asdict, field
 
+
 def player_score():
     """ return a list of player scores after each matchup """
     scores =[]
