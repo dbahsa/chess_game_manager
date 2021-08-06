@@ -66,7 +66,7 @@ tournaments_table.insert_multiple([
     {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
 
 # To better view the db.json file
-filename = 'chess_tournament_db.json'
+filename = 'tournament_db.json'
 with open(filename, "r") as f:
     temp = json.load(f)
 print(temp['t_players']['1']["Last Name"])
