@@ -50,4 +50,6 @@ def add_players():
     print("Passons à l'étape suivante dès à présent...\n")
         
 add_players()
-print(pl_ref)
+for p in pl_ref:
+    print(p)
+# print(pl_ref)
