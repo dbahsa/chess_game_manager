@@ -1,7 +1,7 @@
 from dataclasses import dataclass, asdict, field
 
 def player_score():
-    """ to add player score after each matcup """
+    """ return a list of player scores after each matchup """
     score =[]
     return score
 
@@ -24,7 +24,11 @@ class Player:
     def __post_init__(self):
         """ Method to help create player full data"""
         self.single_pl_info = {"Last Name": self.last_name,
-                                "First Name": self.first_name}
+                                "First Name": self.first_name,
+                                "Genre": self.gender,
+                                "Classement Général": self.rating,
+                                "Score": self.score,
+                                "Tournois": self.tournament}
         
 # pl_ref: list of all players data, exploited by data.py     
 pl_ref = []
@@ -37,7 +41,7 @@ def add_players():
         p = Player(input("- Nom de famille: "), 
                     input("- Prénom: "),
                     input("- Genre : "),
-                    input("- Classement: ")
+                    input("- Nombre de Points au Classement Général: ")
                     )
         pl_ref.append(p.single_pl_info)
         # print("-------------------------------------")
