@@ -1,5 +1,14 @@
 from dataclasses import dataclass, asdict, field
 
+def player_score():
+    """ to add player score after each matcup """
+    score =[]
+    return score
+
+def player_t_in():
+    """ to add tournaments in which a player participated in """
+    score =[]
+    return score
 
 @dataclass
 class Player:
@@ -8,12 +17,12 @@ class Player:
     first_name: str
     gender: str
     rating: int
-    score: list = field(init=False, repr=False, default=[])
-    tournament: list = field(init=False, repr=False, default=[])
+    score: list = field(init=False, repr=False, default_factory=player_score)
+    tournament: list = field(init=False, repr=False, default_factory=player_t_in)
     single_pl_info: dict = field(init=False, repr=False)
 
     def __post_init__(self):
-        """ Method to help create player full data."""
+        """ Method to help create player full data"""
         self.single_pl_info = {"Last Name": self.last_name,
                                 "First Name": self.first_name}
         
@@ -25,8 +34,10 @@ def add_players():
     print("\n🚀 Procédons à l'enregistrement des 8 joueurs:")
     for i in range(1,3):
         print(f"\n🔥 Entrer les informations sur le joueur n°{i}")
-        p = Player(input("- Son nom de famille: "), 
-                    input("- Son prénom: ")
+        p = Player(input("- Nom de famille: "), 
+                    input("- Prénom: "),
+                    input("- Genre : "),
+                    input("- Classement: ")
                     )
         pl_ref.append(p.single_pl_info)
         # print("-------------------------------------")
