@@ -7,7 +7,7 @@
 if __name__=="__main__":
 
     def exec_r_menu1():
-        """ function to launch players menu within the current file"""
+        """ function to launch reports menu within the current file"""
 
         def reports_menu():
             """ Menu interface """
@@ -53,6 +53,7 @@ if __name__=="__main__":
 
 else: 
     def exec_r_menu2():
+        """ function to launch reports menu within the current file"""
 
         def reports_menu():
             """ Menu interface """
