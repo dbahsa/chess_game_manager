@@ -13,7 +13,7 @@ def player_t_in():
 
 @dataclass
 class Player:
-    """Class to create player instance."""
+    """Class to create player instances"""
     last_name: str
     first_name: str
     gender: str
@@ -54,3 +54,33 @@ add_players()
 for p in pl_ref:
     print(p)
 # print(pl_ref)
+
+   
+'''
+        # def all_scripts(user_choice):
+        #     """ Launching Program """
+        #     if user_choice == 1:
+        #         print('choice 1: go to tournament_menu')
+        #         menu_tournament.exec_t_menu2()
+                    
+        #     elif user_choice == 2:
+        #         print('choice 2: go to players_menu')
+        #         menu_players.exec_p_menu2()
+                    
+        #     elif user_choice == 3:
+        #         print('choice 3: go to reports_menu')
+        #         menu_reports.exec_r_menu2()
+            
+        #     elif user_choice == 4:
+        #         print("choice 4: quit prog")
+        #         quit()
+            
+        #     # gotta find out how to dislay the current menu again when 'user_choice < 1 or user_choice > 4'
+        #     else:
+        #         user_choice < 1 or user_choice > 4 
+        #         print('🤓 Votre choix doit être entre 1 et 4. Merci de relancer le script svp.')
+                
+
+        # all_scripts(x)
+
+'''
