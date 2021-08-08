@@ -1,6 +1,17 @@
+#!/user/bin/env python3
+# -*- coding: utf-8 -*-
+
+
 from dataclasses import dataclass, asdict, field
 
+""" players variables used """
+players_number = 8
+registered_players = 0
+# all_players_data:  exploited by data.py     
+all_players_data = []
 
+
+""" # -- Prog Start here -- """
 def player_score():
     """ return a list of player scores after each matchup """
     scores =[]
@@ -30,14 +41,13 @@ class Player:
                                 "Classement Général": self.rating,
                                 "Score": self.scores,
                                 "Tournois": self.tournaments}
-        
-# pl_ref: list of all players data, exploited by data.py     
-pl_ref = []
+
 
 def add_players():
     """ function to instantiate players"""
-    print("\n🚀 Procédons à l'enregistrement des 8 joueurs:")
+    print("\n🚀 Bonjour! Procédons à l'enregistrement des 8 joueurs")
     # !!! DO NOT FORGET TO CHANGE THE RANGE BELOW TO REFLECT USER'S REQUIREMENTS OF 8 PLAYERS
+    # replace 3 by players_number -> range(1, players_number+1)sz
     for i in range(1,3):
         print(f"\n🔥 Entrer les informations sur le joueur n°{i}")
         p = Player(input("- Nom de famille: "), 
@@ -45,15 +55,16 @@ def add_players():
                     input("- Genre : "),
                     input("- Nombre de Points au Classement Général: ")
                     )
-        pl_ref.append(p.single_pl_info)
+        all_players_data.append(p.single_pl_info)
         # print("-------------------------------------")
     print("\n🤓 Merci. Les 8 joueurs ont bien été enregistrés!")
     print("Passons à l'étape suivante dès à présent...\n")
-        
+
+
 add_players()
-for p in pl_ref:
+for p in all_players_data:
     print(p)
-# print(pl_ref)
+# print(all_players_data)
 
    
 '''
