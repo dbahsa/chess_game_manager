@@ -7,8 +7,8 @@ from dataclasses import dataclass, asdict, field
 """ players variables used """
 players_number = 8
 registered_players = 0
-# all_players_data:  exploited by data.py     
-all_players_data = []
+# all_players_db:  exploited by data.py     
+all_players_db = []
 
 
 """ # -- Prog Start here -- """
@@ -31,11 +31,11 @@ class Player:
     rating: int
     scores: list = field(init=False, repr=False, default_factory=player_score)
     tournaments: list = field(init=False, repr=False, default_factory=player_t_in)
-    single_pl_info: dict = field(init=False, repr=False)
+    single_player_db: dict = field(init=False, repr=False)
 
     def __post_init__(self):
         """ Method to help create player full data"""
-        self.single_pl_info = {"Last Name": self.last_name,
+        self.single_player_db = {"Last Name": self.last_name,
                                 "First Name": self.first_name,
                                 "Genre": self.gender,
                                 "Classement Général": self.rating,
@@ -53,18 +53,18 @@ def add_players():
         p = Player(input("- Nom de famille: "), 
                     input("- Prénom: "),
                     input("- Genre : "),
-                    input("- Nombre de Points au Classement Général: ")
+                    int(input("- Nombre de Points au Classement Général: "))
                     )
-        all_players_data.append(p.single_pl_info)
+        all_players_db.append(p.single_player_db)
         # print("-------------------------------------")
     print("\n🤓 Merci. Les 8 joueurs ont bien été enregistrés!")
     print("Passons à l'étape suivante dès à présent...\n")
 
 
 add_players()
-for p in all_players_data:
+for p in all_players_db:
     print(p)
-# print(all_players_data)
+# print(all_players_db)
 
    
 '''
