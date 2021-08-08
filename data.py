@@ -1,13 +1,33 @@
+#!/user/bin/env python3
+# -*- coding: utf-8 -*-
+
 import json
 from tinydb import TinyDB, Query
+# from players import players_db
+from players import all_players_db
 
-""" pl_ref is a list of all players data obtained from players.py"""
-from players import pl_ref
+
+""" Saving Initial Data """
+def save_initial_db():
+    """ save initial players data """
+
+    db = TinyDB('tournament_data.json')
+    #-- in players table (t_players')
+    players_table = db.table('t_players')
+    players_table.truncate() # clear up the table first
+    players_table.insert_multiple(all_players_db)
+    #-- in tournament table ('t_tournaments')
+    tournaments_table = db.table('t_tournaments')
+    tournaments_table.truncate() 
+    tournaments_table.insert_multiple([
+        {"name":"Swiss Tournament", "Date":"12/08/2021", "city":"Geneva", "Joueurs":players_table.all()},
+        {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
 
 
-class Data:
-    players: dict
-    tournaments: dict
+""" Retrieving Data for Processing Purposes """
+""" Updating Data """
+""" Viewing Reports """
+
 
 
 """ 1) Serialization of players data """
@@ -52,28 +72,39 @@ class Data:
 
 """ 2) Save tournament data in json file """
 
-db = TinyDB('tournament_db.json')
+
+#=== SAVING DATA TO FILE
+# db = TinyDB('chess_tournament_db.json')
 
 # #-- T players
-players_table = db.table('t_players')
-players_table.truncate() # clear up the table first
-players_table.insert_multiple(pl_ref)
+# players_table = db.table('t_players')
+# players_table.truncate() # clear up the table first
+# players_table.insert_multiple(xx)
 
 # #-- T Tournament
-tournaments_table = db.table('t_tournaments')
-tournaments_table.truncate() 
-tournaments_table.insert_multiple([
-    {"name":"Swiss Tournament", "Date":"12/08/2021", "city":"Geneva", "Joueurs":players_table.all()},
-    {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
+# tournaments_table = db.table('t_tournaments')
+# tournaments_table.truncate() 
+# tournaments_table.insert_multiple([
+#     {"name":"Swiss Tournament", "Date":"12/08/2021", "city":"Geneva", "Joueurs":players_table.all()},
+#     {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
+
+#=== Viewing DB from file
 
 # To better view the db.json file
-filename = 'tournament_db.json'
+filename = 'chess_tournament_db.json'
 with open(filename, "r") as f:
     temp = json.load(f)
 print(temp['t_players']['1']["Last Name"])
+print(temp)
 
-with open(filename, "w") as f:
-    json.dump(temp, f, indent=4)
+# with open(filename, "w") as f:
+    # json.dump(temp, f, indent=4)
+
+""" to get ids from table
+https://tinydb.readthedocs.io/en/stable/usage.html?highlight=doc_id#using-document-ids
+"""
+
+# === Print info from DB file
 
 # print("\n-- DB Tableau des joueurs --\n")
 # print(players_table.all())
