@@ -3,6 +3,10 @@
 
 
 from dataclasses import dataclass, asdict, field
+import pandas as pd
+
+from data import save_initial_data
+
 
 """ players variables used """
 players_number = 8
@@ -17,7 +21,7 @@ def player_score():
     scores =[]
     return scores
 
-def player_t_in():
+def player_tournament_participation():
     """ to add tournaments in which a player participated in """
     tournaments =[]
     return tournaments
@@ -27,18 +31,20 @@ class Player:
     """Class to create player instances"""
     last_name: str
     first_name: str
+    birth_date: str
     gender: str
     rating: int
     scores: list = field(init=False, repr=False, default_factory=player_score)
-    tournaments: list = field(init=False, repr=False, default_factory=player_t_in)
+    tournaments: list = field(init=False, repr=False, default_factory=player_tournament_participation)
     single_player_db: dict = field(init=False, repr=False)
 
     def __post_init__(self):
         """ Method to help create player full data"""
-        self.single_player_db = {"Last Name": self.last_name,
-                                "First Name": self.first_name,
+        self.single_player_db = {"Nom de famille": self.last_name,
+                                "Prénom": self.first_name,
+                                "Date de naissance": self.birth_date,
                                 "Genre": self.gender,
-                                "Classement Général": self.rating,
+                                "Classement": self.rating,
                                 "Score": self.scores,
                                 "Tournois": self.tournaments}
 
@@ -52,8 +58,9 @@ def add_players():
         print(f"\n🔥 Entrer les informations sur le joueur n°{i}")
         p = Player(input("- Nom de famille: "), 
                     input("- Prénom: "),
-                    input("- Genre : "),
-                    int(input("- Nombre de Points au Classement Général: "))
+                    input("- Date de naissance en chiffre tel que jj/mm/aaaa: "),
+                    input("- Genre [H/F]: ").upper(),
+                    int(input("- Nombre de Points au Classement Général (en chiffre svp): "))
                     )
         all_players_db.append(p.single_player_db)
         # print("-------------------------------------")
@@ -61,37 +68,15 @@ def add_players():
     print("Passons à l'étape suivante dès à présent...\n")
 
 
+# To start adding Player
 add_players()
-for p in all_players_db:
-    print(p)
+# To start saving to DB file
+save_initial_data()
+
+
+# print("Voici la liste des joueurs enregistés:")
+# for p in all_players_db:
+#     print(p)
+# print("\n--\n")
 # print(all_players_db)
 
-   
-'''
-        # def all_scripts(user_choice):
-        #     """ Launching Program """
-        #     if user_choice == 1:
-        #         print('choice 1: go to tournament_menu')
-        #         menu_tournament.exec_t_menu2()
-                    
-        #     elif user_choice == 2:
-        #         print('choice 2: go to players_menu')
-        #         menu_players.exec_p_menu2()
-                    
-        #     elif user_choice == 3:
-        #         print('choice 3: go to reports_menu')
-        #         menu_reports.exec_r_menu2()
-            
-        #     elif user_choice == 4:
-        #         print("choice 4: quit prog")
-        #         quit()
-            
-        #     # gotta find out how to dislay the current menu again when 'user_choice < 1 or user_choice > 4'
-        #     else:
-        #         user_choice < 1 or user_choice > 4 
-        #         print('🤓 Votre choix doit être entre 1 et 4. Merci de relancer le script svp.')
-                
-
-        # all_scripts(x)
-
-'''

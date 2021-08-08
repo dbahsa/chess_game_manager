@@ -1,14 +1,16 @@
 #!/user/bin/env python3
 # -*- coding: utf-8 -*-
 
+import pandas as pd
 import json
 from tinydb import TinyDB, Query
+
 # from players import players_db
 from players import all_players_db
 
 
 """ Saving Initial Data """
-def save_initial_db():
+def save_initial_data():
     """ save initial players data """
 
     db = TinyDB('tournament_data.json')
@@ -26,8 +28,29 @@ def save_initial_db():
 
 """ Retrieving Data for Processing Purposes """
 """ Updating Data """
+
 """ Viewing Reports """
 
+def view_current_data():
+    """ to view current data - use db file """
+    df = pd.DataFrame(all_players_db)
+    print(df)
+
+def sort_data_by_rating():
+    """ to sort current data by rating - use db file """
+    pass
+
+def sorted_players_by_score():
+    """ to view sorted players by score only - use db file """
+    pass
+
+def sorted_players_by_score_and_ranking():
+    """ to view sorted players by score and ranking - use db file """
+    pass
+    # # sorting data
+    # print("\n-- Voici les informations que vous venez de saisir sur les joueurs: --\n")
+    # # # x=df.sort_values(by=['ranking'], ascending=False)
+    # print(df)
 
 
 """ 1) Serialization of players data """
