@@ -20,22 +20,27 @@ def add_players_db_indexes():
     """ function to add players indexes from data file"""
     pass
 
-def add_end_date_time():
-    """ function to add date & time at the end of the tournament """
-    pass
-
 @dataclass
 class Tournament:
     """ This class helps create instances for the current tournament """
     name: str
     location: str
-    start_date: str # automatic input
+    date: str
     time_control: str # choices: bullet, blitz, or coup rapide
     description: str
     number_of_rounds: int = field(default=4)
     rounds: list = field(init=False, repr=False, default_factory=add_rounds)
     players_db_indexes: list = field(init=False, repr=False, default_factory=add_players_db_indexes)
-    end_date: str = field(init=False, repr=False, default_factory=add_end_date_time)
-
-
+    single_tournament_db: dict = field(init=False, repr=False)
+    
+    def __post_init__(self):
+        """ Method to help create a single tournament full data"""
+        self.single_tournament_db = {"Nom du tournoi": self.name,
+                                    "Lieu": self.location,
+                                    "Date": self.date,
+                                    "Nombre de tour": self.number_of_rounds,
+                                    "Tournées": self.rounds,
+                                    "Joueurs": self.players_db_indexes,
+                                    "Contrôle du temps": self.time_control,
+                                    "Description": self.description}
 
