@@ -12,14 +12,16 @@ from dataclasses import dataclass, field
 # list of all tournaments
 tournaments = []
 
-
 def add_rounds():
+    """ function to add round instances """
     pass
 
 def add_players_db_indexes():
+    """ function to add players indexes from data file"""
     pass
 
 def add_end_date_time():
+    """ function to add date & time at the end of the tournament """
     pass
 
 @dataclass
