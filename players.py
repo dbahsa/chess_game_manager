@@ -43,7 +43,7 @@ class Player:
         self.single_player_db = {"Nom de famille": self.last_name,
                                 "Prénom": self.first_name,
                                 "Date de naissance": self.birth_date,
-                                "Genre": self.gender,
+                                "Sexe": self.gender,
                                 "Classement": self.rating,
                                 "Score": self.scores,
                                 "Tournois": self.tournaments}
@@ -51,16 +51,16 @@ class Player:
 
 def add_players():
     """ function to instantiate players"""
-    print("\n🚀 Bonjour! Procédons à l'enregistrement des 8 joueurs")
+    print("\n🚧 Enregistrement des 8 joueurs 🚧")
     # !!! DO NOT FORGET TO CHANGE THE RANGE BELOW TO REFLECT USER'S REQUIREMENTS OF 8 PLAYERS
     # replace 3 by total_number_of_players -> range(1, total_number_of_players+1)
     for i in range(1,3):
         print(f"\n🔥 Entrer les informations sur le joueur n°{i}")
         p = Player(input("- Nom de famille: "), 
                     input("- Prénom: "),
-                    input("- Date de naissance en chiffre tel que jj/mm/aaaa, par exemple 18/02/1973: "),
-                    input("- Genre [H/F]: ").upper(),
-                    int(input("- Nombre de Points au Classement Général (en chiffre svp): "))
+                    input("- Date de naissance telle que jj/mm/aaaa (ex: 18/02/1973): "),
+                    input("- Sexe [H/F]: ").upper(),
+                    int(input("- Classement: "))
                     )
         all_players_db.append(p.single_player_db)
         # print("-------------------------------------")
@@ -70,6 +70,7 @@ def add_players():
 
 # To start adding Player
 add_players()
+
 # To start saving to DB file
 save_initial_data()
 
