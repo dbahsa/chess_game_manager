@@ -9,7 +9,7 @@ from tinydb import TinyDB
 # from data import save_players_data2
 
 
-""" players variables used """
+""" players variables used to launch the script """
 total_number_of_players = 8
 registered_players = 0
 # all_players_db:  exploited by data.py     
@@ -79,9 +79,8 @@ def save_players_data():
     players_table.insert_multiple(all_players_db)
 
 
-
 """ variables to help execute the script """
-# var 'filename' created to access & update data file:
+# 'filename' created to access & update data file:
 filename = 'tournament_data.json'
 
 with open(filename, "r") as f:
