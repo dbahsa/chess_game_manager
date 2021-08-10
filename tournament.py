@@ -1,8 +1,8 @@
-#!/user/bin/env python3
+#! /user/bin/env python3
 # -*- coding: utf-8 -*-
 
 
-import datetime
+# import datetime
 from dataclasses import dataclass, field
 
 
@@ -67,28 +67,3 @@ print("Printing items from dict x which come from tournaments list\n")
 for i in x:
     print(f"{i[0]}: {i[1]}")
 print("\n")
-
-# |- 🌼 Next Steps 🌼:
-# |—— save tournaments info to db files
-# |—— instantiate players obj
-# |—— save players info to db
-# |—— get "sorted" players info (name+rating+score) from db to instantiate 1st matchups
-# |—— save 1st matchups to db
-# |—— get matchups from db to instantiate round1
-# |—— save round1
-# |—— get round1 to add score
-# |—— save round1 score
-# |—— get "sorted" players info based num of scores & rating
-# |—— instantiate round2
-# |—— save round2
-# |—— get round2 to input round2 scores
-# |—— save round2 scores
-# |—— get 'sorted' players info based num of scores & rating
-# |—— instantiate round3
-# |—— save round3
-# |—— get round3 to input round3 scores
-# |—— save round3
-# |—— etc
-# |—— 
-# |—— 
-# 🚨 In each step, always show the user its own input, and ask to pursue or to reset

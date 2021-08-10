@@ -1,4 +1,4 @@
-#!/user/bin/env python3
+#! /user/bin/env python3
 # -*- coding: utf-8 -*-
 
 import pandas as pd
@@ -8,12 +8,46 @@ from tinydb import TinyDB, Query
 # from players import players_db
 from players import all_players_db
 
+# db: var containing tournament data file
+db = TinyDB('tournament_data.json')
 
-""" Saving Initial Data """
-def save_initial_data():
-    """ save initial players data """
 
-    db = TinyDB('tournament_data.json')
+""" Saving Data """
+
+def save_players_data():
+    """ save players data """
+
+    # db = TinyDB('tournament_data.json')
+    #-- in players table (t_players')
+    players_table = db.table('t_players')
+    players_table.truncate() # clear up the table first
+    players_table.insert_multiple(all_players_db)
+    #-- in tournament table ('t_tournaments')
+    tournaments_table = db.table('t_tournaments')
+    tournaments_table.truncate() 
+    tournaments_table.insert_multiple([
+        {"name":"Swiss Tournament", "Date":"12/08/2021", "city":"Geneva", "Joueurs":players_table.all()},
+        {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
+
+def save_tournament_data():
+    """ save tournament data """
+
+    # db = TinyDB('tournament_data.json')
+    #-- in players table (t_players')
+    players_table = db.table('t_players')
+    players_table.truncate() # clear up the table first
+    players_table.insert_multiple(all_players_db)
+    #-- in tournament table ('t_tournaments')
+    tournaments_table = db.table('t_tournaments')
+    tournaments_table.truncate() 
+    tournaments_table.insert_multiple([
+        {"name":"Swiss Tournament", "Date":"12/08/2021", "city":"Geneva", "Joueurs":players_table.all()},
+        {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
+
+def save_matches_data():
+    """ save macthes data """
+
+    # db = TinyDB('tournament_data.json')
     #-- in players table (t_players')
     players_table = db.table('t_players')
     players_table.truncate() # clear up the table first
@@ -26,8 +60,88 @@ def save_initial_data():
         {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
 
 
-""" Retrieving Data for Processing Purposes """
+def save_rounds_data():
+    """ save rounds data """
+
+    # db = TinyDB('tournament_data.json')
+    #-- in players table (t_players')
+    players_table = db.table('t_players')
+    players_table.truncate() # clear up the table first
+    players_table.insert_multiple(all_players_db)
+    #-- in tournament table ('t_tournaments')
+    tournaments_table = db.table('t_tournaments')
+    tournaments_table.truncate() 
+    tournaments_table.insert_multiple([
+        {"name":"Swiss Tournament", "Date":"12/08/2021", "city":"Geneva", "Joueurs":players_table.all()},
+        {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
+
+
 """ Updating Data """
+
+def update_players_data():
+    """ save players data """
+
+    # db = TinyDB('tournament_data.json')
+    #-- in players table (t_players')
+    players_table = db.table('t_players')
+    players_table.truncate() # clear up the table first
+    players_table.insert_multiple(all_players_db)
+    #-- in tournament table ('t_tournaments')
+    tournaments_table = db.table('t_tournaments')
+    tournaments_table.truncate() 
+    tournaments_table.insert_multiple([
+        {"name":"Swiss Tournament", "Date":"12/08/2021", "city":"Geneva", "Joueurs":players_table.all()},
+        {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
+
+def update_tournament_data():
+    """ save tournament data """
+
+    # db = TinyDB('tournament_data.json')
+    #-- in players table (t_players')
+    players_table = db.table('t_players')
+    players_table.truncate() # clear up the table first
+    players_table.insert_multiple(all_players_db)
+    #-- in tournament table ('t_tournaments')
+    tournaments_table = db.table('t_tournaments')
+    tournaments_table.truncate() 
+    tournaments_table.insert_multiple([
+        {"name":"Swiss Tournament", "Date":"12/08/2021", "city":"Geneva", "Joueurs":players_table.all()},
+        {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
+
+def update_matches_data():
+    """ save macthes data """
+
+    # db = TinyDB('tournament_data.json')
+    #-- in players table (t_players')
+    players_table = db.table('t_players')
+    players_table.truncate() # clear up the table first
+    players_table.insert_multiple(all_players_db)
+    #-- in tournament table ('t_tournaments')
+    tournaments_table = db.table('t_tournaments')
+    tournaments_table.truncate() 
+    tournaments_table.insert_multiple([
+        {"name":"Swiss Tournament", "Date":"12/08/2021", "city":"Geneva", "Joueurs":players_table.all()},
+        {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
+
+
+def update_rounds_data():
+    """ save rounds data """
+
+    # db = TinyDB('tournament_data.json')
+    #-- in players table (t_players')
+    players_table = db.table('t_players')
+    players_table.truncate() # clear up the table first
+    players_table.insert_multiple(all_players_db)
+    #-- in tournament table ('t_tournaments')
+    tournaments_table = db.table('t_tournaments')
+    tournaments_table.truncate() 
+    tournaments_table.insert_multiple([
+        {"name":"Swiss Tournament", "Date":"12/08/2021", "city":"Geneva", "Joueurs":players_table.all()},
+        {"name":"Paris Tournament", "Date":"12/10/2021", "city":"Paris", "Joueurs":""}])
+
+
+
+""" Retrieving Data for Processing Purposes """
 
 """ Viewing Reports """
 

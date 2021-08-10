@@ -1,11 +1,11 @@
-#!/user/bin/env python3
+#! /user/bin/env python3
 # -*- coding: utf-8 -*-
 
 
 from dataclasses import dataclass, asdict, field
 import pandas as pd
 
-from data import save_initial_data
+# from data import save_initial_data
 
 
 """ players variables used """
@@ -72,10 +72,26 @@ def add_players():
 add_players()
 
 # To start saving to DB file
-save_initial_data()
+# save_initial_data()
+
+# to sort players:
+def pl_by_name(p):
+    return p
+
+def pl_by_rating(p):
+    return p.rating
+
+def pl_by_score(p):
+    return sum(p.scores)
+
+# players_by_name = sorted(all_players_db, key=pl_by_name)
+# print(players_by_name)
+
+# from operator import attrgetter
+# s_players = sorted(all_players_db, key=attrgetter("Nom de famille"))
 
 
-# print("Voici la liste des joueurs enregistés:")
+# print("Voici la liste des joueurs enregistés:\n")
 # for p in all_players_db:
 #     print(p)
 # print("\n--\n")
