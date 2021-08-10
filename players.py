@@ -85,8 +85,8 @@ filename = 'tournament_data.json'
 
 with open(filename, "r") as f:
     temp = json.load(f)
-with open(filename, "w") as f:
-    json.dump(temp, f, indent=4)
+# with open(filename, "w") as f:
+#     json.dump(temp, f, indent=4)
 
 
 def view_current_players_standings():
@@ -116,12 +116,10 @@ if __name__=="__main__":
     # Add & Save Players to DB file
     # add_players()
     # save_players_data()
-    view_current_players_standings()
+    # view_current_players_standings()
 
     # To start saving to DB file
     # save_initial_data()
-
-
 
     # print(all_players_db)
 
@@ -137,19 +135,55 @@ if __name__=="__main__":
     # or in temp list:
     # print(list(temp.items())[0][1].keys())
 
-    # to get a player's record:
-    # print("\n---")
-    # print(temp["players_db"].items())
-    # print("---\n")
-    # for s in temp["players_db"].items():
-    #     # print(s[1].values())
-    #     print(list(s[1].keys()))
-    # print("\n")
+    # Get player's record:
+    print("\n--- before udate -- ")
+    print(temp["players_db"]["1"]['Nom de famille'])
+    print(temp["players_db"]["2"]['Nom de famille'])
+    
+    # Open file to update them
+    with open(filename, "r") as f:
+        temp = json.load(f) 
+        temp["players_db"]["1"]['Nom de famille'] = "Licorne"
+        temp["players_db"]["2"]['Nom de famille'] = "Vinci"
+
+    # save update
+    with open(filename, "w") as f:
+        json.dump(temp, f, indent=4)
+    
+    # print data updated 
+    print("\n--- after update -- ")
+    print(temp["players_db"]["1"]['Nom de famille'])
+    print(temp["players_db"]["2"]['Nom de famille'])
+
+
+    print("\n---")
+    print(temp["players_db"].items())
+    print("---\n")
+    for s in temp["players_db"].items():
+        # print(s[1].values())
+        print(s)
+        print(s[1].keys())
+        print(list(s[1].keys()))
+        print(s[1]['Nom de famille']) # to update scores, i must change "s[1]['Nom de famille']" from dict "temp["players_db"].items()"
+    print("\n")
+    # print(temp["players_db"].items()[1]['Nom de famille'])
     
     # -- wtih pandas: BEST TABLE VIEW --- #
     # print("\n")
     # # df = pd.DataFrame.from_dict(temp["players_db"], orient='index')
     # print(df)
+    # print("\n")
+
+    # print("\n  -- Tableau des joueurs --")
+    # print("-----------------------------")
+    # # unsorted players data
+    # df = pd.DataFrame.from_dict(temp["players_db"], orient='index')
+    # print(df)
+    # print("\n  - Tri des joueurs par points au 'Classement' général -")
+    # print("---------------------------------------------------------")
+    # # # sorting players data by rating
+    # x = df.sort_values(by=['Classement'], ascending=False)
+    # print(x)
     # print("\n")
 
     # # sorting data
