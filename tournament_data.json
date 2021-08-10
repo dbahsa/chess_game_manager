@@ -1,0 +1,22 @@
+{
+    "players_db": {
+        "1": {
+            "Nom de famille": "Nzimbi",
+            "Pr\u00e9nom": "Didier",
+            "Date de naissance": "18/02/1973",
+            "Sexe": "H",
+            "Classement": 2345,
+            "Score": [],
+            "Tournois": []
+        },
+        "2": {
+            "Nom de famille": "MASSAMBA",
+            "Pr\u00e9nom": "Charlene",
+            "Date de naissance": "08/11/1982",
+            "Sexe": "F",
+            "Classement": 3456,
+            "Score": [],
+            "Tournois": []
+        }
+    }
+}
