@@ -1,7 +1,7 @@
 {
     "players_db": {
         "1": {
-            "Nom de famille": "Licorne",
+            "Nom de famille": "Renard",
             "Pr\u00e9nom": "Didier",
             "Date de naissance": "18/02/1973",
             "Sexe": "H",
@@ -10,7 +10,7 @@
             "Tournois": []
         },
         "2": {
-            "Nom de famille": "Vinci",
+            "Nom de famille": "Poisson",
             "Pr\u00e9nom": "Charlene",
             "Date de naissance": "08/11/1982",
             "Sexe": "F",
