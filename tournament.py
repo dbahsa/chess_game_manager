@@ -76,11 +76,15 @@ def save_tournament_data():
     tournaments_table.insert_multiple(tournaments)
 
 
-add_tournament()
-save_tournament_data()
+""" START TOURNAMENT SCRIPT """
 
-x = tournaments[0].items()
-print("Printing items from dict x which come from tournaments list\n")
-for i in x:
-    print(f"{i[0]}: {i[1]}")
-print("\n")
+if __name__=="__main__":
+
+    add_tournament()
+    save_tournament_data()
+
+    x = tournaments[0].items()
+    print("Printing items from dict x which come from tournaments list\n")
+    for i in x:
+        print(f"{i[0]}: {i[1]}")
+    print("\n")
