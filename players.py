@@ -106,10 +106,7 @@ def view_current_players_standings():
 
 
 
-
-
-
-""" START UI """
+""" START PLAYERS SCRIPT """
 
 if __name__=="__main__":
 
@@ -143,8 +140,8 @@ if __name__=="__main__":
     # Open file to update them
     with open(filename, "r") as f:
         temp = json.load(f) 
-        temp["players_db"]["1"]['Nom de famille'] = "Licorne"
-        temp["players_db"]["2"]['Nom de famille'] = "Vinci"
+        temp["players_db"]["1"]['Nom de famille'] = "Renard"
+        temp["players_db"]["2"]['Nom de famille'] = "Poisson"
 
     # save update
     with open(filename, "w") as f:
