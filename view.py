@@ -3,9 +3,9 @@
 
 
 # |- 🌼 Next Steps 🌼:
-# |—— save tournaments info to db files
-# |—— instantiate players obj
-# |—— save players info to db
+# |—— save tournaments info to db files --#
+# |—— instantiate players obj --#
+# |—— save players info to db --#
 # |—— get "sorted" players info (name+rating+score) from db to instantiate 1st matchups
 # |—— save 1st matchups to db
 # |—— get matchups from db to instantiate round1

@@ -9,14 +9,16 @@ import pandas as pd
 from tinydb import TinyDB
 
 
+""" players variables used to launch the script """
 # tournaments = [tournament1, tournament2, tournament[w]] ; 'w' is the num of tournament
 # tournament[w] = ['name', [round1, round2, round3, round4, round[z]]] ; 'z' is the num of rounds in a Tournament
-
 # list of all tournaments
 tournaments = []
 # db: var containing tournament data file
 db = TinyDB('tournament_data.json')
 
+
+""" # -- Prog Start here -- """
 def add_rounds():
     """ function to add round instances """
     rounds = []
@@ -61,11 +63,9 @@ def add_tournament():
                     input("- Quel est votre Contrôle du temps: 'Bullit', 'Blitz'ou 'Coup Rapide'? "),
                     input("- Description: ")
                     )
-    tournaments.append(p.single_tournament_db)
     # print("-------------------------------------")
     print("\n🤓 Bravo! Le tournoi a bien été enregistré.\n")
     # print("Passons à l'étape suivante svp...\n")
-
 
 def save_tournament_data():
     """ save tournament data """
@@ -76,15 +76,26 @@ def save_tournament_data():
     tournaments_table.insert_multiple(tournaments)
 
 
+""" variables to help execute the script """
+# 'filename' created to access & update data file:
+filename = 'tournament_data.json'
+
+with open(filename, "r") as f:
+    temp = json.load(f)
+
+with open(filename, "w") as f:
+    json.dump(temp, f, indent=4)
+
+
 """ START TOURNAMENT SCRIPT """
 
-if __name__=="__main__":
+# if __name__=="__main__":
 
-    add_tournament()
-    save_tournament_data()
+    # add_tournament()
+    # save_tournament_data()
 
-    x = tournaments[0].items()
-    print("Printing items from dict x which come from tournaments list\n")
-    for i in x:
-        print(f"{i[0]}: {i[1]}")
-    print("\n")
+    # x = tournaments[0].items()
+    # print("Printing items from dict x which come from tournaments list\n")
+    # for i in x:
+    #     print(f"{i[0]}: {i[1]}")
+    # print("\n")

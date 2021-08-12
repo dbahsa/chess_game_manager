@@ -49,6 +49,7 @@ class Player:
                                 "Classement": self.rating,
                                 "Score": self.scores,
                                 "Tournois": self.tournaments}
+        all_players_db.append(p.single_player_db)
 
 
 def add_players():
@@ -64,7 +65,7 @@ def add_players():
                     input("- Sexe [H/F]: ").upper(),
                     int(input("- Classement: "))
                     )
-        all_players_db.append(p.single_player_db)
+        # all_players_db.append(p.single_player_db)
         # print("-------------------------------------")
     print("\n🤓 Merci. Les 8 joueurs ont bien été enregistrés!")
     print("Passons à l'étape suivante dès à présent...\n")
@@ -85,8 +86,8 @@ filename = 'tournament_data.json'
 
 with open(filename, "r") as f:
     temp = json.load(f)
-# with open(filename, "w") as f:
-#     json.dump(temp, f, indent=4)
+with open(filename, "w") as f:
+    json.dump(temp, f, indent=4)
 
 
 def view_current_players_standings():

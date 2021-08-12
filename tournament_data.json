@@ -18,5 +18,27 @@
             "Score": [],
             "Tournois": []
         }
+    },
+    "tournaments_db": {
+        "1": {
+            "Nom du tournoi": "Geneva Championship",
+            "Lieu": "Geneva",
+            "Date": "12/12/2021",
+            "Nombre de tour": 4,
+            "Tourn\u00e9es": [],
+            "Joueurs": [],
+            "Contr\u00f4le du temps": "BLITZ",
+            "Description": "A CE JR RIEN DU TOUT"
+        },
+        "2": {
+            "Nom du tournoi": "Geneva Championship",
+            "Lieu": "Geneva",
+            "Date": "12/12/2021",
+            "Nombre de tour": 4,
+            "Tourn\u00e9es": [],
+            "Joueurs": [],
+            "Contr\u00f4le du temps": "BLITZ",
+            "Description": "A CE JR RIEN DU TOUT"
+        }
     }
 }
