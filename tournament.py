@@ -2,8 +2,11 @@
 # -*- coding: utf-8 -*-
 
 
-# import datetime
-from dataclasses import dataclass, field
+""" modules & packages """
+import json
+from dataclasses import dataclass, asdict, field
+import pandas as pd
+from tinydb import TinyDB
 
 
 # tournaments = [tournament1, tournament2, tournament[w]] ; 'w' is the num of tournament
@@ -11,6 +14,8 @@ from dataclasses import dataclass, field
 
 # list of all tournaments
 tournaments = []
+# db: var containing tournament data file
+db = TinyDB('tournament_data.json')
 
 def add_rounds():
     """ function to add round instances """
@@ -56,11 +61,23 @@ def add_tournament():
                     input("- Quel est votre Contrôle du temps: 'Bullit', 'Blitz'ou 'Coup Rapide'? "),
                     input("- Description: ")
                     )
+    tournaments.append(p.single_tournament_db)
     # print("-------------------------------------")
     print("\n🤓 Bravo! Le tournoi a bien été enregistré.\n")
     # print("Passons à l'étape suivante svp...\n")
 
+
+def save_tournament_data():
+    """ save tournament data """
+    # db = TinyDB('tournament_data.json')
+    # players table: 'players_db'
+    tournaments_table = db.table('tournaments_db')
+    tournaments_table.truncate()  # clear up the table first
+    tournaments_table.insert_multiple(tournaments)
+
+
 add_tournament()
+save_tournament_data()
 
 x = tournaments[0].items()
 print("Printing items from dict x which come from tournaments list\n")
