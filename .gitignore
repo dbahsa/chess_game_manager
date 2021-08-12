@@ -11,8 +11,11 @@ venv.bak/
 .DS_Store
 __pycache__/
 
+
 # Fichiers .py
 __init__.py
 
+
 # Fichiers .txt
 lien_GitHub.txt
+requirements.txt
