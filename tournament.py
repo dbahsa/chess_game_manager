@@ -24,6 +24,7 @@ def add_rounds():
     rounds = []
     return rounds
 
+## -- pl_db_indexes = [x for x in temp["players_db"].keys()]
 def add_players_db_indexes():
     """ function to add players indexes from data file"""
     players_db_indexes = []
@@ -66,6 +67,9 @@ def add_tournament():
     # print("-------------------------------------")
     print("\n🤓 Bravo! Le tournoi a bien été enregistré.\n")
     # print("Passons à l'étape suivante svp...\n")
+
+
+## -- /!!!\ create an input func for different class property where we need to validate the input (see players.py)
 
 def save_tournament_data():
     """ save tournament data """
