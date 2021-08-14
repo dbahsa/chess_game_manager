@@ -180,7 +180,7 @@ def view_sorted_players_by_rating_and_scores():
     print("\n")
 
 
-# -- Done!
+# -- Done! Gotta fix this...
 def generate_first_matchups():
     """ Function to create matchups per round """
 
@@ -192,7 +192,13 @@ def generate_first_matchups():
 
     # -- adding 1st round matchups to tournament rounds instance
     round1_matchups =[]
-    rounds.append(round1_matchups)
+    rounds.append(round1_matchups) # /!!!\ where round1_matchups must be added to rounds dict, name round[i], i being round index froom db
+    # it shall be written : 
+    #                       rounds["1"] =  round1_matchups >>> this gotta be done here
+    #                       rounds["2"] =  round2_matchups
+    #                       rounds["3"] =  round3_matchups
+    #                       rounds["4"] =  round4_matchups ...
+
     
     for g in list(z):
         round1_matchups.append(g)

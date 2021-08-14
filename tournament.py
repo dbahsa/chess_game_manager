@@ -49,8 +49,8 @@ class Tournament:
     time_control: str # choices: bullet, blitz, or coup rapide
     description: str
     number_of_turns: int = field(default=4)
-    rounds: list = field(init=False, repr=False, default_factory=add_rounds)
-    players_db_indexes: list = field(init=False, repr=False, default_factory=add_players_db_indexes)
+    rounds: list = field(init=False, repr=False, default_factory=add_rounds) # MUST BE A DICT WITH EACH ROUND AS A KEY
+    players_db_indexes: list = field(init=False, repr=False, default_factory=add_players_db_indexes) # MUST BE A DICT FROM PLAYERS TABLE
     single_tournament_db: dict = field(init=False, repr=False)
     
     def __post_init__(self):
