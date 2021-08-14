@@ -114,7 +114,7 @@ unsorted_players_db = pd.DataFrame.from_dict(temp["players_db"], orient='index')
 # -- Sorted players table
 sorted_players_by_rating = unsorted_players_db.sort_values(by=['Classement'], ascending=False)
 
-
+# -- Done!
 def view_current_players_standings():
     """ This function allow to see sorted & unsorted players standings """
     # -- View: Unsorted players data
@@ -139,23 +139,26 @@ unsorted_players_by_rating_and_scores =[]
 sorted_players_by_rating_and_scores = sorted(unsorted_players_by_rating_and_scores, key=lambda x: x[1], reverse = True)
 
 
+# -- Done !
 def sort_players_by_ref():
-    """ SORTING PLAYERS BY RATING & SCORES """
+    """ Function used to create 'sorted_players_by_rating_and_scores' variable """
 
     # -- creating 'unsorted_players_by_rating_and_scores' list
     for s in temp["players_db"].values():
         players_lname_rating_scores = [str(s['Nom de famille']), s['Classement'], s['Score']]
         unsorted_players_by_rating_and_scores.append(players_lname_rating_scores)
 
-    # -- creating 'Sorted Players by rating & scores list'
+
+# -- Done !
+def view_sort_players_by_ref():
+    """ To view Sorted Players by Rating & Scores """
+    
+    # -- View 'Sorted Players by rating & scores list'
     for p in sorted_players_by_rating_and_scores:
         print(p)
 
 
-def view_sort_players_by_ref():
-    pass
-
-
+# -- To do!
 def generate_matchups():
     """ Function to create matchups per round """
     
@@ -197,14 +200,35 @@ def generate_matchups():
     #     print(g)
 
     pass
-    
 
-def generate_rounds():
+
+# -- To do!
+def view_matchups():
+    """Function used to view matchups"""
     pass
 
+
+# -- To do!
+def save_rounds_in_bd():
+    pass
+
+
+# -- To do!
+def view_rounds():
+    pass
+
+
+# -- To do!
+def update_rounds_from_db():
+    pass
+
+
+# -- To do!
 def input_scores():
     pass
 
+
+# -- To do!
 def save_scores():
     pass
 
