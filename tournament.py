@@ -8,6 +8,8 @@ from dataclasses import dataclass, asdict, field
 import pandas as pd
 from tinydb import TinyDB
 
+import players
+
 
 """ players variables used to launch the script """
 # tournaments = [tournament1, tournament2, tournament[w]] ; 'w' is the num of tournament
@@ -19,11 +21,19 @@ db = TinyDB('tournament_data.json')
 
 
 """ # -- Prog Start here -- """
+# -- To do! In progress
 def add_rounds():
-    """ function to add round instances """
-    rounds = []
+    """ Function to add round instances """
+    rounds = players.rounds
+    print("================== 🤓 Round1 🏁 Matchups 🥸 ================")
+    for i in rounds[0]:
+        print(i)
     return rounds
 
+
+
+
+# -- To do!
 ## -- pl_db_indexes = [x for x in temp["players_db"].keys()]
 def add_players_db_indexes():
     """ function to add players indexes from data file"""
@@ -93,13 +103,24 @@ with open(filename, "w") as f:
 
 """ START TOURNAMENT SCRIPT """
 
-# if __name__=="__main__":
+if __name__=="__main__":
 
     # add_tournament()
     # save_tournament_data()
+    # add_rounds()
+    print("\n================== 🤓 Round1 🏁 Matchups 🥸 ================")
+    for i in range(len(players.rounds[0])):
+        print(f"Match n°{i+1}: {players.rounds[0][i]}")
+
+    # for i in players.rounds:
+    #     print(i)
 
     # x = tournaments[0].items()
     # print("Printing items from dict x which come from tournaments list\n")
     # for i in x:
     #     print(f"{i[0]}: {i[1]}")
     # print("\n")
+
+    # -- End of program - Goodbye message.
+    print("\n================== 🌼🌼🌼 ===================")
+    print(" Fin du programme 👀...  Merci et à bientôt!\n")

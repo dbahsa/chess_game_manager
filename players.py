@@ -140,9 +140,14 @@ for s in temp["players_db"].values():
 sorted_players_by_rating_and_scores = sorted(unsorted_players_by_rating_and_scores, key=lambda x: x[1], reverse = True)
 
 
-"""Variables used for rounds & matchups"""
+"""Variables used for rounds & matchups instances"""
 # -- rounds list comprises all rounds
-rounds = []
+rounds = {} # /!!!\  MUST BE A DICT FOR USAGE IN DB FILE
+# we want it to be look like this:
+# rounds = {"round1": [matchups], 
+#           "round2": [matchups],
+#           "round3": [matchups], 
+#           "round4": [matchups], ...}
 
 
 # -- Done !
@@ -175,7 +180,7 @@ def view_sorted_players_by_rating_and_scores():
     print("\n")
 
 
-# -- To do! In progress
+# -- Done!
 def generate_first_matchups():
     """ Function to create matchups per round """
 
@@ -185,38 +190,74 @@ def generate_first_matchups():
     y = slice(4,8)
     z = zip(a[x],a[y])
 
-    # -- VIEW Round1 list and matchups
+    # -- adding 1st round matchups to tournament rounds instance
     round1_matchups =[]
     rounds.append(round1_matchups)
-    # print("\n -- Round1 Matchups --")
-    # print("==== 🚦 🤓 🏁 🥸 🚦 ====")
+    
     for g in list(z):
         round1_matchups.append(g)
-        # print(g)
-    
-    print("\n -- Numbered Matchups in Round1 --")
-    print("======== 🚦 🤓 🏁 🥸 🚦 =========")
-    for i in range(len(round1_matchups)):
-        print(f"Match n°{i+1}: {round1_matchups[i]}")
 
 
-# -- To do! In progress
+# -- Done!
 def view_first_matchups():
     """ Function to view first matchups in Round1 """
 
-    print("\n -- Numbered Matchups in Round1 --")
-    print("======== 🚦 🤓 🏁 🥸 🚦 =========")
-    for i in range(len(round1_matchups)):
-        print(f"Match n°{i+1}: {round1_matchups[i]}")
+    print("================== 🤓 Round1 🏁 Matchups 🥸 ================")
+    for i in range(len(rounds[0])):
+        print(f"Match n°{i+1}: {rounds[0][i]}")
+
+
+# -- To do! In progress...
+def save_rounds_in_db():
+    """Function to save rounds instance in tournaments_db in data file"""
+
+    # return None
+    # =======================
+    """ -- UPDATING DB -- """
+
+    # # -- Get tournament's record:
+    # print("\n--- before udate -- ")
+    # for i in range(len(temp["tournaments_db"])):
+    #     print(temp["tournaments_db"][str(i+1)]["Tourn\u00e9es"])
+
+    # -- Open file to update them
+    with open(filename, "r") as f:
+        temp = json.load(f) 
+        # -- Read tournament's record:
+        print("\n--- before udate -- ")
+        for i in range(len(temp["tournaments_db"])):
+            print(temp["tournaments_db"][str(i+1)]["Tourn\u00e9es"])
+
+    # -- save update
+    with open(filename, "w") as f:
+        temp["tournaments_db"]["1"]['Tourn\u00e9es'] = rounds # this doesn't work... 
+        # we want it to be a dict such as:
+        # rounds = {"round1": [matchups], 
+        #           "round2": [matchups],
+        #           "round3": [matchups], 
+        #           "round4": [matchups], ...}
+        json.dump(temp, f, indent=4)
+    
+    # -- print updated db
+    # print("\n--- after update -- ")
+    # for i in range(len(temp["tournaments_db"])):
+    #     print(temp["tournaments_db"][str(i+1)]["Tourn\u00e9es"])
+
+    # print("\n---")
+    # print(temp["tournaments_db"].items())
+    # print("---\n")
+    # for s in temp["tournaments_db"].items():
+    #     # print(s[1].values())
+    #     print(s)
+    #     print(s[1].keys())
+    #     print(list(s[1].keys()))
+    #     print(s[1]['Nom de famille']) # to update scores, i must change "s[1]['Nom de famille']" from dict "temp["tournaments_db"].items()"
+    # print("\n")
+    # print(temp["tournaments_db"].items()[1]['Nom de famille'])
 
 
 # -- To do!
-def save_rounds_in_bd():
-    pass
-
-
-# -- To do!
-def view_rounds():
+def view_rounds_in_db():
     pass
 
 
@@ -231,7 +272,12 @@ def input_scores():
 
 
 # -- To do!
-def save_scores():
+def view_input_scores():
+    pass
+
+
+# -- To do!
+def save_scores_to_db():
     pass
 
 
@@ -244,43 +290,23 @@ if __name__=="__main__":
     # -- Add & Save Players to DB file
     # add_players()
     # save_players_data()
-    view_current_players_standings()
-    view_sorted_players_by_rating_and_scores()
+    # view_current_players_standings()
+    # view_sorted_players_by_rating_and_scores()
     generate_first_matchups()
-    # generate_matchups()
-    print((len(temp["players_db"])))
-    # -- to get the names of tables in db:
-    print(temp["players_db"]["1"]['Nom de famille'])
-    print("\n")
-    print("-- printing round list info --\n")
-    for r in rounds[0]:
-        print(r)
-
-    # -- printing round list info --
-    # print(rounds):
-    # [[(['Nzimbi', 9999, []], ['Hamel', 3445, []]), (['Laville', 9998, []], ['Prudom', 2345, []]), (['Gendre', 4543, []], ['Lyons', 1234, []]), (['Lafarge', 4543, []], ['Gaillard', 1221, []])]]
-
-
-    # ================================================
-    # -- Generate the 1st pairs of players in Round 1
-
-    a = sorted_players_by_rating_and_scores
-    x = slice(0,4)
-    y = slice(4,8)
-    z = zip(a[x],a[y])
-
-    # -- VIEW Round1 list and matchups
-    # round1_matchups =[]
-    # # print("\n -- Round1 Matchups --")
-    # # print("==== 🚦 🤓 🏁 🥸 🚦 ====")
-    # for g in list(z):
-    #     round1_matchups.append(g)
-    #     # print(g)
+    # view_first_matchups()
+    # save_rounds_in_db()
     
-    # print("\n -- Numbered Round1 Matchups --")
-    # print("======== 🚦 🤓 🏁 🥸 🚦 =========")
-    # for i in range(len(round1_matchups)):
-    #     print(f"Match n°{i+1}: {round1_matchups[i]}")
+    # print("\n")
+    # print((len(temp["players_db"])))
+    # # -- to get the names of tables in db:
+    # print(temp["players_db"]["1"]['Nom de famille'])
+    # -- printing round list info --
+    # print("\n")
+    # print("-- printing round list info --\n")
+    # for r in rounds[0]:
+    #     print(r)
+    # print(len(rounds[0]))
+
 
     # ===============
     # -- UPDATE SCORE
@@ -401,3 +427,11 @@ if __name__=="__main__":
     print("\n================== 🌼🌼🌼 ===================")
     print(" Fin du programme 👀...  Merci et à bientôt!\n")
 
+else:
+    # view_current_players_standings()
+    # view_sorted_players_by_rating_and_scores()
+
+    # -- 'generate_first_matchups' must be on so that rounds instance can be used in tournament.py:
+    generate_first_matchups()
+    
+    # view_first_matchups()
