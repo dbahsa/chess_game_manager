@@ -128,15 +128,21 @@ def view_current_players_standings():
     print("\n")
 
 
-""" Variables used to rank players db and create matchups """
-# round1 variable:
-round1_games =[]
+""" Variables used to rank players """
 # players names and rakings variable /!!!\ what's for ???
 players_names_and_rankings = []
 # -- Unsorted Players by rating & scores:
 unsorted_players_by_rating_and_scores =[]
+for s in temp["players_db"].values():
+        players_lname_rating_scores = [str(s['Nom de famille']), s['Classement'], s['Score']]
+        unsorted_players_by_rating_and_scores.append(players_lname_rating_scores)
 # -- Sorted Players by rating & scores:
 sorted_players_by_rating_and_scores = sorted(unsorted_players_by_rating_and_scores, key=lambda x: x[1], reverse = True)
+
+
+"""Variables used for rounds & matchups"""
+# -- rounds list comprises all rounds
+rounds = []
 
 
 # -- Done !
@@ -150,62 +156,58 @@ def sort_players_by_ref():
 
 
 # -- Done !
-def view_sort_players_by_ref():
+def view_sorted_players_by_rating_and_scores():
     """ To view Sorted Players by Rating & Scores """
-    
-    # -- View 'Sorted Players by rating & scores list'
+
+    # unsorted_players_by_rating_and_scores =[]
+    # # print("\n===========================================") 
+    # # print("\n-- Unsorted Players by rating & scores:")
+    # for s in temp["players_db"].values():
+    #     players_lname_rating_scores = [str(s['Nom de famille']), s['Classement'], s['Score']]
+    #     unsorted_players_by_rating_and_scores.append(players_lname_rating_scores)
+    #     # print(players_lname_rating_scores)
+
+    # sorted_players_by_rating_and_scores = sorted(unsorted_players_by_rating_and_scores, key=lambda x: x[1], reverse = True)
+    print("\n=====================================")
+    print("-- Sorted Players by rating & scores:\n")
     for p in sorted_players_by_rating_and_scores:
         print(p)
+    print("\n")
 
 
-# -- To do!
-def generate_matchups():
+# -- To do! In progress
+def generate_first_matchups():
     """ Function to create matchups per round """
+
+    # -- Generate the 1st pairs of players in Round 1
+    a = sorted_players_by_rating_and_scores
+    x = slice(0,4)
+    y = slice(4,8)
+    z = zip(a[x],a[y])
+
+    # -- VIEW Round1 list and matchups
+    round1_matchups =[]
+    rounds.append(round1_matchups)
+    # print("\n -- Round1 Matchups --")
+    # print("==== 🚦 🤓 🏁 🥸 🚦 ====")
+    for g in list(z):
+        round1_matchups.append(g)
+        # print(g)
     
-    # with open(filename, "r") as f:
-    #     temp = json.load(f)
-    
-    # print("\n--- Players Ranking At the Begining of The Tournament --")
-    # players_names_and_rankings = []
-    # for t in range(len(temp["players_db"])):
-    #     player_name_ranking = [ temp["players_db"][t]['Nom de famille'],
-    #                             temp["players_db"][t]['Classement'],
-    #                             temp["players_db"][t]['Score']
-                                # ]
-        #print(f"{sorted_players_by_rating[t]['lname']}'s ranked n°{sorted_players_by_rating[t]['ranking']}")
-        # players_names_and_rankings.append(player_name_ranking)
+    print("\n -- Numbered Matchups in Round1 --")
+    print("======== 🚦 🤓 🏁 🥸 🚦 =========")
+    for i in range(len(round1_matchups)):
+        print(f"Match n°{i+1}: {round1_matchups[i]}")
 
 
-    # -- print data updated 
-    # print("\n--- after update -- ")
-    # print(temp["players_db"]["1"]['Nom de famille'])
-    # print(temp["players_db"]["2"]['Nom de famille'])
+# -- To do! In progress
+def view_first_matchups():
+    """ Function to view first matchups in Round1 """
 
-    # print("\n--- Players names and ranking , NOT SORTED --\n")
-    # for q in players_names_and_rankings:
-    #     print(q)    
-    
-
-    """ To generate the 1st pairs of players in Round 1 """
-    # a = sorted_players_by_rating
-    # x = slice(0,4)
-    # y = slice(4,8)
-    # z = zip(a[x],a[y])
-    # print("\n--- First Match-up based on initial ranking  ---")
-    # print(list(a[x])) # to print out the 1st sliced part from p1 to p4
-    # print(list(a[y])) # to print out the 2nd sliced part from p5 to p8
-    # print("\n-- round1 games --")
-    # for g in list(z):
-    #     round1_games.append(g)
-    #     print(g)
-
-    pass
-
-
-# -- To do!
-def view_matchups():
-    """Function used to view matchups"""
-    pass
+    print("\n -- Numbered Matchups in Round1 --")
+    print("======== 🚦 🤓 🏁 🥸 🚦 =========")
+    for i in range(len(round1_matchups)):
+        print(f"Match n°{i+1}: {round1_matchups[i]}")
 
 
 # -- To do!
@@ -243,28 +245,21 @@ if __name__=="__main__":
     # add_players()
     # save_players_data()
     view_current_players_standings()
+    view_sorted_players_by_rating_and_scores()
+    generate_first_matchups()
     # generate_matchups()
-
-    # ========================================
-    # -- SORTING PLAYERS BY RATING & SCORES --
-
     print((len(temp["players_db"])))
     # -- to get the names of tables in db:
     print(temp["players_db"]["1"]['Nom de famille'])
+    print("\n")
+    print("-- printing round list info --\n")
+    for r in rounds[0]:
+        print(r)
 
-    unsorted_players_by_rating_and_scores =[]
-    # print("\n===========================================") 
-    # print("\n-- Unsorted Players by rating & scores:")
-    for s in temp["players_db"].values():
-        players_lname_rating_scores = [str(s['Nom de famille']), s['Classement'], s['Score']]
-        unsorted_players_by_rating_and_scores.append(players_lname_rating_scores)
-        # print(players_lname_rating_scores)
+    # -- printing round list info --
+    # print(rounds):
+    # [[(['Nzimbi', 9999, []], ['Hamel', 3445, []]), (['Laville', 9998, []], ['Prudom', 2345, []]), (['Gendre', 4543, []], ['Lyons', 1234, []]), (['Lafarge', 4543, []], ['Gaillard', 1221, []])]]
 
-    sorted_players_by_rating_and_scores = sorted(unsorted_players_by_rating_and_scores, key=lambda x: x[1], reverse = True)
-    print("\n========================================")
-    print("-- Sorted Players by rating & scores:")
-    for p in sorted_players_by_rating_and_scores:
-        print(p)
 
     # ================================================
     # -- Generate the 1st pairs of players in Round 1
@@ -275,22 +270,22 @@ if __name__=="__main__":
     z = zip(a[x],a[y])
 
     # -- VIEW Round1 list and matchups
-    round1_games =[]
-    # print("\n -- Round1 Matchups --")
-    # print("==== 🚦 🤓 🏁 🥸 🚦 ====")
-    for g in list(z):
-        round1_games.append(g)
-        # print(g)
+    # round1_matchups =[]
+    # # print("\n -- Round1 Matchups --")
+    # # print("==== 🚦 🤓 🏁 🥸 🚦 ====")
+    # for g in list(z):
+    #     round1_matchups.append(g)
+    #     # print(g)
     
-    print("\n -- Numbered Round1 Matchups --")
-    print("======== 🚦 🤓 🏁 🥸 🚦 =========")
-    for i in range(len(round1_games)):
-        print(f"Match n°{i+1}: {round1_games[i]}")
+    # print("\n -- Numbered Round1 Matchups --")
+    # print("======== 🚦 🤓 🏁 🥸 🚦 =========")
+    # for i in range(len(round1_matchups)):
+    #     print(f"Match n°{i+1}: {round1_matchups[i]}")
 
     # ===============
     # -- UPDATE SCORE
     """ 
-    We wanna get players db 'round1_games[i]' to update them:
+    We wanna get players db 'round1_matchups[i]' to update them:
     Match n°1: (['Nzimbi', 9999, []], ['Hamel', 3445, []])
     Match n°2: (['Laville', 9998, []], ['Prudom', 2345, []])
     Match n°3: (['Gendre', 4543, []], ['Lyons', 1234, []])
@@ -298,7 +293,7 @@ if __name__=="__main__":
     """
 
     # Unique match format = (["playerX_reference, playerX_scores"], ["playerY_reference, playerY_scores"])
-    # which is: round1_games[i]
+    # which is: round1_matchups[i]
 
     # -- To start saving to DB file
     # save_initial_data()
