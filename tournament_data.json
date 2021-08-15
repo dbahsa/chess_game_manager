@@ -79,8 +79,8 @@
             "Lieu": "Geneva",
             "Date": "12/12/2021",
             "Nombre de tour": 4,
-            "Tourn\u00e9es": [],
-            "Joueurs": [],
+            "Tourn\u00e9es": {},
+            "Joueurs": {},
             "Contr\u00f4le du temps": "BLITZ",
             "Description": "A CE JR RIEN DU TOUT"
         },
@@ -89,8 +89,8 @@
             "Lieu": "Paris",
             "Date": "12/12/2021",
             "Nombre de tour": 4,
-            "Tourn\u00e9es": [],
-            "Joueurs": [],
+            "Tourn\u00e9es": {},
+            "Joueurs": {},
             "Contr\u00f4le du temps": "BLITZ",
             "Description": "A CE JR RIEN DU TOUT"
         }

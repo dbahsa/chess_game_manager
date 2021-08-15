@@ -67,7 +67,7 @@ class Tournament:
 
 def add_tournament():
     """ Function to instantiate tournament"""
-    print(f"\n🚀 Veuillez entrer les informations suivantes sur le tournoi")
+    print(f"\n🚀 Veuillez entrer les informations suivantes sur le tournoi: ")
     p = Tournament(input("- Nom: "), 
                     input("- Lieu: "),
                     input("- Date, telle que jj/mm/aaaa (ex: 18/02/2022): "),
@@ -109,8 +109,10 @@ if __name__=="__main__":
     # save_tournament_data()
     # add_rounds()
     print("\n================== 🤓 Round1 🏁 Matchups 🥸 ================")
-    for i in range(len(players.rounds[0])):
-        print(f"Match n°{i+1}: {players.rounds[0][i]}")
+    # for i in range(len(players.rounds[0])):
+    #     print(f"Match n°{i+1}: {players.rounds[0][i]}")
+    for i in range(len(players.rounds["Round1"])):
+        print(f"Match n°{i+1}: {players.rounds['Round1'][i]}")
 
     # for i in players.rounds:
     #     print(i)

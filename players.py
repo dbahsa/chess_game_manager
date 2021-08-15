@@ -142,12 +142,7 @@ sorted_players_by_rating_and_scores = sorted(unsorted_players_by_rating_and_scor
 
 """Variables used for rounds & matchups instances"""
 # -- rounds list comprises all rounds
-rounds = {} # /!!!\  MUST BE A DICT FOR USAGE IN DB FILE
-# we want it to be look like this:
-# rounds = {"round1": [matchups], 
-#           "round2": [matchups],
-#           "round3": [matchups], 
-#           "round4": [matchups], ...}
+rounds = {}
 
 
 # -- Done !
@@ -180,7 +175,7 @@ def view_sorted_players_by_rating_and_scores():
     print("\n")
 
 
-# -- Done! Gotta fix this...
+# -- Done!
 def generate_first_matchups():
     """ Function to create matchups per round """
 
@@ -190,34 +185,26 @@ def generate_first_matchups():
     y = slice(4,8)
     z = zip(a[x],a[y])
 
-    # -- adding 1st round matchups to tournament rounds instance
+    # -- adding Round1 matchups to tournament rounds instance
     round1_matchups =[]
-    rounds.append(round1_matchups) # /!!!\ where round1_matchups must be added to rounds dict, name round[i], i being round index froom db
-    # it shall be written : 
-    #                       rounds["1"] =  round1_matchups >>> this gotta be done here
-    #                       rounds["2"] =  round2_matchups
-    #                       rounds["3"] =  round3_matchups
-    #                       rounds["4"] =  round4_matchups ...
-
-    
     for g in list(z):
         round1_matchups.append(g)
+    rounds["Round1"] = round1_matchups
 
 
 # -- Done!
 def view_first_matchups():
-    """ Function to view first matchups in Round1 """
+    """ Function to view Round1 matchups """
 
-    print("================== 🤓 Round1 🏁 Matchups 🥸 ================")
-    for i in range(len(rounds[0])):
-        print(f"Match n°{i+1}: {rounds[0][i]}")
+    print("\n================== 🤓 Round1 🏁 Matchups 🥸 ================\n")
+    for i in range(len(rounds["Round1"])):
+        print(f"Match n°{i+1}: {rounds['Round1'][i]}")
 
 
 # -- To do! In progress...
 def save_rounds_in_db():
     """Function to save rounds instance in tournaments_db in data file"""
 
-    # return None
     # =======================
     """ -- UPDATING DB -- """
 
@@ -227,23 +214,18 @@ def save_rounds_in_db():
     #     print(temp["tournaments_db"][str(i+1)]["Tourn\u00e9es"])
 
     # -- Open file to update them
-    with open(filename, "r") as f:
-        temp = json.load(f) 
-        # -- Read tournament's record:
-        print("\n--- before udate -- ")
-        for i in range(len(temp["tournaments_db"])):
-            print(temp["tournaments_db"][str(i+1)]["Tourn\u00e9es"])
+    # with open(filename, "r") as f:
+    #     temp = json.load(f) 
+    #     # -- Read tournament's record:
+    #     print("\n--- before udate -- ")
+    #     for i in range(len(temp["tournaments_db"])):
+    #         print(temp["tournaments_db"][str(i+1)]["Tourn\u00e9es"])
 
     # -- save update
     with open(filename, "w") as f:
-        temp["tournaments_db"]["1"]['Tourn\u00e9es'] = rounds # this doesn't work... 
-        # we want it to be a dict such as:
-        # rounds = {"round1": [matchups], 
-        #           "round2": [matchups],
-        #           "round3": [matchups], 
-        #           "round4": [matchups], ...}
+        temp["tournaments_db"]["1"]['Tourn\u00e9es'] = rounds
         json.dump(temp, f, indent=4)
-    
+
     # -- print updated db
     # print("\n--- after update -- ")
     # for i in range(len(temp["tournaments_db"])):
@@ -293,15 +275,23 @@ def save_scores_to_db():
 
 if __name__=="__main__":
 
-    # -- Add & Save Players to DB file
+    # -- Add & Save Players to DB file --
     # add_players()
     # save_players_data()
+    
+    # -- Create/View Round1 Matchups & Save them to db file --
     # view_current_players_standings()
     # view_sorted_players_by_rating_and_scores()
     generate_first_matchups()
     # view_first_matchups()
-    # save_rounds_in_db()
+    save_rounds_in_db()
     
+
+    # # -- View Round1 Matchups
+    # for x in rounds["Round1"]:
+    #     print(x)
+        # print(x[0][0], "vs", x[1][0])
+
     # print("\n")
     # print((len(temp["players_db"])))
     # # -- to get the names of tables in db:
