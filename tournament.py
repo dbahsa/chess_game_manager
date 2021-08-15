@@ -25,12 +25,10 @@ db = TinyDB('tournament_data.json')
 def add_rounds():
     """ Function to add round instances """
     rounds = players.rounds
-    print("================== 🤓 Round1 🏁 Matchups 🥸 ================")
-    for i in rounds[0]:
-        print(i)
+    # print("================== 🤓 Round1 🏁 Matchups 🥸 ================")
+    # for i in rounds[0]:
+    #     print(i)
     return rounds
-
-
 
 
 # -- To do!
@@ -49,7 +47,7 @@ class Tournament:
     time_control: str # choices: bullet, blitz, or coup rapide
     description: str
     number_of_turns: int = field(default=4)
-    rounds: list = field(init=False, repr=False, default_factory=add_rounds) # MUST BE A DICT WITH EACH ROUND AS A KEY
+    rounds: dict = field(init=False, repr=False, default_factory=add_rounds) # MUST BE A DICT WITH EACH ROUND AS A KEY
     players_db_indexes: list = field(init=False, repr=False, default_factory=add_players_db_indexes) # MUST BE A DICT FROM PLAYERS TABLE
     single_tournament_db: dict = field(init=False, repr=False)
     
@@ -65,6 +63,7 @@ class Tournament:
                                     "Description": self.description}
         tournaments.append(self.single_tournament_db)
 
+# -- Done!
 def add_tournament():
     """ Function to instantiate tournament"""
     print(f"\n🚀 Veuillez entrer les informations suivantes sur le tournoi: ")
@@ -81,15 +80,6 @@ def add_tournament():
 
 ## -- /!!!\ create an input func for different class property where we need to validate the input (see players.py)
 
-def save_tournament_data():
-    """ save tournament data """
-    # db = TinyDB('tournament_data.json')
-    # players table: 'players_db'
-    tournaments_table = db.table('tournaments_db')
-    tournaments_table.truncate()  # clear up the table first
-    tournaments_table.insert_multiple(tournaments)
-
-
 """ variables to help execute the script """
 # 'filename' created to access & update data file:
 filename = 'tournament_data.json'
@@ -101,6 +91,17 @@ with open(filename, "w") as f:
     json.dump(temp, f, indent=4)
 
 
+# -- To do! In progress...
+def save_tournament_data():
+    """ save tournament data """
+    # db = TinyDB('tournament_data.json')
+    # players table: 'players_db'
+    tournaments_table = db.table('tournaments_db')
+    tournaments_table.truncate()  # clear up the table first
+    tournaments_table.insert_multiple(tournaments)
+
+
+
 """ START TOURNAMENT SCRIPT """
 
 if __name__=="__main__":
@@ -108,6 +109,7 @@ if __name__=="__main__":
     # add_tournament()
     # save_tournament_data()
     # add_rounds()
+    
     print("\n================== 🤓 Round1 🏁 Matchups 🥸 ================")
     # for i in range(len(players.rounds[0])):
     #     print(f"Match n°{i+1}: {players.rounds[0][i]}")

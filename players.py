@@ -52,7 +52,6 @@ class Player:
 
 
 ## -- /!!!\ create an input func for all class properties such as below (ask_lname, ask_gender...) 
-## -- 
 
 """def ask_lname():
     lname = input("Entrer le nom de famille: ")
@@ -100,7 +99,7 @@ def save_players_data():
 
 
 """ Variables used to execute the script """
-# -- 'filename' created to access & update data file:
+# -- 'filename' created to access & update data file: --
 filename = 'tournament_data.json'
 
 with open(filename, "r") as f:
@@ -109,12 +108,12 @@ with open(filename, "r") as f:
 #     json.dump(temp, f, indent=4)
 
 """ Variables used to VIEW all players db in PANDAS table """
-# -- Unsorted players table:
+# -- Unsorted players table: --
 unsorted_players_db = pd.DataFrame.from_dict(temp["players_db"], orient='index')
-# -- Sorted players table
+# -- Sorted players table --
 sorted_players_by_rating = unsorted_players_db.sort_values(by=['Classement'], ascending=False)
 
-# -- Done!
+# -- Done! --
 def view_current_players_standings():
     """ This function allow to see sorted & unsorted players standings """
     # -- View: Unsorted players data
@@ -129,23 +128,23 @@ def view_current_players_standings():
 
 
 """ Variables used to rank players """
-# players names and rakings variable /!!!\ what's for ???
+# players names and rakings variable /!!!\ what's for ??? --
 players_names_and_rankings = []
-# -- Unsorted Players by rating & scores:
+# -- Unsorted Players by rating & scores: --
 unsorted_players_by_rating_and_scores =[]
 for s in temp["players_db"].values():
         players_lname_rating_scores = [str(s['Nom de famille']), s['Classement'], s['Score']]
         unsorted_players_by_rating_and_scores.append(players_lname_rating_scores)
-# -- Sorted Players by rating & scores:
+# -- Sorted Players by rating & scores: --
 sorted_players_by_rating_and_scores = sorted(unsorted_players_by_rating_and_scores, key=lambda x: x[1], reverse = True)
 
 
 """Variables used for rounds & matchups instances"""
-# -- rounds list comprises all rounds
+# -- rounds list comprises all rounds --
 rounds = {}
 
 
-# -- Done !
+# -- Done !--
 def sort_players_by_ref():
     """ Function used to create 'sorted_players_by_rating_and_scores' variable """
 
@@ -155,7 +154,7 @@ def sort_players_by_ref():
         unsorted_players_by_rating_and_scores.append(players_lname_rating_scores)
 
 
-# -- Done !
+# -- Done ! --
 def view_sorted_players_by_rating_and_scores():
     """ To view Sorted Players by Rating & Scores """
 
@@ -175,7 +174,7 @@ def view_sorted_players_by_rating_and_scores():
     print("\n")
 
 
-# -- Done!
+# -- Done! --
 def generate_first_matchups():
     """ Function to create matchups per round """
 
@@ -192,7 +191,7 @@ def generate_first_matchups():
     rounds["Round1"] = round1_matchups
 
 
-# -- Done!
+# -- Done! --
 def view_first_matchups():
     """ Function to view Round1 matchups """
 
@@ -201,70 +200,69 @@ def view_first_matchups():
         print(f"Match n°{i+1}: {rounds['Round1'][i]}")
 
 
-# -- To do! In progress...
+# -- Done! --
 def save_rounds_in_db():
-    """Function to save rounds instance in tournaments_db in data file"""
+    """Function to save rounds instance in tournaments_db in db file """
 
-    # =======================
-    """ -- UPDATING DB -- """
-
-    # # -- Get tournament's record:
-    # print("\n--- before udate -- ")
-    # for i in range(len(temp["tournaments_db"])):
-    #     print(temp["tournaments_db"][str(i+1)]["Tourn\u00e9es"])
-
-    # -- Open file to update them
-    # with open(filename, "r") as f:
-    #     temp = json.load(f) 
-    #     # -- Read tournament's record:
-    #     print("\n--- before udate -- ")
-    #     for i in range(len(temp["tournaments_db"])):
-    #         print(temp["tournaments_db"][str(i+1)]["Tourn\u00e9es"])
-
-    # -- save update
+    # -- Open and save rounds data in tournament table in db file
     with open(filename, "w") as f:
         temp["tournaments_db"]["1"]['Tourn\u00e9es'] = rounds
         json.dump(temp, f, indent=4)
 
-    # -- print updated db
-    # print("\n--- after update -- ")
-    # for i in range(len(temp["tournaments_db"])):
-    #     print(temp["tournaments_db"][str(i+1)]["Tourn\u00e9es"])
 
-    # print("\n---")
-    # print(temp["tournaments_db"].items())
-    # print("---\n")
-    # for s in temp["tournaments_db"].items():
-    #     # print(s[1].values())
-    #     print(s)
-    #     print(s[1].keys())
-    #     print(list(s[1].keys()))
-    #     print(s[1]['Nom de famille']) # to update scores, i must change "s[1]['Nom de famille']" from dict "temp["tournaments_db"].items()"
-    # print("\n")
-    # print(temp["tournaments_db"].items()[1]['Nom de famille'])
-
-
-# -- To do!
+# -- To do! In progress... --
 def view_rounds_in_db():
-    pass
+    """ Function to view Round1 data from db file """
+
+    # -- 'r' collects round data from db file so that we could print it as needed
+    # -- We stay focused on 'r = temp["tournaments_db"]["1"]["Tourn\u00e9es"]'
+    # -- because it concerns the current tournament 
+    r = temp["tournaments_db"]["1"]["Tourn\u00e9es"]
+
+    for i in range(5):
+        if i == 0:
+            try:
+                print(f"\n--- Round{i+1} Matchups From DB File --")
+                for h in r['Round'+str(i+1)]:
+                    print(h)
+            except:
+                print(f"Round{i+1} is not ready yet.")
+            try:
+                print(f"\n--- Round{i+2} Matchups From DB File --")
+                for h in r[i]['Round'+str(i+2)]:
+                    print(h)
+            except:
+                print(f"Round{i+2} is not available yet.")
+            try:
+                print(f"\n--- Round{i+3} Matchups From DB File --")
+                for h in r[i]['Round'+str(i+3)]:
+                    print(h)
+            except:
+                print(f"Round{i+3} is not available yet.")
+            try:
+                print(f"\n--- Round{i+4} Matchups From DB File --")
+                for h in r[i]['Round'+str(i+4)]:
+                    print(h)
+            except:
+                print(f"Round{i+4} is not available yet.")
 
 
-# -- To do!
+# -- To do! --
 def update_rounds_from_db():
     pass
 
 
-# -- To do!
+# -- To do! --
 def input_scores():
     pass
 
 
-# -- To do!
+# -- To do! --
 def view_input_scores():
     pass
 
 
-# -- To do!
+# -- To do! --
 def save_scores_to_db():
     pass
 
@@ -282,9 +280,13 @@ if __name__=="__main__":
     # -- Create/View Round1 Matchups & Save them to db file --
     # view_current_players_standings()
     # view_sorted_players_by_rating_and_scores()
-    generate_first_matchups()
+
+    # -- the next 3 functions gotta be initiated to be able to save data in db file --
+    # generate_first_matchups()
+    # save_rounds_in_db()
     # view_first_matchups()
-    save_rounds_in_db()
+    view_rounds_in_db()
+    
     
 
     # # -- View Round1 Matchups
