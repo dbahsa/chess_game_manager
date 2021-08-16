@@ -98,7 +98,7 @@ def save_players_data():
     players_table.insert_multiple(all_players_db)
 
 
-""" Variables used to execute the script """
+""" VAR TO READ DB FILE """
 # -- 'filename' created to access & update data file: --
 filename = 'tournament_data.json'
 
@@ -107,131 +107,119 @@ with open(filename, "r") as f:
 # with open(filename, "w") as f:
 #     json.dump(temp, f, indent=4)
 
-""" Variables used to VIEW all players db in PANDAS table """
-# -- Unsorted players table: --
-unsorted_players_db = pd.DataFrame.from_dict(temp["players_db"], orient='index')
-# -- Sorted players table --
-sorted_players_by_rating = unsorted_players_db.sort_values(by=['Classement'], ascending=False)
 
-# -- Done! --
-def view_current_players_standings():
-    """ This function allow to see sorted & unsorted players standings """
-    # -- View: Unsorted players data
-    print("\n  -- Tableau des joueurs --")
-    print("-----------------------------")
-    print(unsorted_players_db)
-    # -- View: Sorted players data by rating
-    print("\n  - Tri des joueurs par points au 'Classement' général -")
-    print("---------------------------------------------------------")
-    print(sorted_players_by_rating)
-    print("\n")
-
-
-""" Variables used to rank players """
-# -- players names and rakings variable /!!!\ what's for ??? --
-# players_names_and_rankings = []
-"""
-# -- Unsorted Players by rating & scores: --
-unsorted_players_by_rating_and_scores =[]
-for s in temp["players_db"].values():
-    players_lname_rating_scores = [str(s['Nom de famille']), s['Classement'], s['Score']]
-    unsorted_players_by_rating_and_scores.append(players_lname_rating_scores)
-# -- Sorted Players by rating & scores: --
-sorted_players_by_rating_and_scores = sorted(unsorted_players_by_rating_and_scores, key=lambda x: x[1], reverse = True)
-"""
-
-# -- Unsorted Players by rating & scores: --
-unsorted_players_by_rating_and_scores = {}
-
+""" VAR TO SORT PLAYERS DATA """
+# -- Unsorted Players by rating: --
+unsorted_players = {}
 for s in temp["players_db"].items():
     y = s[0]
-    # print(s[0])
     w = list(s[1].values())
-    # print(list(s[1].values()))
-    unsorted_players_by_rating_and_scores[y] = w
-# print(unsorted_players_by_rating_and_scores)
-# for e in unsorted_players_by_rating_and_scores.items():
-#     print(e)
-    # print(e[0], e[1][0], e[1][4])
-print("---")
-# -- Sorted Players by rating & scores: --
-sorted_players_by_rating_and_scores = sorted(unsorted_players_by_rating_and_scores.items(), key=lambda x: x[1][4], reverse = True)
-for i in sorted_players_by_rating_and_scores:
-	# print(i[0], i[1])
-    for s in temp["players_db"].items():
-        if i[0] == s[0]:
-            print(i[0], list(s[1].values())) # it does work !!!
-            # -- /!!!\ from here we could use s[] index to pull data from temp["players_db"]... see print below:
-            
-                # 6 ['Nzimbi', 'Brenn', '11/07/2020', 'H', 9999, [], []] ['Nzimbi', 'Brenn', '11/07/2020', 'H', 9999, [], []]
-                # 7 ['Laville', 'Alexia', '20/05/2008', 'F', 9998, [], []] ['Laville', 'Alexia', '20/05/2008', 'F', 9998, [], []]
-                # 4 ['Gendre', 'Mary', '24/03/1990', 'F', 4543, [], []] ['Gendre', 'Mary', '24/03/1990', 'F', 4543, [], []]
-                # 8 ['Lafarge', 'Corine', '23/08/1988', 'F', 4543, [], []] ['Lafarge', 'Corine', '23/08/1988', 'F', 4543, [], []]
-                # 3 ['Hamel', 'John', '23/09/1977', 'H', 3445, [], []] ['Hamel', 'John', '23/09/1977', 'H', 3445, [], []]
-                # 2 ['Prudom', 'Lionel', '13/04/1987', 'H', 2345, [], []] ['Prudom', 'Lionel', '13/04/1987', 'H', 2345, [], []]
-                # 1 ['Lyons', 'Paul', '12/02/1980', 'H', 1234, [], []] ['Lyons', 'Paul', '12/02/1980', 'H', 1234, [], []]
-                # 5 ['Gaillard', 'Sophia', '16/08/2000', 'F', 1221, [], []] ['Gaillard', 'Sophia', '16/08/2000', 'F', 1221, [], []]
+    unsorted_players[y] = w
 
+# -- Sorted Players by rating: --
+sorted_players_by_rating = sorted(unsorted_players.items(), key=lambda x: x[1][4], reverse = True)
 
-# print("---")
-# print(dict(sorted(temp["players_db"].items())))
+# -- View Ranked Players Based on their Rating points:
+# print("\n         - Classement des joueurs au début du tournoi -")
+# print("---------------------------------------------------------------------------")
+# n = 0
+# for i in sorted_players_by_rating:
+#     print(f"N°{n+1} avec l'indexe {i[0]}: '{i[1][1]} {i[1][0]}', '{i[1][4]}' points, avec un score de '{i[1][5]}'")
+#     n += 1
+# print("---------------------------------------------------------------------------\n")
+# -- OUTPUT: 
+# -- Classement des joueurs au début du tournoi --
+# N°1 avec l'indexe 6: 'Brenn Nzimbi', '9999' points, avec un score de '[]'
+# N°2 avec l'indexe 7: 'Alexia Laville', '9998' points, avec un score de '[]'
+# N°3 avec l'indexe 4: 'Mary Gendre', '4543' points, avec un score de '[]'
+# N°4 avec l'indexe 8: 'Corine Lafarge', '4543' points, avec un score de '[]'
+# N°5 avec l'indexe 3: 'John Hamel', '3445' points, avec un score de '[]'
+# N°6 avec l'indexe 2: 'Lionel Prudom', '2345' points, avec un score de '[]'
+# N°7 avec l'indexe 1: 'Paul Lyons', '1234' points, avec un score de '[]'
+# N°8 avec l'indexe 5: 'Sophia Gaillard', '1221' points, avec un score de '[]'
 
-
-"""
-# -- shorter code:
-for s in a["t_players"].items():
-    y = s[0]
-    w = list(s[1].values())
-    z[y] = w
-print("---")
-print(z)
-print("---")
-# -- print matchups
-for e in z.items():
-    print(e)
-""" 
+""" Variables used to VIEW all players db with PANDAS table """
+# # -- Unsorted players table: --
+# unsorted_players_db = pd.DataFrame.from_dict(temp["players_db"], orient='index')
+# # -- Sorted players table --
+# sorted_players_by_rating = unsorted_players_db.sort_values(by=['Classement'], ascending=False)
 
 """Variables used for rounds & matchups instances"""
-# -- rounds list comprises all rounds --
+# -- Rounds list (is a dict) comprises all rounds --
 rounds = {}
 
+# -- Done! --
+def view_unsorted_players_list():
+    """ This function allows to ONLY see unsorted players list """
 
-# -- Done !  To be updated!!! --
-def sort_players_by_ref():
-    """ Function used to create 'sorted_players_by_rating_and_scores' variable """
-
-    # -- creating 'unsorted_players_by_rating_and_scores' list
-    for s in temp["players_db"].values():
-        players_lname_rating_scores = [str(s['Nom de famille']), s['Classement'], s['Score']]
-        unsorted_players_by_rating_and_scores.append(players_lname_rating_scores)
-
-
-# -- Done ! --
-def view_sorted_players_by_rating_and_scores():
-    """ To view Sorted Players by Rating & Scores """
-
-    # unsorted_players_by_rating_and_scores =[]
-    # # print("\n===========================================") 
-    # # print("\n-- Unsorted Players by rating & scores:")
-    # for s in temp["players_db"].values():
-    #     players_lname_rating_scores = [str(s['Nom de famille']), s['Classement'], s['Score']]
-    #     unsorted_players_by_rating_and_scores.append(players_lname_rating_scores)
-    #     # print(players_lname_rating_scores)
-
-    # sorted_players_by_rating_and_scores = sorted(unsorted_players_by_rating_and_scores, key=lambda x: x[1], reverse = True)
-    print("\n=====================================")
-    print("-- Sorted Players by rating & scores:\n")
-    for p in sorted_players_by_rating_and_scores:
-        print(p)
-    print("\n")
+    # -- PANDAS PLAYERS TABLE
+    print("\n                 -  Liste non-triée des joueurs -")
+    print("---------------------------------------------------------------------------")
+    # -- Unsorted players --
+    df = pd.DataFrame.from_dict(temp["players_db"], orient='index')
+    print(df)
 
 
 # -- Done! --
+def view_sorted_players_list_by_rating():
+    """ This function allows to ONLY see unsorted players list """
+
+    # -- PANDAS Sorted players by rating
+    print("\n     - Liste triée des joueurs par points au 'Classement' général -")
+    print("---------------------------------------------------------------------------")
+    df = pd.DataFrame.from_dict(temp["players_db"], orient='index')
+    x = df.sort_values(by=['Classement'], ascending=False)
+    print(x)
+
+
+# -- Done! --
+def view_ranked_players_by_rating_only():
+    """Function to view players list based on their rating ONLY"""
+
+    print("\n- Classement Général des Joueurs -")
+    print("---------------------------------------------------------------------------")
+    n = 0
+    for i in sorted_players_by_rating:
+        # print(f"N°{n+1} avec l'indexe {i[0]}: {i[1][1]} {i[1][0]}, {i[1][4]} points")
+        print(f'Membre n°{i[0]}: {i[1][1]} {i[1][0]},  n°{n+1} au classement général avec {i[1][4]} points')
+        n += 1
+    print("---------------------------------------------------------------------------\n")
+
+
+""" VAR used to create matchups """
+# -- Players matchup reference is used to sort items used to pair up players in a round
+players_matchup_reference = []
+
+# -- To be updated!!! --
+def sort_players_by_ref():
+    """ Function used to create 'sorted_players_by_rating' variable """
+
+    # -- creating 'players_matchup_reference' list
+    # for s in temp["players_db"].values():
+    #     players_lname_rating_scores = [str(s['Nom de famille']), s['Classement'], s['Score']]
+    #     players_matchup_reference.append(players_lname_rating_scores)
+
+    # -- View Players Ranking Based on their Rating points: # --- /!!!\ It works like a charm!!!
+    # for i in sorted_players_by_rating:
+    #     print(i[0], i[1][0], i[1][4])
+
+    # -- Get Player reference for matchups, to be listed in 'players_matchup_reference'
+    for i in sorted_players_by_rating:
+        # print(i[0], i[1][0], i[1][4], i[1][5])
+        print(f'Joueur n°{i[0]}: {i[1][1]} {i[1][0]} ({i[1][4]} au classement), avec un score actuel de {sum(i[1][5])}')
+        # a = ["Indexe: i[0]", "Joueur: i[1][0]", "Classementi: [1][4]", "Score:  [1][5]"]
+
+        
+
+
+
+
+# -- To be updated!!! --
 def generate_first_matchups():
     """ Function to create matchups per round """
 
     # -- Generate the 1st pairs of players in Round 1
-    a = sorted_players_by_rating_and_scores
+    a = sorted_players_by_rating
     x = slice(0,4)
     y = slice(4,8)
     z = zip(a[x],a[y])
@@ -243,7 +231,7 @@ def generate_first_matchups():
     rounds["Round1"] = round1_matchups
 
 
-# -- Done! --
+# -- To be updated!!!--
 def view_first_matchups():
     """ Function to view Round1 matchups """
 
@@ -252,7 +240,7 @@ def view_first_matchups():
         print(f"Match n°{i+1}: {rounds['Round1'][i]}")
 
 
-# -- Done! --
+# -- To be updated!!!--
 def save_rounds_in_db():
     """Function to save rounds instance in tournaments_db in db file """
 
@@ -262,7 +250,7 @@ def save_rounds_in_db():
         json.dump(temp, f, indent=4)
 
 
-# -- Done! --
+# -- To be updated!!!--
 def view_rounds_in_db():
     """ Function to view Round1 data from db file """
 
@@ -299,7 +287,7 @@ def view_rounds_in_db():
                 print(f"Round{i+4} is not available yet.")
 
 
-# -- To do! In progress... --
+# -- To be updated!!! --
 def update_rounds_from_db():
     pass
 
@@ -321,26 +309,32 @@ def save_scores_to_db():
 
 
 
-""" START PLAYERS SCRIPT """
+""" START USER/PLAYERS SCRIPT """
 
 if __name__=="__main__":
+    """Launch program to add/update players, macthes, and rounds"""
 
+    # -- Done!
     # -- Add & Save Players to DB file --
     # add_players()
     # save_players_data()
     
+    # -- Done!
     # -- Create/View Round1 Matchups & Save them to db file --
-    # view_current_players_standings()
-    # view_sorted_players_by_rating_and_scores()
+    # view_unsorted_players_list()
+    # view_sorted_players_list_by_rating()
+    view_ranked_players_by_rating_only()
 
-    # -- the next 3 functions gotta be initiated to be able to save data in db file --
+    # -- In Progress...
+    # -- The next functions MUST be initiated in order to save data in db file --
+    sort_players_by_ref()
     # generate_first_matchups()
     # save_rounds_in_db()
     # view_first_matchups()
     # view_rounds_in_db()
 
-    # ===============
-    # -- UPDATE SCORE
+    # -- To be done!
+    # -- UPDATE SCORE --
     """ 
     We wanna get players db 'round1_matchups[i]' to update them:
     Match n°1: (['Nzimbi', 9999, []], ['Hamel', 3445, []])
@@ -356,7 +350,7 @@ if __name__=="__main__":
     # -- p_score = temp["players_db"]["i"]["Score"] , 'i' is a player's index in the table
     # -- I gotta show up player index in matchups to allow user to allocate proper point to a specific player
     # -- And user input then shall be automatically seen in tournament_db table too
-    # -- ex: Input Macth n°1 player1_name score: ...> player with 1st rating ...> use 'sorted_players_by_rating_and_scores' to know pl ranking
+    # -- ex: Input Macth n°1 player1_name score: ...> player with 1st rating ...> use 'sorted_players_by_rating' to know pl ranking
     # -- ex: Input Macth n°1 player5_name score: ...> player with 5th rating ...> 
     # -- ex: Input Macth n°2 player2_name score: ...> player with 2nd rating ...> 
     # -- ex: Input Macth n°2 player6_name score: ...> player with 6th rating ...> 
@@ -372,7 +366,7 @@ if __name__=="__main__":
     """ /!!!\ 'all_players_db' must be sorted before saving it to db file"""
     # print(all_players_db) # -- all_players_db msut be sorted before saving it to db file
     
-    # t= sorted_players_by_rating_and_scores
+    # t= sorted_players_by_rating
     # d = slice(0,4)
     # e = slice(4,8)
     
@@ -497,12 +491,13 @@ if __name__=="__main__":
     # print(all_players_db)
 
     # -- End of program - Goodbye message.
-    print("\n================== 🌼🌼🌼 ===================")
-    print(" Fin du programme 👀...  Merci et à bientôt!\n")
+    print("---------------------------------------------------------------------------")
+    print("\n     ===================== 🌼🌼🌼 ===================")
+    print("        Fin du programme 👀...  Merci et à bientôt!\n")
 
 else:
-    # view_current_players_standings()
-    # view_sorted_players_by_rating_and_scores()
+    # view_unsorted_players_list()
+
 
     # -- 'generate_first_matchups' must be on so that rounds instance can be used in tournament.py:
     generate_first_matchups()
