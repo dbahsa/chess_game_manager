@@ -5,10 +5,14 @@
 # |- 🌼 Next Steps 🌼:
 # |—— save tournaments info to db files --#
 # |—— instantiate players obj --#
-# |—— save players info to db --#
-# |—— get "sorted" players info (name+rating+score) from db to instantiate 1st matchups
-# |—— save 1st matchups to db
-# |—— get matchups from db to instantiate round1
+# |—— save players info to players_db table --#
+# |—— Save in tournaments_db table, players indexes from players_db
+# |—— get "sorted" players info (name+rating+score) from db to instantiate 1st matchups --#
+# |—— save 1st matchups to db in tournaments_db table --#
+# |—— View Matchups from tournaments_db table --#
+# |—— Input Round1 score in Players_db table
+# |—— View tournaments_db table if Round1 Scores are recorded in there too
+
 # |—— save round1
 # |—— get round1 to add scores
 # |—— save round1 scores
