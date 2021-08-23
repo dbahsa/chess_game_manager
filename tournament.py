@@ -1,15 +1,10 @@
 #! /user/bin/env python3
 # -*- coding: utf-8 -*-
 
-
 """ modules & packages """
 import json
 from dataclasses import dataclass, asdict, field
-import pandas as pd
-from tinydb import TinyDB
-
-import players
-
+# import players
 
 """ players variables used to launch the script """
 # tournaments = [tournament1, tournament2, tournament[w]] ; 'w' is the num of tournament
@@ -17,8 +12,7 @@ import players
 # list of all tournaments
 tournaments = []
 # db: var containing tournament data file
-db = TinyDB('tournament_data.json')
-
+# db = TinyDB('tournament_data.json')
 
 """ # -- Prog Start here -- """
 # -- To do! In progress
@@ -29,7 +23,6 @@ def add_rounds():
     # for i in rounds[0]:
     #     print(i)
     return rounds
-
 
 # -- To do!
 ## -- pl_db_indexes = [x for x in temp["players_db"].keys()]
@@ -47,8 +40,10 @@ class Tournament:
     time_control: str # choices: bullet, blitz, or coup rapide
     description: str
     number_of_turns: int = field(default=4)
+    # rounds = item from players.py
     rounds: dict = field(init=False, repr=False, default_factory=add_rounds) # MUST BE A DICT WITH EACH ROUND AS A KEY
-    players_db_indexes: list = field(init=False, repr=False, default_factory=add_players_db_indexes) # MUST BE A DICT FROM PLAYERS TABLE
+    # players_db_indexes = item from players.py
+    players_db_indexes: list = field(init=False, repr=False, default_factory=add_players_db_indexes)
     single_tournament_db: dict = field(init=False, repr=False)
     
     def __post_init__(self):
@@ -77,18 +72,20 @@ def add_tournament():
     print("\n🤓 Bravo! Le tournoi a bien été enregistré.\n")
     # print("Passons à l'étape suivante svp...\n")
 
-
 ## -- /!!!\ create an input func for different class property where we need to validate the input (see players.py)
 
-""" variables to help execute the script """
-# 'filename' created to access & update data file:
-filename = 'tournament_data.json'
+""" 'tournament_data.json' created to access & update data file: """
 
-with open(filename, "r") as f:
+with open('tournament_data.json', "r") as f:
     temp = json.load(f)
 
-with open(filename, "w") as f:
-    json.dump(temp, f, indent=4)
+print()
+print(temp["tournaments_db"].items())
+print()
+
+
+# with open('tournament_data.json', "w") as f:
+#     json.dump(temp, f, indent=4)
 
 
 # -- To do! In progress...
@@ -110,11 +107,11 @@ if __name__=="__main__":
     # save_tournament_data()
     # add_rounds()
     
-    print("\n================== 🤓 Round1 🏁 Matchups 🥸 ================")
+    # print("\n================== 🤓 Round1 🏁 Matchups 🥸 ================")
     # for i in range(len(players.rounds[0])):
     #     print(f"Match n°{i+1}: {players.rounds[0][i]}")
-    for i in range(len(players.rounds["Round1"])):
-        print(f"Match n°{i+1}: {players.rounds['Round1'][i]}")
+    # for i in range(len(players.rounds["Round1"])):
+    #     print(f"Match n°{i+1}: {players.rounds['Round1'][i]}")
 
     # for i in players.rounds:
     #     print(i)

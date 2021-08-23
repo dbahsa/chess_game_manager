@@ -6,7 +6,7 @@ import json
 from dataclasses import dataclass, asdict, field
 import pandas as pd
 from tinydb import TinyDB
-# from data import save_players_data2
+
 
 
 """ players variables used to launch the script """
@@ -80,11 +80,10 @@ player_gender = ask_gender()
 def add_players():
     """ function to instantiate players"""
     print("\n🚧 Enregistrement des 8 joueurs 🚧")
-    # !!! DO NOT FORGET TO CHANGE THE RANGE BELOW TO REFLECT USER'S REQUIREMENTS OF 8 PLAYERS
     # replace 3 by total_number_of_players -> range(1, total_number_of_players+1)
     for i in range(1,9):
         print(f"\n🔥 Entrer les informations sur le joueur n°{i}")
-        p = Player(input("- Nom de famille: "), # replace input with: 'player_last_name' obteined above
+        p = Player(input("- Nom de famille: "), # replace input with: 'player_last_name' obtained above
                     input("- Prénom: "), # player_fname
                     input("- Date de naissance telle que jj/mm/aaaa (ex: 18/02/1973): "), # player_dob
                     input("- Sexe [H/F]: ").upper(), # player_gender
@@ -110,13 +109,12 @@ def save_players_data():
 def save_players_indexes_in_tournaments_db():
     pass
 
-""" VAR TO READ DB FILE """
-# -- 'filename' created to access & update data file: --
-filename = 'tournament_data.json'
+""" -- Accessing DB from 'tournament_data.json' file: -- """
 
-with open(filename, "r") as f:
+
+with open('tournament_data.json', "r") as f:
     temp = json.load(f)
-# with open(filename, "w") as f:
+# with open('tournament_data.json', "w") as f:
 #     json.dump(temp, f, indent=4)
 
 
@@ -128,11 +126,20 @@ for s in temp["players_db"].items():
     w = list(s[1].values())
     unsorted_players[y] = w
 
+print(temp["players_db"].items())
+print()
+print(temp["tournaments_db"].items())
+print()
+# print(unsorted_players)
+# print()
+# for d in unsorted_players:
+#     print(d)
+
 # -- Sorted Players by rating: --
-sorted_players_by_rating = sorted(unsorted_players.items(), key=lambda x: x[1][4], reverse = True)
+# sorted_players_by_rating = sorted(unsorted_players.items(), key=lambda x: x[1][4], reverse = True)
 
 # -- Sorted Players by score and rating: --
-sorted_players_by_score_and_rating = sorted(unsorted_players.items(), key=lambda x: (sum(x[1][5]), x[1][4]), reverse = True)
+# sorted_players_by_score_and_rating = sorted(unsorted_players.items(), key=lambda x: (sum(x[1][5]), x[1][4]), reverse = True)
 
 # print("\n--- Players UNSORTED _ranking  & num of points at the end of Round1 --\n")
 # players_names_ranking_points = []
@@ -249,34 +256,36 @@ def create_players_matchup_reference_score_and_rating():
 
 
 # -- Update in progress ... --
-def generate_round1_matchups():
+def generate_matchups():
     """ Function to create matchups per round """
 
-    # -- Generate the 1st pairs of players in Round 1
-    a = players_matchup_reference_rating
+    # 1. Generate the 1st pairs of players for Round1
+    a = players_matchup_reference_score_and_rating
     x = slice(0,4)
     y = slice(4,8)
     z = zip(a[x],a[y])
-
-    # -- adding Round1 matchups to tournament rounds instance
+    
+    # 2. Add Round1 matchups to rounds for ["tournaments_db"]["1"]['Tourn\u00e9es']s tournament_db table
     round1_matchups = {}
-    
-    i=1
-    for g in list(z):
-        round1_matchups["Match n°str(i)"] = g
+    i = 1
+    for m in list(z):
+        round1_matchups[f"Match n°{int(i)}"] = m
         i += 1
-    
     rounds["Round1"] = round1_matchups
+    
+    # 3. Open and save rounds data in tournament_db table
+    with open('tournament_data.json', "w") as f:
+        temp["tournaments_db"]["1"]['Tourn\u00e9es']= rounds
+        json.dump(temp, f, indent=4)
 
-    # round1_matchups =[]
-    # for g in list(z):
-    #     round1_matchups.append(g)
-    # rounds["Round1"] = round1_matchups
 
-
-# -- To do!
-def generate_next_rounds_matchups():
-    pass
+# -- Update in progress ... -- NOT REALLY NECESSARY
+"""def generate_next_rounds_matchups():
+    
+    
+    
+    # players_matchup_reference_score_and_rating
+    pass"""
 
 # -- Done! --
 def view_round1_matchups():
@@ -306,7 +315,7 @@ def save_rounds_in_db():
     """Function to save rounds instance in tournaments_db in db file """
 
     # -- Open and save rounds data in tournament table in db file
-    with open(filename, "w") as f:
+    with open('tournament_data.json', "w") as f:
         temp["tournaments_db"]["1"]['Tourn\u00e9es'] = rounds
         json.dump(temp, f)
         # json.dump(temp, f, indent=4)
@@ -394,12 +403,13 @@ if __name__=="__main__":
     # view_unsorted_players_list()
     # view_sorted_players_list_by_rating()
     # view_ranked_players_by_rating_only()
+    # view_ranked_players_by_score_and_rating()
 
     # -- Done!
     # -- The next functions MUST be initiated in order to save data in db file --
-    create_players_matchup_with_reference_rating()
-    create_players_matchup_reference_score_and_rating()
-    # generate_round1_matchups()
+    # create_players_matchup_with_reference_rating()
+    # create_players_matchup_reference_score_and_rating()
+    # generate_matchups()
     # view_round1_matchups()
     # save_rounds_in_db()
     # view_rounds_in_db()
@@ -421,12 +431,10 @@ if __name__=="__main__":
         ask_index = input("Veuillez taper le numéro du membre, svp: ")
         try: 
             if int(ask_index)>0 or int(ask_index)<=range(len(temp["players_db"].keys())): 
-                # print(f'Vous allez taper le score de {temp["players_db"][str(ask_index)]["Nom de famille"]}')
                 ask_score = float(input(f'Taper le score de {temp["players_db"][str(ask_index)]["Nom de famille"]}: '))
-                # print(f'Le nouveau score de {temp["players_db"][str(ask_index)]["Nom de famille"]} est: {ask_score}')
-                with open(filename, "w") as f:
-                    temp["players_db"][str(ask_index)]["Score"].append(ask_score) # /!!!\ MUST FIND A WAY TO LINK 'ask_score' TO TOURNAMENT TABLE
-                    # -- A corriger: temp["tournaments_db"]["1"]['Tourn\u00e9es']["Round1"].append(ask_score)
+                with open('tournament_data.json', "w") as f:
+                    # Being corrected... we should not append but make an addition to a ditc instead --> line 447
+                    temp["players_db"][str(ask_index)]["Score"].append(ask_score)
                     json.dump(temp, f, indent=4)
             else:
                 print("Mauvaise saisie...")
@@ -440,42 +448,62 @@ if __name__=="__main__":
     # print(f'Scores de {temp["players_db"]["1"]["Nom de famille"]}: {temp["players_db"]["1"]["Score"]}')
     # print(f'Score Final de {temp["players_db"]["1"]["Nom de famille"]} dans ce tournoi: {sum(temp["players_db"]["1"]["Score"])}')
 
-    # -- Save Rounds data to tournaments_db
-    
-    # -- Generate the 1st pairs of players in Round 1
-    # a = players_matchup_reference_rating
+    # -- Save Round1 data in tournaments_db -- 
+    # 1. Generate the 1st pairs of players in Round 1
     a = players_matchup_reference_score_and_rating
     x = slice(0,4)
     y = slice(4,8)
     z = zip(a[x],a[y])
-
-    # -- adding Round1 matchups to tournament rounds instance
+    
+    # 2. Add Round1 matchups to tournament rounds instance
     round1_matchups = {}
     i = 1
     for m in list(z):
         round1_matchups[f"Match n°{int(i)}"] = m
         i += 1
+    rounds["Round1"] = round1_matchups
     
-    for d in round1_matchups.items():
-        print(d[1])
+    # 3. Open and save rounds data in tournament_db table
+    # with open('tournament_data.json', "w") as f:
+    #     temp["tournaments_db"]["1"]['Tourn\u00e9es']= rounds
+    #     json.dump(temp, f, indent=4)
+
+    # print("\---")
+    # print(rounds)
+    # print("\---")
+    # print(rounds.items())
+    # print("\---")
+    # print(rounds.keys())
+    # print("\---")
+    # print(rounds.values())
+
+
+
+    """
+    for k in temp["tournaments_db"]["1"]['Tourn\u00e9es'].items():
+        print(k)
+        print("---")
+        print(k[0])
+        print("---")
+        print(k[1]['Match n°1'])
+        print("---")
+        print(k[1]['Match n°1'][0])
+        print("---")
+        print(k[1]['Match n°1'][0][1])
+
+    # -- OUTPUT:
     
-    print("---")
-    for o in players_matchup_reference_score_and_rating:
-        print(o)
+    ('Round1', {'Match n°1': [['1', 4.0], ['8', 0]], 'Match n°2': [['7', 1.0], ['3', 0]], 'Match n°3': [['6', 0], ['2', 0]], 'Match n°4': [['4', 0], ['5', 0]]})
+    ---
+    Round1
+    ---
+    [['1', 4.0], ['8', 0]]
+    ---
+    ['1', 4.0]
+    ---
+    4.0
+    """
 
-    print("---")
-    for h in sorted_players_by_score_and_rating:
-        print(h)
-
-    # print(round1_matchups)
-    # rounds["Round1"] = round1_matchups
-
-
-    # -- Open and save rounds data in tournament table in db file
-    # with open(filename, "w") as f:
-    #     temp["tournaments_db"]["1"]['Tourn\u00e9es'] = rounds
-    #     json.dump(temp, f)
-        # json.dump(temp, f, indent=4)
 
     """
     p_score = temp["players_db"]["i"]["Score"] , 'i' is a player's index in the table
@@ -585,13 +613,13 @@ if __name__=="__main__":
     # print(temp["players_db"]["2"]['Nom de famille'])
     
     # # -- Open file to update them
-    # with open(filename, "r") as f:
+    # with open('tournament_data.json', "r") as f:
     #     temp = json.load(f) 
     #     temp["players_db"]["1"]['Nom de famille'] = "Renard"
     #     temp["players_db"]["2"]['Nom de famille'] = "Poisson"
 
     # # -- save update
-    # with open(filename, "w") as f:
+    # with open('tournament_data.json', "w") as f:
     #     json.dump(temp, f, indent=4)
     
     # -- print data updated 
@@ -669,7 +697,7 @@ else:
     # view_unsorted_players_list()
 
 
-    # -- 'generate_round1_matchups' must be on so that rounds instance can be used in tournament.py:
-    generate_round1_matchups()
+    # -- 'generate_matchups' must be on so that rounds instance can be used in tournament.py:
+    generate_matchups()
     
     # view_round1_matchups()
