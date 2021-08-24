@@ -1,36 +1,44 @@
 #! /user/bin/env python3
 # -*- coding: utf-8 -*-
 
+
 """ modules & packages """
 import json
-from dataclasses import dataclass, asdict, field
+from dataclasses import dataclass, field
 import pandas as pd
 from tinydb import TinyDB
 
+from tournament import Tournament
 
 
 """ players variables used to launch the script """
 total_number_of_players = 8
 registered_players = 0
-# all_players_db:  exploited by data.py     
-all_players_db = [] # ---  /!!!\ MUST BE SORTED BEFORE SAVING IT TO DB FILE ---
+all_players_db = [] 
+
 # db: var containing tournament data file
 db = TinyDB('tournament_data.json')
 
 """ # -- Prog Start here -- """
+
 def player_score():
-    """ return a list of player scores after each matchup """
+    """ return a list of player scores """
+    
     scores =[]
     return scores
 
+
 def player_tournament_participation():
-    """ to add tournaments in which a player participated in """
+    """ Function that adds tournaments in which a player participated in """
+    
     tournaments =[]
     return tournaments
+
 
 @dataclass
 class Player:
     """Class to create player instances"""
+    
     last_name: str
     first_name: str
     birth_date: str
@@ -114,8 +122,11 @@ def save_players_indexes_in_tournaments_db():
 
 with open('tournament_data.json', "r") as f:
     temp = json.load(f)
+# with open('tournament_data.json', 'r') as f:
+#     temp = json.loads(f.read())
 # with open('tournament_data.json', "w") as f:
 #     json.dump(temp, f, indent=4)
+
 
 
 """ VAR TO SORT PLAYERS DATA """
@@ -126,10 +137,18 @@ for s in temp["players_db"].items():
     w = list(s[1].values())
     unsorted_players[y] = w
 
-print(temp["players_db"].items())
+# print(temp)
+# print()
+# print(temp["players_db"])
+
 print()
-print(temp["tournaments_db"].items())
+print(temp["tournaments_db"])
 print()
+print(temp["tournaments_db"]['1'])
+print()
+print(temp["tournaments_db"]['1']['Nom du tournoi'])
+print()
+
 # print(unsorted_players)
 # print()
 # for d in unsorted_players:

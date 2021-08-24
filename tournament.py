@@ -4,7 +4,8 @@
 """ modules & packages """
 import json
 from dataclasses import dataclass, asdict, field
-# import players
+from tinydb import TinyDB, Query, where
+from tinydb.operations import add, delete, subtract
 
 """ players variables used to launch the script """
 # tournaments = [tournament1, tournament2, tournament[w]] ; 'w' is the num of tournament
@@ -12,13 +13,15 @@ from dataclasses import dataclass, asdict, field
 # list of all tournaments
 tournaments = []
 # db: var containing tournament data file
-# db = TinyDB('tournament_data.json')
+db = TinyDB('tournament_data.json')
+
 
 """ # -- Prog Start here -- """
+
 # -- To do! In progress
 def add_rounds():
     """ Function to add round instances """
-    rounds = players.rounds
+    rounds = {}
     # print("================== 🤓 Round1 🏁 Matchups 🥸 ================")
     # for i in rounds[0]:
     #     print(i)
@@ -79,13 +82,14 @@ def add_tournament():
 with open('tournament_data.json', "r") as f:
     temp = json.load(f)
 
-print()
-print(temp["tournaments_db"].items())
-print()
 
-
-# with open('tournament_data.json', "w") as f:
-#     json.dump(temp, f, indent=4)
+# print()
+print(temp["tournaments_db"])
+# print()
+# print(temp["tournaments_db"].items())
+# print()
+# print(temp["tournaments_db"]['1'])
+# print()
 
 
 # -- To do! In progress...
@@ -97,6 +101,21 @@ def save_tournament_data():
     tournaments_table.truncate()  # clear up the table first
     tournaments_table.insert_multiple(tournaments)
 
+
+
+""" json way to UPDATE / SAVE in db file """
+# temp = {'players_table':{}, 'tournament_table':{}}
+# temp['tournament_table']["Nom du tournoi"] = self.name
+# temp['tournament_table']["Lieu"] = self.location
+# temp['tournament_table']["Date"] = self.date
+# temp['tournament_table']["Nombre de tour"] = self.number_of_turns
+# temp['tournament_table']["Tournées"] = self.rounds
+# temp['tournament_table']["Joueurs"] = self.players_db_indexes
+# temp['tournament_table']["Contrôle du temps"] = self.time_control
+# temp['tournament_table']["Description"] = self.description
+# print(temp)
+# with open('xxx.json', "w") as f:
+#     temp = json.load(f)
 
 
 """ START TOURNAMENT SCRIPT """
