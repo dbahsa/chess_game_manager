@@ -114,7 +114,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
         pour R3.  Et la même procédure s'applique également pour les autres rounds.
             
         Notez qu'avant de poursuivre, ces matches doivent être validés en vérifiant leur existence dans la base de données.
-        S'ils existent, la génération des pairs se fait alors en faisnt le 1er contre le 3ème joueur.
+        S'ils existent, la génération des pairs s'effectue alors en faisant le 1er contre le 3ème joueur.
 
 
 ### PRE-REQUIS
