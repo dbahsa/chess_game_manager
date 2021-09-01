@@ -52,7 +52,6 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             - Matches R6 : scores R1 + scores R2 + scores R3 + scores R4 + scores R5 & cl
             - Matches R7 : scores R1 + scores R2 + scores R3 + scores R4 + scores R5 + scores R6 & cl
         </pre>
-        <br>
         - et des scénarios de résultats obtenus à la fin de chaque round (w: gagnant | l: perdant | t: nul):<br>
         <pre>
             - Cas 1:  4w   |   4l   |   0t
@@ -60,8 +59,8 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             - Cas 3:  2w   |   2l   |   4t
             - Cas 4:  1w   |   1l   |   6t
             - Cas 5:  0w   |   0l   |   8t
-        <br> Ces scénarios sont très importants pour l'écriture des algorithmes pour générer les paires de joueurs
-            (match) de R2 à R7. Par exemple:
+        
+        Ces scénarios sont très importants pour l'écriture des algorithmes pour générer les paires de joueurs (match) de R2 à R7. Par exemple:
             
             (M: Match | T: Top | L: Low | w: gagnant | l: perdant | t: nul)
 
