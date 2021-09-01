@@ -42,7 +42,8 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
     MIN     0       0       0       0       0       0       0
     </pre>
     - La création d'une paire de joueurs pour chacun des 4 matches dans un round (après R1) se fait en fonction:
-        <br>- de scores et du classment général en cas d'égalité:<br>
+        <br>
+        - des scores et du classment général en cas d'égalité:<br>
         <pre>
             - Matches R2 : scores R1 & cl
             - Matches R3 : scores R1 + scores R2 & cl
@@ -52,7 +53,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             - Matches R7 : scores R1 + scores R2 + scores R3 + scores R4 + scores R5 + scores R6 & cl
         </pre>
         <br>
-        - et de scénarios de résultats obtenus à la fin de chaque round (w: gagnant | l: perdant | t: nul):<br>
+        - et des scénarios de résultats obtenus à la fin de chaque round (w: gagnant | l: perdant | t: nul):<br>
         <pre>
             - Cas 1:  4w   |   4l   |   0t
             - Cas 2:  3w   |   3l   |   2t
@@ -60,7 +61,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             - Cas 4:  1w   |   1l   |   6t
             - Cas 5:  0w   |   0l   |   8t
         </pre>
-
+        <br>
         <pre>
         /!!!\ Ces scénarios sont très importants pour l'écriture des algorithmes pour générer les paires de joueurs
             (match) de R2 à R7. Par exemple:
