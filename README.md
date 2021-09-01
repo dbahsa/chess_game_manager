@@ -52,7 +52,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             - Cas 3:  2w   |   2l   |   4t
             - Cas 4:  1w   |   1l   |   6t
             - Cas 5:  0w   |   0l   |   8t
-            
+            <pre>
             /!!!\ Ces scénarios sont très importants pour l'écriture des algorithmes pour générer les paires de joueurs
             (match) de R2 à R7. Par exemple:
             
@@ -87,6 +87,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             j5 vs. j2 | j3 vs. j4          j1 vs. j2 | j3 vs. j4          j1 vs. j3 | j6 vs. j8          j3 vs. j4 | j6 vs. j1
             j6 vs. j7 | j8 vs. j1          j5 vs. j6 | j7 vs. j8          j2 vs. j4 | j5 vs. j7          j5 vs. j2 | j7 vs. j8
 
+            </pre>
             Comme vous pouvez le contaster, ces différents scénarios ne fonctionnent pas pour R2 vu qu'aucun des joueurs n'a la possibilité
             de renconter son oppsant du R1 parce que la création des paires a changé; soit en faisant jouer le 1er contre le 2ème,
             soit le 1er contre le 3ème, en fonction du classement établi à l'issu du R1.  Par exemple, j1 et j5 ne peuvent pas jouer ensemble
