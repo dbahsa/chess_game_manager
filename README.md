@@ -29,7 +29,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
     j1 vs. j4   |   j2 vs. j5   |   j3 vs. j6   |   j4 vs. j7   |   j5 vs. j8<br>
     j1 vs. j5   |   j2 vs. j6   |   j3 vs. j7   |   j4 vs. j8<br>
     j1 vs. j6   |   j2 vs. j7   |   j3 vs. j8<br>
-    1 vs. j7   |   j2 vs. j8<br>
+    j1 vs. j7   |   j2 vs. j8<br>
     j1 vs. j8<br>
     </pre>
     - Point gagnant (w) par match: 1;
