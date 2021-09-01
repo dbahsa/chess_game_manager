@@ -96,14 +96,14 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
 
         Comme vous pouvez le contaster, ces différents scénarios ne fonctionnent pas pour R2 vu qu'aucun des joueurs n'a la 
         possibilité de renconter son opposant du R1 parce que la création des paires a changé; maintenant le choix se fait 
-        soit le 1e contre le 2ème joueur, soit le 1er contre le 3ème, en fonction du classement établi à l'issu du R1.
+        soit le 1er contre le 2ème joueur, soit le 1er contre le 3ème, en fonction du classement établi à l'issu du R1.
         Par exemple, j1 et j5 ne peuvent pas jouer ensemble au R2 parce que la répartition des points (0, 0,5, 1) ferait 
-        qu'au classement final du R1, ils seront toujours éloignés d'une probable opposition peu importe le scénario obtenu
+        qu'au classement final après les matches de R1, ils seront toujours éloignés d'une probable opposition peu importe le scénario obtenu
         de ces 4 premiers matches.
             
-        Donc pour R2, seul le classement des joueurs à l'issu de R1 est suffisant pour générer ses 4 nouvelles paires de joueurs.
-        Ensuite, c'est après les matches du R2 que l'algorithme devrait prendre en compte ces scénarios/cas pour générer les 
-        matches de R3 à R7 pour éviter l'arrêt de l'application.
+        Donc pour R2, seul le classement (basé sur les scores) des joueurs à l'issu de R1 est suffisant pour générer ses 4 nouvelles paires de joueurs.
+        Ensuite, c'est après les matches du R2 que l'algorithme devrait prendre en compte ces 5 scénarios/cas pour générer les 
+        matches de R3 à R7 pour le bon déroulement de l'application.
             
         Pour illustrer, si les résultats du R2 orientent vers le Cas1 (4w, 4l, 0t), une liste des 4w doit être constituée et
         triée par scores (et par position au classement général, le cas échéant), ainsi qu'une autre pour les 4l.  Ensuite,

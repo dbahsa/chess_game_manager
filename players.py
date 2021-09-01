@@ -5,22 +5,39 @@
 """ modules & packages """
 import json
 from dataclasses import dataclass, field
+from tinydb import TinyDB, Query
 import pandas as pd
-from tinydb import TinyDB
+import datetime
+import itertools
 
-from tournament import Tournament
 
+""" players variables used in this file script """
 
-""" players variables used to launch the script """
 total_number_of_players = 8
 registered_players = 0
 all_players_db = [] 
 
-# db: var containing tournament data file
-db = TinyDB('tournament_data.json')
+## -- 'db' allows to generate a DB file, 'db1.json', for this app --
+db = TinyDB('db1.json', indent=4)
+tournaments_table = db.table('tournaments_db')
+players_table = db.table('players_db')
 
-""" # -- Prog Start here -- """
+filename = "db1.json"
+with open(filename, "r") as f:
+    json_object = json.load(f)
 
+## -- 'df' allows to update data in DB file --
+df = pd.DataFrame(json_object['players_db'])
+## - 'T' (Transpose) to use db indexes as table indexes for a better reading of data
+real_db = df.T
+
+
+## -- PPrint for internal use ONLY
+pp = pprint.PrettyPrinter(indent=4)
+
+""" # -- Prog Start Here -- """
+
+## -- Done! -- Scores are added directly by the user in the DB file
 def player_score():
     """ return a list of player scores """
     
@@ -28,6 +45,7 @@ def player_score():
     return scores
 
 
+## -- Done!
 def player_tournament_participation():
     """ Function that adds tournaments in which a player participated in """
     
@@ -35,9 +53,10 @@ def player_tournament_participation():
     return tournaments
 
 
+## -- Done! --
 @dataclass
 class Player:
-    """Class to create player instances"""
+    """Class to generate player instances"""
     
     last_name: str
     first_name: str
@@ -49,7 +68,7 @@ class Player:
     single_player_db: dict = field(init=False, repr=False)
 
     def __post_init__(self):
-        """ Method to help create player full data"""
+        """ Method to help generate player full data"""
         self.single_player_db = {"Nom de famille": self.last_name,
                                 "Prénom": self.first_name,
                                 "Date de naissance": self.birth_date,
@@ -59,355 +78,792 @@ class Player:
                                 "Tournois": self.tournaments}
 
 
-## -- /!!!\ create an input func for all class properties such as below (ask_lname, ask_gender...) 
-
-
-"""
-# -- To Do!
-def ask_lname():
-    lname = input("Entrer le nom de famille: ")
-    if lname == "":
-        print("Veuillez saisir le nom de famille svp. Merci!")
-        return ask_lname() # this allows to ask the user the lname again; this will keep on asking so as long as the user doens't answer the question
-    return lname # once lname obtained it can be pushed to function "add_players", where p = Player(last_name = lname...)
-
-player_last_name = ask_lname()
-
-# -- To Do!
-def ask_gender():
-    player_gender = input("Entrer le sexe, F (femme) ou H (homme): ")
-    if player_gender != "m".upper() or player_gender != "f".upper():
-        print("Veuillez saisir le sexe en tapant F (femme) ou H (homme). Merci!")
-        return ask_gender() # this allows to ask the user the lname again; this will keep on asking so as long as the user doens't answer the question
-    return player_gender # once lname obtained it can be pushed to function "add_players", where p = Player(last_name = lname...)
-player_gender = ask_gender()
-"""
-
-
-# --  Done! Gotta be reajusted when above functions will updated
+## -- Done! --
 def add_players():
     """ function to instantiate players"""
-    print("\n🚧 Enregistrement des 8 joueurs 🚧")
+    
+    print("\nEnregistrement des 8 joueurs...")
     # replace 3 by total_number_of_players -> range(1, total_number_of_players+1)
     for i in range(1,9):
-        print(f"\n🔥 Entrer les informations sur le joueur n°{i}")
-        p = Player(input("- Nom de famille: "), # replace input with: 'player_last_name' obtained above
-                    input("- Prénom: "), # player_fname
-                    input("- Date de naissance telle que jj/mm/aaaa (ex: 18/02/1973): "), # player_dob
-                    input("- Sexe [H/F]: ").upper(), # player_gender
-                    int(input("- Classement: ")) # player_rating
+        print(f"\nEntrer les informations sur le joueur n°{i}")
+        p = Player(input("- Nom de famille: "),
+                    input("- Prénom: "),
+                    input("- Date de naissance telle que jj/mm/aaaa (ex: 18/02/1973): "),
+                    input("- Sexe [H/F]: ").upper(),
+                    int(input("- Classement: "))
                     )
         all_players_db.append(p.single_player_db)
         # print("-------------------------------------")
-    print("\n🤓 Merci. Les 8 joueurs ont bien été enregistrés!")
-    print("Passons à l'étape suivante dès à présent...\n")
+        print(f"\nJoueur n°{i} enregistré.")
+    print("Fin de l'enregistrement des joueurs.\n")
+# add_players()
 
 
-# -- Done! Gotta be reajusted when above functions will updated
+""" Saving players data into db file /!!!\ """
+
+## -- Done! --
 def save_players_data():
     """ save players data """
-    # db = TinyDB('tournament_data.json')
-    # players table: 'players_db'
+    
+    db = TinyDB(filename)
     players_table = db.table('players_db')
-    players_table.truncate() # clear up the table first
+    players_table.truncate()
     players_table.insert_multiple(all_players_db)
+# save_players_data()
 
 
-# -- To Do!
+## -- Done!
 def save_players_indexes_in_tournaments_db():
-    pass
+    '''Function to save players indexes in tournament table in db file'''
 
-""" -- Accessing DB from 'tournament_data.json' file: -- """
-
-
-with open('tournament_data.json', "r") as f:
-    temp = json.load(f)
-# with open('tournament_data.json', 'r') as f:
-#     temp = json.loads(f.read())
-# with open('tournament_data.json', "w") as f:
-#     json.dump(temp, f, indent=4)
+    for i in range(len(list(json_object["players_db"]))):
+        json_object["tournaments_db"]['1']['Joueurs'].append(list(json_object["players_db"])[i])
+    with open(filename, "w") as f:
+        json.dump(json_object, f, indent=4)
+# save_players_indexes_in_tournaments_db()
 
 
+""" View players data from db file /!!!\ """
 
-""" VAR TO SORT PLAYERS DATA """
-# -- Unsorted Players by rating: --
-unsorted_players = {}
-for s in temp["players_db"].items():
-    y = s[0]
-    w = list(s[1].values())
-    unsorted_players[y] = w
-
-# print(temp)
-# print()
-# print(temp["players_db"])
-
-print()
-print(temp["tournaments_db"])
-print()
-print(temp["tournaments_db"]['1'])
-print()
-print(temp["tournaments_db"]['1']['Nom du tournoi'])
-print()
-
-# print(unsorted_players)
-# print()
-# for d in unsorted_players:
-#     print(d)
-
-# -- Sorted Players by rating: --
-# sorted_players_by_rating = sorted(unsorted_players.items(), key=lambda x: x[1][4], reverse = True)
-
-# -- Sorted Players by score and rating: --
-# sorted_players_by_score_and_rating = sorted(unsorted_players.items(), key=lambda x: (sum(x[1][5]), x[1][4]), reverse = True)
-
-# print("\n--- Players UNSORTED _ranking  & num of points at the end of Round1 --\n")
-# players_names_ranking_points = []
-# for t in range(len(serialized_players)):
-#     player_name_ranking_point = [serialized_players[t]['lname'], serialized_players[t]['points'], serialized_players[t]['ranking']]
-#     print(serialized_players[t]['lname'], serialized_players[t]['points'], serialized_players[t]['ranking'])
-#     players_names_ranking_points.append(player_name_ranking_point)
-
-# print("\n--- Players SORTED _num of Points & Ranking at the end of Round1 --\n")
-# sorted_players_by_points = sorted(unsorted_players.items(), key = lambda x: (x[1], x[2]), reverse = True)
-# for s in sorted_players_by_points:
-#     print(s)
-
-# -- View Ranked Players Based on their Rating points:
-# print("\n         - Classement des joueurs au début du tournoi -")
-# print("---------------------------------------------------------------------------")
-# n = 0
-# for i in sorted_players_by_rating:
-#     print(f"N°{n+1} avec l'indexe {i[0]}: '{i[1][1]} {i[1][0]}', '{i[1][4]}' points, avec un score de '{i[1][5]}'")
-#     n += 1
-# print("---------------------------------------------------------------------------\n")
-# -- OUTPUT: 
-# -- Classement des joueurs au début du tournoi --
-# N°1 avec l'indexe 6: 'Brenn Nzimbi', '9999' points, avec un score de '[]'
-# N°2 avec l'indexe 7: 'Alexia Laville', '9998' points, avec un score de '[]'
-# N°3 avec l'indexe 4: 'Mary Gendre', '4543' points, avec un score de '[]'
-# N°4 avec l'indexe 8: 'Corine Lafarge', '4543' points, avec un score de '[]'
-# N°5 avec l'indexe 3: 'John Hamel', '3445' points, avec un score de '[]'
-# N°6 avec l'indexe 2: 'Lionel Prudom', '2345' points, avec un score de '[]'
-# N°7 avec l'indexe 1: 'Paul Lyons', '1234' points, avec un score de '[]'
-# N°8 avec l'indexe 5: 'Sophia Gaillard', '1221' points, avec un score de '[]'
+## -- Done! --
+def view_players_info():
+    """ Function to view tournament info """
+    
+    print("\n📚 Voici les informations actuelles sur les joueurs\n")
+    print(real_db)
+view_players_info()
 
 
-"""Variables used for rounds & matchups instances"""
-# -- Rounds list (is a dict) comprises all rounds --
-rounds = {}
+""" Update players data from db file /!!!\ """
 
-# -- Done! --
-def view_unsorted_players_list():
-    """ This function allows to ONLY see unsorted players list """
+## -- Done! -- Update Player last name in db file -- /!!!\ At the end of the script, send the user back to the former menu
+def update_player_lname():
+    """ Function to update players last name in db file """
 
-    # -- PANDAS PLAYERS TABLE
-    print("\n                 -  Liste non-triée des joueurs -")
-    print("---------------------------------------------------------------------------")
-    # -- Unsorted players --
-    df = pd.DataFrame.from_dict(temp["players_db"], orient='index')
-    print(df)
-
-
-# -- Done! --
-def view_sorted_players_list_by_rating():
-    """ This function allows to ONLY see unsorted players list """
-
-    # -- PANDAS Sorted players by rating
-    print("\n     - Liste triée des joueurs par points au 'Classement' général -")
-    print("---------------------------------------------------------------------------")
-    df = pd.DataFrame.from_dict(temp["players_db"], orient='index')
-    x = df.sort_values(by=['Classement'], ascending=False)
-    print(x)
-
-
-# -- Done! --
-def view_ranked_players_by_rating_only():
-    """Function to view players list based on their rating ONLY"""
-
-    print("\n- Classement Général des Joueurs -")
-    print("---------------------------------------------------------------------------")
-    n = 0
-    for i in sorted_players_by_rating:
-        # print(f"N°{n+1} avec l'indexe {i[0]}: {i[1][1]} {i[1][0]}, {i[1][4]} points")
-        print(f'Membre n°{i[0]}: {i[1][1]} {i[1][0]},  n°{n+1} au classement général avec {i[1][4]} points')
-        n += 1
-    print("---------------------------------------------------------------------------\n")
+    print("\n🚧 Procédons à l'actualisation des données...")
+    view_players_info()
+    while True:
+        msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
+        print("\n🚨 Pour modifier le 'Nom de famille' d'un joueur, ", end="")
+        user_choice = input(msg)
+        try:
+            if int(user_choice) in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}] pour modifier le 'Nom de famille' de", end="")
+                print(f" {real_db.at[user_choice, 'Prénom']} {real_db.at[user_choice, 'Nom de famille']}.")
+                txt = f"🚦 Veuillez saisir son nouveau 'Nom de famille', svp: "
+                real_db.at[user_choice, 'Nom de famille'] = str(input(txt).capitalize())
+                data = real_db.to_json(orient='index', indent=4)
+                json_object['players_db'] = json.loads(data)
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                print(f"🎉 Le nouveau 'Nom de famille' de {real_db.at[user_choice, 'Prénom']} est ", end="")
+                print(f"{real_db.at[user_choice, 'Nom de famille']}.")
+                print()
+                view_players_info()
+            if int(user_choice) not in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            view_players_info()
+            print()
+# update_player_lname()
 
 
-# -- Done! --
-def view_ranked_players_by_score_and_rating():
-    """Function to view players list based on their rating ONLY"""
+## -- Done! -- Update Player first name in db file -- /!!!\ At the end of the script, send the user back to the former menu
+def update_player_fname():
+    """ Function to update players first name in db file """
 
-    print("\n- Joueurs Triés par Score et Classement Général -")
-    print("---------------------------------------------------------------------------")
-    n = 0
-    for i in sorted_players_by_score_and_rating:
-        print(f'Membre n°{i[0]}: {i[1][1]} {i[1][0]}  est actuellement n°{n+1} avec un score de {sum(i[1][5])}')
-        n += 1
-    print("---------------------------------------------------------------------------\n")
+    print("\n🚧 Procédons à l'actualisation des données...")
+    view_players_info()
+    while True:
+        msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
+        print("\n🚨 Pour modifier le 'Prénom' d'un joueur, ", end="")
+        user_choice = input(msg)
+        try:
+            if int(user_choice) in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}] pour modifier le 'Prénom' de", end="")
+                print(f" {real_db.at[user_choice, 'Nom de famille']}.")
+                txt = f"🚦 Veuillez saisir son nouveau 'Prénom', svp: "
+                real_db.at[user_choice, 'Prénom'] = str(input(txt).capitalize())
+                data = real_db.to_json(orient='index', indent=4)
+                json_object['players_db'] = json.loads(data)
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                print(f"🎉 Le nouveau 'Prénom' de {real_db.at[user_choice, 'Nom de famille']} est ", end="")
+                print(f"{real_db.at[user_choice, 'Prénom']}.")
+                print()
+                view_players_info()
+            if int(user_choice) not in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            view_players_info()
+            print()
+# update_player_fname()
 
 
-""" VAR used to create matchups """
+## -- Done! -- Update Player gender in db file -- /!!!\ At the end of the script, send the user back to the former menu
+def update_player_gender():
+    """ Function to update players gender in db file """
+
+    print("\n🚧 Procédons à l'actualisation des données...")
+    view_players_info()
+    while True:
+        msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
+        print("\n🚨 Pour modifier le 'Sexe' d'un joueur, ", end="")
+        user_choice = input(msg)
+        try:
+            if int(user_choice) in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}] pour changer le 'Sexe' de", end="")
+                print(f" {real_db.at[user_choice, 'Prénom']} {real_db.at[user_choice, 'Nom de famille']}.")
+                txt = f"🚦 Veuillez taper [H] pour homme et [F] pour femme: "
+                real_db.at[user_choice, 'Sexe'] = str(input(txt).capitalize())
+                data = real_db.to_json(orient='index', indent=4)
+                json_object['players_db'] = json.loads(data)
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                print(f"🎉 Le nouveau 'Sexe' de {real_db.at[user_choice, 'Nom de famille']} est ", end="")
+                print(f"{real_db.at[user_choice, 'Sexe']}.")
+                print()
+                view_players_info()
+            if int(user_choice) not in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            view_players_info()
+            print()
+# update_player_gender()
+
+
+## -- Done! -- Update Player birth date in db file -- /!!!\ At the end of the script, send the user back to the former menu
+def update_player_birth_date():
+    """ Function to update players birth date in db file """
+
+    print("\n🚧 Procédons à l'actualisation des données...")
+    view_players_info()
+    while True:
+        msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
+        print("\n🚨 Pour modifier la 'Date de naissance' d'un joueur, ", end="")
+        user_choice = input(msg)
+        try:
+            if int(user_choice) in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}] pour changer la 'Date de naissance' de", end="")
+                print(f" {real_db.at[user_choice, 'Prénom']} {real_db.at[user_choice, 'Nom de famille']}.")
+                txt = f"🚦 Taper la nouvelle date en respectant le format jj/mm/aaaa (ex: 18/02/1973): "
+                real_db.at[user_choice, 'Date de naissance'] = str(input(txt).capitalize())
+                data = real_db.to_json(orient='index', indent=4)
+                json_object['players_db'] = json.loads(data)
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                print(f"🎉 La nouvelle 'Date de naissance' de {real_db.at[user_choice, 'Nom de famille']}", end="")
+                print(f" est {real_db.at[user_choice, 'Date de naissance']}.")
+                print()
+                view_players_info()
+            if int(user_choice) not in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            view_players_info()
+            print()
+# update_player_birth_date()
+
+
+## -- Done! -- Update Player rating in db file -- /!!!\ At the end of the script, send the user back to the former menu
+def update_player_rating():
+    """ Function to update players rating in db file """
+
+    print("\n🚧 Procédons à l'actualisation des données...")
+    view_players_info()
+    while True:
+        msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
+        print("\n🚨 Pour modifier le nombre de points d'un joueur au 'Classement' général, ", end="")
+        user_choice = input(msg)
+        try:
+            if int(user_choice) in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}] pour changer le 'Classement' de", end="")
+                print(f" {real_db.at[user_choice, 'Prénom']} {real_db.at[user_choice, 'Nom de famille']}.")
+                txt = f"🚦 Veuillez taper en chiffre son nouveau nombre de points au 'Classement' général: "
+                real_db.at[user_choice, 'Classement'] = str(input(txt))
+                data = real_db.to_json(orient='index', indent=4)
+                json_object['players_db'] = json.loads(data)
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                print(f"🎉 Le nouveau nombre de points au 'Classement' général de ", end="")
+                print(f"{real_db.at[user_choice, 'Nom de famille']} est {real_db.at[user_choice, 'Classement']}.")
+                print()
+                view_players_info()
+            if int(user_choice) not in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            view_players_info()
+            print()
+# update_player_rating()
+
+
+## -- Done! -- Add Player score in db file -- /!!!\ At the end of the script, send the user back to the former menu
+def add_player_score():
+    """ Function to add players score in db file """
+    
+    print("\n🚧 Procédons à l'actualisation des données...")
+    view_players_info()
+    while True:
+        msg = "taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
+        print("\n🚨 Pour ajouter le 'Score' d'un joueur, ", end="")
+        user_choice = input(msg)
+        try:
+            if int(user_choice) in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}] pour ajouter un 'Score' à ", end="")
+                print(f"{real_db.at[user_choice, 'Prénom']} {real_db.at[user_choice, 'Nom de famille']}.")
+                add_score = float(input("🚨 Entrer le nouveau score du joueur: ").replace(",", "."))
+                try:
+                    if add_score in [0, 0.5, 1]:
+                        real_db.at[user_choice, 'Score'].append(add_score)
+                        data = real_db.to_json(orient='index', indent=4)
+                        json_object['players_db'] = json.loads(data)
+                        with open(filename, "w") as f:
+                            json.dump(json_object, f, indent=4)
+                        print(f"🎉 Vous avez ajouté {real_db.at[user_choice, 'Score']}", end="")
+                        print(f" au 'Score' de {real_db.at[user_choice, 'Prénom']}", end="")
+                        print(f" {real_db.at[user_choice, 'Nom de famille']}")
+                        print()
+                        view_players_info()
+                    else:
+                        print("💥 Merci de saisir 'uniquement' un score de [0], [0.5] ou [1].")
+                        continue
+                except:
+                    print("💥 Erreur de saisie...")
+                else:
+                    continue
+            if int(user_choice) not in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            view_players_info()
+            print()
+# add_player_score()
+
+
+## -- Done! -- /!!!\ At the end of the script, send the user back to the former menu
+def update_player_score():
+    """ Function to update/add players score in db file """
+    
+    print("\n🚧 Procédons à l'actualisation des données...")
+    view_players_info()
+    while True:
+        msg = "taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
+        print("\n🚨 Pour actualiser le 'Score' d'un joueur, ", end="")
+        user_choice = input(msg)
+        try:
+            if int(user_choice) in range(1,9):
+                print(f"\n💡 Vous avez tapé [{user_choice}] pour actualiser un 'Score' de ", end="")
+                print(f"{real_db.at[user_choice, 'Prénom']} {real_db.at[user_choice, 'Nom de famille']}", end="")
+                print(" mentionné ci-dessous:\n")
+                ## --> if the score list is not empty -> Update Score
+                if len(real_db.at[user_choice, 'Score']) > 0:
+                    s = 0
+                    for x in real_db.at[user_choice, 'Score']:
+                        print(f"🏁  Score du match n°{s+1}: {x} point")
+                        s += 1
+                    update_msg = "\n🚨 Taper le numéro du match dont le score doit être mofidié: "
+                    update_score = int(input(update_msg))
+                    
+                    try:
+                        if update_score > 0 and update_score <= len(real_db.at[user_choice, 'Score']):
+                            score_ref = real_db.at[user_choice, 'Score'][update_score-1]
+                            print(f"💡 Le match n°{update_score} a pour score: {score_ref} \n")
+                            msg = f"🚨 Le nouveau score du match n°{update_score} est: "
+                            new_score = float(input(msg).replace(",", "."))
+                            print(new_score)
+                            ## --> validate the right choice of points
+                            try: 
+                                if new_score in [0, 0.5, 1]:
+                                    real_db.at[user_choice, 'Score'][update_score-1] = new_score
+                                    
+                                    data = real_db.to_json(orient='index', indent=4)
+                                    json_object['players_db'] = json.loads(data)
+                                    with open(filename, "w") as f:
+                                        json.dump(json_object, f, indent=4)
+                                    
+                                    p_fname = real_db.at[user_choice, 'Prénom']
+                                    p_lname = real_db.at[user_choice, 'Nom de famille']
+
+                                    print(f"🎉 Félicitations! Le nouveau score de {p_fname} {p_lname}", end="")
+                                    print(f" pour le match n°{update_score}", end="")
+                                    print(f" est: {real_db.at[user_choice, 'Score']}")
+                                    print()
+                                    view_players_info()
+                                else:
+                                    print("💡 Merci de saisir 'uniquement' un score de [0], [0.5] ou [1].")
+                                    continue
+                            except:
+                                print("💥 Erreur de saisie...")
+                            else:
+                                continue
+                        else:
+                            print(f"💥 Erreur de saisie: {update_score} ")
+                            print(f"\n💡 Merci de taper le bon numéro de match comme ci-dessous, svp:\n")
+                            if len(real_db.at[user_choice, 'Score']) > 0:
+                                s = 0
+                                for x in real_db.at[user_choice, 'Score']:
+                                    print(f"🏁  Score du match n°{s+1}: {x} point")
+                                    s += 1
+                    except:
+                        print("💥 Erreur de saisie...")
+                    else:
+                        continue
+                ## --> if the score list is empty --> Add Score
+                else: 
+                    add_score = float(input("\n🚨 Ajouter un score pour ce joueur: ").replace(",", "."))
+                    try:
+                        if add_score in [0, 0.5, 1]:
+                            real_db.at[user_choice, 'Score'].append(add_score)
+                            data = real_db.to_json(orient='index', indent=4)
+                            json_object['players_db'] = json.loads(data)
+                            with open(filename, "w") as f:
+                                json.dump(json_object, f, indent=4)
+                            print(f"🎉 Vous avez actualisé {real_db.at[user_choice, 'Score']}", end="")
+                            print(f" au 'Score' de {real_db.at[user_choice, 'Prénom']}", end="")
+                            print(f" {real_db.at[user_choice, 'Nom de famille']}")
+                            print()
+                            view_players_info()
+                        else:
+                            print("💥 Merci de saisir 'uniquement' un score de [0], [0.5] ou [1].")
+                            continue
+                    except:
+                        print("💥 Erreur de saisie...")
+                    else:
+                        continue
+            if int(user_choice) not in range(1,9):
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            view_players_info()
+            print()
+# update_player_score()
+
+
+""" Var of Sorted Players Data """
+
+## -- Unsorted Players by rating--
+    # unsorted_players = {}
+    # for s in json_object["players_db"].items():
+        # print(s)
+        # print(s[0])
+        # print(list(s[1].values()))
+        # y = s[0]
+        # w = list(s[1].values())
+        # unsorted_players[y] = w
+
+## -- Done! -- Var - Sorted Players by score and rating
+sorted_players_by_score_and_rating = sorted(json_object["players_db"].items(), key=lambda i: (sum(i[1]['Score']), int(i[1]['Classement'])), reverse=True)
+
+## -- Done! -- Var - Sorted Players by rating
+sorted_players_by_rating = sorted(json_object["players_db"].items(), key=lambda i: int(i[1]['Classement']), reverse=True)
+
+
+""" View Ranked Players by Ratings & Scores """
+
+## -- Done! -- Func - Ranked Players by score and rating
+def view_sorted_players_by_score_and_rating():
+    print('\n🙂 Classement des joueurs par score et par nombre de points au classement général:\n')
+    k=0
+    for u in sorted_players_by_score_and_rating:
+        print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}\t{u[1]['Score']}")
+        k +=1
+view_sorted_players_by_score_and_rating()
+
+
+## -- Done! -- Func - Ranked Players by rating, Used ONLY for Round1
+def view_sorted_players_by_rating():
+    print('\n🙂 Classement des joueurs par nombre de points au classement général:\n')
+    k=0
+    for u in sorted_players_by_rating:
+        print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}")
+        k +=1
+# view_sorted_players_by_rating()
+
+
+""" Var used to generate matchups """
+
+# -- Rounds dict includes all rounds --
+rounds = ''
+
 # -- Players matchup reference_rating is used to sort items used to pair up players in a round1 ONLY
 players_matchup_reference_rating = []
-# -- Players matchup reference_score_and_rating is used to sort items used to pair up players in a round1 ONLY
+
+# -- Players matchup reference_score_and_rating is used to sort items used to pair up players
 players_matchup_reference_score_and_rating = []
 
 
-# -- Done! --
-def create_players_matchup_with_reference_rating():
-    """ Function used to create 'sorted_players_by_rating' variable """
+""" Generate Matches for Round1 """
+
+## -- Done! -- /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
+def generate_players_round1_matchup_ref_rating():
+    """ Function used to generate 'sorted_players_by_rating' variable """
 
     # -- Get Player reference for matchups, to be listed in 'players_matchup_reference_rating'
-    for i in sorted_players_by_rating:
-        a = [i[0], sum(i[1][5])]
+    for u in sorted_players_by_rating:
+        w = 'Index n°' + u[0]
+        x = u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']
+        y = 'Classement: ' + str(u[1]['Classement'])
+        a = [w, x, y]
         players_matchup_reference_rating.append(a)
+generate_players_round1_matchup_ref_rating()
 
 
-# -- Done!  --
-def create_players_matchup_reference_score_and_rating():
-    """ Function used to create 'sorted_players_by_rating' variable """
+## -- Done! --
+def view_generate_players_round1_matchup_ref_rating_by_index():
+    """ Function used to view 'sorted_players_by_rating' variable """
+
+    print("\n🙂 Classement général des joueurs avec n°index:\n")
+    for u in sorted_players_by_rating:
+        w = 'Index n°' + u[0]
+        x = u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']
+        y = 'Classement: ' + str(u[1]['Classement'])
+        a = [w, x, y]
+        print(a)
+# view_generate_players_round1_matchup_ref_rating_by_index()
+
+
+## -- Done! --  /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
+def generate_players_matchup_reference_score_and_rating():
+    """ Function used to generate 'sorted_players_by_rating' variable """
 
     # -- Get Player reference for matchups, to be listed in 'players_matchup_reference_rating'
-    for i in sorted_players_by_score_and_rating:
-        a = [i[0], sum(i[1][5])]
+    for u in sorted_players_by_score_and_rating:
+        w = 'Index n°' + u[0]
+        x = u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']
+        y = 'Classement: ' + str(u[1]['Classement'])
+        z = u[1]['Score']
+        a = [w, x, y, z]
         players_matchup_reference_score_and_rating.append(a)
+generate_players_matchup_reference_score_and_rating()
 
 
-# -- Update in progress ... --
-def generate_matchups():
-    """ Function to create matchups per round """
+
+## -- Done! -- /!!!\ TO BE ADDED RIGHT AFTER PLAYERS OBJ INSTANCIATION /!!!\
+def adding_roundx_in_tournament_table():
+    """Function to add new items in tournament table under 'Tournées' key"""
+    
+    for i in range(int(json_object['tournaments_db']['1']['Nombre de tours'])):
+        data = {f'Round{i+1}':{
+                    'Temps de départ': '',
+                    'Matches': {
+                        'Match1': {
+                            'Jeu': "",
+                            'Scores': ""
+                            },
+                        'Match2': {
+                            'Jeu': "",
+                            'Scores': ""
+                            },
+                        'Match3': {
+                            'Jeu': "",
+                            'Scores': ""
+                            },
+                        'Match4': {
+                            'Jeu': "",
+                            'Scores': ""
+                            },
+                        },
+                    'Temps de fin': ''}
+                }
+
+        json_object['tournaments_db']['1']['Tournées'].update(data)
+        with open(filename, "w") as f:
+            f.seek(0)
+            json.dump(json_object, f, indent=4)
+# adding_roundx_in_tournament_table()
+
+
+## -- Done! --
+def add_starting_time():
+    """Function to add starting time for each round"""
+    
+    current_time = datetime.datetime.now()
+    a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+    json_object['tournaments_db']['1']['Tournées']["Round1"]['Temps de départ'] = a
+    with open(filename, "w") as f:
+        json.dump(json_object, f, indent=4)
+# add_starting_time()
+
+
+## -- Done! --
+def add_ending_time():
+    """Function to add ending time for each round"""
+
+    current_time = datetime.datetime.now()
+    a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+    json_object['tournaments_db']['1']['Tournées']["Round1"]['Temps de fin'] = a
+    with open(filename, "w") as f:
+        # f.seek(0)
+        json.dump(json_object, f, indent=4)
+# add_ending_time()
+
+
+## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
+## -- generate_players_matchup_reference_score_and_rating() must be initiated 
+## -- to allow generate_round1_matchups() to work /!!!\ 
+def generate_round1_matchups():
+    """ Function to generate and save round1 matchups based on players ratings only """
 
     # 1. Generate the 1st pairs of players for Round1
-    a = players_matchup_reference_score_and_rating
+    a = players_matchup_reference_rating
     x = slice(0,4)
     y = slice(4,8)
     z = zip(a[x],a[y])
-    
-    # 2. Add Round1 matchups to rounds for ["tournaments_db"]["1"]['Tourn\u00e9es']s tournament_db table
-    round1_matchups = {}
-    i = 1
-    for m in list(z):
-        round1_matchups[f"Match n°{int(i)}"] = m
-        i += 1
-    rounds["Round1"] = round1_matchups
-    
-    # 3. Open and save rounds data in tournament_db table
-    with open('tournament_data.json', "w") as f:
-        temp["tournaments_db"]["1"]['Tourn\u00e9es']= rounds
-        json.dump(temp, f, indent=4)
+
+    ## -- Save Round1 matchups & rounds info in tournament_db table
+    o = 1
+    for g in z:
+        json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']['Jeu'] = tuple(g)
+        #- to cleanup: json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']['Jeu'].clear()
+        with open(filename, "w") as f:
+            json.dump(json_object, f, indent=4)
+        o += 1
+# generate_round1_matchups()
 
 
-# -- Update in progress ... -- NOT REALLY NECESSARY
-"""def generate_next_rounds_matchups():
-    
-    
-    
-    # players_matchup_reference_score_and_rating
-    pass"""
+""" /!!!\ Hint - View more details on matches/rounds/players from the tournament table in the db file:
+    # i = 1
+    # for m in list(z):
+    #     print(json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{i}']['Jeu'][0][1])
+    #     i += 1
+    # print()
+"""
 
-# -- Done! --
+
+## -- Done ! --- 
 def view_round1_matchups():
-    """ Function to view Round1 matchups """
-
-    # -- The user must know member number in order to enter their scores
-    view_ranked_players_by_rating_only()
-    print("======= 🏁 Matches Round1 🏁 ======\n")
-    for i in range(len(rounds["Round1"])):
-        print(f"Match n°{i+1}: {rounds['Round1'][i]}")
-    print("\n🚧 Match n°x: ([n° membre, son score], [n° autre membre, son score]) 🚧")
-    print("========================================================================\n")
-
-
-# -- To do!
-def view_generate_next_rounds_matchups():
-    pass
+    """Function to view Round1 Matchups"""
+    
+    print("\n💡 Voici les Matches du Round1:\n")
+    e = 1
+    for x in list(json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'].values()):
+        b = list(x.values())
+        print(f"Match n°{e}: {b[0][0]} vs. {b[0][1]}")
+        e +=1
+# view_round1_matchups()
 
 
-# -- To do!
-def view_next_rounds_matchups():
-    pass
+## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
+## -- generate_players_matchup_reference_score_and_rating() must be initiated 
+## -- to allow generate_round1_matchups() to work /!!!\ 
+## -- Must rework the conditions to avoid players facing each other more than once  /!!!\ 
+def generate_round2_matchups():
+    """ Function to generate and save round1 matchups based on players ratings only """
+
+    # 1. Generate pairs of players for Roundx
+    a = players_matchup_reference_score_and_rating
+    b = slice(0,8,2)
+    c = slice(1,8,2)
+    z = zip(a[b],a[c])
+    ## -- Save Round2 matchups & rounds info in tournament_db table
+    o = 1
+    for g in z:
+        ##-- cleanup: json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']['Jeu'].clear()
+        q = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']['Jeu']
+        json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}']['Jeu'] = tuple(g)
+        r = json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}']['Jeu']
+        if q != r:
+            json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}']['Jeu'] = tuple(g)
+            with open(filename, "w") as f:
+                json.dump(json_object, f, indent=4)
+        else:
+            print("Ces joueurs se sont déjà affrontés dans ce tournoi...")
+            print("Même si le programme continue, il faudra changer les scores manuellement...")
+            ## -- Take 'em back to the main menu.
+        o += 1
+# generate_round2_matchups()
 
 
-# -- Update in progress ... --
-def save_rounds_in_db():
-    """Function to save rounds instance in tournaments_db in db file """
-
-    # -- Open and save rounds data in tournament table in db file
-    with open('tournament_data.json', "w") as f:
-        temp["tournaments_db"]["1"]['Tourn\u00e9es'] = rounds
-        json.dump(temp, f)
-        # json.dump(temp, f, indent=4)
-
-
-# -- Done! --
-def view_rounds_in_db():
-    """ Function to view Round1 data from db file """
-
-    # -- 'r' collects round data from db file so that we could print it as needed
-    # -- We stay focused on 'r = temp["tournaments_db"]["1"]["Tourn\u00e9es"]'
-    # -- because it concerns the current tournament 
-    r = temp["tournaments_db"]["1"]["Tourn\u00e9es"]
-
-    for i in range(5):
-        if i == 0:
-            try:
-                print(f"🏁 Les matches du Round{i+1} 🏁")
-                q = 1
-                for h in r['Round'+str(i+1)]:
-                    # print(h)
-                    print(f"Match n°{q}: {h}")
-                    q +=1
-                print("\n🚧 Match n°x: ([n° membre, son score], [n° autre membre, son score]) 🚧")
-                print("-------------------------------------------------------------------------")
-                # -- The user must know member number in order to enter their scores
-                view_ranked_players_by_score_and_rating()
-                view_ranked_players_by_rating_only()
-            except:
-                print(f"Round{i+1} is not ready yet.")
-            # try:
-            #     print(f"\n--- Round{i+2} Matchups From DB File --")
-            #     for h in r[i]['Round'+str(i+2)]:
-            #         print(h)
-            # except:
-            #     # print(f"Round{i+2} is not available yet.")
-            # try:
-            #     print(f"\n--- Round{i+3} Matchups From DB File --")
-            #     for h in r[i]['Round'+str(i+3)]:
-            #         print(h)
-            # except:
-            #     # print(f"Round{i+3} is not available yet.")
-            # try:
-            #     print(f"\n--- Round{i+4} Matchups From DB File --")
-            #     for h in r[i]['Round'+str(i+4)]:
-            #         print(h)
-            # except:
-            #     # print(f"Round{i+4} is not available yet.")
+## -- Done ! --- 
+def view_round2_matchups():
+    """Function to view Round1 Matchups"""
+    
+    print("\n💡 Voici les Matches du Round2:\n")
+    e = 1
+    for x in list(json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'].values()):
+        b = list(x.values())
+        print(f"Match n°{e}: {b[0][0]} vs. {b[0][1]}")
+        e +=1
+# view_round2_matchups()
 
 
-# -- Update in progress ... see below on trial in __main__ --
-def input_scores():
-    pass
+## -- To Do! -- /!!! \ generate_players_matchup_with_reference_rating() and 
+## -- generate_players_matchup_reference_score_and_rating() must be initiated 
+## -- to allow generate_round1_matchups() to work /!!!\ 
+## -- Must rework the conditions to avoid players facing each other more than once  /!!!\ 
+def generate_round3_matchups():
+    """ Function to generate and save round1 matchups based on players ratings only """
+
+    # 1. Generate pairs of players for Roundx
+    a = players_matchup_reference_score_and_rating
+    b = slice(0,8,2)
+    c = slice(1,8,2)
+    z = zip(a[b],a[c])
+
+    
+    ## -- Save Round2 matchups & rounds info in tournament_db table
+    o = 1
+    for g in z:
+        ##-- cleanup: json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']['Jeu'].clear()
+        q = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']['Jeu']
+        s = json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}']['Jeu']
+        json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}']['Jeu'] = tuple(g)
+        r = json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}']['Jeu']
+        if q != r and s != r:
+            json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}']['Jeu'] = tuple(g)
+            with open(filename, "w") as f:
+                json.dump(json_object, f, indent=4)
+        else:
+            
+            print("Ces joueurs se sont déjà affrontés dans ce tournoi...")
+            print("Même si le programme continue, il faudra changer les scores manuellement...")
+            ## -- Take 'em back to the main menu.
+        o += 1
+# generate_round3_matchups()
 
 
-# -- To Do! --
-def update_rounds_from_db():
-    pass
-
-
-# -- To do! --
-def view_input_scores():
-    pass
-
-
-# -- To do! --
-def save_scores_to_db():
-    pass
+## -- Done ! --- 
+def view_round3_matchups():
+    """Function to view Round1 Matchups"""
+    
+    print("\n💡 Voici les Matches du Round3:\n")
+    e = 1
+    for x in list(json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'].values()):
+        b = list(x.values())
+        print(f"Match n°{e}: {b[0][0]} vs. {b[0][1]}")
+        e +=1
+# view_round3_matchups()
 
 
 
+## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
+## -- generate_players_matchup_reference_score_and_rating() must be initiated 
+## -- to allow generate_round1_matchups() to work /!!!\ 
+## -- Must rework the conditions to avoid players facing each other more than once  /!!!\ 
+def generate_round4_matchups():
+    """ Function to generate and save round1 matchups based on players ratings only """
 
-""" START USER/PLAYERS SCRIPT """
+    # 1. Generate pairs of players for Roundx
+    a = players_matchup_reference_score_and_rating
+    b = slice(0,8,2)
+    c = slice(1,8,2)
+    z = zip(a[b],a[c])
+    ## -- Save Round2 matchups & rounds info in tournament_db table
+    o = 1
+    for g in z:
+        ##-- cleanup: json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']['Jeu'].clear()
+        q = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']['Jeu']
+        s = json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}']['Jeu']
+        n = json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}']['Jeu']
+        json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{o}']['Jeu'] = tuple(g)
+        r = json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{o}']['Jeu']
+        if q != r and s != r and n != r:
+            json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{o}']['Jeu'] = tuple(g)
+            with open(filename, "w") as f:
+                json.dump(json_object, f, indent=4)
+        else:
+            print("Ces joueurs se sont déjà affrontés dans ce tournoi...")
+            print("Même si le programme continue, il faudra changer les scores manuellement...")
+            ## -- Take 'em back to the main menu.
+        o += 1
+# generate_round4_matchups()
+
+
+## -- Done ! --- 
+def view_round4_matchups():
+    """Function to view Round1 Matchups"""
+    
+    print("\n💡 Voici les Matches du Round4:\n")
+    e = 1
+    for x in list(json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'].values()):
+        b = list(x.values())
+        print(f"Match n°{e}: {b[0][0]} vs. {b[0][1]}")
+        e +=1
+view_round4_matchups()
+
+# add_player_score()
+
+
+"""Use this to verify if player have already played againts each other:
+
+    ## -- To create 28 Unique GAMES with 7 Rounds, 4 games/round
+
+    challengers=['p1','p2','p3','p4','p5','p6','p7','p8']
+    # challengers = sorted_challengers_by_rankings
+    matches=[]
+    challenger1=0
+    while challenger1<len(challengers):
+        challenger2=challenger1+1    # start
+        while challenger2<len(challengers):
+            matches.append((challengers[challenger1],challengers[challenger2]))
+            challenger2+=1
+        challenger1+=1
+
+    print("\n--- ___ ---")
+    print(f"\nThere is a total of '{len(matches)}' matches:\n")
+    for m in matches:
+        print(m)
+
+"""
+
+
+
+"""Hint on diferent var used in this program
+    #### --- PROJECTS VAR ---
+    # player = [lname, fname, date_of_birth, gender, rating, player_id, [player_scores]]
+    # match = (["playerX_id, playerX_scores"], ["playerY_id, playerY_scores"]) 
+    # round1 = ['round_name', start_date_hour, [match1, match2, match3, match4], end_date_hour]
+
+
+    ## -- round[z] = ['name', start_date_hour, [match1, match2, match3, match4], end_date_hour]
+    ## - "name" = json_object['tournaments_db']['1']['Tournées']["Round1"]
+    ## - "start_date_hour" = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches']
+    ## - "[match1, match2, match3, match4]" = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches']
+    ## - "end_date_hour" = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches']
+
+    ## -- Print tournament table...
+    print()
+    pp.pprint(json_object['tournaments_db']['1']['Tournées'])
+"""
+
+""" START USER/PLAYERS MATCH/ROUNDS SCRIPT /!!!\ """
 
 if __name__=="__main__":
     """Launch program to add/update players, macthes, and rounds"""
@@ -418,7 +874,7 @@ if __name__=="__main__":
     # save_players_data()
     
     # -- Done!
-    # -- Create/View Round1 Matchups & Save them to db file --
+    # -- generate/View Round1 Matchups & Save them to db file --
     # view_unsorted_players_list()
     # view_sorted_players_list_by_rating()
     # view_ranked_players_by_rating_only()
@@ -426,8 +882,8 @@ if __name__=="__main__":
 
     # -- Done!
     # -- The next functions MUST be initiated in order to save data in db file --
-    # create_players_matchup_with_reference_rating()
-    # create_players_matchup_reference_score_and_rating()
+    # generate_players_matchup_with_reference_rating()
+    # generate_players_matchup_reference_score_and_rating()
     # generate_matchups()
     # view_round1_matchups()
     # save_rounds_in_db()
@@ -438,10 +894,10 @@ if __name__=="__main__":
     # -- To be done!
     # -- UPDATE SCORE --
 
-    # print(temp["players_db"].keys())
-    # print(temp["players_db"]["1"]['Sexe'])
-    # print(range(len(temp["players_db"].keys())))
-    # for a in range(len(temp["players_db"].keys())):
+    # print(json_object["players_db"].keys())
+    # print(json_object["players_db"]["1"]['Sexe'])
+    # print(range(len(json_object["players_db"].keys())))
+    # for a in range(len(json_object["players_db"].keys())):
     #     print(a+1)
 
     # -- creating a function to collect score from the user
@@ -449,12 +905,12 @@ if __name__=="__main__":
         print("Pour entrer un score")
         ask_index = input("Veuillez taper le numéro du membre, svp: ")
         try: 
-            if int(ask_index)>0 or int(ask_index)<=range(len(temp["players_db"].keys())): 
-                ask_score = float(input(f'Taper le score de {temp["players_db"][str(ask_index)]["Nom de famille"]}: '))
+            if int(ask_index)>0 or int(ask_index)<=range(len(json_object["players_db"].keys())): 
+                ask_score = float(input(f'Taper le score de {json_object["players_db"][str(ask_index)]["Nom de famille"]}: '))
                 with open('tournament_data.json', "w") as f:
                     # Being corrected... we should not append but make an addition to a ditc instead --> line 447
-                    temp["players_db"][str(ask_index)]["Score"].append(ask_score)
-                    json.dump(temp, f, indent=4)
+                    json_object["players_db"][str(ask_index)]["Score"].append(ask_score)
+                    json.dump(json_object, f, indent=4)
             else:
                 print("Mauvaise saisie...")
                 return ask_player_index()
@@ -464,28 +920,28 @@ if __name__=="__main__":
 
     # ask_player_index()
     # print("\n--- En résumé ---")
-    # print(f'Scores de {temp["players_db"]["1"]["Nom de famille"]}: {temp["players_db"]["1"]["Score"]}')
-    # print(f'Score Final de {temp["players_db"]["1"]["Nom de famille"]} dans ce tournoi: {sum(temp["players_db"]["1"]["Score"])}')
+    # print(f'Scores de {json_object["players_db"]["1"]["Nom de famille"]}: {json_object["players_db"]["1"]["Score"]}')
+    # print(f'Score Final de {json_object["players_db"]["1"]["Nom de famille"]} dans ce tournoi: {sum(json_object["players_db"]["1"]["Score"])}')
 
     # -- Save Round1 data in tournaments_db -- 
     # 1. Generate the 1st pairs of players in Round 1
-    a = players_matchup_reference_score_and_rating
-    x = slice(0,4)
-    y = slice(4,8)
-    z = zip(a[x],a[y])
+    # a = players_matchup_reference_score_and_rating
+    # x = slice(0,4)
+    # y = slice(4,8)
+    # z = zip(a[x],a[y])
     
     # 2. Add Round1 matchups to tournament rounds instance
-    round1_matchups = {}
-    i = 1
-    for m in list(z):
-        round1_matchups[f"Match n°{int(i)}"] = m
-        i += 1
-    rounds["Round1"] = round1_matchups
+    # round1_matchups = {}
+    # i = 1
+    # for m in list(z):
+    #     round1_matchups[f"Match n°{int(i)}"] = m
+    #     i += 1
+    # rounds["Round1"] = round1_matchups
     
     # 3. Open and save rounds data in tournament_db table
     # with open('tournament_data.json', "w") as f:
-    #     temp["tournaments_db"]["1"]['Tourn\u00e9es']= rounds
-    #     json.dump(temp, f, indent=4)
+    #     json_object["tournaments_db"]["1"]['Tourn\u00e9es']= rounds
+    #     json.dump(json_object, f, indent=4)
 
     # print("\---")
     # print(rounds)
@@ -499,7 +955,7 @@ if __name__=="__main__":
 
 
     """
-    for k in temp["tournaments_db"]["1"]['Tourn\u00e9es'].items():
+    for k in json_object["tournaments_db"]["1"]['Tourn\u00e9es'].items():
         print(k)
         print("---")
         print(k[0])
@@ -525,15 +981,15 @@ if __name__=="__main__":
 
 
     """
-    p_score = temp["players_db"]["i"]["Score"] , 'i' is a player's index in the table
+    p_score = json_object["players_db"]["i"]["Score"] , 'i' is a player's index in the table
 
     def ask_player_index():
         ask_index = int(input("Taper le score du membre n°: "))
         
-        if (ask_index+1) in range(len(temp["players_db"].keys())):
+        if (ask_index+1) in range(len(json_object["players_db"].keys())):
             ask_score = int(input(f"Quel est le score du membre n°{ask_index}: "))
-            print(temp["players_db"]["(ask_index)"]["Score"])
-            # temp["players_db"]["(ask_index)"]["Score"] = ask_score
+            print(json_object["players_db"]["(ask_index)"]["Score"])
+            # json_object["players_db"]["(ask_index)"]["Score"] = ask_score
 
     """
 
@@ -560,10 +1016,10 @@ if __name__=="__main__":
 
     """ /!!!\ Updates must be done in players_db table and seen in tournaments_db table in db file """
     # -- To update scores, DO NOT USE use the following var:
-    # -- r = temp["tournaments_db"]["1"]["Tourn\u00e9es"]["Round"+str(i)].... [player score]; use this to view score only
+    # -- r = json_object["tournaments_db"]["1"]["Tourn\u00e9es"]["Round"+str(i)].... [player score]; use this to view score only
     # -- INSTEAD use the following var:
     
-    # -- p_score = temp["players_db"]["i"]["Score"] , 'i' is a player's index in the table
+    # -- p_score = json_object["players_db"]["i"]["Score"] , 'i' is a player's index in the table
 
     # -- I gotta show up player index in matchups to allow user to allocate proper point to a specific player
     # -- And user input then shall be automatically seen in tournament_db table too
@@ -611,16 +1067,16 @@ if __name__=="__main__":
     # print(all_players_db)
 
     # -- to get the names of tables in db:
-    # for s in temp.keys():
+    # for s in json_object.keys():
     #     print(s[0:])
 
-    # print(temp["players_db"].items())
+    # print(json_object["players_db"].items())
 
     # -- to get indexes from t_players table separately:
-    # for s in temp["players_db"].items():
+    # for s in json_object["players_db"].items():
     #     print(s[0])
-    # or in temp list:
-    # print(list(temp.items())[0][1].keys())
+    # or in json_object list:
+    # print(list(json_object.items())[0][1].keys())
 
 
     # =======================
@@ -628,48 +1084,48 @@ if __name__=="__main__":
 
     # -- Get player's record:
     # print("\n--- before udate -- ")
-    # print(temp["players_db"]["1"]['Nom de famille'])
-    # print(temp["players_db"]["2"]['Nom de famille'])
+    # print(json_object["players_db"]["1"]['Nom de famille'])
+    # print(json_object["players_db"]["2"]['Nom de famille'])
     
     # # -- Open file to update them
     # with open('tournament_data.json', "r") as f:
-    #     temp = json.load(f) 
-    #     temp["players_db"]["1"]['Nom de famille'] = "Renard"
-    #     temp["players_db"]["2"]['Nom de famille'] = "Poisson"
+    #     json_object = json.load(f) 
+    #     json_object["players_db"]["1"]['Nom de famille'] = "Renard"
+    #     json_object["players_db"]["2"]['Nom de famille'] = "Poisson"
 
     # # -- save update
     # with open('tournament_data.json', "w") as f:
-    #     json.dump(temp, f, indent=4)
+    #     json.dump(json_object, f, indent=4)
     
     # -- print data updated 
     # print("\n--- after update -- ")
-    # print(temp["players_db"]["1"]['Nom de famille'])
-    # print(temp["players_db"]["2"]['Nom de famille'])
+    # print(json_object["players_db"]["1"]['Nom de famille'])
+    # print(json_object["players_db"]["2"]['Nom de famille'])
 
     # print("\n---")
-    # print(temp["players_db"].items())
+    # print(json_object["players_db"].items())
     # print("---\n")
-    # for s in temp["players_db"].items():
+    # for s in json_object["players_db"].items():
     #     # print(s[1].values())
     #     print(s)
     #     print(s[1].keys())
     #     print(list(s[1].keys()))
-    #     print(s[1]['Nom de famille']) # to update scores, i must change "s[1]['Nom de famille']" from dict "temp["players_db"].items()"
+    #     print(s[1]['Nom de famille']) # to update scores, i must change "s[1]['Nom de famille']" from dict "json_object["players_db"].items()"
     # print("\n")
-    # print(temp["players_db"].items()[1]['Nom de famille'])
+    # print(json_object["players_db"].items()[1]['Nom de famille'])
 
 
     # =====================================
     # -- wtih pandas: BEST TABLE VIEW --- #
     # print("\n")
-    # # df = pd.DataFrame.from_dict(temp["players_db"], orient='index')
+    # # df = pd.DataFrame.from_dict(json_object["players_db"], orient='index')
     # print(df)
     # print("\n")
 
     # print("\n  -- Tableau des joueurs --")
     # print("-----------------------------")
     # # unsorted players data
-    # df = pd.DataFrame.from_dict(temp["players_db"], orient='index')
+    # df = pd.DataFrame.from_dict(json_object["players_db"], orient='index')
     # print(df)
     # print("\n  - Tri des joueurs par points au 'Classement' général -")
     # print("---------------------------------------------------------")
@@ -709,14 +1165,14 @@ if __name__=="__main__":
 
     # -- End of program - Goodbye message.
     # print("---------------------------------------------------------------------------")
-    print("\n     ===================== 🌼🌼🌼 ===================")
-    print("        Fin du programme 👀...  Merci et à bientôt!\n")
+    print("\n===================== 👀 ===================\n")
 
 else:
     # view_unsorted_players_list()
 
 
     # -- 'generate_matchups' must be on so that rounds instance can be used in tournament.py:
-    generate_matchups()
+    # generate_matchups()
     
     # view_round1_matchups()
+    pass

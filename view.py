@@ -3,9 +3,9 @@
 
 
 # |- program:
-# |—— controller.py (cls: menu)
-# |—— model.py (cls: pl + tournt + db + menu)
-# |—— view.py (view func)
+# |—— controller.py (main + menu)
+# |—— model.py (pl + tournt + db + menu)
+# |—— view.py (view funcs)
 # |—— db.json
 
 
@@ -43,3 +43,29 @@
 # |—— 
 # |—— 
 # 🚨 In each step, always show the user its own input, and ask to pursue or to reset
+
+"""
+while True:
+    try:
+        add_score = float(input("Taper le nouveau score du joueur: ").replace(",", "."))
+        if add_score in [0, 0.5, 1]:
+            print(F"Vous avez saisi: {add_score}")
+        else:
+            print("Merci de choisir [0], [0.5] ou [1]")
+            continue
+    except:
+        print("Erreur de saisie...")
+        # continue
+    else:
+        break
+"""
+
+"""a = range(4)
+print(len(a))
+i = int(input("saisir un chiffre: "))
+if i < len(a):
+    print(i+1)"""
+
+list = [1,2,3,4,5,6,7,8]
+print(list[0::2])
+print(list[1::2])
