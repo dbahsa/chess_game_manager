@@ -33,10 +33,10 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
     - Point gagnant (w) par match: 1;
     - Point perdant (l) par match: 0;
     - oint égalité (t) par match: 0,5;
-    - Nombre max et min de points accumulés par un joueur dans chaque round durant le tournoi:
+    - Nombre max et min de points accumulés par un joueur dans chaque round durant le tournoi:<br><pre>
              R1      R2      R3      R4      R5      R6      R7<br>
-    > MAX     1       2       3       4       5       6       7<br>
-    > MIN     0       0       0       0       0       0       0
+    MAX     1       2       3       4       5       6       7<br>
+    MIN     0       0       0       0       0       0       0</pre>
     - La création d'une paire de joueurs pour chacun des 4 matches dans un round (après R1) se fait en fonction:
         - de scores et du classment général en cas d'égalité:
             - Matches R2 : scores R1 & cl
