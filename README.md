@@ -60,9 +60,9 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             - Cas 4:  1w   |   1l   |   6t
             - Cas 5:  0w   |   0l   |   8t
         </pre>
-        <br>
+
         <pre>
-            /!!!\ Ces scénarios sont très importants pour l'écriture des algorithmes pour générer les paires de joueurs
+        /!!!\ Ces scénarios sont très importants pour l'écriture des algorithmes pour générer les paires de joueurs
             (match) de R2 à R7. Par exemple:
             
             (M: Match | T: Top | L: Low | w: gagnant | l: perdant | t: nul)
