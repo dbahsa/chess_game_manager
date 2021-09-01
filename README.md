@@ -97,10 +97,10 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             j6 vs. j7 | j8 vs. j1          j5 vs. j6 | j7 vs. j8          j2 vs. j4 | j5 vs. j7          j5 vs. j2 | j7 vs. j8
             
         </pre>
-        <br>
+        
             Comme vous pouvez le contaster, ces différents scénarios ne fonctionnent pas pour R2 vu qu'aucun des joueurs n'a la 
             possibilité de renconter son opposant du R1 parce que la création des paires a changé; maintenant le choix se fait 
-            soit le 1e contre le 2ème joueur, soit le 1er <br>contre le 3ème, en fonction du classement établi à l'issu du R1.
+            soit le 1e contre le 2ème joueur, soit le 1er contre le 3ème, en fonction du classement établi à l'issu du R1.
             Par exemple, j1 et j5 ne peuvent pas jouer ensemble au R2 parce que la répartition des points (0, 0,5, 1) ferait 
             qu'au classement final du R1, ils seront toujours éloignés d'une probable opposition peu importe le scénario obtenu
             de ces 4 premiers matches.
@@ -119,7 +119,6 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             
             Notez qu'avant de poursuivre, ces matches doivent être validés en vérifiant leur existence dans la base de données.
             S'ils existent, la génération des pairs se fait alors en faisnt le 1er contre le 3ème joueur.
-        <br>
 
 
 ### PRE-REQUIS
