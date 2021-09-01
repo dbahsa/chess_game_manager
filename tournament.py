@@ -68,7 +68,7 @@ def add_tournament():
     p = Tournament(input("- Nom: "), 
                     input("- Lieu: "),
                     input("- Date, telle que jj/mm/aaaa (ex: 18/02/2022): "),
-                    input("- Quel est votre Contrôle du temps: 'Bullit', 'Blitz'ou 'Coup Rapide'? "),
+                    input("- Quel est votre Contrôle du temps? 'Bullit', 'Blitz' ou 'Coup Rapide'"),
                     input("- Description: ")
                     )
     print("\n🤓 Bravo! Le tournoi a bien été enregistré.\n")
