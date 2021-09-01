@@ -104,18 +104,18 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             Par exemple, j1 et j5 ne peuvent pas jouer ensemble au R2 parce que la répartition des points (0, 0,5, 1) ferait 
             qu'au classement final du R1, ils seront toujours éloignés d'une probable opposition peu importe le scénario obtenu
             de ces 4 premiers matches.
-
+            
             Donc pour R2, seul le classement des joueurs à l'issu de R1 est suffisant pour générer ses 4 nouvelles paires de joueurs.
             Ensuite, c'est après les matches du R2 que l'algorithme devrait prendre en compte ces scénarios/cas pour générer les 
             matches de R3 à R7 pour éviter l'arrêt de l'application.
-
+            
             Pour illustrer, si les résultats du R2 orientent vers le Cas1 (4w, 4l, 0t), une liste des 4w doit être constituée et
             triée par scores (et par position au classement général, le cas échéant), ainsi qu'une autre pour les 4l.  Ensuite,
             concatener les deux listes pour obtenir <br>une liste finale qui sera utilisée pour générer les 4 matches de R3.
-
+            
             Dans le présent programme, c'est après la saisie des scores de R2 que l'algorithme vérifie le nombre de 'w' pour
             déterminer le scénario (ex: dans le Cas1, il y a 4w, dans le Cas2, 3w...) à suivre pour créer les paires de matches
-            pour R3.  Et la même procédure <br>s'applique également pour les autres rounds. 
+            pour R3.  Et la même procédure <br>s'applique également pour les autres rounds.
             
             Notez qu'avant de poursuivre, ces matches doivent être validés en vérifiant dans la base de données s'ils n'existent
             pas déjà. S'ils existent, la génération des pairs se fait alors entre le 1er et le 3ème joueur.
