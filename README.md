@@ -41,9 +41,8 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
     MAX     1       2       3       4       5       6       7<br>
     MIN     0       0       0       0       0       0       0
     </pre>
-    <br>
     - La création d'une paire de joueurs pour chacun des 4 matches dans un round (après R1) se fait en fonction:
-        - de scores et du classment général en cas d'égalité:<br>
+        <br>- de scores et du classment général en cas d'égalité:<br>
         <pre>
             - Matches R2 : scores R1 & cl
             - Matches R3 : scores R1 + scores R2 & cl
@@ -53,15 +52,14 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             - Matches R7 : scores R1 + scores R2 + scores R3 + scores R4 + scores R5 + scores R6 & cl
         </pre>
         <br>
-            
         - et de scénarios de résultats obtenus à la fin de chaque round (w: gagnant | l: perdant | t: nul):
             - Cas 1:  4w   |   4l   |   0t
             - Cas 2:  3w   |   3l   |   2t
             - Cas 3:  2w   |   2l   |   4t
             - Cas 4:  1w   |   1l   |   6t
             - Cas 5:  0w   |   0l   |   8t
-            <br>
-            <pre>
+        <br>
+        <pre>
             /!!!\ Ces scénarios sont très importants pour l'écriture des algorithmes pour générer les paires de joueurs
             (match) de R2 à R7. Par exemple:
             
@@ -95,6 +93,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             
             j5 vs. j2 | j3 vs. j4          j1 vs. j2 | j3 vs. j4          j1 vs. j3 | j6 vs. j8          j3 vs. j4 | j6 vs. j1
             j6 vs. j7 | j8 vs. j1          j5 vs. j6 | j7 vs. j8          j2 vs. j4 | j5 vs. j7          j5 vs. j2 | j7 vs. j8
+            
             </pre>
             <br>
             Comme vous pouvez le contaster, ces différents scénarios ne fonctionnent pas pour R2 vu qu'aucun des joueurs n'a la <br>possibilité de renconter son opposant du R1 parce que la création des paires a changé; maintenant le choix se fait soit le 1e contre le 2ème joueur, soit le 1er <br>contre le 3ème, en fonction du classement établi à l'issu du R1.  Par exemple, j1 et j5 ne peuvent pas jouer ensemble au R2 parce que la répartition des points (0, 0,5, 1) <br>ferait qu'au classement final du R1, ils seront toujours éloignés d'une probable opposition peu importe le scénario obtenu de ces 4 premiers matches.
