@@ -95,9 +95,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             
             j5 vs. j2 | j3 vs. j4          j1 vs. j2 | j3 vs. j4          j1 vs. j3 | j6 vs. j8          j3 vs. j4 | j6 vs. j1
             j6 vs. j7 | j8 vs. j1          j5 vs. j6 | j7 vs. j8          j2 vs. j4 | j5 vs. j7          j5 vs. j2 | j7 vs. j8
-            
         </pre>
-        
             Comme vous pouvez le contaster, ces différents scénarios ne fonctionnent pas pour R2 vu qu'aucun des joueurs n'a la 
             possibilité de renconter son opposant du R1 parce que la création des paires a changé; maintenant le choix se fait 
             soit le 1e contre le 2ème joueur, soit le 1er contre le 3ème, en fonction du classement établi à l'issu du R1.
