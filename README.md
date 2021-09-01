@@ -19,17 +19,19 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
     - Les 4 matches de R1:
         - en fonction du nombre de points de chaque joueur au classement général, c-à-d de leur position du 1er au 8ème,
         - le 1er des 4 premiers rencontre le 1er des 4 derniers, et ainsi de suite, tels que:<br>
-        > j1 vs j5   |   j2 vs j6   |  j3 vs j7   |   j4 vs j8   |   j1 vs j2 ;
+        <pre>j1 vs j5   |   j2 vs j6   |  j3 vs j7   |   j4 vs j8   |   j1 vs j2 ;</pre><br>
     - Nombre max de match unique joué par un joueur dans un tournoi: 7;
     - Nombre max de R unique: 7 (R5,R6,R7 sont utilisés ici à titre indicatif, mais l'application s'arrête après R4 /!!!\ );
-    - Nombre max de match unique joué par tous les joueurs dans un tournoi est de 28, soit:
-    > j1 vs. j2   |   j2 vs. j3   |   j3 vs. j4   |   j4 vs. j5   |   j5 vs. j6   |   j6 vs. j7   |   j7 vs. j8<br>
-    > j1 vs. j3   |   j2 vs. j4   |   j3 vs. j5   |   j4 vs. j6   |   j5 vs. j7   |   j6 vs. j8<br>
-    > j1 vs. j4   |   j2 vs. j5   |   j3 vs. j6   |   j4 vs. j7   |   j5 vs. j8<br>
-    > j1 vs. j5   |   j2 vs. j6   |   j3 vs. j7   |   j4 vs. j8<br>
-    > j1 vs. j6   |   j2 vs. j7   |   j3 vs. j8<br>
-    > 1 vs. j7   |   j2 vs. j8<br>
-    > j1 vs. j8<br>
+    - Nombre max de match unique joué par tous les joueurs dans un tournoi est de 28, soit:<br>
+    <pre>
+    j1 vs. j2   |   j2 vs. j3   |   j3 vs. j4   |   j4 vs. j5   |   j5 vs. j6   |   j6 vs. j7   |   j7 vs. j8<br>
+    j1 vs. j3   |   j2 vs. j4   |   j3 vs. j5   |   j4 vs. j6   |   j5 vs. j7   |   j6 vs. j8<br>
+    j1 vs. j4   |   j2 vs. j5   |   j3 vs. j6   |   j4 vs. j7   |   j5 vs. j8<br>
+    j1 vs. j5   |   j2 vs. j6   |   j3 vs. j7   |   j4 vs. j8<br>
+    j1 vs. j6   |   j2 vs. j7   |   j3 vs. j8<br>
+    1 vs. j7   |   j2 vs. j8<br>
+    j1 vs. j8<br>
+    </pre>
     - Point gagnant (w) par match: 1;
     - Point perdant (l) par match: 0;
     - oint égalité (t) par match: 0,5;
@@ -39,6 +41,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
     MAX     1       2       3       4       5       6       7<br>
     MIN     0       0       0       0       0       0       0
     </pre>
+    <br>
     - La création d'une paire de joueurs pour chacun des 4 matches dans un round (après R1) se fait en fonction:
         - de scores et du classment général en cas d'égalité:
             - Matches R2 : scores R1 & cl
@@ -54,6 +57,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             - Cas 3:  2w   |   2l   |   4t
             - Cas 4:  1w   |   1l   |   6t
             - Cas 5:  0w   |   0l   |   8t
+            <br>
             <pre>
             /!!!\ Ces scénarios sont très importants pour l'écriture des algorithmes pour générer les paires de joueurs
             (match) de R2 à R7. Par exemple:
@@ -100,6 +104,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             Dans le présent programme, c'est après la saisie des scores de R2 que l'algorithme vérifie le nombre de 'w' pour déterminer le scénario (ex: dans le Cas1, il y a 4w, dans le Cas2, 3w...) à suivre pour créer les paires de matches pour R3.  Et la même procédure s'applique également pour les autres rounds. 
             
             Notez qu'avant de poursuivre, ces matches doivent être validés en vérifiant dans la base de données s'ils n'existent pas déjà. S'ils existent, la génération des pairs se fait alors entre le 1er et le 3ème joueur.
+            <br>
 
 
 ### PRE-REQUIS
