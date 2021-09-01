@@ -111,14 +111,14 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
             
             Pour illustrer, si les résultats du R2 orientent vers le Cas1 (4w, 4l, 0t), une liste des 4w doit être constituée et
             triée par scores (et par position au classement général, le cas échéant), ainsi qu'une autre pour les 4l.  Ensuite,
-            concatener les deux listes pour obtenir <br>une liste finale qui sera utilisée pour générer les 4 matches de R3.
+            concatener les deux listes pour obtenir une liste finale qui sera utilisée pour générer les 4 matches de R3.
             
             Dans le présent programme, c'est après la saisie des scores de R2 que l'algorithme vérifie le nombre de 'w' pour
             déterminer le scénario (ex: dans le Cas1, il y a 4w, dans le Cas2, 3w...) à suivre pour créer les paires de matches
-            pour R3.  Et la même procédure <br>s'applique également pour les autres rounds.
+            pour R3.  Et la même procédure s'applique également pour les autres rounds.
             
-            Notez qu'avant de poursuivre, ces matches doivent être validés en vérifiant dans la base de données s'ils n'existent
-            pas déjà. S'ils existent, la génération des pairs se fait alors entre le 1er et le 3ème joueur.
+            Notez qu'avant de poursuivre, ces matches doivent être validés en vérifiant leur existence dans la base de données.
+            S'ils existent, la génération des pairs se fait alors en faisnt le 1er contre le 3ème joueur.
         <br>
 
 
