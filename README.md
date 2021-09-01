@@ -24,13 +24,13 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
     - Nombre max de R unique: 7 (R5,R6,R7 sont utilisés ici à titre indicatif, mais l'application s'arrête après R4 /!!!\ );
     - Nombre max de match unique joué par tous les joueurs dans un tournoi est de 28, soit:<br>
     <pre>
-    j1 vs. j2   |   j2 vs. j3   |   j3 vs. j4   |   j4 vs. j5   |   j5 vs. j6   |   j6 vs. j7   |   j7 vs. j8<br>
-    j1 vs. j3   |   j2 vs. j4   |   j3 vs. j5   |   j4 vs. j6   |   j5 vs. j7   |   j6 vs. j8<br>
-    j1 vs. j4   |   j2 vs. j5   |   j3 vs. j6   |   j4 vs. j7   |   j5 vs. j8<br>
-    j1 vs. j5   |   j2 vs. j6   |   j3 vs. j7   |   j4 vs. j8<br>
-    j1 vs. j6   |   j2 vs. j7   |   j3 vs. j8<br>
-    j1 vs. j7   |   j2 vs. j8<br>
-    j1 vs. j8<br>
+    j1 vs. j2   |   j2 vs. j3   |   j3 vs. j4   |   j4 vs. j5   |   j5 vs. j6   |   j6 vs. j7   |   j7 vs. j8
+    j1 vs. j3   |   j2 vs. j4   |   j3 vs. j5   |   j4 vs. j6   |   j5 vs. j7   |   j6 vs. j8
+    j1 vs. j4   |   j2 vs. j5   |   j3 vs. j6   |   j4 vs. j7   |   j5 vs. j8
+    j1 vs. j5   |   j2 vs. j6   |   j3 vs. j7   |   j4 vs. j8
+    j1 vs. j6   |   j2 vs. j7   |   j3 vs. j8
+    j1 vs. j7   |   j2 vs. j8
+    j1 vs. j8
     </pre>
     - Point gagnant (w) par match: 1;
     - Point perdant (l) par match: 0;
