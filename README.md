@@ -35,86 +35,17 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
     - Point gagnant (w) par match: 1;
     - Point perdant (l) par match: 0;
     - oint égalité (t) par match: 0,5;
-    - Nombre max et min de points accumulés par un joueur dans chaque round durant le tournoi:<br>
+    - La création d'une paire de joueurs pour chacun des 4 matches dans un round (après R1) se fait en fonction des scores et du classment général en cas d'égalité:<br>
     <pre>
-            R1      R2      R3      R4      R5      R6      R7
-    MAX     1       2       3       4       5       6       7
-    MIN     0       0       0       0       0       0       0
+        - Matches R2 : scores R1 & cl
+        - Matches R3 : scores R1 + scores R2 & cl
+        - Matches R4 : scores R1 + scores R2 + scores R3 & cl
+        - Matches R5 : scores R1 + scores R2 + scores R3 + scores R4 & cl
+        - Matches R6 : scores R1 + scores R2 + scores R3 + scores R4 + scores R5 & cl
+        - Matches R7 : scores R1 + scores R2 + scores R3 + scores R4 + scores R5 + scores R6 & cl
     </pre>
-    - La création d'une paire de joueurs pour chacun des 4 matches dans un round (après R1) se fait en fonction:
-        <br>
-        - des scores et du classment général en cas d'égalité:<br>
-        <pre>
-            - Matches R2 : scores R1 & cl
-            - Matches R3 : scores R1 + scores R2 & cl
-            - Matches R4 : scores R1 + scores R2 + scores R3 & cl
-            - Matches R5 : scores R1 + scores R2 + scores R3 + scores R4 & cl
-            - Matches R6 : scores R1 + scores R2 + scores R3 + scores R4 + scores R5 & cl
-            - Matches R7 : scores R1 + scores R2 + scores R3 + scores R4 + scores R5 + scores R6 & cl
-        </pre>
-        - et des scénarios de résultats obtenus à la fin de chaque round (w: gagnant | l: perdant | t: nul):<br>
-        <pre>
-            - Cas 1:  4w   |   4l   |   0t
-            - Cas 2:  3w   |   3l   |   2t
-            - Cas 3:  2w   |   2l   |   4t
-            - Cas 4:  1w   |   1l   |   6t
-            - Cas 5:  0w   |   0l   |   8t
-        
-        Ces scénarios sont très importants pour l'écriture des algorithmes pour générer les paires de joueurs (match) de R2 à R7. Par exemple:
-            
-            (M: Match | T: Top | L: Low | w: gagnant | l: perdant | t: nul)
 
-                Les Matches de R1                  Probables Resultats R1 (Cas3)
-            ----------------------                -----------------------------
-                M1   M2   M3   M4                   M1     M2     M3     M4
-            T:  j1 | j2 | j3 | j4                   j1.t | j6.w | j3.t | j8.w
-                vs | vs | vs | vs                   j5.t | j2.l | j7.t | j4.l
-            L:  j5 | j6 | j7 | j8                   
-                                                    Classement: j6,j8,j1,j3,j5,j7,j2,j4
-                                                    Matches R2 en faisant jouer le 1er contre le 2ème:
-                                                    j6 vs. j8 | j1 vs. j3 | j5 vs. j7 | j2 vs. j4 
-            
-            (ex: j1.t == j1 a fait match nul avec j5; j6.w veut dire j6 a gagné, et j2 a jerdu (j2.l))
-
-            Resultats R1 (Cas4)            Resultats R1 (Cas5)            Resultats R1 (Cas1)            Resultats R1 (Cas2)
-            ----------------------         ------------------------       ------------------------       ------------------------
-            M1     M2     M3     M4        M1     M2     M3     M4        M1     M2     M3     M4        M1     M2     M3     M4
-            j1.l \ j2.t \ j3.t \ j4.t      j1.t \ j2.t \ j3.t \ j4.t      j1.w \ j2.l \ j3.w \ j4.l      j1.t \ j2.l \ j3.w \ j4.w
-            j5.w \ j6.t \ j7.t \ j8.t      j5.t \ j6.t \ j7.t \ j8.t      j5.l \ j6.w \ j7.l \ j8.w      j5.t \ j6.w \ j7.l \ j8.l
-            
-            Classement par cas:
-            
-            j5,j2,j3,j4,j6,j7,j8,j1        j1,j2,j3,j4,j5,j6,j7,j8        j1,j3,j6,j8,j2,j4,j5,j7        j3,j4,j6,j1,j5,j2,j7,j8
-
-            Matches R2 par cas,
-            en faisant jouer le 1er
-            contre le 2ème:
-            
-            j5 vs. j2 | j3 vs. j4          j1 vs. j2 | j3 vs. j4          j1 vs. j3 | j6 vs. j8          j3 vs. j4 | j6 vs. j1
-            j6 vs. j7 | j8 vs. j1          j5 vs. j6 | j7 vs. j8          j2 vs. j4 | j5 vs. j7          j5 vs. j2 | j7 vs. j8
-        </pre>
-
-        Comme vous pouvez le contaster, ces différents scénarios ne fonctionnent pas pour R2 vu qu'aucun des joueurs n'a la 
-        possibilité de renconter son opposant du R1 parce que la création des paires a changé; maintenant le choix se fait 
-        soit le 1er contre le 2ème joueur, soit le 1er contre le 3ème, en fonction du classement établi à l'issu du R1.
-        Par exemple, j1 et j5 ne peuvent pas jouer ensemble au R2 parce que la répartition des points (0, 0,5, 1) ferait 
-        qu'au classement final après les matches de R1, ils seront toujours éloignés d'une probable opposition peu importe le scénario obtenu
-        de ces 4 premiers matches.
-            
-        Donc pour R2, seul le classement (basé sur les scores) des joueurs à l'issu de R1 est suffisant pour générer ses 4 nouvelles paires de joueurs.
-        Ensuite, c'est après les matches du R2 que l'algorithme devrait prendre en compte ces 5 scénarios/cas pour générer les 
-        matches de R3 à R7 pour le bon déroulement de l'application.
-            
-        Pour illustrer, si les résultats du R2 orientent vers le Cas1 (4w, 4l, 0t), une liste des 4w doit être constituée et
-        triée par scores (et par position au classement général, le cas échéant), ainsi qu'une autre pour les 4l.  Ensuite,
-        concatener les deux listes pour obtenir une liste finale qui sera utilisée pour générer les 4 matches de R3.
-            
-        Dans le présent programme, c'est après la saisie des scores de R2 que l'algorithme vérifie le nombre de 'w' pour
-        déterminer le scénario (ex: dans le Cas1, il y a 4w, dans le Cas2, 3w...) à suivre pour créer les paires de matches
-        pour R3.  Et la même procédure s'applique également pour les autres rounds.
-            
-        Notez qu'avant de poursuivre, ces matches doivent être validés en vérifiant leur existence dans la base de données.
-        S'ils existent, la génération des pairs s'effectue alors en faisant le 1er contre le 3ème joueur.
+    Notez qu'avant de poursuivre, ces matches doivent être validés en vérifiant leur existence dans la base de données. S'ils existent, la génération des pairs s'effectue alors en faisant le 1er contre le 3ème joueur.
 
 
 ### PRE-REQUIS
