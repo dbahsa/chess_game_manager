@@ -131,7 +131,7 @@ def view_players_info():
     
     print("\n📚 Voici les informations actuelles sur les joueurs\n")
     print(real_db)
-view_players_info()
+# view_players_info()
 
 
 """ Update players data from db file /!!!\ """
@@ -519,7 +519,7 @@ def view_sorted_players_by_score_and_rating():
     for u in sorted_players_by_score_and_rating:
         print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}\t{u[1]['Score']}")
         k +=1
-# view_sorted_players_by_score_and_rating()
+view_sorted_players_by_score_and_rating()
 
 
 ## -- Done! -- Func - Ranked Players by rating, Used ONLY for Round1
@@ -638,14 +638,20 @@ def add_ending_time():
 # add_ending_time()
 
 
+""" Generating & Saving Matchups & Scores """
+
+""" Round 1 """
+
+###### --- 1. GENERATE & SAVE MATCHUPS ---
+
 ## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
-## -- generate_players_matchup_reference_score_and_rating() must be initiated 
+## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
 ## -- to allow generate_round1_matchups() to work /!!!\ 
-def generate_round1_matchups():
+def generate_save_round1_matchups():
     """ Function to generate and save round1 matchups based on players ratings only """
 
     # 1. Generate the 1st pairs of players for Round1
-    a = players_matchup_reference_rating
+    a = players_matchup_reference_score_and_rating
     x = slice(0,4)
     y = slice(4,8)
     z = zip(a[x],a[y])
@@ -658,16 +664,7 @@ def generate_round1_matchups():
         with open(filename, "w") as f:
             json.dump(json_object, f, indent=4)
         o += 1
-# generate_round1_matchups()
-
-
-""" /!!!\ Hint - View more details on matches/rounds/players from the tournament table in the db file:
-    # i = 1
-    # for m in list(z):
-    #     print(json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{i}'][0][1])
-    #     i += 1
-    # print()
-"""
+# generate_save_round1_matchups()
 
 
 ## -- Done ! --- 
@@ -680,14 +677,40 @@ def view_round1_matchups():
     for k in d:
         print(f"Match{e}: {k[0][1]} ({k[0][0][-1]}) vs. {k[1][1]} ({k[1][0][-1]})")
         e +=1
-view_round1_matchups()
+# view_round1_matchups()
 
+
+###### --- 2. ADD SCORES AND SAVE SCORES IN DB --
+
+def save_round1_matchups():
+    """ Function to generate and save round1 matchups based on players ratings only """
+
+    # 1. Generate the 1st pairs of players for Round1
+    a = players_matchup_reference_score_and_rating
+    x = slice(0,4)
+    y = slice(4,8)
+    z = zip(a[x],a[y])
+
+    ## -- Save Round1 matchups & rounds info in tournament_db table
+    o = 1
+    for g in z:
+        json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}'] = tuple(g)
+        ## -- to cleanup: key.clear()
+        with open(filename, "w") as f:
+            json.dump(json_object, f, indent=4)
+        o += 1
+# save_round1_matchups()
+
+
+""" Round 2 """
+
+###### --- 1. GENERATE & SAVE MATCHUPS ---
 
 ## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
-## -- generate_players_matchup_reference_score_and_rating() must be initiated 
+## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
 ## -- to allow generate_round1_matchups() to work /!!!\ 
-def generate_round2_matchups():
-    """ Function to generate and save round2 matchups based on players ratings only """
+def generate_save_round2_matchups():
+    """ Function to generate and save round2 matchups based on players scores and rating from round1 games """
 
     # 1. Generate pairs of players for Round2
     a = players_matchup_reference_score_and_rating
@@ -702,7 +725,7 @@ def generate_round2_matchups():
         with open(filename, "w") as f:
             json.dump(json_object, f, indent=4)
         o += 1
-# generate_round2_matchups()
+# generate_save_round2_matchups()
 
 
 ## -- Done ! --- 
@@ -715,80 +738,103 @@ def view_round2_matchups():
     for k in d:
         print(f"Match{e}: {k[0][1]} ({k[0][0][-1]}) vs. {k[1][1]} ({k[1][0][-1]})")
         e +=1
-view_round2_matchups()
+# view_round2_matchups()
 
+
+###### --- 2. ADD SCORES AND SAVE SCORES IN DB --
+
+def save_round2_scores():
+    """ Function to generate and save round2 matchups based on players scores and rating from round1 games """
+
+    # 1. Generate pairs of players for Round2
+    a = players_matchup_reference_score_and_rating
+    b = slice(0,8,2)
+    c = slice(1,8,2)
+    z = zip(a[b],a[c])
+    
+    ## -- Save Round2 matchups & rounds info in tournament_db table
+    o = 1
+    for g in z:
+        json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}'] = tuple(g)
+        with open(filename, "w") as f:
+            json.dump(json_object, f, indent=4)
+        o += 1
+# save_round2_scores()
+
+
+""" Round 3 """
+
+###### --- 1. GENERATE & SAVE MATCHUPS ---
 
 ## -- To Do! -- /!!! \ generate_players_matchup_with_reference_rating() and 
-## -- generate_players_matchup_reference_score_and_rating() must be initiated 
+## -- generate_players_matchup_reference_score_and_rating() must be REMAIN initiated
 ## -- to allow generate_round1_matchups() to work /!!!\ 
 ## -- Must rework the conditions to avoid players facing each other more than once  /!!!\ 
-def generate_round3_matchups():
-    """ Function to generate and save round1 matchups based on players scores and rating """
+def generate_save_round3_matchups():
+    """ Function to generate and save round3 matchups based on players scores and rating from round2 games """
 
-    """
-    ## -- Outcomes Scenarios (w: win, l: loss, t: tie):
-        
-        ## - Case 1:  4w   |   4l   |   0t
-            ## create and sort (by score and rating) a win_list and a loss_list, then win_list.extend(loss_list)
-            ## in order to generate next round games:
-            ### win_list = ['w1', 'w2', 'w3', 'w4']
-            ### loss_list = ['l1', 'l2', 'l3', 'l4']
-            ### win_list.extend(loss_list)
-            #### a = win_list // 'a' is the var used to create next round matchups
-        
-        ## - Case 2:  3w   |   3l   |   2t
-            ## create and sort (by score and rating) a win_list, loss_list and a tie_list, then win_list.extend(tie_list + loss_list)
-            ## in order to generate next round games:
-            ### win_list = ['w1', 'w2', 'w3']
-            ### loss_list = ['l1', 'l2', 'l3']
-            ### tie_list = ['t1', 't2']
-            ### win_list.extend(tie_list + loss_list)
-            #### a = win_list // 'a' is the var used to create next round matchups
-        
-        ## - Case 3:  2w   |   2l   |   4t
-            ## create and sort (by score and rating) a win_list, loss_list and a tie_list, then win_list.extend(loss_list + tie_list)
-            ## in order to generate next round games:
-            ### win_list = ['w1', 'w2']
-            ### loss_list = ['l1', 'l2']
-            ### tie_list = ['t1', 't2', 't3', 't4']
-            ### win_list.extend(tie_list + loss_list)
-            #### a = win_list // 'a' is the var used to create next round matchups
-        
-        ## - Case 4:  1w   |   1l   |   6t
-            ## create and sort (by score and rating) a win_list, loss_list and a tie_list, then win_list.extend(loss_list + tie_list)
-            ## in order to generate next round games:
-            ### win_list = ['w1']
-            ### loss_list = ['l1']
-            ### tie_list = ['t1', 't2', 't3', 't4', 't5', 't6']
-            ### win_list.extend(tie_list + loss_list)
-            #### a = win_list // 'a' is the var used to create next round matchups
-        
-        ## - Case 5:  0w   |   0l   |   8t
-            ## create and sort (by score and rating) a tie_list = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8']
-            ## in order to generate next round games.
-            ### a = tie_list // 'a' is the var used to create next round matchups
-    
-    """
-    
-    print("\n-- Scenarios Outcomes --\n")
-    l = []
-    for d in real_db['Score'].values:
-        if d[0] == float(1):
-            l.append(float(1))
-    if len(l) == 4:
-        print(f" Il y a en tout {len(l)} wins, c'est un cas1")
-    elif len(l) == 3:
-        print(f" Il y a en tout {len(l)} wins, c'est un cas2")
-    elif len(l) == 2:
-        print(f" Il y a en tout {len(l)} wins, c'est un cas3")
-    elif len(l) == 1:
-        print(f" Il y a en tout {len(l)} wins, c'est un cas4")
-    elif len(l) == 0:
-        print(f" Il y a en tout {len(l)} wins, c'est un cas5")
-    else:
-        print("error...")
+    # 1. Generate pairs of players for Roundx
+    a = players_matchup_reference_score_and_rating
+    b = slice(0,8,2)
+    c = slice(1,8,2)
+    z = zip(a[b],a[c])
 
-    """
+    ## -- Save Round3 matchups & rounds info in tournament_db table
+    o = 1
+    for g in z:
+        q = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']
+        s = json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}']
+        json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}'] = tuple(g)
+        r = json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}']
+        if q != r and s != r:
+            json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}'] = tuple(g)
+            with open(filename, "w") as f:
+                json.dump(json_object, f, indent=4)
+        else:
+            print("Ces joueurs se sont déjà affrontés dans ce tournoi...")
+            print("Même si le programme continue, il faudra changer les scores manuellement...")
+            ## -- Take 'em back to main menu.
+        o += 1
+# generate__save_round3_matchups()
+
+a = players_matchup_reference_score_and_rating
+
+## -- 1st player vs 2nd player
+b = slice(0,8,2)
+c = slice(1,8,2)
+z = zip(a[b],a[c])
+
+## -- 1st player vs 3rd player
+d = a[0:8:2]
+e = a[1:8:2]
+d.extend(e)
+w = zip(d[b],d[c])
+# w = zip(d,e)
+
+print()
+for u in w:
+    pp.pprint(u)
+
+
+
+
+## -- Done ! --- 
+def view_round3_matchups():
+    """Function to view Round1 Matchups"""
+    
+    print("\n💡 Voici les Matches du Round3:\n")
+    e = 1
+    d = list(json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'].values())
+    for k in d:
+        print(f"Match{e}: {k[0][1]} ({k[0][0][-1]}) vs. {k[1][1]} ({k[1][0][-1]})")
+        e +=1
+# view_round3_matchups()
+
+
+###### --- 2. ADD SCORES AND SAVE SCORES IN DB --
+
+def save_round3_scores():
+    """ Function to generate and save round3 matchups based on players scores and rating from round2 games """
 
     # 1. Generate pairs of players for Roundx
     a = players_matchup_reference_score_and_rating
@@ -809,62 +855,17 @@ def generate_round3_matchups():
             with open(filename, "w") as f:
                 json.dump(json_object, f, indent=4)
         else:
-            
             print("Ces joueurs se sont déjà affrontés dans ce tournoi...")
             print("Même si le programme continue, il faudra changer les scores manuellement...")
             ## -- Take 'em back to the main menu.
         o += 1
-
-    """
-generate_round3_matchups()
-
-print("===")
-# pp.pprint(json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match1'])
-# pp.pprint(json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match1'][0][0][-1])
-# pp.pprint(json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match1'][0][3][0])
-print('===')
+# save_round3_scores()
 
 
-## -- To Do... In progress
-## -- To determine which scenario to choose so as to generate games for the next rounds !!!
-def matchup_scenario():
-    """Function to determine which scenario to choose so as to generate games for the next round"""
-    
-    ## May be better to use this in a generate_matches function !!!!
-    l = []
-    for d in real_db['Score'].values:
-        if d[0] == float(1):
-            l.append(float(1))
-    if len(l) == 4:
-        print(f" Il y a en tout {len(l)} wins, c'est un cas1")
-    elif len(l) == 3:
-        print(f" Il y a en tout {len(l)} wins, c'est un cas2")
-    elif len(l) == 2:
-        print(f" Il y a en tout {len(l)} wins, c'est un cas3")
-    elif len(l) == 1:
-        print(f" Il y a en tout {len(l)} wins, c'est un cas4")
-    elif len(l) == 0:
-        print(f" Il y a en tout {len(l)} wins, c'est un cas5")
-    else:
-        print("error...")
-
-
-## -- Done ! --- 
-def view_round3_matchups():
-    """Function to view Round1 Matchups"""
-    
-    print("\n💡 Voici les Matches du Round3:\n")
-    e = 1
-    d = list(json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'].values())
-    for k in d:
-        print(f"Match{e}: {k[0][1]} ({k[0][0][-1]}) vs. {k[1][1]} ({k[1][0][-1]})")
-        e +=1
-# view_round3_matchups()
-
-
+""" Round 4 """
 
 ## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
-## -- generate_players_matchup_reference_score_and_rating() must be initiated 
+## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
 ## -- to allow generate_round1_matchups() to work /!!!\ 
 ## -- Must rework the conditions to avoid players facing each other more than once  /!!!\ 
 def generate_round4_matchups():
@@ -908,6 +909,17 @@ def view_round4_matchups():
         e +=1
 # view_round4_matchups()
 
+
+""" Round X """
+
+
+""" /!!!\ Hint - View more details on matches/rounds/players from the tournament table in the db file:
+    # i = 1
+    # for m in list(z):
+    #     print(json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{i}'][0][1])
+    #     i += 1
+    # print()
+"""
 
 
 """Use this to verify if players have already played againts each other:
