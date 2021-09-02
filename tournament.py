@@ -46,7 +46,7 @@ class Tournament:
     rounds: dict = field(init=False, repr=False, default_factory=add_rounds)
     players_db_indexes: list = field(init=False, repr=False, default_factory=add_players_db_indexes)
     single_tournament_db: dict = field(init=False, repr=False)
-    
+
     def __post_init__(self):
         """ Method to help create a single tournament full data"""
         self.single_tournament_db = {"Nom du tournoi": self.name,
@@ -59,6 +59,8 @@ class Tournament:
                                     "Description": self.description}
         tournaments.append(self.single_tournament_db)
 
+
+"""Add/Save Tournament"""
 
 # -- Done! -- Add Tournament -- /!!!\ ADD AN END DATE WHICH IS ADDED AUTOMATICALLY AT THE END OF THE TOURNAMENT !!!
 def add_tournament():
@@ -82,20 +84,8 @@ def save_tournament_data():
     tournaments_table.truncate()  # clear up the table first
     tournaments_table.insert_multiple(tournaments)
 
-# -- Done! -- View Tournament Info  --
-def view_tournament_info():
-    """ Function to view tournament info """
-    
-    print("\n-- Voici les informations actuelles du tournoi --\n")
-    ## -- Not Numbered List
-    # for i in json_object['tournaments_db']['1']:
-    #     print(f"{i}: {json_object['tournaments_db']['1'][i]}")
-    ## -- Numbered List
-    h = 1
-    for i in json_object['tournaments_db']['1']:
-        print(f"{[h]} {i}: {json_object['tournaments_db']['1'][i]}")
-        h += 1
 
+"""Update Tournaments properties"""
 
 # -- Done! -- Update Tournament Name in db file --
 def update_tournament_name():
@@ -267,6 +257,23 @@ def update_tournament_info():
         # for i in json_object['tournaments_db']['1']:
         #     print(f"{i}: {json_object['tournaments_db']['1'][i]}")
         # print("--")
+
+
+"""View Tournament Info"""
+
+# -- Done! -- View Tournament Info  --
+def view_tournament_info():
+    """ Function to view tournament info """
+    
+    print("\n-- Voici les informations actuelles du tournoi --\n")
+    ## -- Not Numbered List
+    # for i in json_object['tournaments_db']['1']:
+    #     print(f"{i}: {json_object['tournaments_db']['1'][i]}")
+    ## -- Numbered List
+    h = 1
+    for i in json_object['tournaments_db']['1']:
+        print(f"{[h]} {i}: {json_object['tournaments_db']['1'][i]}")
+        h += 1
 
 
 """ START TOURNAMENT CREATION SCRIPT """

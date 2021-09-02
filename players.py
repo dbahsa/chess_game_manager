@@ -83,7 +83,6 @@ def add_players():
     """ function to instantiate players"""
     
     print("\nEnregistrement des 8 joueurs...")
-    # replace 3 by total_number_of_players -> range(1, total_number_of_players+1)
     for i in range(1,9):
         print(f"\nEntrer les informations sur le joueur n°{i}")
         p = Player(input("- Nom de famille: "),
@@ -93,7 +92,6 @@ def add_players():
                     int(input("- Classement: "))
                     )
         all_players_db.append(p.single_player_db)
-        # print("-------------------------------------")
         print(f"\nJoueur n°{i} enregistré.")
     print("Fin de l'enregistrement des joueurs.\n")
 # add_players()
