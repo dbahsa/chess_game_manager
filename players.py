@@ -131,7 +131,7 @@ def view_players_info():
     
     print("\n📚 Voici les informations actuelles sur les joueurs\n")
     print(real_db)
-# view_players_info()
+view_players_info()
 
 
 """ Update players data from db file /!!!\ """
@@ -589,9 +589,10 @@ def generate_players_matchup_reference_score_and_rating():
 generate_players_matchup_reference_score_and_rating()
 
 
+"""Add Matches Data to Tournament Table"""
 
 ## -- Done! -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
-def adding_roundx_in_tournament_table():
+def add_roundx_in_tournament_table():
     """Function to add new items in tournament table under 'Tournées' key"""
     
     for i in range(int(json_object['tournaments_db']['1']['Nombre de tours'])):
@@ -605,44 +606,40 @@ def adding_roundx_in_tournament_table():
                         },
                     'Temps de fin': ''}
                 }
-        # json_object['tournaments_db']['1']['Tournées'].clear()
         json_object['tournaments_db']['1']['Tournées'].update(data)
         with open(filename, "w") as f:
             f.seek(0)
             json.dump(json_object, f, indent=4)
-# adding_roundx_in_tournament_table()
+# add_roundx_in_tournament_table()
 
 
-## -- Done! --
-def add_starting_time():
-    """Function to add starting time for each round"""
+## -- Done! -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
+def clear_roundx_in_tournament_table():
+    """Function to add new items in tournament table under 'Tournées' key"""
     
-    current_time = datetime.datetime.now()
-    a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
-    json_object['tournaments_db']['1']['Tournées']["Round1"]['Temps de départ'] = a
-    with open(filename, "w") as f:
-        json.dump(json_object, f, indent=4)
-# add_starting_time()
+    for i in range(int(json_object['tournaments_db']['1']['Nombre de tours'])):
+        data = {f'Round{i+1}':{
+                    'Temps de départ': '',
+                    'Matches': {
+                        'Match1': "",
+                        'Match2': "",
+                        'Match3': "",
+                        'Match4': ""
+                        },
+                    'Temps de fin': ''}
+                }
+        json_object['tournaments_db']['1']['Tournées'].clear()
+        with open(filename, "w") as f:
+            f.seek(0)
+            json.dump(json_object, f, indent=4)
+# clear_roundx_in_tournament_table()
 
 
-## -- Done! --
-def add_ending_time():
-    """Function to add ending time for each round"""
-
-    current_time = datetime.datetime.now()
-    a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
-    json_object['tournaments_db']['1']['Tournées']["Round1"]['Temps de fin'] = a
-    with open(filename, "w") as f:
-        # f.seek(0)
-        json.dump(json_object, f, indent=4)
-# add_ending_time()
-
-
-""" Generating & Saving Matchups & Scores """
+""" Generate & Save Matchups & Scores """
 
 """ Round 1 """
 
-###### --- 1. GENERATE & SAVE MATCHUPS ---
+###### --- 1. GENERATE & SAVE ROUND1 MATCHUPS --- FIRST LAUNCH 'add_roundx_in_tournament_table()'
 
 ## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
 ## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
@@ -651,7 +648,7 @@ def generate_save_round1_matchups():
     """ Function to generate and save round1 matchups based on players ratings only """
 
     # 1. Generate the 1st pairs of players for Round1
-    a = players_matchup_reference_score_and_rating
+    a = players_matchup_reference_rating
     x = slice(0,4)
     y = slice(4,8)
     z = zip(a[x],a[y])
@@ -660,12 +657,13 @@ def generate_save_round1_matchups():
     o = 1
     for g in z:
         json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}'] = tuple(g)
-        ## -- to cleanup: key.clear()
         with open(filename, "w") as f:
             json.dump(json_object, f, indent=4)
         o += 1
 # generate_save_round1_matchups()
 
+
+###### --- 2. VIEW ROUND1 MATCHUPS FROM DB --
 
 ## -- Done ! --- 
 def view_round1_matchups():
@@ -680,7 +678,92 @@ def view_round1_matchups():
 # view_round1_matchups()
 
 
-###### --- 2. ADD SCORES AND SAVE SCORES IN DB --
+###### --- 3. LAUNCH ROUND1 GAMES - STARTING TIME -- GOOD MENU TRY EXCEPT /!!!!!\
+
+## -- Done! --  ADD STARTING TIME ROUND1
+def add_starting_time_round1():
+    """Function to add starting time for round1"""
+    
+    print("\n🚧 Êtes-vous prêt à lancer les matches?.")
+    while True:
+        msg = "\nTaper [1] pour commencer ou taper [0] pour revenir au menu pécédent: "
+        user_choice = input(msg)
+        try:
+            if int(user_choice) == 1:
+                current_time = datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de commencer!")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                json_object['tournaments_db']['1']['Tournées']["Round1"]['Temps de départ'] = a
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                continue
+            if int(user_choice) != 1:
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            print()
+# add_starting_time_round1()
+
+
+## -- Done! --  CLEAR STARTING TIME ROUND1
+def clear_starting_time_round1():
+    """Function to remove starting for round 1"""
+
+    json_object['tournaments_db']['1']['Tournées']["Round1"]['Temps de départ'] = ""
+    with open(filename, "w") as f:
+        # f.seek(0)
+        json.dump(json_object, f, indent=4)
+# clear_starting_time_round1()
+
+
+###### --- 4. STOP ROUND1 GAMES - ENDING TIME -- GOOD MENU TRY EXCEPT /!!!!!\
+
+## -- Done! --  ADD ENDING TIME ROUND1
+def add_ending_time_round1():
+    """Function to add ending time for round1"""
+    
+    print("\n🚧 Souhaitez-vous arrêter les matches?.")
+    while True:
+        msg = "\nTaper [1] pour arrêter, ou taper [0] pour revenir au menu pécédent: "
+        user_choice = input(msg)
+        try:
+            if int(user_choice) == 1:
+                current_time = datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de terminer!")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                json_object['tournaments_db']['1']['Tournées']["Round1"]['Temps de fin'] = a
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+            if int(user_choice) != 1:
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            print()
+# add_ending_time_round1()
+
+
+## -- Done! --  CLEAR ENDING TIME ROUND1
+def clear_starting_time_round1():
+    """Function to remove starting for round 1"""
+
+    json_object['tournaments_db']['1']['Tournées']["Round1"]['Temps de fin'] = ""
+    with open(filename, "w") as f:
+        # f.seek(0)
+        json.dump(json_object, f, indent=4)
+# clear_starting_time_round1()
+
+
+###### --- 5. ADD & SAVE SCORES ROUND1 IN DB --
 
 def save_round1_matchups():
     """ Function to generate and save round1 matchups based on players ratings only """
@@ -704,7 +787,7 @@ def save_round1_matchups():
 
 """ Round 2 """
 
-###### --- 1. GENERATE & SAVE MATCHUPS ---
+###### --- 1. GENERATE & SAVE ROUND2 MATCHUPS ---
 
 ## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
 ## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
@@ -728,9 +811,11 @@ def generate_save_round2_matchups():
 # generate_save_round2_matchups()
 
 
+###### --- 2. VIEW ROUND2 MATCHUPS FROM DB --
+
 ## -- Done ! --- 
 def view_round2_matchups():
-    """Function to view Round1 Matchups"""
+    """Function to view Round2 Matchups"""
     
     print("\n💡 Voici les Matches du Round2:\n")
     e = 1
@@ -741,10 +826,95 @@ def view_round2_matchups():
 # view_round2_matchups()
 
 
-###### --- 2. ADD SCORES AND SAVE SCORES IN DB --
+###### --- 3. LAUNCH ROUND2 GAMES - STARTING TIME --
+
+## -- Done! --  ADD STARTING TIME ROUND2
+def add_starting_time_round2():
+    """Function to add starting time for round2"""
+    
+    print("\n🚧 Êtes-vous prêt à lancer les matches?.")
+    while True:
+        msg = "\nTaper [1] pour commencer ou taper [0] pour revenir au menu pécédent: "
+        user_choice = input(msg)
+        try:
+            if int(user_choice) == 1:
+                current_time = datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de commencer!")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                json_object['tournaments_db']['1']['Tournées']["Round2"]['Temps de départ'] = a
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                continue
+            if int(user_choice) != 1:
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            print()
+# add_starting_time_round2()
+
+
+## -- Done! --  CLEAR STARTING TIME ROUND2
+def clear_starting_time_round2():
+    """Function to remove starting for round 2"""
+
+    json_object['tournaments_db']['1']['Tournées']["Round2"]['Temps de départ'] = ""
+    with open(filename, "w") as f:
+        # f.seek(0)
+        json.dump(json_object, f, indent=4)
+# clear_starting_time_round2()
+
+
+###### --- 4. STOP ROUND2 GAMES - ENDING TIME --
+
+## -- Done! --  ADD ENDING TIME ROUND2
+def add_ending_time_round2():
+    """Function to add ending time for round2"""
+    
+    print("\n🚧 Souhaitez-vous arrêter les matches?.")
+    while True:
+        msg = "\nTaper [1] pour arrêter, ou taper [0] pour revenir au menu pécédent: "
+        user_choice = input(msg)
+        try:
+            if int(user_choice) == 1:
+                current_time = datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de terminer!")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                json_object['tournaments_db']['1']['Tournées']["Round2"]['Temps de fin'] = a
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+            if int(user_choice) != 1:
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            print()
+# add_ending_time_round2()
+
+
+## -- Done! --  CLEAR ENDING TIME ROUND2
+def clear_starting_time_round2():
+    """Function to remove starting for round2"""
+
+    json_object['tournaments_db']['1']['Tournées']["Round2"]['Temps de fin'] = ""
+    with open(filename, "w") as f:
+        # f.seek(0)
+        json.dump(json_object, f, indent=4)
+# clear_starting_time_round2()
+
+
+###### --- 5. ADD & SAVE SCORES ROUND2 IN DB --
 
 def save_round2_scores():
-    """ Function to generate and save round2 matchups based on players scores and rating from round1 games """
+    """ Function to generate and save round2 matchups based on players scores and rating from round2 games """
 
     # 1. Generate pairs of players for Round2
     a = players_matchup_reference_score_and_rating
@@ -764,24 +934,30 @@ def save_round2_scores():
 
 """ Round 3 """
 
-###### --- 1. GENERATE & SAVE MATCHUPS ---
+###### --- 1. GENERATE & SAVE ROUND3 MATCHUPS ---
 
 ## -- To Do! -- /!!! \ generate_players_matchup_with_reference_rating() and 
 ## -- generate_players_matchup_reference_score_and_rating() must be REMAIN initiated
 ## -- to allow generate_round1_matchups() to work /!!!\ 
 ## -- Must rework the conditions to avoid players facing each other more than once  /!!!\ 
 def generate_save_round3_matchups():
-    """ Function to generate and save round3 matchups based on players scores and rating from round2 games """
+    """ Function to generate and save round3 matchups based on players scores and rating from round3 games """
 
-    # 1. Generate pairs of players for Roundx
+    ## 1. Generate pairs of players for Round3
     a = players_matchup_reference_score_and_rating
+    ## -- 1st player vs 2nd player
     b = slice(0,8,2)
     c = slice(1,8,2)
     z = zip(a[b],a[c])
-
-    ## -- Save Round3 matchups & rounds info in tournament_db table
+    ## -- 1st player vs 3rd player
+    d = a[0:8:2]
+    e = a[1:8:2]
+    d.extend(e)
+    j = zip(d[b],d[c])
+    ## 2. Save Round3 matchups & rounds info in tournament_db table
     o = 1
     for g in z:
+        ## -- 1st player vs 2nd player
         q = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']
         s = json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}']
         json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}'] = tuple(g)
@@ -791,36 +967,23 @@ def generate_save_round3_matchups():
             with open(filename, "w") as f:
                 json.dump(json_object, f, indent=4)
         else:
-            print("Ces joueurs se sont déjà affrontés dans ce tournoi...")
-            print("Même si le programme continue, il faudra changer les scores manuellement...")
-            ## -- Take 'em back to main menu.
+            ## -- 1st player vs 3rd player
+            h = 1
+            for y in j:
+                json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{h}'] = tuple(y)
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                h += 1
         o += 1
-# generate__save_round3_matchups()
-
-a = players_matchup_reference_score_and_rating
-
-## -- 1st player vs 2nd player
-b = slice(0,8,2)
-c = slice(1,8,2)
-z = zip(a[b],a[c])
-
-## -- 1st player vs 3rd player
-d = a[0:8:2]
-e = a[1:8:2]
-d.extend(e)
-w = zip(d[b],d[c])
-# w = zip(d,e)
-
-print()
-for u in w:
-    pp.pprint(u)
+        ## -- Take 'em back to main menu.
+# generate_save_round3_matchups()
 
 
-
+###### --- 2. VIEW ROUND3 MATCHUPS FROM DB --
 
 ## -- Done ! --- 
 def view_round3_matchups():
-    """Function to view Round1 Matchups"""
+    """Function to view Round3 Matchups"""
     
     print("\n💡 Voici les Matches du Round3:\n")
     e = 1
@@ -831,21 +994,111 @@ def view_round3_matchups():
 # view_round3_matchups()
 
 
-###### --- 2. ADD SCORES AND SAVE SCORES IN DB --
+###### --- 3. LAUNCH ROUND3 GAMES - STARTING TIME --
+
+## -- Done! --  ADD STARTING TIME ROUND3
+def add_starting_time_round3():
+    """Function to add starting time for round3"""
+    
+    print("\n🚧 Êtes-vous prêt à lancer les matches?.")
+    while True:
+        msg = "\nTaper [1] pour commencer ou taper [0] pour revenir au menu pécédent: "
+        user_choice = input(msg)
+        try:
+            if int(user_choice) == 1:
+                current_time = datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de commencer!")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                json_object['tournaments_db']['1']['Tournées']["Round3"]['Temps de départ'] = a
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                continue
+            if int(user_choice) != 1:
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            print()
+# add_starting_time_round3()
+
+
+## -- Done! --  CLEAR STARTING TIME ROUND3
+def clear_starting_time_round3():
+    """Function to remove starting for round 3"""
+
+    json_object['tournaments_db']['1']['Tournées']["Round3"]['Temps de départ'] = ""
+    with open(filename, "w") as f:
+        # f.seek(0)
+        json.dump(json_object, f, indent=4)
+# clear_starting_time_round3()
+
+
+###### --- 4. STOP ROUND3 GAMES - ENDING TIME --
+
+## -- Done! --  ADD ENDING TIME ROUND3
+def add_ending_time_round3():
+    """Function to add ending time for round3"""
+    
+    print("\n🚧 Souhaitez-vous arrêter les matches?.")
+    while True:
+        msg = "\nTaper [1] pour arrêter, ou taper [0] pour revenir au menu pécédent: "
+        user_choice = input(msg)
+        try:
+            if int(user_choice) == 1:
+                current_time = datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de terminer!")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                json_object['tournaments_db']['1']['Tournées']["Round3"]['Temps de fin'] = a
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+            if int(user_choice) != 1:
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            print()
+# add_ending_time_round3()
+
+
+## -- Done! --  CLEAR ENDING TIME ROUND3
+def clear_starting_time_round3():
+    """Function to remove starting for round3"""
+
+    json_object['tournaments_db']['1']['Tournées']["Round3"]['Temps de fin'] = ""
+    with open(filename, "w") as f:
+        # f.seek(0)
+        json.dump(json_object, f, indent=4)
+# clear_starting_time_round3()
+
+
+###### --- 5. ADD & SAVE SCORES ROUND3 IN DB --
 
 def save_round3_scores():
-    """ Function to generate and save round3 matchups based on players scores and rating from round2 games """
+    """ Function to generate and save round3 matchups based on players scores and rating from round3 games """
 
-    # 1. Generate pairs of players for Roundx
+    ## 1. Generate pairs of players for Round3
     a = players_matchup_reference_score_and_rating
+    ## -- 1st player vs 2nd player
     b = slice(0,8,2)
     c = slice(1,8,2)
     z = zip(a[b],a[c])
-
-    ## -- Save Round3 matchups & rounds info in tournament_db table
+    ## -- 1st player vs 3rd player
+    d = a[0:8:2]
+    e = a[1:8:2]
+    d.extend(e)
+    j = zip(d[b],d[c])
+    ## 2. Save Round3 matchups & rounds info in tournament_db table
     o = 1
     for g in z:
-        ##-- cleanup: json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}'].clear()
+        ## -- 1st player vs 2nd player
         q = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']
         s = json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}']
         json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}'] = tuple(g)
@@ -855,47 +1108,65 @@ def save_round3_scores():
             with open(filename, "w") as f:
                 json.dump(json_object, f, indent=4)
         else:
-            print("Ces joueurs se sont déjà affrontés dans ce tournoi...")
-            print("Même si le programme continue, il faudra changer les scores manuellement...")
-            ## -- Take 'em back to the main menu.
+            ## -- 1st player vs 3rd player
+            h = 1
+            for y in j:
+                json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{h}'] = tuple(y)
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                h += 1
         o += 1
 # save_round3_scores()
 
 
 """ Round 4 """
 
+###### --- 1. GENERATE & SAVE ROUND4 MATCHUPS ---
+
 ## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
 ## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
 ## -- to allow generate_round1_matchups() to work /!!!\ 
 ## -- Must rework the conditions to avoid players facing each other more than once  /!!!\ 
-def generate_round4_matchups():
-    """ Function to generate and save round1 matchups based on players ratings only """
+def generate_save_round4_matchups():
+    """ Function to generate and save round3 matchups based on players scores and rating from round4 games """
 
-    # 1. Generate pairs of players for Roundx
+    ## 1. Generate pairs of players for Round3
     a = players_matchup_reference_score_and_rating
+    ## -- 1st player vs 2nd player
     b = slice(0,8,2)
     c = slice(1,8,2)
     z = zip(a[b],a[c])
-    ## -- Save Round2 matchups & rounds info in tournament_db table
+    ## -- 1st player vs 3rd player
+    d = a[0:8:2]
+    e = a[1:8:2]
+    d.extend(e)
+    j = zip(d[b],d[c])
+    ## 2. Save Round4 matchups & rounds info in tournament_db table
     o = 1
     for g in z:
-        ##-- cleanup: json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}'].clear()
+        ## -- 1st player vs 2nd player
         q = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']
         s = json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}']
-        n = json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}']
+        p = json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}']
         json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{o}'] = tuple(g)
         r = json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{o}']
-        if q != r and s != r and n != r:
+        if q != r and s != r and p != r :
             json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{o}'] = tuple(g)
             with open(filename, "w") as f:
                 json.dump(json_object, f, indent=4)
         else:
-            print("Ces joueurs se sont déjà affrontés dans ce tournoi...")
-            print("Même si le programme continue, il faudra changer les scores manuellement...")
-            ## -- Take 'em back to the main menu.
+            ## -- 1st player vs 3rd player
+            h = 1
+            for y in j:
+                json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{h}'] = tuple(y)
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                h += 1
         o += 1
-# generate_round4_matchups()
+# generate_save_round4_matchups()
 
+
+###### --- 2. VIEW ROUND4 MATCHUPS FROM DB --
 
 ## -- Done ! --- 
 def view_round4_matchups():
@@ -910,7 +1181,130 @@ def view_round4_matchups():
 # view_round4_matchups()
 
 
-""" Round X """
+###### --- 3. LAUNCH ROUND4 GAMES - STARTING TIME --
+
+## -- Done! --  ADD STARTING TIME ROUND4
+def add_starting_time_round4():
+    """Function to add starting time for round4"""
+    
+    print("\n🚧 Êtes-vous prêt à lancer les matches?.")
+    while True:
+        msg = "\nTaper [1] pour commencer ou taper [0] pour revenir au menu pécédent: "
+        user_choice = input(msg)
+        try:
+            if int(user_choice) == 1:
+                current_time = datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de commencer!")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                json_object['tournaments_db']['1']['Tournées']["Round4"]['Temps de départ'] = a
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                continue
+            if int(user_choice) != 1:
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            print()
+# add_starting_time_round4()
+
+
+## -- Done! --  CLEAR STARTING TIME ROUND4
+def clear_starting_time_round4():
+    """Function to remove starting for round4"""
+
+    json_object['tournaments_db']['1']['Tournées']["Round4"]['Temps de départ'] = ""
+    with open(filename, "w") as f:
+        # f.seek(0)
+        json.dump(json_object, f, indent=4)
+# clear_starting_time_round4()
+
+
+###### --- 4. STOP ROUND4 GAMES - ENDING TIME --
+
+## -- Done! --  ADD ENDING TIME ROUND4
+def add_ending_time_round4():
+    """Function to add ending time for round4"""
+    
+    print("\n🚧 Souhaitez-vous arrêter les matches?.")
+    while True:
+        msg = "\nTaper [1] pour arrêter, ou taper [0] pour revenir au menu pécédent: "
+        user_choice = input(msg)
+        try:
+            if int(user_choice) == 1:
+                current_time = datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de terminer!")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                json_object['tournaments_db']['1']['Tournées']["Round4"]['Temps de fin'] = a
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+            if int(user_choice) != 1:
+                print(f"💡 Vous avez tapé [{user_choice}].\n")
+                print()
+            if int(user_choice) == 0:
+                ## -- /!!!\ Send the user back to the former menu
+                print("🏠 Retour au menu précédent...\n")
+                break
+        except:
+            print(f"\n💥 Erreur de saisie...")
+            print()
+# add_ending_time_round4()
+
+
+## -- Done! --  CLEAR ENDING TIME ROUND4
+def clear_starting_time_round4():
+    """Function to remove starting for round4"""
+
+    json_object['tournaments_db']['1']['Tournées']["Round4"]['Temps de fin'] = ""
+    with open(filename, "w") as f:
+        # f.seek(0)
+        json.dump(json_object, f, indent=4)
+# clear_starting_time_round4()
+
+
+###### --- 5. ADD & SAVE SCORES ROUND4 IN DB --
+
+def save_round4_scores():
+    """ Function to generate and save round4 matchups based on players scores and rating from round4 games """
+
+    ## 1. Generate pairs of players for Round3
+    a = players_matchup_reference_score_and_rating
+    ## -- 1st player vs 2nd player
+    b = slice(0,8,2)
+    c = slice(1,8,2)
+    z = zip(a[b],a[c])
+    ## -- 1st player vs 3rd player
+    d = a[0:8:2]
+    e = a[1:8:2]
+    d.extend(e)
+    j = zip(d[b],d[c])
+    ## 2. Save Round4 matchups & rounds info in tournament_db table
+    o = 1
+    for g in z:
+        ## -- 1st player vs 2nd player
+        q = json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}']
+        s = json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match{o}']
+        p = json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'][f'Match{o}']
+        json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{o}'] = tuple(g)
+        r = json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{o}']
+        if q != r and s != r and p != r :
+            json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{o}'] = tuple(g)
+            with open(filename, "w") as f:
+                json.dump(json_object, f, indent=4)
+        else:
+            ## -- 1st player vs 3rd player
+            h = 1
+            for y in j:
+                json_object['tournaments_db']['1']['Tournées']["Round4"]['Matches'][f'Match{h}'] = tuple(y)
+                with open(filename, "w") as f:
+                    json.dump(json_object, f, indent=4)
+                h += 1
+        o += 1
+# save_round3_scores()
 
 
 """ /!!!\ Hint - View more details on matches/rounds/players from the tournament table in the db file:
