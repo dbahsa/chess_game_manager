@@ -11,7 +11,6 @@ import datetime
 import pprint
 
 
-
 """ players variables used in this file script """
 
 total_number_of_players = 8
@@ -395,7 +394,7 @@ def update_player_score():
                     for x in real_db.at[user_choice, 'Score']:
                         print(f"🏁 A son match n°{s+1}, {real_db.at[user_choice, 'Prénom']} a eu {x} point")
                         s += 1
-                    update_msg = "\n🚨 Taper le numéro du match dont le score doit être mofidié: "
+                    update_msg = "\n🚨 Taper le numéro du match dont le score doit être modifié: "
                     update_score = int(input(update_msg))
                     
                     try:
@@ -406,7 +405,7 @@ def update_player_score():
                             new_score = float(input(msg).replace(",", "."))
                             print(new_score)
                             ## --> validate the right choice of points
-                            try: 
+                            try:
                                 if new_score in [0, 0.5, 1]:
                                     real_db.at[user_choice, 'Score'][update_score-1] = new_score
                                     
@@ -475,6 +474,19 @@ def update_player_score():
             view_players_info()
             print()
 # update_player_score()
+
+
+## -- Done! --  /!!!\ be very careful with this one!
+def erase_all_scores():
+    """"Function removes all scores at once.  Better be carfeul with it!"""
+
+    for r in range(8):
+        real_db.iat[r,5] = []
+        data = real_db.to_json(orient='index', indent=4)
+        json_object['players_db'] = json.loads(data)
+        with open(filename, "w") as f:
+            json.dump(json_object, f, indent=4)
+# erase_all_scores()
 
 
 """ Var of Sorted Players Data """
@@ -578,7 +590,7 @@ generate_players_matchup_reference_score_and_rating()
 
 
 
-## -- Done! -- /!!!\ TO BE ADDED RIGHT AFTER PLAYERS OBJ INSTANCIATION /!!!\  Watch out ! It will clear the part of the table concerned before adding the needed items.
+## -- Done! -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
 def adding_roundx_in_tournament_table():
     """Function to add new items in tournament table under 'Tournées' key"""
     
@@ -664,11 +676,11 @@ def view_round1_matchups():
     
     print("\n💡 Voici les Matches du Round1:\n")
     e = 1
-    for x in list(json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'].values()):
-        b = list(x.values())
-        print(f"Match n°{e}: {b[0][0]} vs. {b[0][1]}")
+    d = list(json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'].values())
+    for k in d:
+        print(f"Match{e}: {k[0][1]} ({k[0][0][-1]}) vs. {k[1][1]} ({k[1][0][-1]})")
         e +=1
-# view_round1_matchups()
+view_round1_matchups()
 
 
 ## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
@@ -699,11 +711,11 @@ def view_round2_matchups():
     
     print("\n💡 Voici les Matches du Round2:\n")
     e = 1
-    for x in list(json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'].values()):
-        b = list(x.values())
-        print(f"Match n°{e}: {b[0][0]} vs. {b[0][1]}")
+    d = list(json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'].values())
+    for k in d:
+        print(f"Match{e}: {k[0][1]} ({k[0][0][-1]}) vs. {k[1][1]} ({k[1][0][-1]})")
         e +=1
-# view_round2_matchups()
+view_round2_matchups()
 
 
 ## -- To Do! -- /!!! \ generate_players_matchup_with_reference_rating() and 
@@ -713,13 +725,62 @@ def view_round2_matchups():
 def generate_round3_matchups():
     """ Function to generate and save round1 matchups based on players scores and rating """
 
+    """
+    ## -- Scenarios Outcomes (w: win, l: loss, t: tie):
+        
+        ## - Case 1:  4w   |   4l   |   0t/
+            ## create and sort a  win_list and a loss_list, then win_list.extend(loss_list)
+            ## in order to generate next round games:
+            ### win_list = ['w1', 'w2', 'w3', 'w4']
+            ### loss_list = ['l1', 'l2', 'l3', 'l4']
+            ### win_list.extend(loss_list)
+            #### a = win_list // 'a' is the var used to create matchups
+        
+        ## - Case 2:  3w   |   3l   |   2t
+            ## create and sort a  win_list and a loss_list, then win_list.extend(loss_list)
+            ## in order to generate next round games.
+        
+        ## - Case 3:  2w   |   2l   |   4t
+            ## create and sort a  win_list and a loss_list, then win_list.extend(loss_list)
+            ## in order to generate next round games.
+        
+        ## - Case 4:  1w   |   1l   |   6t
+            ## create and sort a  win_list and a loss_list, then win_list.extend(loss_list)
+            ## in order to generate next round games.
+        
+        ## - Case 5:  0w   |   0l   |   8t
+            ## create and sort a  win_list and a loss_list, then win_list.extend(loss_list)
+            ## in order to generate next round games.
+    
+    """
+    
+    print("\n-- Scenarios Outcomes --\n")
+    l = []
+    for d in real_db['Score'].values:
+        if d[0] == float(1):
+            l.append(float(1))
+    if len(l) == 4:
+        print(f" Il y a en tout {len(l)} wins, c'est un cas1")
+    elif len(l) == 3:
+        print(f" Il y a en tout {len(l)} wins, c'est un cas2")
+    elif len(l) == 2:
+        print(f" Il y a en tout {len(l)} wins, c'est un cas3")
+    elif len(l) == 1:
+        print(f" Il y a en tout {len(l)} wins, c'est un cas4")
+    elif len(l) == 0:
+        print(f" Il y a en tout {len(l)} wins, c'est un cas5")
+    else:
+        print("error...")
+
+    """
+
     # 1. Generate pairs of players for Roundx
     a = players_matchup_reference_score_and_rating
     b = slice(0,8,2)
     c = slice(1,8,2)
     z = zip(a[b],a[c])
 
-    ## -- Save Round2 matchups & rounds info in tournament_db table
+    ## -- Save Round3 matchups & rounds info in tournament_db table
     o = 1
     for g in z:
         ##-- cleanup: json_object['tournaments_db']['1']['Tournées']["Round1"]['Matches'][f'Match{o}'].clear()
@@ -737,7 +798,9 @@ def generate_round3_matchups():
             print("Même si le programme continue, il faudra changer les scores manuellement...")
             ## -- Take 'em back to the main menu.
         o += 1
-# generate_round3_matchups()
+
+    """
+generate_round3_matchups()
 
 print("===")
 # pp.pprint(json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match1'])
@@ -745,26 +808,29 @@ print("===")
 # pp.pprint(json_object['tournaments_db']['1']['Tournées']["Round2"]['Matches'][f'Match1'][0][3][0])
 print('===')
 
-## -- This allows to determine which scenario to choose so as to generate games for the next rounds !!!
-# l = []
-# for d in real_db['Score'].values:
-#     if d[2] == float(1):
-#         l.append(float(1))
-# if len(l) == 4:
-#     print(f" Il y a en tout {len(l)} wins, c'est un cas1")
-# elif len(l) == 3:
-#     print(f" Il y a en tout {len(l)} wins, c'est un cas2")
-# elif len(l) == 2:
-#     print(f" Il y a en tout {len(l)} wins, c'est un cas3")
-# elif len(l) == 1:
-#     print(f" Il y a en tout {len(l)} wins, c'est un cas4")
-# elif len(l) == 0:
-#     print(f" Il y a en tout {len(l)} wins, c'est un cas5")
-# else:
-#     print("error...")
 
-
-
+## -- To Do... In progress
+## -- To determine which scenario to choose so as to generate games for the next rounds !!!
+def matchup_scenario():
+    """Function to determine which scenario to choose so as to generate games for the next round"""
+    
+    ## May be better to use this in a generate_matches function !!!!
+    l = []
+    for d in real_db['Score'].values:
+        if d[0] == float(1):
+            l.append(float(1))
+    if len(l) == 4:
+        print(f" Il y a en tout {len(l)} wins, c'est un cas1")
+    elif len(l) == 3:
+        print(f" Il y a en tout {len(l)} wins, c'est un cas2")
+    elif len(l) == 2:
+        print(f" Il y a en tout {len(l)} wins, c'est un cas3")
+    elif len(l) == 1:
+        print(f" Il y a en tout {len(l)} wins, c'est un cas4")
+    elif len(l) == 0:
+        print(f" Il y a en tout {len(l)} wins, c'est un cas5")
+    else:
+        print("error...")
 
 
 ## -- Done ! --- 
@@ -773,9 +839,9 @@ def view_round3_matchups():
     
     print("\n💡 Voici les Matches du Round3:\n")
     e = 1
-    for x in list(json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'].values()):
-        b = list(x.values())
-        print(f"Match n°{e}: {b[0][0]} vs. {b[0][1]}")
+    d = list(json_object['tournaments_db']['1']['Tournées']["Round3"]['Matches'].values())
+    for k in d:
+        print(f"Match{e}: {k[0][1]} ({k[0][0][-1]}) vs. {k[1][1]} ({k[1][0][-1]})")
         e +=1
 # view_round3_matchups()
 
