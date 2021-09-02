@@ -13,7 +13,15 @@ __pycache__/
 
 
 # Fichiers .py
+controller.py
+model.py
+view.py
+matches.py
+rounds.py
 
+# Fichiers .json
+tournament_data.json
+tournament_db.json
 
 
 # Fichiers .txt
