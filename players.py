@@ -737,12 +737,12 @@ def generate_round3_matchups():
             #### a = win_list // 'a' is the var used to create next round matchups
         
         ## - Case 2:  3w   |   3l   |   2t
-            ## create and sort (by score and rating) a win_list, loss_list and a tie_list, then win_list.extend(loss_list + tie_list)
+            ## create and sort (by score and rating) a win_list, loss_list and a tie_list, then win_list.extend(tie_list + loss_list)
             ## in order to generate next round games:
             ### win_list = ['w1', 'w2', 'w3']
             ### loss_list = ['l1', 'l2', 'l3']
             ### tie_list = ['t1', 't2']
-            ### win_list.extend(loss_list + tie_list)
+            ### win_list.extend(tie_list + loss_list)
             #### a = win_list // 'a' is the var used to create next round matchups
         
         ## - Case 3:  2w   |   2l   |   4t
@@ -751,7 +751,7 @@ def generate_round3_matchups():
             ### win_list = ['w1', 'w2']
             ### loss_list = ['l1', 'l2']
             ### tie_list = ['t1', 't2', 't3', 't4']
-            ### win_list.extend(loss_list + tie_list)
+            ### win_list.extend(tie_list + loss_list)
             #### a = win_list // 'a' is the var used to create next round matchups
         
         ## - Case 4:  1w   |   1l   |   6t
@@ -760,7 +760,7 @@ def generate_round3_matchups():
             ### win_list = ['w1']
             ### loss_list = ['l1']
             ### tie_list = ['t1', 't2', 't3', 't4', 't5', 't6']
-            ### win_list.extend(loss_list + tie_list)
+            ### win_list.extend(tie_list + loss_list)
             #### a = win_list // 'a' is the var used to create next round matchups
         
         ## - Case 5:  0w   |   0l   |   8t
