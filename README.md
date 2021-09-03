@@ -4,12 +4,12 @@
 
 # POUR COMMENCER
 
-* Ce programme est destiné à un public avisé tel qu'un administrateur événementiel, qui est responsable de la gestion sa base de données
+*🚨 Ce programme est destiné à un public avisé tel qu'un administrateur événementiel, qui est responsable de la gestion sa base de données
 dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette application sur console.
 
-* Ce programme comporte ses limites et n'est n'est pas sous sa forme aboutie à l'heure actuelle.
+*🚧 Ce programme est limité à 4 rounds comme mentionné ci-après.
 
-* Les paramètres à prendre compte avec le système suisse des tournois:
+*💡 Les paramètres à prendre compte avec le système suisse des tournois:
     - Il y a au départ un classement général des joueurs en fonction de leur nombre de points;
     - /!\ Le classement général (cl) des joueurs ne change pas durant un tournoi;
     - Le classement dans un tournoi dépend de la somme de points gagnés par match dans chaque round, et de la position des joueurs au classement général en cas d'égalité;
