@@ -1379,77 +1379,6 @@ def save_round4_scores():
 
 ########################### MENUS MANAGEMENT ########################
 
-## -- Main Menu --
-def exec_main_menu1():
-    """ function to launch main menu within the current file"""
-
-    def main_menu():
-        """ Main Menu interface """
-        # Main menu: [1]Tournament | [2]Players | [3]Reports | [4]Exit
-        a = "\n 🏁 GESTIONNAIRE DE TOURNOI D'ECHECS 🏁"
-        b = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        c = "\n~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~~"
-        x = "\n Entrer le chiffre:"
-        d = "\n [1] pour Tournoi       [2] pour Joueurs"
-        f = "\n [3] pour Rapports      [4] pour Arrêter"
-        g = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        menu = a+b+c+x+d+f+g
-        print(menu)
-            
-    while True:
-        """ Launching Program """
-        main_menu()
-        user_choice = input("\nTaper votre choix: ")
-        if user_choice == "1":
-            print('choice 1: go to tournament_menu')
-            # menu_tournament.exec_t_menu2()
-        elif user_choice == "2":
-            print('choice 2: go to players_menu')
-            # menu_players.exec_p_menu2()
-        elif user_choice == "3":
-            print('choice 3: go to reports_menu')
-            # menu_reports.exec_r_menu2()
-        elif user_choice == "4":
-            print("Merci d'avoir utilisé notre programme et à bientôt 😉")
-            break
-        else:
-            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
-# exec_main_menu1()
-
-
-## -- Players Menu --
-def exec_p_menu1():
-    """ function to launch players menu within the current file"""
-
-    def players_menu():
-        """ Menu interface """
-        # Players menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
-        c = "\n---------- 🔥 MENU JOUEURS 🔥 -------------"
-        x = "\nEntrer le chiffre:"
-        d = "\n[1] pour Créer            [2] pour Ouvrir"
-        f = "\n[3] pour Menu Principal   [4] pour Arrêter\n"
-        menu = c+x+d+f
-        print(menu)
-
-    while True:
-        """ Launching Program """
-        players_menu()
-        user_choice = input("\nTaper votre choix: ")
-        if user_choice == "1":
-            print('choice 1: go to tournament_menu')
-            # menu_tournament.exec_t_menu2()
-        elif user_choice == "2":
-            print('choice 2: go to players_menu')
-            # menu_players.exec_p_menu2()
-        elif user_choice == "3":
-            print('choice 3: go to reports_menu')
-            # menu_reports.exec_r_menu2()
-        elif user_choice == "4":
-            print("Merci d'avoir utilisé notre programme et à bientôt 😉")
-            break
-        else:
-            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
-# exec_p_menu1()
 
 
 ## -- Reports Menu --
@@ -1488,14 +1417,49 @@ def exec_r_menu1():
             print('choice 5: go to players_menu')
             # menu_players.exec_p_menu2()
         elif user_choice == "6":
-            print('choice 6: go to reports_menu')
-            # menu_reports.exec_r_menu2()
+            exec_main_menu1()
+            break
         elif user_choice == "7":
             print("Merci d'avoir utilisé notre programme et à bientôt 😉")
             break
         else:
             print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 7.\n")
 # exec_r_menu1()
+
+
+## -- Players Menu --
+def exec_p_menu1():
+    """ function to launch players menu within the current file"""
+
+    def players_menu():
+        """ Menu interface """
+        # Players menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
+        c = "\n------------ 🔥 MENU JOUEURS 🔥 ---------------"
+        x = "\nTaper le chiffre:"
+        d = "\n[1] pour Créer            [2] pour Actualiser"
+        f = "\n[3] pour Menu Principal   [4] pour Arrêter\n"
+        menu = c+x+d+f
+        print(menu)
+
+    while True:
+        """ Launching Program """
+        players_menu()
+        user_choice = input("\nTaper votre choix: ")
+        if user_choice == "1":
+            print('Créer un joueur')
+            # menu_tournament.exec_t_menu2()
+        elif user_choice == "2":
+            print("Accéder à l'actualisation des joueurs......")
+            # menu_players.exec_p_menu2()
+        elif user_choice == "3":
+            exec_main_menu1()
+            break
+        elif user_choice == "4":
+            print("Merci d'avoir utilisé notre programme et à bientôt 😉")
+            break
+        else:
+            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
+# exec_p_menu1()
 
 
 ## -- Tournament Menu --
@@ -1505,9 +1469,9 @@ def exec_t_menu1():
     def tournament_menu():
         """ Menu interface """
         # Tournament menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
-        c = "\n---------- 🔥 MENU TOURNOI 🔥 -------------"
+        c = "\n-------------- 🔥 MENU TOURNOI 🔥 -------------"
         x = "\nEntrer le chiffre:"
-        d = "\n[1] pour Créer            [2] pour Ouvrir"
+        d = "\n[1] pour Créer            [2] pour Actualiser"
         f = "\n[3] pour Menu Principal   [4] pour Arrêter\n"
         menu = c+x+d+f
         print(menu)
@@ -1523,14 +1487,53 @@ def exec_t_menu1():
             print('choice 2: go to players_menu')
             # menu_players.exec_p_menu2()
         elif user_choice == "3":
-            print('choice 3: go to reports_menu')
-            # menu_reports.exec_r_menu2()
+            exec_main_menu1()
+            break
         elif user_choice == "4":
             print("Merci d'avoir utilisé notre programme et à bientôt 😉")
             break
         else:
             print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
 # exec_t_menu1()
+
+
+## -- Main Menu --
+def exec_main_menu1():
+    """ function to launch main menu within the current file"""
+
+    def main_menu():
+        """ Main Menu interface """
+        # Main menu: [1]Tournament | [2]Players | [3]Reports | [4]Exit
+        a = "\n 🏁 GESTIONNAIRE DE TOURNOI D'ECHECS 🏁"
+        b = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        c = "\n~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~~"
+        x = "\n Taper le chiffre:"
+        d = "\n [1] pour Tournoi       [2] pour Joueurs"
+        f = "\n [3] pour Rapports      [4] pour Arrêter"
+        g = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        menu = a+b+c+x+d+f+g
+        print()
+        print(menu)
+            
+    while True:
+        """ Launching Program """
+        main_menu()
+        user_choice = input("\nTaper votre choix: ")
+        if user_choice == "1":
+            exec_t_menu1()
+            break
+        elif user_choice == "2":
+            exec_p_menu1()
+            break
+        elif user_choice == "3":
+            exec_r_menu1()
+            break
+        elif user_choice == "4":
+            print("\n🥸 Merci d'avoir utilisé le programme, et à bientôt 👍 🤓")
+            break
+        else:
+            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
+exec_main_menu1()
 
 
 ############ START USER/PLAYERS MATCH/ROUNDS SCRIPT /!!!\ ###############
