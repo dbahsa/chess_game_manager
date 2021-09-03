@@ -49,10 +49,10 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
 
 
 ### PRE-REQUIS
-> 🚩 Langage: Python > 3.8
-> 🚩 Coding: utf-8
-> 🚩 Environnement virtuel: voir fichier requirements.txt
-> 🚩 requirements.txt: TinyDB, Pandas, Json, datetime, dataclasses, plus modules/paquets annexes
+* Langage: Python > 3.8
+* Coding: utf-8
+* Environnement virtuel: voir fichier requirements.txt
+* requirements.txt: TinyDB, Pandas, Json, datetime, dataclasses, plus modules/paquets annexes
 
 #### I. Création de l'environnement virtuel
 * Soit avec le fichier requirements.txt;
@@ -79,7 +79,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
 
 
 # Fabriqué avec
-* [Forthebadge](http://forthebadge.com) - Badges en-tête
+🔥 [Forthebadge](http://forthebadge.com) - Badges en-tête
 
 # Auteur
 🤓 Didier K Nzimbi** _alias_ [dbahsa](https://github.com/dbahsa)
