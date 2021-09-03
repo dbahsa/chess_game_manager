@@ -4,12 +4,12 @@
 
 # POUR COMMENCER
 
-*🚨 Ce programme est destiné à un public avisé tel qu'un administrateur événementiel, qui est responsable de la gestion sa base de données
+* Ce programme est destiné à un public avisé tel qu'un administrateur événementiel, qui est responsable de la gestion sa base de données
 dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette application sur console.
 
-*🚧 Ce programme est limité à 4 rounds comme mentionné ci-après.
+* Ce programme est limité à 4 rounds comme mentionné ci-après.
 
-*💡 Les paramètres à prendre compte avec le système suisse des tournois:
+* Les paramètres à prendre compte avec le système suisse des tournois:
     - Il y a au départ un classement général des joueurs en fonction de leur nombre de points;
     - /!\ Le classement général (cl) des joueurs ne change pas durant un tournoi;
     - Le classement dans un tournoi dépend de la somme de points gagnés par match dans chaque round, et de la position des joueurs au classement général en cas d'égalité;
@@ -49,10 +49,10 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
 
 
 ### PRE-REQUIS
-🚩 Langage: Python > 3.8
-🚩 Coding: utf-8
-🚩 Environnement virtuel: voir fichier requirements.txt
-🚩 requirements.txt: TinyDB, Pandas, Json, datetime, dataclasses, plus modules/paquets annexes
+> 🚩 Langage: Python > 3.8
+> 🚩 Coding: utf-8
+> 🚩 Environnement virtuel: voir fichier requirements.txt
+> 🚩 requirements.txt: TinyDB, Pandas, Json, datetime, dataclasses, plus modules/paquets annexes
 
 #### I. Création de l'environnement virtuel
 * Soit avec le fichier requirements.txt;
@@ -75,11 +75,11 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
 # DEMARRAGE
 🚀 Le programme vous est livré avec une base de données pour vous faciliter son utilisation.  Comme vous pourrez le constater, toutes les données peuvent être actualisées pour vous permettre de relancer un nouveau tournoi.
 
-🎊🎉 Voilà, vous pouvez dès à présent exécuter `main.py` pour passer à l'action
+🎉 Voilà, vous pouvez dès à présent exécuter `main.py` pour passer à l'action 🎊
 
 
 # Fabriqué avec
 * [Forthebadge](http://forthebadge.com) - Badges en-tête
 
 # Auteur
-*🤓 Didier K Nzimbi** _alias_ [dbahsa](https://github.com/dbahsa)
+🤓 Didier K Nzimbi** _alias_ [dbahsa](https://github.com/dbahsa)
