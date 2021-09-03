@@ -49,31 +49,31 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
 
 
 ### PRE-REQUIS
-* Langage: Python > 3.8
-* Coding: utf-8
-* Environnement virtuel: voir fichier requirements.txt
-* requirements.txt: TinyDB, Pandas, Json, datetime, dataclasses, plus modules/paquets annexes
+🚩 Langage: Python > 3.8
+🚩 Coding: utf-8
+🚩 Environnement virtuel: voir fichier requirements.txt
+🚩 requirements.txt: TinyDB, Pandas, Json, datetime, dataclasses, plus modules/paquets annexes
 
 #### I. Création de l'environnement virtuel
 * Soit avec le fichier requirements.txt;
 * soit avec pip.
 
 #### II. Activation de l'environnement virtuel
-* Pour activer l'environnement virtuel à partir de votre terminal, veuillez exécuter la commande `source env/bin/activate`  (`env/Scripts/activate.bat` si vous êtes sous Windows). A ce stade, votre terminal doit ajoute le nom de votre environnement au début de chaque ligne de votre terminal (ici, **‘env’**).
-* Ensuite, pour que l'**environnement virtuel** soit **fonctionnel**, il va falloir **ajout**er les **paquets** Python requis à cet effet, soit en installant manuellement chaque paquet avec `pip`, soit en utilisant le fichier `requirements.txt` pour installer automatiquement tous les paquets.
+💡 Pour activer l'environnement virtuel à partir de votre terminal, veuillez exécuter la commande `source env/bin/activate`  (`env/Scripts/activate.bat` si vous êtes sous Windows). A ce stade, votre terminal doit ajoute le nom de votre environnement au début de chaque ligne de votre terminal (ici, **‘env’**).
+💡 Ensuite, pour que l'**environnement virtuel** soit **fonctionnel**, il va falloir **ajout**er les **paquets** Python requis à cet effet, soit en installant manuellement chaque paquet avec `pip`, soit en utilisant le fichier `requirements.txt` pour installer automatiquement tous les paquets.
 
 
 ### INSTALLATION
 
 ##### Installation _"manuelle"_
-Avec `$ pip install` vous pouvez installer les paquets/modules requis pour le bon fonctionnement des sccripts. 
+💡 Avec `$ pip install` vous pouvez installer les paquets/modules requis pour le bon fonctionnement des sccripts. 
 
 ##### Installation _"automatique"_
-Ajouter dans votre repertoire local **Projet** une copie du fichier _"requirements.txt"_ (provenant du dossier compressé "P4_Nzimbi_Didier.zip"), ensuite exécuter la commande:
+💡 Ajouter dans votre repertoire local **Projet** une copie du fichier _"requirements.txt"_ (provenant du dossier compressé "P4_Nzimbi_Didier.zip"), ensuite exécuter la commande:
 > `$ pip install -r requirements.txt`
 
 # DEMARRAGE
-💡 Le programme vous est livré avec une base de données pour vous faciliter son utilisation.  Comme vous pourrez le constater, toutes les données peuvent être actualisées pour vous permettre de relancer un nouveau tournoi.
+🚀 Le programme vous est livré avec une base de données pour vous faciliter son utilisation.  Comme vous pourrez le constater, toutes les données peuvent être actualisées pour vous permettre de relancer un nouveau tournoi.
 
 🎊🎉 Voilà, vous pouvez dès à présent exécuter `main.py` pour passer à l'action
 
