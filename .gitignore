@@ -10,6 +10,9 @@ venv.bak/
 # Dossier
 .DS_Store
 __pycache__/
+_controller
+_model
+_view
 
 
 # Fichiers .py
