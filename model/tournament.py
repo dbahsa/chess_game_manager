@@ -10,9 +10,9 @@ from tinydb import TinyDB
 
 """ tournament variables used to launch the script """
 tournaments = []
-db = TinyDB('db1.json')
+db = TinyDB('../data/data.json')
 
-filename = "db1.json"
+filename = "../data/data.json"
 with open(filename, "r") as f:
     json_object = json.load(f)
 
@@ -79,7 +79,7 @@ def add_tournament():
 # -- Done! -- Save First Tournament Info --
 def save_tournament_data():
     """ save tournament data """
-    db = TinyDB('db1.json')
+    db = TinyDB('../data/data.json')
     tournaments_table = db.table('tournaments_db')
     tournaments_table.truncate()  # clear up the table first
     tournaments_table.insert_multiple(tournaments)

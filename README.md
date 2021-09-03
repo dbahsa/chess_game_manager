@@ -82,4 +82,4 @@ Ajouter dans votre repertoire local **Projet** une copie du fichier _"requiremen
 * [Forthebadge](http://forthebadge.com) - Badges en-tête
 
 # Auteur
-* ** 😀 Didier K Nzimbi** _alias_ [dbahsa](https://github.com/dbahsa)
+*🤓 Didier K Nzimbi** _alias_ [dbahsa](https://github.com/dbahsa)
