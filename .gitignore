@@ -13,9 +13,6 @@ __pycache__/
 
 
 # Fichiers .py
-controller.py
-model.py
-view.py
 matches.py
 rounds.py
 
