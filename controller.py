@@ -9,13 +9,11 @@ from tinydb import TinyDB
 import pandas as pd
 import datetime
 
-from model import Player, Tournament
-
+import model
+import view
 
 ########################### TOURNAMENT VARIABLES & TOOLS ########################
 
-""" tournament variables used to launch the script """
-tournaments = []
 
 """ players variables used in this file script """
 
@@ -23,12 +21,12 @@ total_number_of_players = 8
 registered_players = 0
 all_players_db = [] 
 
-## -- 'db' allows to generate a DB file, './data/data.json', for this app --
-db = TinyDB('./data/data.json', indent=4)
+## -- 'db' allows to generate a DB file, 'data.json', for this app --
+db = TinyDB('data.json', indent=4)
 tournaments_table = db.table('tournaments_db')
 players_table = db.table('players_db')
 
-filename = "./data/data.json"
+filename = "data.json"
 with open(filename, "r") as f:
     json_object = json.load(f)
 
@@ -47,22 +45,25 @@ def add_tournament():
     """ Function to instantiate tournament"""
     
     print(f"\n🚀 Veuillez entrer les informations suivantes sur le tournoi: ")
-    p = Tournament(input("- Nom: "), 
+    p = model.Tournament(input("- Nom: "), 
                     input("- Lieu: "),
                     input("- Date, telle que jj/mm/aaaa (ex: 18/02/2022): "),
                     input("- Quel est votre Contrôle du temps? 'Bullit', 'Blitz' ou 'Coup Rapide'"),
                     input("- Description: ")
                     )
+    save_tournament_data()
+    view.view_tournament_info()
     print("\n🤓 Bravo! Le tournoi a bien été enregistré.\n")
+    exec_t_menu1()
 
 
 # -- Save First Tournament Info --
 def save_tournament_data():
     """ save tournament data """
-    db = TinyDB('../data/data.json')
+    db = TinyDB('data.json')
     tournaments_table = db.table('tournaments_db')
     tournaments_table.truncate()  # clear up the table first
-    tournaments_table.insert_multiple(tournaments)
+    tournaments_table.insert_multiple(model.tournaments)
 
 
 """Update Tournaments properties"""
@@ -76,7 +77,7 @@ def update_tournament_name():
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
     print(f"\nLe nouveau nom du tournoi est: {json_object['tournaments_db']['1']['Nom du tournoi']}")
-    ## -- Send the user back to the main menu
+    exec_t_menu1()
 
 
 # -- Done! -- Update Tournament Location in db file --
@@ -88,7 +89,7 @@ def update_tournament_location():
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
     print(f"\nNouveau nom du lieu actualisé: {json_object['tournaments_db']['1']['Lieu']}")
-    ## -- Send the user back to the main menu
+    exec_t_menu1()
 
 
 # -- Done! -- Update Tournament Date in db file --
@@ -100,7 +101,7 @@ def update_tournament_date():
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
     print(f"\nNouvelle date: {json_object['tournaments_db']['1']['Date']}")
-    ## -- Send the user back to the main menu
+    exec_t_menu1()
 
 
 # -- Done! -- Update Tournament Number of Turns in db file --
@@ -112,7 +113,7 @@ def update_tournament_number_of_turns():
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
     print(f"\nNouveau Nombre de Tours: {json_object['tournaments_db']['1']['Nombre de tours']}")
-    ## -- Send the user back to the main menu
+    exec_t_menu1()
 
 
 # -- Done! -- Update Tournament Rounds in db file 
@@ -126,7 +127,7 @@ def update_tournament_rounds():
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
     print(f"\nNouvelles Tournées: {json_object['tournaments_db']['1']['Tournées']}")
-    ## -- Send the user back to the main menu
+    exec_t_menu1()
 
 
 # -- Done! -- Update Tournament Players Indexes in db file
@@ -136,11 +137,11 @@ def update_tournament_players_info():
 
     print(f"\nLes indices des joueurs sont: {json_object['tournaments_db']['1']['Joueurs']}\n")
     ## -- Append players indexes from players_db table
-    json_object['tournaments_db']['1']['Joueurs'].append(json_object['players_db']['1']['Joueurs'])
+    json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
     print(f"\nNouveaux Joueurs: {json_object['tournaments_db']['1']['Joueurs']}")
-    ## -- Send the user back to the main menu
+
 
 
 # -- Done! -- Update Tournament Time Control in db file --
@@ -152,7 +153,7 @@ def update_tournament_time_control():
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
     print(f"\nNouveau Contrôle du temps: {json_object['tournaments_db']['1']['Contrôle du temps']}")
-    ## -- Send the user back to the main menu
+    exec_t_menu1()
 
 
 # -- Done! -- Update Tournament Description in db file --
@@ -164,7 +165,7 @@ def update_tournament_description():
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
     print(f"\nNouvelle Description: {json_object['tournaments_db']['1']['Description']}")
-    ## -- Send the user back to the main menu
+    exec_t_menu1()
 
 '''
 # -- Done! -- Update User Tournalent Input in db file --
@@ -243,27 +244,51 @@ def update_tournament_info():
 
 ########################### PLAYERS MANAGEMENT ########################
 
-## -- Done! --
+## -- 
 def add_players():
     """ function to instantiate players"""
     
     print("\nEnregistrement des 8 joueurs...")
     for i in range(1,9):
         print(f"\nEntrer les informations sur le joueur n°{i}")
-        p = Player(input("- Nom de famille: "),
-                    input("- Prénom: "),
-                    input("- Date de naissance telle que jj/mm/aaaa (ex: 18/02/1973): "),
-                    input("- Sexe [H/F]: ").upper(),
-                    int(input("- Classement: "))
-                    )
-        all_players_db.append(p.single_player_db)
-        print(f"\nJoueur n°{i} enregistré.")
-    print("Fin de l'enregistrement des joueurs.\n")
+        lname = input("- Nom de famille: ")
+        fname = input("- Prénom: ")
+        birth_date = input("- Date de naissance telle que jj/mm/aaaa (ex: 18/02/1973): ")
+        gender = input("- Sexe [H/F]: ").upper()
+        
+        while True:
+            rating = input("- Classement (en chiffre svp): ")
+            try:
+                if rating.isdigit():
+                    p = model.Player(lname,fname,birth_date,gender,rating)
+                    all_players_db.append(p.single_player_db)
+                    print(f"\nJoueur n°{i} enregistré.")
+                    break
+            except:
+                print("Erreur de saisie... Merci de recommencer svp.")
+            else:
+                print("Veuillez taper un chiffre svp. Merci.")
+            
+    # p = model.Player(lname,fname,birth_date,gender,rating)
+    # all_players_db.append(p.single_player_db)
+    # print(f"\nJoueur n°{i} enregistré.")
+    # save_players_data()
+    ## -- Save data:
+    db = TinyDB(filename)
+    players_table = db.table('players_db')
+    players_table.truncate()
+    players_table.insert_multiple(all_players_db)
 
+    print("Fin de l'enregistrement des joueurs.\n")
+    update_tournament_players_info()
+    update_players_menu()
+
+# add_players()
+update_tournament_players_info()
 
 """ Saving players data into db file /!!!\ """
 
-## -- Done! --
+## -- 
 def save_players_data():
     """ save players data """
     
@@ -273,7 +298,7 @@ def save_players_data():
     players_table.insert_multiple(all_players_db)
 
 
-## -- Done!
+## -- 
 def save_players_indexes_in_tournaments_db():
     '''Function to save players indexes in tournament table in db file'''
 
@@ -285,12 +310,12 @@ def save_players_indexes_in_tournaments_db():
 
 """ Update players data from db file /!!!\ """
 
-## -- Done! -- Update Player last name in db file -- /!!!\ At the end of the script, send the user back to the former menu
+## -- Update Player last name in db file --
 def update_player_lname():
     """ Function to update players last name in db file """
 
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
+    view.view_players_info()
     while True:
         msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour modifier le 'Nom de famille' d'un joueur, ", end="")
@@ -308,7 +333,7 @@ def update_player_lname():
                 print(f"🎉 Le nouveau 'Nom de famille' de {real_db.at[user_choice, 'Prénom']} est ", end="")
                 print(f"{real_db.at[user_choice, 'Nom de famille']}.")
                 print()
-                view_players_info()
+                view.view_players_info()
             if int(user_choice) not in range(1,9):
                 print(f"💡 Vous avez tapé [{user_choice}].\n")
                 print()
@@ -318,16 +343,17 @@ def update_player_lname():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
+            view.view_players_info()
             print()
+    update_players_menu()
 
 
-## -- Done! -- Update Player first name in db file -- /!!!\ At the end of the script, send the user back to the former menu
+## -- Update Player first name in db file -- 
 def update_player_fname():
     """ Function to update players first name in db file """
 
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
+    view.view_players_info()
     while True:
         msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour modifier le 'Prénom' d'un joueur, ", end="")
@@ -345,7 +371,7 @@ def update_player_fname():
                 print(f"🎉 Le nouveau 'Prénom' de {real_db.at[user_choice, 'Nom de famille']} est ", end="")
                 print(f"{real_db.at[user_choice, 'Prénom']}.")
                 print()
-                view_players_info()
+                view.view_players_info()
             if int(user_choice) not in range(1,9):
                 print(f"💡 Vous avez tapé [{user_choice}].\n")
                 print()
@@ -355,16 +381,17 @@ def update_player_fname():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
+            view.view_players_info()
             print()
+    update_players_menu()
 
 
-## -- Done! -- Update Player gender in db file -- /!!!\ At the end of the script, send the user back to the former menu
+## -- Update Player gender in db file --
 def update_player_gender():
     """ Function to update players gender in db file """
 
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
+    view.view_players_info()
     while True:
         msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour modifier le 'Sexe' d'un joueur, ", end="")
@@ -382,7 +409,7 @@ def update_player_gender():
                 print(f"🎉 Le nouveau 'Sexe' de {real_db.at[user_choice, 'Nom de famille']} est ", end="")
                 print(f"{real_db.at[user_choice, 'Sexe']}.")
                 print()
-                view_players_info()
+                view.view_players_info()
             if int(user_choice) not in range(1,9):
                 print(f"💡 Vous avez tapé [{user_choice}].\n")
                 print()
@@ -392,16 +419,17 @@ def update_player_gender():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
+            view.view_players_info()
             print()
+    update_players_menu()
 
 
-## -- Done! -- Update Player birth date in db file -- /!!!\ At the end of the script, send the user back to the former menu
+## -- Update Player birth date in db file -- 
 def update_player_birth_date():
     """ Function to update players birth date in db file """
 
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
+    view.view_players_info()
     while True:
         msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour modifier la 'Date de naissance' d'un joueur, ", end="")
@@ -419,7 +447,7 @@ def update_player_birth_date():
                 print(f"🎉 La nouvelle 'Date de naissance' de {real_db.at[user_choice, 'Nom de famille']}", end="")
                 print(f" est {real_db.at[user_choice, 'Date de naissance']}.")
                 print()
-                view_players_info()
+                view.view_players_info()
             if int(user_choice) not in range(1,9):
                 print(f"💡 Vous avez tapé [{user_choice}].\n")
                 print()
@@ -429,16 +457,17 @@ def update_player_birth_date():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
+            view.view_players_info()
             print()
+    update_players_menu()
 
 
-## -- Done! -- Update Player rating in db file -- /!!!\ At the end of the script, send the user back to the former menu
+## -- Update Player rating in db file --
 def update_player_rating():
     """ Function to update players rating in db file """
 
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
+    view.view_players_info()
     while True:
         msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour modifier le nombre de points d'un joueur au 'Classement' général, ", end="")
@@ -456,7 +485,7 @@ def update_player_rating():
                 print(f"🎉 Le nouveau nombre de points au 'Classement' général de ", end="")
                 print(f"{real_db.at[user_choice, 'Nom de famille']} est {real_db.at[user_choice, 'Classement']}.")
                 print()
-                view_players_info()
+                view.view_players_info()
             if int(user_choice) not in range(1,9):
                 print(f"💡 Vous avez tapé [{user_choice}].\n")
                 print()
@@ -466,16 +495,17 @@ def update_player_rating():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
+            view.view_players_info()
             print()
+    update_players_menu()
 
 
-## -- Done! -- Add Player score in db file -- /!!!\ At the end of the script, send the user back to the former menu
+## -- Add Player score in db file --
 def add_player_score():
     """ Function to add players score in db file """
     
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
+    view.view_players_info()
     while True:
         msg = "taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour ajouter le 'Score' d'un joueur, ", end="")
@@ -496,7 +526,7 @@ def add_player_score():
                         print(f" au 'Score' de {real_db.at[user_choice, 'Prénom']}", end="")
                         print(f" {real_db.at[user_choice, 'Nom de famille']}")
                         print()
-                        view_players_info()
+                        view.view_players_info()
                     else:
                         print("💥 Merci de saisir 'uniquement' un score de [0], [0.5] ou [1].")
                         continue
@@ -512,16 +542,17 @@ def add_player_score():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
+            view.view_players_info()
             print()
+    update_players_menu()
 
 
-## -- Done! -- /!!!\ At the end of the script, send the user back to the former menu
+## -- Update Player score
 def update_player_score():
     """ Function to update/add players score in db file """
     
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
+    view.view_players_info()
     while True:
         msg = "taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour actualiser le 'Score' d'un joueur, ", end="")
@@ -564,7 +595,7 @@ def update_player_score():
                                     print(f" pour le match n°{update_score}", end="")
                                     print(f" est: {real_db.at[user_choice, 'Score']}")
                                     print()
-                                    view_players_info()
+                                    view.view_players_info()
                                 else:
                                     print("💡 Merci de saisir 'uniquement' un score de [0], [0.5] ou [1].")
                                     continue
@@ -598,7 +629,7 @@ def update_player_score():
                             print(f" au 'Score' de {real_db.at[user_choice, 'Prénom']}", end="")
                             print(f" {real_db.at[user_choice, 'Nom de famille']}")
                             print()
-                            view_players_info()
+                            view.view_players_info()
                         else:
                             print("💥 Merci de saisir 'uniquement' un score de [0], [0.5] ou [1].")
                             continue
@@ -614,11 +645,12 @@ def update_player_score():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
+            view.view_players_info()
             print()
+    update_players_menu()
 
 
-## -- Done! --  /!!!\ be very careful with this one!
+## -- /!!!\ be very careful with this one!
 def erase_all_scores():
     """"Function removes all scores at once.  Better be carfeul with it!"""
 
@@ -628,6 +660,7 @@ def erase_all_scores():
         json_object['players_db'] = json.loads(data)
         with open(filename, "w") as f:
             json.dump(json_object, f, indent=4)
+    update_players_menu()
 
 
 """ Var of Sorted Players Data """
@@ -665,7 +698,7 @@ def generate_players_round1_matchup_ref_rating():
 generate_players_round1_matchup_ref_rating()
 
 
-## -- 
+'''## -- 
 def view_generate_players_round1_matchup_ref_rating_by_index():
     """ Function used to view 'sorted_players_by_rating' variable """
 
@@ -676,6 +709,8 @@ def view_generate_players_round1_matchup_ref_rating_by_index():
         y = 'Classement: ' + str(u[1]['Classement'])
         a = [w, x, y]
         print(a)
+'''
+## view.view_generate_players_round1_matchup_ref_rating_by_index()
 
 
 ## -- /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
@@ -716,7 +751,7 @@ def add_roundx_in_tournament_table():
             json.dump(json_object, f, indent=4)
 
 
-## -- Done! -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
+## -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
 def clear_roundx_in_tournament_table():
     """Function to add new items in tournament table under 'Tournées' key"""
     
@@ -765,7 +800,7 @@ def generate_save_round1_matchups():
 
 
 ###### --- 2. VIEW ROUND1 MATCHUPS FROM DB --
-'''
+
 def view_round1_matchups():
     """Function to view Round1 Matchups"""
     
@@ -775,7 +810,7 @@ def view_round1_matchups():
     for k in d:
         print(f"Match{e}: {k[0][1]} ({k[0][0][-1]}) vs. {k[1][1]} ({k[1][0][-1]})")
         e +=1
-'''
+
 
 ###### --- 3. LAUNCH ROUND1 GAMES - STARTING TIME -- GOOD MENU TRY EXCEPT /!!!!!\
 
@@ -1386,34 +1421,53 @@ def save_round4_scores():
 def update_players_menu():
     """ function to launch players menu within the current file"""
 
-    def players_menu():
+    def update_players_menu():
         """ Menu interface """
-        # Players menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
-        c = "\n------------ 🔥 MENU JOUEURS 🔥 ---------------"
-        x = "\nTaper le chiffre:"
-        d = "\n[1] pour Créer            [2] pour Actualiser"
-        f = "\n[3] pour Menu Principal   [4] pour Arrêter\n"
-        menu = c+x+d+f
+        
+        a = "\n------------------ 🔥 ACTUALISATION DES JOUEURS 🔥 --------------------"
+        b = "\nTaper [1] pour le nom\t[2] pour le prénom\t[3] pour le sexe"
+        c = "\n      [4] pour modifier la date de naissance"
+        d = "\n      [5] pour modifier le nombre de point au classement général"
+        e = "\n      [6] pour ajouter ou modifier un score"
+        f = "\n      [7] pour effacer tous les scores 🚨"
+        g = "\n      [8] pour le 'MENU JOUEUR'\t[9] pour le 'MENU PRINCIPAL'\n"
+        menu = a+b+c+d+e+f+g
         print(menu)
 
     while True:
         """ Launching Program """
-        players_menu()
+        
+        update_players_menu()
         user_choice = input("\nTaper votre choix: ")
         if user_choice == "1":
-            print('Créer un joueur')
-            # menu_tournament.exec_t_menu2()
+            update_player_lname()
+            break
         elif user_choice == "2":
-            print("Accéder à l'actualisation des joueurs......")
-            # menu_players.exec_p_menu2()
+            update_player_fname()
+            break
         elif user_choice == "3":
-            exec_main_menu1()
+            update_player_gender()
             break
         elif user_choice == "4":
-            print("Merci d'avoir utilisé notre programme et à bientôt 😉")
+            update_player_birth_date()
+            break
+        elif user_choice == "5":
+            update_player_rating()
+            break
+        elif user_choice == "6":
+            update_player_score()
+            break
+        elif user_choice == "7":
+            erase_all_scores()
+            break
+        elif user_choice == "8":
+            exec_p_menu1()
+            break
+        elif user_choice == "9":
+            exec_main_menu1()
             break
         else:
-            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
+            print(f"😅 Vous avez saisi '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 9.\n")
 # update_players_menu()
 
 
@@ -1421,12 +1475,12 @@ def update_players_menu():
 def update_tournament_menu():
     """ function to launch reports menu within the current file"""
 
-    def tournament_menu():
+    def update_tournament_menu():
         """ Menu interface """
-        ## Tournament menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
+        
         a = "\n------------------ 🔥 ACTUALISATION DU TOURNOI 🔥 -------------------"
         b = "\nTaper [1] pour le nom\t[2] pour le lieu\t[3] pour la date"
-        c = "\n      [4] pour modifier le nombre de tours" # if != 4, contact admin!!!
+        c = "\n      [4] pour modifier le nombre de tours"
         d = "\n      [5] pour modifier le contrôle du temps"
         e = "\n      [6] pour modifier la description du tournoi"
         f = "\n      [7] pour le 'MENU JOUEUR'\t[8] pour le 'MENU PRINCIPAL'\n"
@@ -1435,24 +1489,22 @@ def update_tournament_menu():
 
     while True:
         """ Launching Program """
-        tournament_menu()
+        
+        update_tournament_menu()
         user_choice = input("\nTaper votre choix: ")
         if user_choice == "1":
             update_tournament_name()
             break
         elif user_choice == "2":
-            print('choice 2: go to players_menu')
-            # menu_players.exec_p_menu2()
+            update_tournament_location()
+            break
         elif user_choice == "3":
-            exec_main_menu1()
+            update_tournament_date()
             break
         elif user_choice == "4":
-            print("Merci de nous joindre pour actualiser les paramètres de votre application")
+            print("🚨 Merci de nous joindre pour modifier le nombre de tours, qui par défaut est égal à 4")
         elif user_choice == "5":
             update_tournament_time_control()
-            break
-        elif user_choice == "5":
-            exec_main_menu1()
             break
         elif user_choice == "6":
             update_tournament_description()
@@ -1464,7 +1516,7 @@ def update_tournament_menu():
             exec_main_menu1()
             break
         else:
-            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
+            print(f"😅 Vous avez tapé '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 8.\n")
 # update_tournament_menu()
 
 
@@ -1476,7 +1528,7 @@ def exec_r_menu1():
 
     def reports_menu():
         """ Menu interface """
-        # Reports menu: [1]Actors | [2]Players | [3]Tournaments | [4]Rounds | [5]Matches | [6]Go Back | [7]Exit
+        
         c = "\n---------- 🔥 MENU RAPPORTS 🔥 -------------"
         d = "\nEntrer le chiffre:"
         e = "\n[1] pour Acteurs     [2] pour Joueurs"
@@ -1512,7 +1564,7 @@ def exec_r_menu1():
             print("Merci d'avoir utilisé notre programme et à bientôt 😉")
             break
         else:
-            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 7.\n")
+            print(f"😅 Vous avez entré '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 7.\n")
 # exec_r_menu1()
 
 
@@ -1547,7 +1599,7 @@ def exec_p_menu1():
             print("Merci d'avoir utilisé notre programme et à bientôt 😉")
             break
         else:
-            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
+            print(f"😅 Vous avez tapé '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
 # exec_p_menu1()
 
 
@@ -1557,32 +1609,29 @@ def exec_t_menu1():
 
     def tournament_menu():
         """ Menu interface """
-        ## Tournament menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
+        
         a = "\n---------------- 🔥 MENU TOURNOI 🔥 ---------------"
         b = "\nTaper [1] pour créer un nouveau tournoi"
         c = "\n      [2] pour ajouter huit joueurs"
         d = "\n      [3] pour modifier les données du tournoi"
         e = "\n      [4] pour modifier les données des joueurs"
         f = "\n      [5] pour aller au 'MENU JOUEUR'"
-        g = "\n      [6] pour revenir au 'MENU PRINCIPAL'\n"
+        g = "\n      [6] pour revenir au 'MENU PRINCIPAL'"
         h = "\n      [7] pour arrêter le programme\n"
         menu = a+b+c+d+e+f+g+h
         print(menu)
 
     while True:
         """ Launching Program """
+        
         tournament_menu()
         user_choice = input("\nTaper votre choix: ")
         if user_choice == "1":
             add_tournament()
-            if add_tournament():
-                save_tournament_data()
             break
         elif user_choice == "2":
             add_players()
-            if add_players():
-                save_players_data()
-                update_tournament_players_info()
+            update_tournament_players_info()
             break
         elif user_choice == "3":
             update_tournament_menu()
@@ -1600,7 +1649,7 @@ def exec_t_menu1():
             print("Merci d'avoir utilisé ce programme.\nA bientôt 😉\n")
             break
         else:
-            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
+            print(f"😅 Vous avez entré '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 7.\n")
 # exec_t_menu1()
 
 
@@ -1610,20 +1659,22 @@ def exec_main_menu1():
 
     def main_menu():
         """ Main Menu interface """
-        # Main menu: [1]Tournament | [2]Players | [3]Reports | [4]Exit
-        a = "\n 🏁 GESTIONNAIRE DE TOURNOI D'ECHECS 🏁"
-        b = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        c = "\n~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~~"
+        
+        a = "\n             🏁 GESTIONNAIRE DE TOURNOI D'ECHECS 🏁"
+        b = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        c = "\n~~~~~~~~~~~~~~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~~~~~~~~"
         x = "\n Taper le chiffre:"
-        d = "\n [1] pour Tournoi       [2] pour Joueurs"
-        f = "\n [3] pour Rapports      [4] pour Arrêter"
-        g = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        d = "\n [1] pour le menu Tournoi       [2] pour le menu Joueurs"
+        f = "\n [3] pour voir les Rapports     [4] pour arrêter le programme"
+        g = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         menu = a+b+c+x+d+f+g
         print()
         print(menu)
+
             
     while True:
         """ Launching Program """
+        
         main_menu()
         user_choice = input("\nTaper votre choix: ")
         if user_choice == "1":
@@ -1636,11 +1687,11 @@ def exec_main_menu1():
             exec_r_menu1()
             break
         elif user_choice == "4":
-            print("\n🥸 Merci d'avoir utilisé le programme, et à bientôt 👍 🤓")
+            print("\n🥸 Merci d'avoir utilisé ce programme, et à bientôt 👍🤓")
             break
         else:
-            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
-exec_main_menu1()
+            print(f"😅 Vous avez saisi '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
+# exec_main_menu1()
 
 
 ############ START USER/PLAYERS MATCH/ROUNDS SCRIPT /!!!\ ###############
@@ -1674,7 +1725,7 @@ if __name__=="__main__":
     # -- creating a function to collect score from the user
     # -- Save Round1 data in tournaments_db -- 
 
-    print("\n===================== 👀 ===================\n")
+    print("\n============================== 👀 ===========================\n")
 
 else:
     # view_unsorted_players_list()

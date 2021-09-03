@@ -4,7 +4,12 @@
 
 from dataclasses import dataclass, field
 
+
+
 """ Tournament constructors """
+
+""" tournament variables used to launch the script """
+tournaments = []
 
 def add_rounds():
     """ Function to add round instances """
