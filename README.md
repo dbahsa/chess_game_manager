@@ -1,4 +1,4 @@
-# CHESS GAME TOURNAMENT MANAGER
+# 🏆 CHESS GAME TOURNAMENT MANAGER 🏆
 
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](#)[![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](#)[![forthebadge](https://forthebadge.com/images/badges/made-with-markdown.svg)](#)
 
@@ -18,7 +18,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
     - Nombre de R par défaut: 4;
     - Les 4 matches de R1:
         - en fonction du nombre de points de chaque joueur au classement général, c-à-d de leur position du 1er au 8ème,
-        - le 1er des 4 premiers rencontre le 1er des 4 derniers, et ainsi de suite, tels que:<br>
+        - le 1er des 4 premières contre le 1er des 4 derniers, et ainsi de suite, tels que:<br>
         <pre>j1 vs j5   |   j2 vs j6   |  j3 vs j7   |   j4 vs j8   |   j1 vs j2 ;</pre><br>
     - Nombre max de match unique joué par un joueur dans un tournoi: 7;
     - Nombre max de R unique: 7 (R5,R6,R7 sont utilisés ici à titre indicatif, mais l'application s'arrête après R4 /!!!\ );
@@ -73,11 +73,13 @@ Ajouter dans votre repertoire local **Projet** une copie du fichier _"requiremen
 > `$ pip install -r requirements.txt`
 
 # DEMARRAGE
-Voilà, vous pouvez dès à présent exécuter le script contenu dans le fichier `main.py`.
+💡 Le programme vous est livré avec une base de données pour vous faciliter son utilisation.  Comme vous pourrez le constater, toutes les données peuvent être actualisées pour vous permettre de relancer un nouveau tournoi.
+
+🎊🎉 Voilà, vous pouvez dès à présent exécuter `main.py` pour passer à l'action
 
 
 # Fabriqué avec
 * [Forthebadge](http://forthebadge.com) - Badges en-tête
 
 # Auteur
-* **Didier K Nzimbi** _alias_ [dbahsa](https://github.com/dbahsa)
+* ** 😀 Didier K Nzimbi** _alias_ [dbahsa](https://github.com/dbahsa)
