@@ -8,7 +8,6 @@ from dataclasses import dataclass, field
 from tinydb import TinyDB
 import pandas as pd
 import datetime
-import pprint
 
 from model import Player, Tournament
 
@@ -116,7 +115,8 @@ def update_tournament_number_of_turns():
     ## -- Send the user back to the main menu
 
 
-# -- Done! -- Update Tournament Rounds in db file -- Automatic Process... Check it when rounds are created
+# -- Done! -- Update Tournament Rounds in db file 
+# --- Automatic Process... Check it when rounds are created --
 def update_tournament_rounds():
     """ Function to update Tournament Rounds in db file """
 
@@ -129,7 +129,8 @@ def update_tournament_rounds():
     ## -- Send the user back to the main menu
 
 
-# -- Done! -- Update Tournament Players Indexes in db file -- Automatic Process... Check it when player instances are created
+# -- Done! -- Update Tournament Players Indexes in db file
+# --- Automatic Process... Check it when player instances are created --
 def update_tournament_players_info():
     """ Function to update Tournament Players Indexes in db file """
 
@@ -650,7 +651,7 @@ players_matchup_reference_score_and_rating = []
 
 """ Generate Matches for Round1 """
 
-## -- Done! -- /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
+## -- /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
 def generate_players_round1_matchup_ref_rating():
     """ Function used to generate 'sorted_players_by_rating' variable """
 
@@ -664,7 +665,7 @@ def generate_players_round1_matchup_ref_rating():
 generate_players_round1_matchup_ref_rating()
 
 
-## -- Done! --
+## -- 
 def view_generate_players_round1_matchup_ref_rating_by_index():
     """ Function used to view 'sorted_players_by_rating' variable """
 
@@ -677,7 +678,7 @@ def view_generate_players_round1_matchup_ref_rating_by_index():
         print(a)
 
 
-## -- Done! --  /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
+## -- /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
 def generate_players_matchup_reference_score_and_rating():
     """ Function used to generate 'sorted_players_by_rating' variable """
 
@@ -694,7 +695,7 @@ generate_players_matchup_reference_score_and_rating()
 
 """Add Matches Data to Tournament Table"""
 
-## -- Done! -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
+## -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
 def add_roundx_in_tournament_table():
     """Function to add new items in tournament table under 'Tournées' key"""
     
@@ -743,8 +744,8 @@ def clear_roundx_in_tournament_table():
 ###### --- 1. GENERATE & SAVE ROUND1 MATCHUPS --- FIRST LAUNCH 'add_roundx_in_tournament_table()'
 
 ## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
-## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
-## -- to allow generate_round1_matchups() to work /!!!\ 
+## --- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
+## ---- to allow generate_round1_matchups() to work /!!!\ --
 def generate_save_round1_matchups():
     """ Function to generate and save round1 matchups based on players ratings only """
 
@@ -778,7 +779,7 @@ def view_round1_matchups():
 
 ###### --- 3. LAUNCH ROUND1 GAMES - STARTING TIME -- GOOD MENU TRY EXCEPT /!!!!!\
 
-## -- Done! --  ADD STARTING TIME ROUND1
+## -- ADD STARTING TIME ROUND1 --
 def add_starting_time_round1():
     """Function to add starting time for round1"""
     
@@ -807,7 +808,7 @@ def add_starting_time_round1():
             print()
 
 
-## -- Done! --  CLEAR STARTING TIME ROUND1
+## -- CLEAR STARTING TIME ROUND1 --
 def clear_starting_time_round1():
     """Function to remove starting for round 1"""
 
@@ -819,7 +820,7 @@ def clear_starting_time_round1():
 
 ###### --- 4. STOP ROUND1 GAMES - ENDING TIME -- GOOD MENU TRY EXCEPT /!!!!!\
 
-## -- Done! --  ADD ENDING TIME ROUND1
+## -- ADD ENDING TIME ROUND1 --
 def add_ending_time_round1():
     """Function to add ending time for round1"""
     
@@ -847,7 +848,7 @@ def add_ending_time_round1():
             print()
 
 
-## -- Done! --  CLEAR ENDING TIME ROUND1
+## -- CLEAR ENDING TIME ROUND1 --
 def clear_starting_time_round1():
     """Function to remove starting for round 1"""
 
@@ -882,9 +883,9 @@ def save_round1_matchups():
 
 ###### --- 1. GENERATE & SAVE ROUND2 MATCHUPS ---
 
-## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
-## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
-## -- to allow generate_round1_matchups() to work /!!!\ 
+## -- /!!! \ First, generate_players_matchup_with_reference_rating() and 
+## --- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
+## ---- to allow generate_round1_matchups() to work /!!!\ --
 def generate_save_round2_matchups():
     """ Function to generate and save round2 matchups based on players scores and rating from round1 games """
 
@@ -918,7 +919,7 @@ def view_round2_matchups():
 
 ###### --- 3. LAUNCH ROUND2 GAMES - STARTING TIME --
 
-## -- Done! --  ADD STARTING TIME ROUND2
+## -- ADD STARTING TIME ROUND2 --
 def add_starting_time_round2():
     """Function to add starting time for round2"""
     
@@ -947,7 +948,7 @@ def add_starting_time_round2():
             print()
 
 
-## -- Done! --  CLEAR STARTING TIME ROUND2
+## -- CLEAR STARTING TIME ROUND2 --
 def clear_starting_time_round2():
     """Function to remove starting for round 2"""
 
@@ -959,7 +960,7 @@ def clear_starting_time_round2():
 
 ###### --- 4. STOP ROUND2 GAMES - ENDING TIME --
 
-## -- Done! --  ADD ENDING TIME ROUND2
+## -- ADD ENDING TIME ROUND2 --
 def add_ending_time_round2():
     """Function to add ending time for round2"""
     
@@ -987,7 +988,7 @@ def add_ending_time_round2():
             print()
 
 
-## -- Done! --  CLEAR ENDING TIME ROUND2
+## -- CLEAR ENDING TIME ROUND2 --
 def clear_starting_time_round2():
     """Function to remove starting for round2"""
 
@@ -1021,10 +1022,10 @@ def save_round2_scores():
 
 ###### --- 1. GENERATE & SAVE ROUND3 MATCHUPS ---
 
-## -- To Do! -- /!!! \ generate_players_matchup_with_reference_rating() and 
-## -- generate_players_matchup_reference_score_and_rating() must be REMAIN initiated
-## -- to allow generate_round1_matchups() to work /!!!\ 
-## -- Must rework the conditions to avoid players facing each other more than once  /!!!\ 
+## -- /!!! \ First, generate_players_matchup_with_reference_rating() and 
+## --- generate_players_matchup_reference_score_and_rating() must be REMAIN initiated
+## ---- to allow generate_round1_matchups() to work /!!!\ 
+## ----- Must rework the conditions to avoid players facing each other more than once  /!!!\ 
 def generate_save_round3_matchups():
     """ Function to generate and save round3 matchups based on players scores and rating from round3 games """
 
@@ -1078,7 +1079,7 @@ def view_round3_matchups():
 
 ###### --- 3. LAUNCH ROUND3 GAMES - STARTING TIME --
 
-## -- Done! --  ADD STARTING TIME ROUND3
+## -- ADD STARTING TIME ROUND3 --
 def add_starting_time_round3():
     """Function to add starting time for round3"""
     
@@ -1107,7 +1108,7 @@ def add_starting_time_round3():
             print()
 
 
-## -- Done! --  CLEAR STARTING TIME ROUND3
+## -- CLEAR STARTING TIME ROUND3 --
 def clear_starting_time_round3():
     """Function to remove starting for round 3"""
 
@@ -1119,7 +1120,7 @@ def clear_starting_time_round3():
 
 ###### --- 4. STOP ROUND3 GAMES - ENDING TIME --
 
-## -- Done! --  ADD ENDING TIME ROUND3
+## -- ADD ENDING TIME ROUND3 --
 def add_ending_time_round3():
     """Function to add ending time for round3"""
     
@@ -1147,7 +1148,7 @@ def add_ending_time_round3():
             print()
 
 
-## -- Done! --  CLEAR ENDING TIME ROUND3
+## -- CLEAR ENDING TIME ROUND3 --
 def clear_starting_time_round3():
     """Function to remove starting for round3"""
 
@@ -1200,10 +1201,10 @@ def save_round3_scores():
 
 ###### --- 1. GENERATE & SAVE ROUND4 MATCHUPS ---
 
-## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
-## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
-## -- to allow generate_round1_matchups() to work /!!!\ 
-## -- Must rework the conditions to avoid players facing each other more than once  /!!!\ 
+## -- /!!! \ First, generate_players_matchup_with_reference_rating() and 
+## --- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
+## ---- to allow generate_round1_matchups() to work /!!!\ 
+## ----- Must rework the conditions to avoid players facing each other more than once  /!!!\ --
 def generate_save_round4_matchups():
     """ Function to generate and save round3 matchups based on players scores and rating from round4 games """
 
@@ -1257,7 +1258,7 @@ def view_round4_matchups():
 
 ###### --- 3. LAUNCH ROUND4 GAMES - STARTING TIME --
 
-## -- Done! --  ADD STARTING TIME ROUND4
+## -- ADD STARTING TIME ROUND4 --
 def add_starting_time_round4():
     """Function to add starting time for round4"""
     
@@ -1286,7 +1287,7 @@ def add_starting_time_round4():
             print()
 
 
-## -- Done! --  CLEAR STARTING TIME ROUND4
+## -- CLEAR STARTING TIME ROUND4 --
 def clear_starting_time_round4():
     """Function to remove starting for round4"""
 
@@ -1298,7 +1299,7 @@ def clear_starting_time_round4():
 
 ###### --- 4. STOP ROUND4 GAMES - ENDING TIME --
 
-## -- Done! --  ADD ENDING TIME ROUND4
+## -- ADD ENDING TIME ROUND4 --
 def add_ending_time_round4():
     """Function to add ending time for round4"""
     
@@ -1326,7 +1327,7 @@ def add_ending_time_round4():
             print()
 
 
-## -- Done! --  CLEAR ENDING TIME ROUND4
+## -- CLEAR ENDING TIME ROUND4 --
 def clear_starting_time_round4():
     """Function to remove starting for round4"""
 
@@ -1374,7 +1375,7 @@ def save_round4_scores():
                     json.dump(json_object, f, indent=4)
                 h += 1
         o += 1
-save_round4_scores()
+
 
 ########################### MENUS MANAGEMENT ########################
 
@@ -1529,7 +1530,7 @@ def exec_t_menu1():
             break
         else:
             print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
-exec_t_menu1()
+# exec_t_menu1()
 
 
 ############ START USER/PLAYERS MATCH/ROUNDS SCRIPT /!!!\ ###############
