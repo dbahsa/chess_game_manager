@@ -82,4 +82,4 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
 🔥 [Forthebadge](http://forthebadge.com) - Badges en-tête
 
 # Auteur
-🤓 Didier K Nzimbi** _alias_ [dbahsa](https://github.com/dbahsa)
+🤓 **Didier K Nzimbi** _alias_ [dbahsa](https://github.com/dbahsa)
