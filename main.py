@@ -4,6 +4,19 @@
 
 import os
 
+from model import players
+
+## -- Done! -- Func - Ranked Players by score and rating
+def view_sorted_players_by_score_and_rating():
+    """View sorted players by score and rating"""
+
+    print('\n🙂 Classement des joueurs par score et par nombre de points au classement général:\n')
+    k=0
+    for u in players.sorted_players_by_score_and_rating:
+        print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}\t{u[1]['Score']}")
+        k +=1
+view_sorted_players_by_score_and_rating()
+
 
 # |- program:
 # |—— controller.py (cls: menu)

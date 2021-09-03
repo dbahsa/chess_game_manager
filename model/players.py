@@ -5,7 +5,7 @@
 """ modules & packages """
 import json
 from dataclasses import dataclass, field
-from tinydb import TinyDB, Query
+from tinydb import TinyDB
 import pandas as pd
 import datetime
 import pprint
@@ -17,12 +17,12 @@ total_number_of_players = 8
 registered_players = 0
 all_players_db = [] 
 
-## -- 'db' allows to generate a DB file, '../data/data.json', for this app --
-db = TinyDB('../data/data.json', indent=4)
+## -- 'db' allows to generate a DB file, './data/data.json', for this app --
+db = TinyDB('./data/data.json', indent=4)
 tournaments_table = db.table('tournaments_db')
 players_table = db.table('players_db')
 
-filename = "../data/data.json"
+filename = "./data/data.json"
 with open(filename, "r") as f:
     json_object = json.load(f)
 
@@ -126,7 +126,7 @@ def view_players_info():
     
     print("\n📚 Voici les informations actuelles sur les joueurs\n")
     print(real_db)
-view_players_info()
+# view_players_info()
 
 
 """ Update players data from db file /!!!\ """
@@ -496,7 +496,7 @@ def view_sorted_players_by_score_and_rating():
     for u in sorted_players_by_score_and_rating:
         print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}\t{u[1]['Score']}")
         k +=1
-view_sorted_players_by_score_and_rating()
+# view_sorted_players_by_score_and_rating()
 
 
 ## -- Done! -- Func - Ranked Players by rating, Used ONLY for Round1
