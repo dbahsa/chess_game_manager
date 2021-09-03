@@ -156,7 +156,7 @@ def update_tournament_time_control():
 
 
 # -- Done! -- Update Tournament Description in db file --
-def update_tournament_time_description():
+def update_tournament_description():
     """ Function to update Tournament Time Control in db file """
 
     print(f"\nLa description actuelle est: {json_object['tournaments_db']['1']['Description']}\n")
@@ -166,7 +166,7 @@ def update_tournament_time_description():
     print(f"\nNouvelle Description: {json_object['tournaments_db']['1']['Description']}")
     ## -- Send the user back to the main menu
 
-
+'''
 # -- Done! -- Update User Tournalent Input in db file --
 def update_tournament_info():
     """Menu to update tournament info"""
@@ -213,7 +213,7 @@ def update_tournament_info():
         elif user_choice == "8":
             print("\n--------------------------------------------------")
             print(json_object['tournaments_db']['1']['Description'])
-            update_tournament_time_description()
+            update_tournament_description()
         elif user_choice == "0":
             print("\n--------------------------------------------------")
             print("Retour au Menu Principal")
@@ -239,7 +239,7 @@ def update_tournament_info():
         # for i in json_object['tournaments_db']['1']:
         #     print(f"{i}: {json_object['tournaments_db']['1'][i]}")
         # print("--")
-
+'''
 
 ########################### PLAYERS MANAGEMENT ########################
 
@@ -1379,7 +1379,96 @@ def save_round4_scores():
 
 ########################### MENUS MANAGEMENT ########################
 
+"""Update Menus"""
 
+
+## -- Update Players Menu --
+def update_players_menu():
+    """ function to launch players menu within the current file"""
+
+    def players_menu():
+        """ Menu interface """
+        # Players menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
+        c = "\n------------ 🔥 MENU JOUEURS 🔥 ---------------"
+        x = "\nTaper le chiffre:"
+        d = "\n[1] pour Créer            [2] pour Actualiser"
+        f = "\n[3] pour Menu Principal   [4] pour Arrêter\n"
+        menu = c+x+d+f
+        print(menu)
+
+    while True:
+        """ Launching Program """
+        players_menu()
+        user_choice = input("\nTaper votre choix: ")
+        if user_choice == "1":
+            print('Créer un joueur')
+            # menu_tournament.exec_t_menu2()
+        elif user_choice == "2":
+            print("Accéder à l'actualisation des joueurs......")
+            # menu_players.exec_p_menu2()
+        elif user_choice == "3":
+            exec_main_menu1()
+            break
+        elif user_choice == "4":
+            print("Merci d'avoir utilisé notre programme et à bientôt 😉")
+            break
+        else:
+            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
+# update_players_menu()
+
+
+## -- Update Tournament Menu --
+def update_tournament_menu():
+    """ function to launch reports menu within the current file"""
+
+    def tournament_menu():
+        """ Menu interface """
+        ## Tournament menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
+        a = "\n------------------ 🔥 ACTUALISATION DU TOURNOI 🔥 -------------------"
+        b = "\nTaper [1] pour le nom\t[2] pour le lieu\t[3] pour la date"
+        c = "\n      [4] pour modifier le nombre de tours" # if != 4, contact admin!!!
+        d = "\n      [5] pour modifier le contrôle du temps"
+        e = "\n      [6] pour modifier la description du tournoi"
+        f = "\n      [7] pour le 'MENU JOUEUR'\t[8] pour le 'MENU PRINCIPAL'\n"
+        menu = a+b+c+d+e+f
+        print(menu)
+
+    while True:
+        """ Launching Program """
+        tournament_menu()
+        user_choice = input("\nTaper votre choix: ")
+        if user_choice == "1":
+            update_tournament_name()
+            break
+        elif user_choice == "2":
+            print('choice 2: go to players_menu')
+            # menu_players.exec_p_menu2()
+        elif user_choice == "3":
+            exec_main_menu1()
+            break
+        elif user_choice == "4":
+            print("Merci de nous joindre pour actualiser les paramètres de votre application")
+        elif user_choice == "5":
+            update_tournament_time_control()
+            break
+        elif user_choice == "5":
+            exec_main_menu1()
+            break
+        elif user_choice == "6":
+            update_tournament_description()
+            break
+        elif user_choice == "7":
+            exec_p_menu1()
+            break
+        elif user_choice == "8":
+            exec_main_menu1()
+            break
+        else:
+            print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
+# update_tournament_menu()
+
+
+""" Starting Menus """
 
 ## -- Reports Menu --
 def exec_r_menu1():
@@ -1468,12 +1557,16 @@ def exec_t_menu1():
 
     def tournament_menu():
         """ Menu interface """
-        # Tournament menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
-        c = "\n-------------- 🔥 MENU TOURNOI 🔥 -------------"
-        x = "\nEntrer le chiffre:"
-        d = "\n[1] pour Créer            [2] pour Actualiser"
-        f = "\n[3] pour Menu Principal   [4] pour Arrêter\n"
-        menu = c+x+d+f
+        ## Tournament menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
+        a = "\n---------------- 🔥 MENU TOURNOI 🔥 ---------------"
+        b = "\nTaper [1] pour créer un nouveau tournoi"
+        c = "\n      [2] pour ajouter huit joueurs"
+        d = "\n      [3] pour modifier les données du tournoi"
+        e = "\n      [4] pour modifier les données des joueurs"
+        f = "\n      [5] pour aller au 'MENU JOUEUR'"
+        g = "\n      [6] pour revenir au 'MENU PRINCIPAL'\n"
+        h = "\n      [7] pour arrêter le programme\n"
+        menu = a+b+c+d+e+f+g+h
         print(menu)
 
     while True:
@@ -1481,16 +1574,30 @@ def exec_t_menu1():
         tournament_menu()
         user_choice = input("\nTaper votre choix: ")
         if user_choice == "1":
-            print('choice 1: go to tournament_menu')
-            # menu_tournament.exec_t_menu2()
+            add_tournament()
+            if add_tournament():
+                save_tournament_data()
+            break
         elif user_choice == "2":
-            print('choice 2: go to players_menu')
-            # menu_players.exec_p_menu2()
+            add_players()
+            if add_players():
+                save_players_data()
+                update_tournament_players_info()
+            break
         elif user_choice == "3":
-            exec_main_menu1()
+            update_tournament_menu()
             break
         elif user_choice == "4":
-            print("Merci d'avoir utilisé notre programme et à bientôt 😉")
+            update_players_menu()
+            break
+        elif user_choice == "5":
+            exec_p_menu1()
+            break
+        elif user_choice == "6":
+            exec_main_menu1()
+            break
+        elif user_choice == "7":
+            print("Merci d'avoir utilisé ce programme.\nA bientôt 😉\n")
             break
         else:
             print(f"😅 Vous avez taper '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
