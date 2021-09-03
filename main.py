@@ -5,6 +5,13 @@
 import os
 
 
+# |- program:
+# |—— controller.py (cls: menu)
+# |—— model.py (cls: challengers + tournt + db + menu)
+# |—— view.py (view func)
+# |—— db.json
+
+
 """ I. LAUNCHING PROGRAM: First create data and mvc folders, and __init__.py file."""
 
 ## -- Create Data & MVC Folders -- 
