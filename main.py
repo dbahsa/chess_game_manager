@@ -7,7 +7,7 @@ import json
 from dataclasses import dataclass, field
 from tinydb import TinyDB
 import pandas as pd
-import datetime
+
 
 from model import tournament, players
 import view
@@ -21,6 +21,87 @@ if __name__=="__main__":
     view.welcome_msg()
 
     """Update Menus"""
+
+
+    ## -- Launch Game Menu --
+    def launch_games_menu():
+        """ function to launch games per round"""
+
+        while True:
+            """ Launching Games """
+            
+            view.launch_games_menu()
+            user_choice = input("\nTaper votre choix: ")
+            if user_choice == "1":
+                current_time = players.datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de commencer!")
+                print("En cas d'erreur, revenir en arrière pour arrêter le compte à rebours,", end="")
+                print("puis recommencer")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                players.json_object['tournaments_db']['1']['Tournées']["Round1"]['Temps de départ'] = a
+                with open(players.filename, "w") as f:
+                    json.dump(players.json_object, f, indent=4)
+            elif user_choice == "2":
+                current_time = players.datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de commencer!")
+                print("En cas d'erreur, revenir en arrière pour arrêter le compte à rebours,", end="")
+                print("puis recommencer")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                players.json_object['tournaments_db']['1']['Tournées']["Round2"]['Temps de départ'] = a
+                with open(players.filename, "w") as f:
+                    json.dump(players.json_object, f, indent=4)
+            elif user_choice == "3":
+                current_time = players.datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de commencer!")
+                print("En cas d'erreur, revenir en arrière pour arrêter le compte à rebours,", end="")
+                print("puis recommencer")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                players.json_object['tournaments_db']['1']['Tournées']["Round3"]['Temps de départ'] = a
+                with open(players.filename, "w") as f:
+                    json.dump(players.json_object, f, indent=4)
+            elif user_choice == "4":
+                current_time = players.datetime.datetime.now()
+                print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de commencer!")
+                print("En cas d'erreur, revenir en arrière pour arrêter le compte à rebours,", end="")
+                print("puis recommencer")
+                a= f"{current_time.day}/{current_time.month}/{current_time.year} à {current_time.hour}h:{current_time.minute}"
+                players.json_object['tournaments_db']['1']['Tournées']["Round4"]['Temps de départ'] = a
+                with open(players.filename, "w") as f:
+                    json.dump(players.json_object, f, indent=4)
+            elif user_choice == "5":
+                break
+            else:
+                view.error_msg()
+
+
+
+    
+
+    ## -- Reports Menu --
+    def latest_reports_menu():
+        """ function to view differents reports"""
+
+        while True:
+            """ Launching Program """
+            
+            view.latest_reports_menu()
+            user_choice = input("\nTaper votre choix: ")
+            if user_choice == "1":
+                view.tournament_overview_by_players_by_last_and_first_names()
+            elif user_choice == "2":
+                view.sorted_players_by_score_and_rating()
+            elif user_choice == "3":
+                view.tournament_info()
+            elif user_choice == "4":
+                view.all_rounds_info()
+            elif user_choice == "5":
+                view.all_matches_info()
+            elif user_choice == "6":
+                view.byebye()
+                break
+            else:
+                view.error_msg()
+    
 
     ## -- Update Players Menu --
     def update_players_menu():
@@ -199,7 +280,6 @@ if __name__=="__main__":
             if user_choice == "1":
                 tournament.add_tournament()
                 tournament.save_tournament_data()
-                players.clear_roundx_in_tournament_table()
                 players.add_roundx_in_tournament_table()
                 tournament.update_tournament_players_info()
             elif user_choice == "2":
@@ -208,33 +288,29 @@ if __name__=="__main__":
                 players.save_players_indexes_in_tournaments_db()
             elif user_choice == "3":
                 view.all_matches_info()
-                # view.view_round1_matchups()
                 pass
             elif user_choice == "4":
+                view.stop_games_menu()
+            elif user_choice == "5":
+                launch_games_menu()
+            elif user_choice == "6":
                 players.update_player_score()
                 players.generate_players_round1_matchup_ref_rating()
                 players.generate_players_matchup_reference_score_and_rating()
-
-            elif user_choice == "5":
-                view.players_info()
-                view.tournament_overview_by_players_by_last_and_first_names()
-                view.sorted_players_by_score_and_rating()
-                view.tournament_info()
-                view.all_rounds_info()
-                view.all_matches_info()
-                pass
-            elif user_choice == "6":
-                update_players_menu()
             elif user_choice == "7":
-                # update_tournament_menu_out()
-                tournament.update_tournament_info()
+                latest_reports_menu()
             elif user_choice == "8":
+                update_players_menu()
+            elif user_choice == "9":
+                tournament.update_tournament_info()
+            elif user_choice == "10":
                 view.byebye()
                 break
             else:
                 view.error_msg()
     exec_main_menu1()
-    
+
+
 
 else:
     pass

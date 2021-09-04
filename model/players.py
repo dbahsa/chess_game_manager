@@ -503,7 +503,7 @@ players_matchup_reference_score_and_rating = []
 
 """ Generate Matches for Round1 """
 
-## -- Done! -- /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
+## -- /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
 def generate_players_round1_matchup_ref_rating():
     """ Function used to generate 'sorted_players_by_rating' variable """
 
@@ -517,7 +517,7 @@ def generate_players_round1_matchup_ref_rating():
 generate_players_round1_matchup_ref_rating()
 
 
-## -- Done! --
+## -- 
 def view_generate_players_round1_matchup_ref_rating_by_index():
     """ Function used to view 'sorted_players_by_rating' variable """
 
@@ -530,7 +530,7 @@ def view_generate_players_round1_matchup_ref_rating_by_index():
         print(a)
 
 
-## -- Done! --  /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
+## -- /!!!\ DO NOT TOUCH IT - LEAVE IT ACTIVE /!!!\
 def generate_players_matchup_reference_score_and_rating():
     """ Function used to generate 'sorted_players_by_rating' variable """
 
@@ -547,7 +547,7 @@ generate_players_matchup_reference_score_and_rating()
 
 """Add Matches Data to Tournament Table"""
 
-## -- Done! -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
+## -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
 def add_roundx_in_tournament_table():
     """Function to add new items in tournament table under 'Tournées' key"""
     
@@ -566,9 +566,9 @@ def add_roundx_in_tournament_table():
         with open(filename, "w") as f:
             f.seek(0)
             json.dump(json_object, f, indent=4)
-# add_roundx_in_tournament_table()
+add_roundx_in_tournament_table()
 
-## -- Done! -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
+## -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
 def clear_roundx_in_tournament_table():
     """Function to add new items in tournament table under 'Tournées' key"""
     
@@ -595,7 +595,7 @@ def clear_roundx_in_tournament_table():
 
 ###### --- 1. GENERATE & SAVE ROUND1 MATCHUPS --- FIRST LAUNCH 'add_roundx_in_tournament_table()'
 
-## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
+## -- /!!! \ generate_players_matchup_with_reference_rating() and 
 ## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
 ## -- to allow generate_round1_matchups() to work /!!!\ 
 def generate_save_round1_matchups():
@@ -637,7 +637,7 @@ def view_round1_matchups():
 
 ###### --- 3. LAUNCH ROUND1 GAMES - STARTING TIME -- GOOD MENU TRY EXCEPT /!!!!!\
 
-## -- Done! --  ADD STARTING TIME ROUND1
+## -- ADD STARTING TIME ROUND1
 def add_starting_time_round1():
     """Function to add starting time for round1"""
     
@@ -666,7 +666,7 @@ def add_starting_time_round1():
             print()
 
 
-## -- Done! --  CLEAR STARTING TIME ROUND1
+## -- CLEAR STARTING TIME ROUND1
 def clear_starting_time_round1():
     """Function to remove starting for round 1"""
 

@@ -49,7 +49,6 @@ def tournament_overview_by_players_by_last_and_first_names():
     print('\n📚 Classement des joueurs par ordre alphabétique:\n')
     print(players.real_db.sort_values(["Nom de famille", "Prénom"], ascending = (True)))
     print()
-# tournament_overview_by_players_by_last_and_first_names()
 
 
 ## -- Func - Ranked Players by score and rating -- ok ok!!!
@@ -61,7 +60,6 @@ def sorted_players_by_score_and_rating():
     for u in players.sorted_players_by_score_and_rating:
         print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}\t{u[1]['Score']}")
         k +=1
-# sorted_players_by_score_and_rating()
 
 
 ## -- Func - Ranked Players by rating, Used ONLY for Round1 __ OK OK !!
@@ -71,7 +69,6 @@ def sorted_players_by_rating():
     for u in players.sorted_players_by_rating:
         print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}")
         k +=1
-# sorted_players_by_rating()
 
 
 """Tournament Infos"""
@@ -85,7 +82,6 @@ def tournament_info():
     for i in json_object['tournaments_db']['1']:
         print(f"{[h]} {i}: {json_object['tournaments_db']['1'][i]}")
         h += 1
-# tournament_info()
 
 
 ## -- View All Rounds Info  -- OK OK !!!
@@ -93,12 +89,12 @@ def all_rounds_info():
     """ Function to view all rounds info """
     
     print("\n📚 Voici les informations de tous les tours de l'actuel tournoi: \n")
-    # pp.pprint(json_object['tournaments_db'])
     h = 1
     for i in json_object['tournaments_db']['1']['Tournées']:
-        print(f"{[h]} {i}: {json_object['tournaments_db']['1']['Tournées'][i]}")
+        df = pd.DataFrame(json_object['tournaments_db']['1']['Tournées'][i])
+        print(f"💥 {i}: {df}")
+        print()
         h += 1
-# all_rounds_info()
 
 
 ## -- View All Matches Info  -- OK OK !!!
@@ -115,7 +111,7 @@ def all_matches_info():
     df = pd.DataFrame(k, index=p)
     print(df)
     print()
-# all_matches_info()
+
 
 
 #############################   MATCHES VIEWS #########################
@@ -195,13 +191,40 @@ def main_menu():
     c = "\n~~~~~~~~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~~~~~~~"
     x = "\n\n  ☰ Faites votre choix en tapant:\n"
     d = "\n [1] CREER TOURNOI          [2] AJOUTER JOUEURS"
-    f = "\n [3] VOIR MATCHES           [4] AJOUTER SCORES"
-    g = "\n [5] VOIR RAPPORTS          [6] ACTUALISER JOUEURS"
-    h = "\n [7] ACTUALISER TOURNOI     [8] ARRETER LE PROGRAMME"
-    i = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    menu = a+b+c+x+d+f+g+h+i
+    f = "\n [3] VOIR MATCHES           [4] ARRETER ROUNDS"
+    g = "\n [5] LANCER ROUNDS          [6] AJOUTER SCORES"
+    h = "\n [7] VOIR RAPPORTS          [8] ACTUALISER JOUEURS"
+    i = "\n [9] ACTUALISER TOURNOI     [10] ARRETER LE PROGRAMME"
+    j = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    menu = a+b+c+x+d+f+g+h+i+j
     print()
     print(menu)
+
+
+
+## -- Launch Games Menu --
+def launch_games_menu():
+    """ Menu interface """
+    
+    a = "\n-----------🔥 LANCER LE TOURNOI 🔥 -----------"
+    b = "\nTaper [1] pour Round 1      [3] pour Round 3"
+    c = "\n      [2] pour Round 2      [4] pour Round 4"
+    g = "\n      [5] pour revenir au 'MENU PRINCIPAL'"
+    menu = a+b+c+g
+    print(menu)
+
+
+## -- Stop Games Menu --
+def stop_games_menu():
+    """ Menu interface """
+    
+    a = "\n--------- 🔥 ARRETER LES MATCHES 🔥 -----------"
+    b = "\nTaper [1] pour Round 1      [3] pour Round 3"
+    c = "\n      [2] pour Round 2      [4] pour Round 4"
+    g = "\n      [5] pour revenir au 'MENU PRINCIPAL'"
+    menu = a+b+c+g
+    print(menu)
+
 
 ## -- View Tournament Menu --
 def tournament_menu():
@@ -219,14 +242,14 @@ def tournament_menu():
 
 
 ## -- View Reports Menu --
-def reports_menu():
+def latest_reports_menu():
     """ Menu interface """
     
     c = "\n------------ 🔥 MENU RAPPORTS 🔥 ---------------"
     x = "\n ☰ Pour voir les rapports ci-après, taper:\n"
     d = "\n[1] LES JOUEURS PAR NOM       [2] LES JOUEURS PAR POINTS"
-    f = "\n[3] LES TOURNOIS              [4] LES TOURS PAR TOURNOI\n"
-    g = "\n[5] LES MATCHES PAR TOURS     [6] revenir au menu principal\n"
+    f = "\n[3] LES TOURNOIS              [4] LES TOURS PAR TOURNOI"
+    g = "\n[5] LES MATCHES PAR TOURS     [6] revenir au menu principal"
     menu = c+x+d+f+g
     print(menu)
 
