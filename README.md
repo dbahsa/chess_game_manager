@@ -4,6 +4,23 @@
 
 # POUR COMMENCER
 
+<pre>
+                            Bonjour et bienvenu!
+
+                🏁 GESTIONNAIRE DE TOURNOI D'ECHECS 🏁
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            ~~~~~~~~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~~~~~~~
+
+            ☰ Faites votre choix en tapant:
+
+            [1] CREER TOURNOI          [2] AJOUTER JOUEURS
+            [3] LANCER ROUNDS          [4] ARRETER ROUNDS
+            [5] VOIR MATCHES           [6] AJOUTER SCORES
+            [7] VOIR RAPPORTS          [8] ACTUALISER JOUEURS
+            [9] ACTUALISER TOURNOI     [10] ARRETER LE PROGRAMME
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+<br>
 * Ce programme est destiné à un public avisé tel qu'un administrateur événementiel, qui est responsable de la gestion sa base de données
 dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette application sur console.
 
