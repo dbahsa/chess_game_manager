@@ -58,15 +58,10 @@ if __name__=="__main__":
                 players.erase_all_scores()
             
             elif user_choice == "8":
-                view.byebye()
                 break
-            
-            elif user_choice == "9":
-                exec_main_menu1()
             
             else:
                 view.error_msg()
-    # update_players_menu()
 
 
     ## -- Update Tournament Menu --
@@ -96,14 +91,10 @@ if __name__=="__main__":
                 tournament.update_tournament_description()
                 
             elif user_choice == "7":
-                view.byebye()
                 break
-            elif user_choice == "8":
-                exec_main_menu1()
             
             else:
                 view.error_msg()
-    # update_tournament_menu_out()
 
 
     """ Starting Menus """
@@ -151,7 +142,7 @@ if __name__=="__main__":
                 break
             else:
                 print(f"😅 Vous avez entré '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 7.\n")
-    # exec_r_menu1()
+
 
     '''
     ## -- Players Menu --
@@ -170,11 +161,9 @@ if __name__=="__main__":
             elif user_choice == "3":
                 exec_main_menu1()
             elif user_choice == "4":
-                view.byebye()
                 break
             else:
                 view.error_msg()
-    # exec_p_menu1()
     '''
 
     ## -- Tournament Menu --
@@ -199,16 +188,14 @@ if __name__=="__main__":
                 update_players_menu()
             
             elif user_choice == "5":
-                # view.byebye()
                 break
             elif user_choice == "6":
                 exec_main_menu1()
             else:
                 view.error_msg()
-    # exec_t_menu1()
 
 
-    ## -- Main Menu -- /!!!\ Must stay active to allow other menu to function properly!!!
+    ## -- Main Menu -- /!!!\ Must REMAIN ACTIVE to allow other menus to function properly!!!
     def exec_main_menu1():
         """ function to launch main menu within the current file"""
 
@@ -218,12 +205,26 @@ if __name__=="__main__":
             view.main_menu()
             user_choice = input("\nTaper votre choix: ")
             if user_choice == "1":
-                exec_t_menu1()
+                tournament.add_tournament()
+                tournament.save_tournament_data()
+                tournament.update_tournament_players_info()
             elif user_choice == "2":
-                update_players_menu()
+                players.add_players()
+                players.save_players_data()
             elif user_choice == "3":
-                exec_r_menu1()
+                ## voir les matches
+                pass
             elif user_choice == "4":
+                players.update_player_score()
+                # update_players_menu()
+            elif user_choice == "5":
+                # voir les rapports
+                pass
+            elif user_choice == "6":
+                update_players_menu()
+            elif user_choice == "7":
+                update_tournament_menu_out()
+            elif user_choice == "8":
                 view.byebye()
                 break
             else:

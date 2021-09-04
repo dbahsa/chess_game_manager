@@ -141,18 +141,20 @@ def view_round4_matchups():
 ############################# MENU VIEWS #########################
 
 
-## -- View Main Menu --
+## -- View Main Menu -- OK OK !!!
 def main_menu():
     """ Main Menu interface """
     
-    a = "\n 🏁 GESTIONNAIRE DE TOURNOI D'ECHECS 🏁"
-    b = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    c = "\n~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~"
-    x = "\n\n   ☰ Pour choisir votre menu, taper:\n"
-    d = "\n [1] pour Tournoi       [2] pour Joueurs"
-    f = "\n [3] pour Rapports      [4] pour Arrêter"
-    g = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    menu = a+b+c+x+d+f+g
+    a = "\n       🏁 GESTIONNAIRE DE TOURNOI D'ECHECS 🏁"
+    b = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    c = "\n~~~~~~~~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~~~~~~~"
+    x = "\n\n  ☰ Faites votre choix en tapant:\n"
+    d = "\n [1] CREER TOURNOI          [2] AJOUTER JOUEURS"
+    f = "\n [3] VOIR MATCHES           [4] AJOUTER SCORES"
+    g = "\n [5] VOIR RAPPORTS          [6] ACTUALISER JOUEURS"
+    h = "\n [7] ACTUALISER TOURNOI     [8] ARRETER LE PROGRAMME"
+    i = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    menu = a+b+c+x+d+f+g+h+i
     print()
     print(menu)
 
@@ -165,34 +167,34 @@ def tournament_menu():
     c = "\n      [2] pour ajouter huit joueurs"
     d = "\n      [3] pour modifier les données du tournoi"
     e = "\n      [4] pour modifier les données des joueurs"
-    g = "\n      [5] pour arrêter le programme"
+    g = "\n      [5] pour revenir en arrière"
     h = "\n      [6] pour revenir au 'MENU PRINCIPAL'"
     menu = a+b+c+d+e+g+h
     print(menu)
 
-
+'''
 ## -- View Starting Players Menu --
 def players_menu():
     """ Menu interface """
     # Players menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
     c = "\n------------ 🔥 MENU JOUEURS 🔥 ---------------"
     x = "\nTaper le chiffre:"
-    d = "\n[1] pour Créer            [2] pour Actualiser"
-    f = "\n[3] pour Menu Principal   [4] pour Arrêter\n"
+    d = "\n[1] pour créer            [2] pour actualiser"
+    f = "\n[3] pour Menu Principal   [4] pour revenir en arrière\n"
     menu = c+x+d+f
     print(menu)
-
+'''
 
 ## -- View Update Tournament Menu
 def update_tournament_menu_in():
     """ Menu interface """
     
-    a = "\n------------------ 🔥 ACTUALISATION DU TOURNOI 🔥 -------------------"
+    a = "\n---------------- 🔥 ACTUALISATION DU TOURNOI 🔥 -----------------"
     b = "\nTaper [1] pour le nom\t[2] pour le lieu\t[3] pour la date"
     c = "\n      [4] pour modifier le nombre de tours"
     d = "\n      [5] pour modifier le contrôle du temps"
     e = "\n      [6] pour modifier la description du tournoi"
-    f = "\n      [7] pour arrêter \t[8] pour le 'MENU PRINCIPAL'\n"
+    f = "\n      [7] pour revenir au 'MENU PRINCIPAL'\n"
     menu = a+b+c+d+e+f
     print(menu)
 
@@ -207,7 +209,7 @@ def update_players_menu():
     d = "\n      [5] pour modifier le nombre de point au classement général"
     e = "\n      [6] pour ajouter ou modifier un score"
     f = "\n      [7] pour effacer tous les scores 🚨"
-    g = "\n      [8] pour arrêter \t[9] pour le 'MENU PRINCIPAL'\n"
+    g = "\n      [8] pour revenir au 'MENU PRINCIPAL'\n"
     menu = a+b+c+d+e+f+g
     print(menu)
 
