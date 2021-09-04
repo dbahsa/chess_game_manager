@@ -5,9 +5,12 @@
 import json
 from tinydb import TinyDB
 import pandas as pd
+import pprint
 
-import model
-# import controller
+## -- PPrint for internal use ONLY
+pp = pprint.PrettyPrinter(indent=4)
+
+from model import tournament, players
 
 
 ### PRINTOUTS FROM DB ONLY !!!! ### 
@@ -23,65 +26,75 @@ filename = "data.json"
 with open(filename, "r") as f:
     json_object = json.load(f)
 
-## -- 'df' allows to update data in DB file --
-df = pd.DataFrame(json_object['players_db'])
-real_db = df.T
 
 
 ########################### TOURNAMENT VIEWS ########################
 
-"""View Tournament Info"""
 
-## -- View Tournament Info  -- OK OK
-def view_tournament_info():
-    """ Function to view tournament info """
-    
-    print("\n-- Voici les informations actuelles du tournoi --\n")
-    h = 1
-    for i in json_object['tournaments_db']['1']:
-        print(f"{[h]} {i}: {json_object['tournaments_db']['1'][i]}")
-        h += 1
+"""Players infos"""
 
-############################# PLAYERS VIEWS #########################
-
-""" View players data from db file /!!!\ """
-
-## -- To view players info  -- ok OK !!!
+## -- View Tournament data with players ranked by indexes (tous les acteurs) -- ok ok!!!
 def view_players_info():
     """ Function to view tournament info """
     
     print("\n📚 Voici les informations actuelles sur les joueurs\n")
-    print(real_db)
+    print(players.real_db)
+    print()
 
 
-""" View Ranked Players by Ratings & Scores """
+## -- View Tournament data with players ranked by last and first names -- ok ok !!!
+def tournament_overview_by_players_by_last_and_first_names():
+    """View sorted players sorted by last and first names"""
 
-## -- Func - Ranked Players by score and rating /!!\ BACK IN CONTROLLER !!!
+    print('\n🙂 Classement des joueurs par ordre alphabétique:\n')
+    print(players.real_db.sort_values(["Nom de famille", "Prénom"], ascending = (True)))
+    print()
+tournament_overview_by_players_by_last_and_first_names()
+
+## -- Func - Ranked Players by score and rating -- ok ok!!!
 def view_sorted_players_by_score_and_rating():
     """View sorted players by score and rating"""
 
     print('\n🙂 Classement des joueurs par score et par nombre de points au classement général:\n')
     k=0
-    for u in sorted_players_by_score_and_rating:
+    for u in players.sorted_players_by_score_and_rating:
         print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}\t{u[1]['Score']}")
         k +=1
+view_sorted_players_by_score_and_rating()
 
-
-## -- Func - Ranked Players by rating, Used ONLY for Round1 /!!\ BACK IN CONTROLLER !!!
+## -- Func - Ranked Players by rating, Used ONLY for Round1 __ OK OK !!
 def view_sorted_players_by_rating():
     print('\n🙂 Classement des joueurs par nombre de points au classement général:\n')
     k=0
-    for u in sorted_players_by_rating:
+    for u in players.sorted_players_by_rating:
         print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}")
         k +=1
+view_sorted_players_by_rating()
 
 
-## --  /!!\ BACK IN CONTROLLER !!!
+"""Tournament Infos"""
+## -- View Tournament Info  -- OK OK !!!
+def view_tournament_info():
+    """ Function to view tournament info """
+    
+    print("\n-- Voici les informations du tournoi actuel --\n")
+    h = 1
+    for i in json_object['tournaments_db']['1']:
+        print(f"{[h]} {i}: {json_object['tournaments_db']['1'][i]}")
+        h += 1
+view_tournament_info()
+
+
+
+#############################   MATCHES VIEWS #########################
+
+
+## --  ok ok!!!
 def view_generate_players_round1_matchup_ref_rating_by_index():
     """ Function used to view 'sorted_players_by_rating' variable """
 
     print("\n🙂 Classement général des joueurs avec n°index:\n")
-    for u in sorted_players_by_rating:
+    for u in players.sorted_players_by_rating:
         w = 'Index n°' + u[0]
         x = u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']
         y = 'Classement: ' + str(u[1]['Classement'])
@@ -172,18 +185,20 @@ def tournament_menu():
     menu = a+b+c+d+e+g+h
     print(menu)
 
-'''
-## -- View Starting Players Menu --
-def players_menu():
+
+## -- View Reports Menu --
+def reports_menu():
     """ Menu interface """
-    # Players menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
-    c = "\n------------ 🔥 MENU JOUEURS 🔥 ---------------"
-    x = "\nTaper le chiffre:"
-    d = "\n[1] pour créer            [2] pour actualiser"
-    f = "\n[3] pour Menu Principal   [4] pour revenir en arrière\n"
-    menu = c+x+d+f
+    
+    c = "\n------------ 🔥 MENU RAPPORTS 🔥 ---------------"
+    x = "\n ☰ Pour voir les rapports ci-après, taper:\n"
+    d = "\n[1] LES JOUEURS PAR NOM       [2] LES JOUEURS PAR POINTS"
+    f = "\n[3] LES TOURNOIS              [4] LES TOURS PAR TOURNOI\n"
+    g = "\n[5] LES MATCHES PAR TOURS     [6] revenir au menu principal\n"
+    menu = c+x+d+f+g
     print(menu)
-'''
+
+
 
 ## -- View Update Tournament Menu
 def update_tournament_menu_in():
