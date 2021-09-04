@@ -1,0 +1,97 @@
+{
+    "players_db": {
+        "1": {
+            "Nom de famille": "Bridou",
+            "Pr\u00e9nom": "Nicois",
+            "Date de naissance": "12/12/1930",
+            "Sexe": "H",
+            "Classement": 1234,
+            "Score": [],
+            "Tournois": []
+        },
+        "2": {
+            "Nom de famille": "Grosdidier",
+            "Pr\u00e9nom": "Fanny",
+            "Date de naissance": "12/03/1980",
+            "Sexe": "F",
+            "Classement": 2345,
+            "Score": [],
+            "Tournois": []
+        },
+        "3": {
+            "Nom de famille": "Mika",
+            "Pr\u00e9nom": "Joel",
+            "Date de naissance": "23/12/1970",
+            "Sexe": "H",
+            "Classement": 4534,
+            "Score": [],
+            "Tournois": []
+        },
+        "4": {
+            "Nom de famille": "Gigi",
+            "Pr\u00e9nom": "Luka",
+            "Date de naissance": "12/05/1990",
+            "Sexe": "H",
+            "Classement": 9282,
+            "Score": [],
+            "Tournois": []
+        },
+        "5": {
+            "Nom de famille": "Luke",
+            "Pr\u00e9nom": "Lucky",
+            "Date de naissance": "25/09/1802",
+            "Sexe": "H",
+            "Classement": 9898,
+            "Score": [],
+            "Tournois": []
+        },
+        "6": {
+            "Nom de famille": "Grill",
+            "Pr\u00e9nom": "Bear",
+            "Date de naissance": "05/03/1969",
+            "Sexe": "H",
+            "Classement": 8877,
+            "Score": [],
+            "Tournois": []
+        },
+        "7": {
+            "Nom de famille": "Durant",
+            "Pr\u00e9nom": "Jean-Paul",
+            "Date de naissance": "12/12/1973",
+            "Sexe": "H",
+            "Classement": 3344,
+            "Score": [],
+            "Tournois": []
+        },
+        "8": {
+            "Nom de famille": "Dumoulin",
+            "Pr\u00e9nom": "Josette",
+            "Date de naissance": "17/03/1958",
+            "Sexe": "F",
+            "Classement": "5654",
+            "Score": [],
+            "Tournois": []
+        }
+    },
+    "tournaments_db": {
+        "1": {
+            "Nom du tournoi": "Geneva 1000",
+            "Lieu": "Zone Leman",
+            "Date": "12/09/1990",
+            "Nombre de tours": 4,
+            "Tourn\u00e9es": {},
+            "Joueurs": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8"
+            ],
+            "Contr\u00f4le du temps": "Blitz",
+            "Description": "Pas trop long, mais bpn \u00e7a arrive"
+        }
+    }
+}
