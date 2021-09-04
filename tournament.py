@@ -7,18 +7,21 @@ import json
 from dataclasses import dataclass, field
 from tinydb import TinyDB
 
+import players
+
 
 """ tournament variables used to launch the script """
 tournaments = []
-db = TinyDB('./data.json')
 
-filename = "./data.json"
+db = TinyDB('data.json')
+
+filename = "data.json"
 with open(filename, "r") as f:
     json_object = json.load(f)
 
 """ # -- Prog Start Here -- """
 
-# -- Done! -- 
+# -- 
 def add_rounds():
     """ Function to add round instances """
     
@@ -62,7 +65,7 @@ class Tournament:
 
 """Add/Save Tournament"""
 
-# -- Done! -- Add Tournament -- /!!!\ ADD AN END DATE WHICH IS ADDED AUTOMATICALLY AT THE END OF THE TOURNAMENT !!!
+# -- To Add Tournament -- /!!!\ ADD AN END DATE WHICH IS ADDED AUTOMATICALLY AT THE END OF THE TOURNAMENT !!!
 def add_tournament():
     """ Function to instantiate tournament"""
     
@@ -74,20 +77,23 @@ def add_tournament():
                     input("- Description: ")
                     )
     print("\n🤓 Bravo! Le tournoi a bien été enregistré.\n")
+    save_tournament_data()
+    players.add_roundx_in_tournament_table()
+    update_tournament_players_info()
 
+# add_tournament()
 
-# -- Done! -- Save First Tournament Info --
+# -- Save First Tournament Info --
 def save_tournament_data():
     """ save tournament data """
-    db = TinyDB('../data.json')
+    db = TinyDB('data.json')
     tournaments_table = db.table('tournaments_db')
     tournaments_table.truncate()  # clear up the table first
     tournaments_table.insert_multiple(tournaments)
 
-
 """Update Tournaments properties"""
 
-# -- Done! -- Update Tournament Name in db file --
+# -- Update Tournament Name in db file --
 def update_tournament_name():
     """ Function to update Tournament Name in db file """
 
@@ -99,7 +105,7 @@ def update_tournament_name():
     ## -- Send the user back to the main menu
 
 
-# -- Done! -- Update Tournament Location in db file --
+# -- Update Tournament Location in db file --
 def update_tournament_location():
     """ Function to update Tournament Location in db file """
 
@@ -111,7 +117,7 @@ def update_tournament_location():
     ## -- Send the user back to the main menu
 
 
-# -- Done! -- Update Tournament Date in db file --
+# -- Update Tournament Date in db file --
 def update_tournament_date():
     """ Function to update Tournament Date in db file """
 
@@ -123,7 +129,7 @@ def update_tournament_date():
     ## -- Send the user back to the main menu
 
 
-# -- Done! -- Update Tournament Number of Turns in db file --
+# -- Update Tournament Number of Turns in db file --
 def update_tournament_number_of_turns():
     """ Function to update Tournament Number of Turns in db file """
 
@@ -135,7 +141,7 @@ def update_tournament_number_of_turns():
     ## -- Send the user back to the main menu
 
 
-# -- Done! -- Update Tournament Rounds in db file -- Automatic Process... Check it when rounds are created
+# -- Update Tournament Rounds in db file -- Automatic Process... Check it when rounds are created
 def update_tournament_rounds():
     """ Function to update Tournament Rounds in db file """
 
@@ -148,7 +154,7 @@ def update_tournament_rounds():
     ## -- Send the user back to the main menu
 
 
-# -- Done! -- Update Tournament Players Indexes in db file -- Automatic Process... Check it when player instances are created
+# -- Update Tournament Players Indexes in db file -- Automatic Process... Check it when player instances are created
 def update_tournament_players_info():
     """ Function to update Tournament Players Indexes in db file """
 
@@ -159,7 +165,7 @@ def update_tournament_players_info():
     ## -- Send the user back to the main menu
 
 
-# -- Done! -- Update Tournament Time Control in db file --
+# -- Update Tournament Time Control in db file --
 def update_tournament_time_control():
     """ Function to update Tournament Time Control in db file """
 
@@ -171,7 +177,7 @@ def update_tournament_time_control():
     ## -- Send the user back to the main menu
 
 
-# -- Done! -- Update Tournament Description in db file --
+# -- Update Tournament Description in db file --
 def update_tournament_description():
     """ Function to update Tournament Time Control in db file """
 
@@ -183,7 +189,7 @@ def update_tournament_description():
     ## -- Send the user back to the main menu
 
 
-# -- Done! -- Update User Tournalent Input in db file --
+# -- Update User Tournalent Input in db file --
 def update_tournament_info():
     """Menu to update tournament info"""
     
@@ -241,7 +247,7 @@ def update_tournament_info():
 
 """View Tournament Info"""
 
-# -- Done! -- View Tournament Info  --
+# -- View Tournament Info  --
 def view_tournament_info():
     """ Function to view tournament info """
     

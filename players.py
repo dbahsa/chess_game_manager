@@ -10,7 +10,7 @@ import pandas as pd
 import datetime
 import pprint
 
-# import tournament
+import tournament
 
 
 """ players variables used in this file script """
@@ -19,12 +19,13 @@ total_number_of_players = 8
 registered_players = 0
 all_players_db = [] 
 
-## -- 'db' allows to generate a DB file, './data.json', for this app --
-db = TinyDB('./data.json', indent=4)
+## -- 'db' allows to generate a DB file, 'data.json', for this app --
+
+db = TinyDB('data.json', indent=4)
 tournaments_table = db.table('tournaments_db')
 players_table = db.table('players_db')
 
-filename = "./data.json"
+filename = "data.json"
 with open(filename, "r") as f:
     json_object = json.load(f)
 
@@ -33,13 +34,12 @@ df = pd.DataFrame(json_object['players_db'])
 ## - 'T' (Transpose) to use db indexes as table indexes for a better reading of data
 real_db = df.T
 
-
 ## -- PPrint for internal use ONLY
 pp = pprint.PrettyPrinter(indent=4)
 
 """ # -- Prog Start Here -- """
 
-## -- Done! -- Scores are added directly by the user in the DB file
+## -- Scores are added directly by the user in the DB file
 def player_score():
     """ return a list of player scores """
     
@@ -123,17 +123,6 @@ def save_players_indexes_in_tournaments_db():
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
 
-
-""" View players data from db file /!!!\ see view.py """
-'''
-## -- 
-def view_players_info():
-    """ Function to view tournament info """
-    
-    print("\n📚 Voici les informations actuelles sur les joueurs\n")
-    print(real_db)
-# view_players_info()
-'''
 
 """ Update players data from db file /!!!\ """
 
@@ -307,7 +296,7 @@ def update_player_rating():
             print()
 
 
-## -- Done! -- Add Player score in db file -- /!!!\ At the end of the script, send the user back to the former menu
+## -- Add Player score in db file -- /!!!\ At the end of the script, send the user back to the former menu
 def add_player_score():
     """ Function to add players score in db file """
     
@@ -350,7 +339,7 @@ def add_player_score():
             print()
 
 
-## -- Done! -- /!!!\ At the end of the script, send the user back to the former menu
+## -- /!!!\ At the end of the script, send the user back to the former menu
 def update_player_score():
     """ Function to update/add players score in db file """
     
@@ -448,7 +437,7 @@ def update_player_score():
             print()
 
 
-## -- Done! --  /!!!\ be very careful with this one!
+## --  /!!!\ be very careful with this one!
 def erase_all_scores():
     """"Function removes all scores at once.  Better be carfeul with it!"""
 
@@ -462,33 +451,12 @@ def erase_all_scores():
 
 """ Var of Sorted Players Data """
 
-## -- Done! -- Var - Sorted Players by score and rating
+## -- Var - Sorted Players by score and rating
 sorted_players_by_score_and_rating = sorted(json_object["players_db"].items(), key=lambda i: (sum(i[1]['Score']), int(i[1]['Classement'])), reverse=True)
 
-## -- Done! -- Var - Sorted Players by rating
+## -- Var - Sorted Players by rating
 sorted_players_by_rating = sorted(json_object["players_db"].items(), key=lambda i: int(i[1]['Classement']), reverse=True)
 
-
-""" View Ranked Players by Ratings & Scores """
-'''
-## -- Done! -- Func - Ranked Players by score and rating
-def view_sorted_players_by_score_and_rating():
-    """View sorted players by score and rating"""
-
-    print('\n🙂 Classement des joueurs par score et par nombre de points au classement général:\n')
-    k=0
-    for u in sorted_players_by_score_and_rating:
-        print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}\t{u[1]['Score']}")
-        k +=1
-
-## -- Done! -- Func - Ranked Players by rating, Used ONLY for Round1
-def view_sorted_players_by_rating():
-    print('\n🙂 Classement des joueurs par nombre de points au classement général:\n')
-    k=0
-    for u in sorted_players_by_rating:
-        print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}")
-        k +=1
-'''
 
 """ Var used to generate matchups """
 
@@ -566,7 +534,7 @@ def add_roundx_in_tournament_table():
         with open(filename, "w") as f:
             f.seek(0)
             json.dump(json_object, f, indent=4)
-add_roundx_in_tournament_table()
+# add_roundx_in_tournament_table()
 
 ## -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
 def clear_roundx_in_tournament_table():
@@ -619,6 +587,7 @@ def generate_save_round1_matchups():
     json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
+generate_save_round1_matchups()
 
 
 ###### --- 2. VIEW ROUND1 MATCHUPS FROM DB --
@@ -678,7 +647,7 @@ def clear_starting_time_round1():
 
 ###### --- 4. STOP ROUND1 GAMES - ENDING TIME -- GOOD MENU TRY EXCEPT /!!!!!\
 
-## -- Done! --  ADD ENDING TIME ROUND1
+## --  ADD ENDING TIME ROUND1
 def add_ending_time_round1():
     """Function to add ending time for round1"""
     
@@ -706,7 +675,7 @@ def add_ending_time_round1():
             print()
 
 
-## -- Done! --  CLEAR ENDING TIME ROUND1
+## --  CLEAR ENDING TIME ROUND1
 def clear_starting_time_round1():
     """Function to remove starting for round 1"""
 
@@ -741,7 +710,7 @@ def save_round1_matchups():
 
 ###### --- 1. GENERATE & SAVE ROUND2 MATCHUPS ---
 
-## -- Done! -- /!!! \ generate_players_matchup_with_reference_rating() and 
+## -- /!!! \ generate_players_matchup_with_reference_rating() and 
 ## -- generate_players_matchup_reference_score_and_rating() must REMAIN initiated 
 ## -- to allow generate_round1_matchups() to work /!!!\ 
 def generate_save_round2_matchups():
@@ -782,7 +751,7 @@ def view_round2_matchups():
 
 ###### --- 3. LAUNCH ROUND2 GAMES - STARTING TIME --
 
-## -- Done! --  ADD STARTING TIME ROUND2
+## --  ADD STARTING TIME ROUND2
 def add_starting_time_round2():
     """Function to add starting time for round2"""
     
@@ -811,7 +780,7 @@ def add_starting_time_round2():
             print()
 
 
-## -- Done! --  CLEAR STARTING TIME ROUND2
+## --  CLEAR STARTING TIME ROUND2
 def clear_starting_time_round2():
     """Function to remove starting for round 2"""
 

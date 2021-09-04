@@ -10,7 +10,7 @@ import pprint
 ## -- PPrint for internal use ONLY
 pp = pprint.PrettyPrinter(indent=4)
 
-from model import tournament, players
+import tournament, players
 
 
 ### PRINTOUTS FROM DB ONLY !!!! ### 
@@ -18,6 +18,7 @@ from model import tournament, players
 ########################### TOURNAMENT VARIABLES & TOOLS ########################
 
 ## -- 'db' allows to generate a DB file, 'data.json', for this app --
+
 db = TinyDB('data.json', indent=4)
 tournaments_table = db.table('tournaments_db')
 players_table = db.table('players_db')
@@ -40,6 +41,7 @@ def players_info():
     print("\n📚 Voici les informations actuelles sur les joueurs\n")
     print(players.real_db)
     print()
+
 
 
 ## -- View Tournament data with players ranked by last and first names -- ok ok !!!
@@ -128,7 +130,6 @@ def view_generate_players_round1_matchup_ref_rating_by_index():
         y = 'Classement: ' + str(u[1]['Classement'])
         a = [w, x, y]
         print(a)
-# view_generate_players_round1_matchup_ref_rating_by_index()
 
 
 ## -- VIEW ROUND1 MATCHUPS FROM DB --  /!!\ BACK IN CONTROLLER !!!
@@ -190,23 +191,22 @@ def main_menu():
     b = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     c = "\n~~~~~~~~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~~~~~~~"
     x = "\n\n  ☰ Faites votre choix en tapant:\n"
-    d = "\n [1] CREER TOURNOI          [2] AJOUTER JOUEURS"
-    f = "\n [3] VOIR MATCHES           [4] ARRETER ROUNDS"
-    g = "\n [5] LANCER ROUNDS          [6] AJOUTER SCORES"
-    h = "\n [7] VOIR RAPPORTS          [8] ACTUALISER JOUEURS"
-    i = "\n [9] ACTUALISER TOURNOI     [10] ARRETER LE PROGRAMME"
+    d = "\n [1] Créer un tournoi       [2] Ajouter les joueurs"
+    f = "\n [3] Modifier un tournoi    [4] Actualiser infos joueurs"
+    g = "\n [5] Activer les matches    [6] Arrêter les matches"
+    h = "\n [7] Générer les tours      [8] Entrer les résulats"
+    i = "\n [9] Consulter les rapports [0] Menu principal"
     j = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     menu = a+b+c+x+d+f+g+h+i+j
     print()
     print(menu)
 
 
-
 ## -- Launch Games Menu --
 def launch_games_menu():
     """ Menu interface """
     
-    a = "\n-----------🔥 LANCER LE TOURNOI 🔥 -----------"
+    a = "\n-----------🔥 COMMENCEMENT DE ROUND 🔥 -----------"
     b = "\nTaper [1] pour Round 1      [3] pour Round 3"
     c = "\n      [2] pour Round 2      [4] pour Round 4"
     g = "\n      [5] pour revenir au 'MENU PRINCIPAL'"
@@ -218,7 +218,7 @@ def launch_games_menu():
 def stop_games_menu():
     """ Menu interface """
     
-    a = "\n--------- 🔥 ARRETER LES MATCHES 🔥 -----------"
+    a = "\n--------- 🔥 FIN DE ROUND 🔥 -----------"
     b = "\nTaper [1] pour Round 1      [3] pour Round 3"
     c = "\n      [2] pour Round 2      [4] pour Round 4"
     g = "\n      [5] pour revenir au 'MENU PRINCIPAL'"
@@ -254,7 +254,6 @@ def latest_reports_menu():
     print(menu)
 
 
-
 ## -- View Update Tournament Menu
 def update_tournament_menu_in():
     """ Menu interface """
@@ -283,6 +282,8 @@ def update_players_menu():
     menu = a+b+c+d+e+f+g
     print(menu)
 
+
+""" Small User Interactive Messages """
 
 ## -- Welcome Message--
 def welcome_msg():
