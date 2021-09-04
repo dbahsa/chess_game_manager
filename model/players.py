@@ -10,6 +10,8 @@ import pandas as pd
 import datetime
 import pprint
 
+import tournament
+
 
 """ players variables used in this file script """
 
@@ -106,6 +108,7 @@ def save_players_data():
     players_table = db.table('players_db')
     players_table.truncate()
     players_table.insert_multiple(all_players_db)
+    tournament.update_tournament_players_info()
 
 
 ## --
@@ -118,8 +121,8 @@ def save_players_indexes_in_tournaments_db():
         json.dump(json_object, f, indent=4)
 
 
-""" View players data from db file /!!!\ """
-
+""" View players data from db file /!!!\ see view.py """
+'''
 ## -- 
 def view_players_info():
     """ Function to view tournament info """
@@ -127,7 +130,7 @@ def view_players_info():
     print("\n📚 Voici les informations actuelles sur les joueurs\n")
     print(real_db)
 # view_players_info()
-
+'''
 
 """ Update players data from db file /!!!\ """
 
@@ -486,7 +489,7 @@ sorted_players_by_rating = sorted(json_object["players_db"].items(), key=lambda 
 
 
 """ View Ranked Players by Ratings & Scores """
-
+'''
 ## -- Done! -- Func - Ranked Players by score and rating
 def view_sorted_players_by_score_and_rating():
     """View sorted players by score and rating"""
@@ -496,8 +499,6 @@ def view_sorted_players_by_score_and_rating():
     for u in sorted_players_by_score_and_rating:
         print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}\t{u[1]['Score']}")
         k +=1
-# view_sorted_players_by_score_and_rating()
-
 
 ## -- Done! -- Func - Ranked Players by rating, Used ONLY for Round1
 def view_sorted_players_by_rating():
@@ -506,7 +507,7 @@ def view_sorted_players_by_rating():
     for u in sorted_players_by_rating:
         print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}")
         k +=1
-
+'''
 
 """ Var used to generate matchups """
 
@@ -584,7 +585,7 @@ def add_roundx_in_tournament_table():
         with open(filename, "w") as f:
             f.seek(0)
             json.dump(json_object, f, indent=4)
-
+# add_roundx_in_tournament_table()
 
 ## -- Done! -- /!!!\ LAUNCH ONLY ONCE, ELSE = SERIOUS ISSUE WITH DB !!! 
 def clear_roundx_in_tournament_table():
@@ -605,7 +606,7 @@ def clear_roundx_in_tournament_table():
         with open(filename, "w") as f:
             f.seek(0)
             json.dump(json_object, f, indent=4)
-
+# clear_roundx_in_tournament_table()
 
 """ Generate & Save Matchups & Scores """
 
@@ -619,6 +620,7 @@ def clear_roundx_in_tournament_table():
 def generate_save_round1_matchups():
     """ Function to generate and save round1 matchups based on players ratings only """
 
+    generate_players_round1_matchup_ref_rating()
     # 1. Generate the 1st pairs of players for Round1
     a = players_matchup_reference_rating
     x = slice(0,4)
@@ -632,6 +634,7 @@ def generate_save_round1_matchups():
         with open(filename, "w") as f:
             json.dump(json_object, f, indent=4)
         o += 1
+    tournament.update_tournament_rounds()
 
 
 ###### --- 2. VIEW ROUND1 MATCHUPS FROM DB --
@@ -773,6 +776,7 @@ def generate_save_round2_matchups():
         with open(filename, "w") as f:
             json.dump(json_object, f, indent=4)
         o += 1
+    tournament.update_tournament_rounds()
 
 
 ###### --- 2. VIEW ROUND2 MATCHUPS FROM DB --
@@ -933,6 +937,7 @@ def generate_save_round3_matchups():
                     json.dump(json_object, f, indent=4)
                 h += 1
         o += 1
+    tournament.update_tournament_rounds()
         ## -- Take 'em back to main menu.
 
 
@@ -1114,6 +1119,7 @@ def generate_save_round4_matchups():
                     json.dump(json_object, f, indent=4)
                 h += 1
         o += 1
+    tournament.update_tournament_rounds()
 
 
 ###### --- 2. VIEW ROUND4 MATCHUPS FROM DB --
@@ -1282,11 +1288,4 @@ if __name__=="__main__":
     print("\n===================== 👀 ===================\n")
 
 else:
-    # view_unsorted_players_list()
-
-
-    # -- 'generate_matchups' must be on so that rounds instance can be used in tournament.py:
-    # generate_matchups()
-    
-    # view_round1_matchups()
     pass

@@ -10,9 +10,7 @@ import pandas as pd
 import datetime
 
 from model import tournament, players
-# import model
 import view
-# import controller as co
 
 
 """ START USER/PLAYERS MATCH/ROUNDS SCRIPT /!!!\ """
@@ -38,28 +36,20 @@ if __name__=="__main__":
             user_choice = input("\nTaper votre choix: ")
             if user_choice == "1":
                 players.update_player_lname()
-             
             elif user_choice == "2":
                 players.update_player_fname()
-            
             elif user_choice == "3":
                 players.update_player_gender()
-            
             elif user_choice == "4":
                 players.update_player_birth_date()
-            
             elif user_choice == "5":
                 players.update_player_rating()
-            
             elif user_choice == "6":
                 players.update_player_score()
-            
             elif user_choice == "7":
                 players.erase_all_scores()
-            
             elif user_choice == "8":
                 break
-            
             else:
                 view.error_msg()
 
@@ -71,31 +61,58 @@ if __name__=="__main__":
         while True:
             """ Launching Program """
             
-            view.update_tournament_menu_in()
+            ## w/o menu sys
+             
+            print("\nVoici les informations actuelles sur le tournoi.")
+            print("Taper le chiffre de votre choix pour effectuer une modification:\n")
+            h = 1
+            for i in tournament.json_object['tournaments_db']['1']:
+                if h!=5 and h!=6:
+                    print(f"{[h]} {i}: {tournament.json_object['tournaments_db']['1'][i]}")
+                h += 1
+            print("[0] Menu Principal.")
+            
             user_choice = input("\nTaper votre choix: ")
             if user_choice == "1":
+                print("\n--------------------------------------------------")
+                print(tournament.json_object['tournaments_db']['1']['Nom du tournoi'])
                 tournament.update_tournament_name()
-                
             elif user_choice == "2":
+                print("\n--------------------------------------------------")
+                print(tournament.json_object['tournaments_db']['1']['Lieu'])
                 tournament.update_tournament_location()
-               
             elif user_choice == "3":
+                print("\n--------------------------------------------------")
+                print(tournament.json_object['tournaments_db']['1']['Date'])
                 tournament.update_tournament_date()
-                
-            elif user_choice == "4":
-                view.contact_us_quick_msg()
+            if user_choice == "4":
+                print("\n--------------------------------------------------")
+                print(tournament.json_object['tournaments_db']['1']['Nombre de tours'])
+                tournament.update_tournament_number_of_turns()
             elif user_choice == "5":
-                tournament.update_tournament_time_control()
-                
+                print("\n--------------------------------------------------")
+                print(tournament.json_object['tournaments_db']['1']['Tournées'])
+                tournament.update_tournament_rounds()
             elif user_choice == "6":
-                tournament.update_tournament_description()
-                
+                print("\n--------------------------------------------------")
+                print(tournament.json_object['tournaments_db']['1']['Joueurs'])
+                tournament.update_tournament_players_info()
             elif user_choice == "7":
+                print("\n--------------------------------------------------")
+                print(tournament.json_object['tournaments_db']['1']['Contrôle du temps'])
+                tournament.update_tournament_time_control()
+            elif user_choice == "8":
+                print("\n--------------------------------------------------")
+                print(tournament.json_object['tournaments_db']['1']['Description'])
+                tournament.update_tournament_description()
+            elif user_choice == "0":
+                print("\n--------------------------------------------------")
+                print("Retour au Menu Principal")
                 break
-            
             else:
-                view.error_msg()
-
+                print("\n==================================================")
+                print(f"Vous avez tapé '{user_choice}'.\nChoisissez à nouveau un chiffre sur le menu, svp.\n")
+            
 
     """ Starting Menus """
 
@@ -144,28 +161,6 @@ if __name__=="__main__":
                 print(f"😅 Vous avez entré '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 7.\n")
 
 
-    '''
-    ## -- Players Menu --
-    def exec_p_menu1():
-        """ function to launch players menu within the current file"""
-
-        while True:
-            """ Launching Program """
-            view.players_menu()
-            user_choice = input("\nTaper votre choix: ")
-            if user_choice == "1":
-                update_players_menu()
-            elif user_choice == "2":
-                print("Accéder à l'actualisation des joueurs......")
-                # menu_players.exec_p_menu2()
-            elif user_choice == "3":
-                exec_main_menu1()
-            elif user_choice == "4":
-                break
-            else:
-                view.error_msg()
-    '''
-
     ## -- Tournament Menu --
     def exec_t_menu1():
         """ function to launch reports menu within the current file"""
@@ -183,10 +178,9 @@ if __name__=="__main__":
                 players.add_players()
                 players.save_players_data()
             elif user_choice == "3":
-                update_tournament_menu_out()
+                tournament.update_tournament_info()
             elif user_choice == "4":
                 update_players_menu()
-            
             elif user_choice == "5":
                 break
             elif user_choice == "6":
@@ -207,29 +201,37 @@ if __name__=="__main__":
             if user_choice == "1":
                 tournament.add_tournament()
                 tournament.save_tournament_data()
+                players.clear_roundx_in_tournament_table()
+                players.add_roundx_in_tournament_table()
                 tournament.update_tournament_players_info()
             elif user_choice == "2":
                 players.add_players()
                 players.save_players_data()
+                players.save_players_indexes_in_tournaments_db()
             elif user_choice == "3":
-                ## voir les matches
+                view.all_matches_info()
+                # view.view_round1_matchups()
                 pass
             elif user_choice == "4":
                 players.update_player_score()
-                # update_players_menu()
+                players.generate_players_round1_matchup_ref_rating()
+                players.generate_players_matchup_reference_score_and_rating()
+
             elif user_choice == "5":
-                # voir les rapports
+                view.players_info()
                 pass
             elif user_choice == "6":
                 update_players_menu()
             elif user_choice == "7":
-                update_tournament_menu_out()
+                # update_tournament_menu_out()
+                tournament.update_tournament_info()
             elif user_choice == "8":
                 view.byebye()
                 break
             else:
                 view.error_msg()
     exec_main_menu1()
+    
 
 else:
     pass

@@ -115,7 +115,7 @@ def all_matches_info():
     df = pd.DataFrame(k, index=p)
     print(df)
     print()
-all_matches_info()
+# all_matches_info()
 
 
 #############################   MATCHES VIEWS #########################

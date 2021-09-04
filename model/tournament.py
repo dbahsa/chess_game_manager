@@ -74,12 +74,12 @@ def add_tournament():
                     input("- Description: ")
                     )
     print("\n🤓 Bravo! Le tournoi a bien été enregistré.\n")
-# add_tournament()
+
 
 # -- Done! -- Save First Tournament Info --
 def save_tournament_data():
     """ save tournament data """
-    db = TinyDB('./data.json')
+    db = TinyDB('../data.json')
     tournaments_table = db.table('tournaments_db')
     tournaments_table.truncate()  # clear up the table first
     tournaments_table.insert_multiple(tournaments)
@@ -156,7 +156,6 @@ def update_tournament_players_info():
     json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
-    # print(f"\nLes indices des joueurs sont: {json_object['tournaments_db']['1']['Joueurs']}\n")
     ## -- Send the user back to the main menu
 
 
@@ -238,24 +237,6 @@ def update_tournament_info():
         else:
             print("\n==================================================")
             print(f"Vous avez tapé '{user_choice}'.\nChoisissez à nouveau un chiffre sur le menu, svp.\n")
-
-    ## -- DO NOT ERASE THESE -- scripts used to update functions above --
-        # with open(filename, "r") as f:
-        #     json_object = json.load(f)
-        # print(json_object['tournaments_db']['1'])
-        # print()
-        # print(json_object['tournaments_db']['1']['Nom du tournoi'])
-        # print(json_object['tournaments_db']['1']['Lieu'])
-        # print(json_object['tournaments_db']['1']['Date'])
-        # print(json_object['tournaments_db']['1']['Nombre de tours'])
-        # print(json_object['tournaments_db']['1']['Tournées'])
-        # print(json_object['tournaments_db']['1']['Joueurs'])
-        # print(json_object['tournaments_db']['1']['Contrôle du temps'])
-        # print(json_object['tournaments_db']['1']['Description'])
-        # print("\n-- Current Tournament Info --\n")
-        # for i in json_object['tournaments_db']['1']:
-        #     print(f"{i}: {json_object['tournaments_db']['1'][i]}")
-        # print("--")
 
 
 """View Tournament Info"""
