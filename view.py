@@ -165,10 +165,21 @@ def tournament_menu():
     c = "\n      [2] pour ajouter huit joueurs"
     d = "\n      [3] pour modifier les données du tournoi"
     e = "\n      [4] pour modifier les données des joueurs"
-    f = "\n      [5] pour aller au 'MENU JOUEUR'"
-    g = "\n      [6] pour revenir au 'MENU PRINCIPAL'"
-    h = "\n      [7] pour arrêter le programme\n"
-    menu = a+b+c+d+e+f+g+h
+    g = "\n      [5] pour arrêter le programme"
+    h = "\n      [6] pour revenir au 'MENU PRINCIPAL'"
+    menu = a+b+c+d+e+g+h
+    print(menu)
+
+
+## -- View Starting Players Menu --
+def players_menu():
+    """ Menu interface """
+    # Players menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
+    c = "\n------------ 🔥 MENU JOUEURS 🔥 ---------------"
+    x = "\nTaper le chiffre:"
+    d = "\n[1] pour Créer            [2] pour Actualiser"
+    f = "\n[3] pour Menu Principal   [4] pour Arrêter\n"
+    menu = c+x+d+f
     print(menu)
 
 
@@ -181,8 +192,23 @@ def update_tournament_menu_in():
     c = "\n      [4] pour modifier le nombre de tours"
     d = "\n      [5] pour modifier le contrôle du temps"
     e = "\n      [6] pour modifier la description du tournoi"
-    f = "\n      [7] pour le 'MENU JOUEUR'\t[8] pour le 'MENU PRINCIPAL'\n"
+    f = "\n      [7] pour arrêter \t[8] pour le 'MENU PRINCIPAL'\n"
     menu = a+b+c+d+e+f
+    print(menu)
+
+
+## -- view Update Players Menu
+def update_players_menu():
+    """ Menu interface """
+    
+    a = "\n------------------ 🔥 ACTUALISATION DES JOUEURS 🔥 --------------------"
+    b = "\nTaper [1] pour le nom\t[2] pour le prénom\t[3] pour le sexe"
+    c = "\n      [4] pour modifier la date de naissance"
+    d = "\n      [5] pour modifier le nombre de point au classement général"
+    e = "\n      [6] pour ajouter ou modifier un score"
+    f = "\n      [7] pour effacer tous les scores 🚨"
+    g = "\n      [8] pour arrêter \t[9] pour le 'MENU PRINCIPAL'\n"
+    menu = a+b+c+d+e+f+g
     print(menu)
 
 
@@ -200,3 +226,6 @@ def byebye():
 def error_msg():
     print(f"😅 Mauvaise saisie...\nMerci d'essayer à nouveau.\n")
 
+## -- Contact us msg --
+def contact_us_quick_msg():
+    print("🚨 Merci de nous joindre pour modifier le nombre de tours, qui par défaut est égal à 4")

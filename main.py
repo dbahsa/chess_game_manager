@@ -31,53 +31,41 @@ if __name__=="__main__":
     def update_players_menu():
         """ function to launch players menu within the current file"""
 
-        def update_players_menu():
-            """ Menu interface """
-            
-            a = "\n------------------ 🔥 ACTUALISATION DES JOUEURS 🔥 --------------------"
-            b = "\nTaper [1] pour le nom\t[2] pour le prénom\t[3] pour le sexe"
-            c = "\n      [4] pour modifier la date de naissance"
-            d = "\n      [5] pour modifier le nombre de point au classement général"
-            e = "\n      [6] pour ajouter ou modifier un score"
-            f = "\n      [7] pour effacer tous les scores 🚨"
-            g = "\n      [8] pour le 'MENU JOUEUR'\t[9] pour le 'MENU PRINCIPAL'\n"
-            menu = a+b+c+d+e+f+g
-            print(menu)
-
         while True:
             """ Launching Program """
             
-            update_players_menu()
+            view.update_players_menu()
             user_choice = input("\nTaper votre choix: ")
             if user_choice == "1":
-                update_player_lname()
-                break
+                players.update_player_lname()
+             
             elif user_choice == "2":
-                update_player_fname()
-                break
+                players.update_player_fname()
+            
             elif user_choice == "3":
-                update_player_gender()
-                break
+                players.update_player_gender()
+            
             elif user_choice == "4":
-                update_player_birth_date()
-                break
+                players.update_player_birth_date()
+            
             elif user_choice == "5":
-                update_player_rating()
-                break
+                players.update_player_rating()
+            
             elif user_choice == "6":
-                update_player_score()
-                break
+                players.update_player_score()
+            
             elif user_choice == "7":
-                erase_all_scores()
-                break
+                players.erase_all_scores()
+            
             elif user_choice == "8":
-                exec_p_menu1()
+                view.byebye()
                 break
+            
             elif user_choice == "9":
                 exec_main_menu1()
-                break
+            
             else:
-                print(f"😅 Vous avez saisi '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 9.\n")
+                view.error_msg()
     # update_players_menu()
 
 
@@ -100,7 +88,7 @@ if __name__=="__main__":
                 tournament.update_tournament_date()
                 
             elif user_choice == "4":
-                print("🚨 Merci de nous joindre pour modifier le nombre de tours, qui par défaut est égal à 4")
+                view.contact_us_quick_msg()
             elif user_choice == "5":
                 tournament.update_tournament_time_control()
                 
@@ -108,13 +96,13 @@ if __name__=="__main__":
                 tournament.update_tournament_description()
                 
             elif user_choice == "7":
-                exec_p_menu1()
-            
+                view.byebye()
+                break
             elif user_choice == "8":
                 exec_main_menu1()
             
             else:
-                print(f"😅 Vous avez tapé '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 8.\n")
+                view.error_msg()
     # update_tournament_menu_out()
 
 
@@ -165,43 +153,30 @@ if __name__=="__main__":
                 print(f"😅 Vous avez entré '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 7.\n")
     # exec_r_menu1()
 
-
+    '''
     ## -- Players Menu --
     def exec_p_menu1():
         """ function to launch players menu within the current file"""
 
-        def players_menu():
-            """ Menu interface """
-            # Players menu: [1]Create | [2]Open | [3]Go Back | [4]Exit
-            c = "\n------------ 🔥 MENU JOUEURS 🔥 ---------------"
-            x = "\nTaper le chiffre:"
-            d = "\n[1] pour Créer            [2] pour Actualiser"
-            f = "\n[3] pour Menu Principal   [4] pour Arrêter\n"
-            menu = c+x+d+f
-            print(menu)
-
         while True:
             """ Launching Program """
-            players_menu()
+            view.players_menu()
             user_choice = input("\nTaper votre choix: ")
             if user_choice == "1":
-                print('Créer un joueur')
-                # menu_tournament.exec_t_menu2()
+                update_players_menu()
             elif user_choice == "2":
                 print("Accéder à l'actualisation des joueurs......")
                 # menu_players.exec_p_menu2()
             elif user_choice == "3":
                 exec_main_menu1()
-                break
             elif user_choice == "4":
-                print("Merci d'avoir utilisé notre programme et à bientôt 😉")
+                view.byebye()
                 break
             else:
-                print(f"😅 Vous avez tapé '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 4.\n")
+                view.error_msg()
     # exec_p_menu1()
+    '''
 
-
-    
     ## -- Tournament Menu --
     def exec_t_menu1():
         """ function to launch reports menu within the current file"""
@@ -221,14 +196,13 @@ if __name__=="__main__":
             elif user_choice == "3":
                 update_tournament_menu_out()
             elif user_choice == "4":
-                players.update_players_menu()
+                update_players_menu()
+            
             elif user_choice == "5":
-                exec_p_menu1()
+                # view.byebye()
+                break
             elif user_choice == "6":
                 exec_main_menu1()
-            elif user_choice == "7":
-                view.byebye()
-                break
             else:
                 view.error_msg()
     # exec_t_menu1()
@@ -245,13 +219,10 @@ if __name__=="__main__":
             user_choice = input("\nTaper votre choix: ")
             if user_choice == "1":
                 exec_t_menu1()
-                break
             elif user_choice == "2":
-                exec_p_menu1()
-                break
+                update_players_menu()
             elif user_choice == "3":
                 exec_r_menu1()
-                break
             elif user_choice == "4":
                 view.byebye()
                 break
