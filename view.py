@@ -172,6 +172,20 @@ def tournament_menu():
     print(menu)
 
 
+## -- View Update Tournament Menu
+def update_tournament_menu_in():
+    """ Menu interface """
+    
+    a = "\n------------------ 🔥 ACTUALISATION DU TOURNOI 🔥 -------------------"
+    b = "\nTaper [1] pour le nom\t[2] pour le lieu\t[3] pour la date"
+    c = "\n      [4] pour modifier le nombre de tours"
+    d = "\n      [5] pour modifier le contrôle du temps"
+    e = "\n      [6] pour modifier la description du tournoi"
+    f = "\n      [7] pour le 'MENU JOUEUR'\t[8] pour le 'MENU PRINCIPAL'\n"
+    menu = a+b+c+d+e+f
+    print(menu)
+
+
 ## -- Welcome Message--
 def welcome_msg():
     print("\nBonjour et bienvenu!")
