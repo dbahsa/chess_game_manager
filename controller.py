@@ -136,7 +136,7 @@ def update_tournament_players_info():
     """ Function to update Tournament Players Indexes in db file """
 
     print(f"\nLes indices des joueurs sont: {json_object['tournaments_db']['1']['Joueurs']}\n")
-    ## -- Append players indexes from players_db table
+    ## -- Add players indexes from players_db table
     json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
     with open(filename, "w") as f:
         json.dump(json_object, f, indent=4)
@@ -167,80 +167,6 @@ def update_tournament_description():
     print(f"\nNouvelle Description: {json_object['tournaments_db']['1']['Description']}")
     exec_t_menu1()
 
-'''
-# -- Done! -- Update User Tournalent Input in db file --
-def update_tournament_info():
-    """Menu to update tournament info"""
-    
-    while True:
-        print("\nVoici les informations actuelles sur le tournoi.")
-        print("Taper le chiffre de votre choix pour effectuer une modification:\n")
-        h = 1
-        for i in json_object['tournaments_db']['1']:
-            if h!=5 and h!=6:
-                print(f"{[h]} {i}: {json_object['tournaments_db']['1'][i]}")
-            h += 1
-        print("[0] Menu Principal.")
-        
-        user_choice = input("\nTaper votre choix: ")
-        if user_choice == "1":
-            print("\n--------------------------------------------------")
-            print(json_object['tournaments_db']['1']['Nom du tournoi'])
-            update_tournament_name()
-        elif user_choice == "2":
-            print("\n--------------------------------------------------")
-            print(json_object['tournaments_db']['1']['Lieu'])
-            update_tournament_location()
-        elif user_choice == "3":
-            print("\n--------------------------------------------------")
-            print(json_object['tournaments_db']['1']['Date'])
-            update_tournament_date()
-        if user_choice == "4":
-            print("\n--------------------------------------------------")
-            print(json_object['tournaments_db']['1']['Nombre de tours'])
-            update_tournament_number_of_turns()
-        elif user_choice == "5":
-            print("\n--------------------------------------------------")
-            print(json_object['tournaments_db']['1']['Tournées'])
-            update_tournament_rounds()
-        elif user_choice == "6":
-            print("\n--------------------------------------------------")
-            print(json_object['tournaments_db']['1']['Joueurs'])
-            update_tournament_players_info()
-        elif user_choice == "7":
-            print("\n--------------------------------------------------")
-            print(json_object['tournaments_db']['1']['Contrôle du temps'])
-            update_tournament_time_control()
-        elif user_choice == "8":
-            print("\n--------------------------------------------------")
-            print(json_object['tournaments_db']['1']['Description'])
-            update_tournament_description()
-        elif user_choice == "0":
-            print("\n--------------------------------------------------")
-            print("Retour au Menu Principal")
-            break
-        else:
-            print("\n==================================================")
-            print(f"Vous avez tapé '{user_choice}'.\nChoisissez à nouveau un chiffre sur le menu, svp.\n")
-
-    ## -- DO NOT ERASE THESE -- scripts used to update functions above --
-        # with open(filename, "r") as f:
-        #     json_object = json.load(f)
-        # print(json_object['tournaments_db']['1'])
-        # print()
-        # print(json_object['tournaments_db']['1']['Nom du tournoi'])
-        # print(json_object['tournaments_db']['1']['Lieu'])
-        # print(json_object['tournaments_db']['1']['Date'])
-        # print(json_object['tournaments_db']['1']['Nombre de tours'])
-        # print(json_object['tournaments_db']['1']['Tournées'])
-        # print(json_object['tournaments_db']['1']['Joueurs'])
-        # print(json_object['tournaments_db']['1']['Contrôle du temps'])
-        # print(json_object['tournaments_db']['1']['Description'])
-        # print("\n-- Current Tournament Info --\n")
-        # for i in json_object['tournaments_db']['1']:
-        #     print(f"{i}: {json_object['tournaments_db']['1'][i]}")
-        # print("--")
-'''
 
 ########################### PLAYERS MANAGEMENT ########################
 
@@ -249,42 +175,57 @@ def add_players():
     """ function to instantiate players"""
     
     print("\nEnregistrement des 8 joueurs...")
+    players_table.truncate()
     for i in range(1,9):
         print(f"\nEntrer les informations sur le joueur n°{i}")
         lname = input("- Nom de famille: ")
         fname = input("- Prénom: ")
-        birth_date = input("- Date de naissance telle que jj/mm/aaaa (ex: 18/02/1973): ")
+        # day_birth = input("- Jour de naissance, en chiffre: ")
+        # month_birth = input("- Mois de naissance, en chiffre: ")
+        # year_birth = input("- Année de naissance, en chiffre: ")
+        # birth_date = f"{day_birth}/{month_birth}/{year_birth}"
         gender = input("- Sexe [H/F]: ").upper()
         
         while True:
-            rating = input("- Classement (en chiffre svp): ")
+            day_birth = input("- Jour de naissance, en chiffre svp: ")
+            month_birth = input("- Mois de naissance, en chiffre svp: ")
+            year_birth = input("- Année de naissance, en chiffre svp: ")
+            rating = input("- Classement, en chiffre svp: ")
             try:
-                if rating.isdigit():
+                if rating.isdigit() and day_birth.isdigit() and year_birth.isdigit():
+                    birth_date = f"{day_birth}/{month_birth}/{year_birth}"
                     p = model.Player(lname,fname,birth_date,gender,rating)
                     all_players_db.append(p.single_player_db)
                     print(f"\nJoueur n°{i} enregistré.")
+                    ## -- Saving players info to db file:
+                    players_table.insert_multiple(all_players_db)
+                    print("Fin de l'enregistrement des joueurs.\n")
+                    ## -- Add players indexes from players_db table
+                    json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
+                    with open(filename, "w") as f:
+                        json.dump(json_object, f, indent=4)
+                    # print(f"\nNouveaux Joueurs: {json_object['tournaments_db']['1']['Joueurs']}")
                     break
             except:
                 print("Erreur de saisie... Merci de recommencer svp.")
             else:
                 print("Veuillez taper un chiffre svp. Merci.")
-            
-    # p = model.Player(lname,fname,birth_date,gender,rating)
-    # all_players_db.append(p.single_player_db)
-    # print(f"\nJoueur n°{i} enregistré.")
-    # save_players_data()
-    ## -- Save data:
-    db = TinyDB(filename)
-    players_table = db.table('players_db')
-    players_table.truncate()
-    players_table.insert_multiple(all_players_db)
 
-    print("Fin de l'enregistrement des joueurs.\n")
-    update_tournament_players_info()
-    update_players_menu()
+    # ## -- Saving players info to db file:
+    # db = TinyDB(filename)
+    # players_table = db.table('players_db')
+    # players_table.truncate()
+    # players_table.insert_multiple(all_players_db)
+    # print("Fin de l'enregistrement des joueurs.\n")
+    # ## -- Add players indexes from players_db table
+    # json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
+    # with open(filename, "w") as f:
+    #     json.dump(json_object, f, indent=4)
+    # print(f"\nIndexes Joueurs: {json_object['tournaments_db']['1']['Joueurs']}")
+    # update_players_menu()
 
-# add_players()
-update_tournament_players_info()
+add_players()
+# update_tournament_players_info()
 
 """ Saving players data into db file /!!!\ """
 
@@ -1607,24 +1548,12 @@ def exec_p_menu1():
 def exec_t_menu1():
     """ function to launch reports menu within the current file"""
 
-    def tournament_menu():
-        """ Menu interface """
-        
-        a = "\n---------------- 🔥 MENU TOURNOI 🔥 ---------------"
-        b = "\nTaper [1] pour créer un nouveau tournoi"
-        c = "\n      [2] pour ajouter huit joueurs"
-        d = "\n      [3] pour modifier les données du tournoi"
-        e = "\n      [4] pour modifier les données des joueurs"
-        f = "\n      [5] pour aller au 'MENU JOUEUR'"
-        g = "\n      [6] pour revenir au 'MENU PRINCIPAL'"
-        h = "\n      [7] pour arrêter le programme\n"
-        menu = a+b+c+d+e+f+g+h
-        print(menu)
+    view.tournament_menu()
 
     while True:
         """ Launching Program """
         
-        tournament_menu()
+        view.tournament_menu()
         user_choice = input("\nTaper votre choix: ")
         if user_choice == "1":
             add_tournament()
@@ -1650,7 +1579,7 @@ def exec_t_menu1():
             break
         else:
             print(f"😅 Vous avez entré '{user_choice}'.\n🙂 Merci de faire un choix entre 1 et 7.\n")
-# exec_t_menu1()
+
 
 
 ## -- Main Menu --

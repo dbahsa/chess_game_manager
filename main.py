@@ -2,70 +2,87 @@
 # -*- coding: utf-8 -*-
 
 
-import os
+""" modules & packages """
+import json
+from dataclasses import dataclass, field
+from tinydb import TinyDB
+import pandas as pd
+import datetime
 
-from model import players
-
-## -- Done! -- Func - Ranked Players by score and rating
-def view_sorted_players_by_score_and_rating():
-    """View sorted players by score and rating"""
-
-    print('\n🙂 Classement des joueurs par score et par nombre de points au classement général:\n')
-    k=0
-    for u in players.sorted_players_by_score_and_rating:
-        print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}\t{u[1]['Score']}")
-        k +=1
-view_sorted_players_by_score_and_rating()
+# import model
+import view
+# import controller as co
 
 
-# |- program:
-# |—— controller.py (cls: menu)
-# |—— model.py (cls: challengers + tournt + db + menu)
-# |—— view.py (view func)
-# |—— db.json
+""" START USER/PLAYERS MATCH/ROUNDS SCRIPT /!!!\ """
 
+if __name__=="__main__":
+    """Launch program to add/update players, macthes, and rounds"""
 
-""" I. LAUNCHING PROGRAM: First create data and mvc folders, and __init__.py file."""
-
-## -- Create Data & MVC Folders -- 
-def create_data_and_mvc_folders():
-    """Function to create data nd mvc folder"""
-
-    dir = os.path.join("./data/")
-    if not os.path.exists(dir):
-        os.mkdir(dir)
-
-    dir = os.path.join("./model/")
-    if not os.path.exists(dir):
-        os.mkdir(dir)
-
-    dir = os.path.join("./view/")
-    if not os.path.exists(dir):
-        os.mkdir(dir)
-
-    dir = os.path.join("./controller/")
-    if not os.path.exists(dir):
-        os.mkdir(dir)
-
-
-## -- Add __init__.py in Data and MVC folders -- 
-def add__init__file():
-    """Function to add __init__.py in Data and MVC folders"""
     
-    filename = "__init__.py"
+    
+    ## -- Tournament Menu --
+    def exec_t_menu1():
+        """ function to launch reports menu within the current file"""
 
-    f = open("./data/"+filename, "w")
-    f.close()
+        view.tournament_menu()
+        while True:
+            """ Launching Tournament Menu"""
+            
+            view.tournament_menu()
+            user_choice = input("\nTaper votre choix: ")
+            if user_choice == "1":
+                add_tournament()
+                break
+            elif user_choice == "2":
+                add_players()
+                update_tournament_players_info()
+                break
+            elif user_choice == "3":
+                update_tournament_menu()
+                break
+            elif user_choice == "4":
+                update_players_menu()
+                break
+            elif user_choice == "5":
+                exec_p_menu1()
+                break
+            elif user_choice == "6":
+                exec_main_menu1()
+                break
+            elif user_choice == "7":
+                view.byebye()
+                break
+            else:
+                view.error_msg()
 
-    g = open("./model/"+filename, "w")
-    g.close()
 
-    h = open("./view/"+filename, "w")
-    h.close()
+    
+    ## -- Main Menu --
+    def exec_main_menu1():
+        """ function to launch main menu within the current file"""
 
-    i = open("./controller/"+filename, "w")
-    i.close()
+        view.welcome_msg()
+        while True:
+            """ Launching Main Menu Interface """
+            
+            view.main_menu()
+            user_choice = input("\nTaper votre choix: ")
+            if user_choice == "1":
+                exec_t_menu1()
+                break
+            elif user_choice == "2":
+                exec_p_menu1()
+                break
+            elif user_choice == "3":
+                exec_r_menu1()
+                break
+            elif user_choice == "4":
+                view.byebye()
+                break
+            else:
+                view.error_msg()
+    exec_main_menu1()
 
-
-"""II.  Call Main Menu"""
-
+else:
+    pass

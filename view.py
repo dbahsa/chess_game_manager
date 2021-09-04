@@ -6,6 +6,10 @@ import json
 from tinydb import TinyDB
 import pandas as pd
 
+import model
+# import controller
+
+
 ### PRINTOUTS FROM DB ONLY !!!! ### 
 
 ########################### TOURNAMENT VARIABLES & TOOLS ########################
@@ -23,14 +27,6 @@ with open(filename, "r") as f:
 df = pd.DataFrame(json_object['players_db'])
 real_db = df.T
 
-s = []
-for k in json_object['players_db']:
-    s.append(k)
-print(s)
-print()
-d = [j for j in json_object['players_db']]
-print(d)
-
 
 ########################### TOURNAMENT VIEWS ########################
 
@@ -46,7 +42,6 @@ def view_tournament_info():
         print(f"{[h]} {i}: {json_object['tournaments_db']['1'][i]}")
         h += 1
 
-# view_tournament_info()
 ############################# PLAYERS VIEWS #########################
 
 """ View players data from db file /!!!\ """
@@ -146,18 +141,48 @@ def view_round4_matchups():
 ############################# MENU VIEWS #########################
 
 
-### -- View Main Menu --
+## -- View Main Menu --
 def main_menu():
     """ Main Menu interface """
     
     a = "\n 🏁 GESTIONNAIRE DE TOURNOI D'ECHECS 🏁"
     b = "\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    c = "\n~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~~"
-    x = "\n Taper le chiffre:"
+    c = "\n~~~~~~~~~~ 🏠 MENU PRINCIPAL ~~~~~~~~~~~"
+    x = "\n\n   ☰ Pour choisir votre menu, taper:\n"
     d = "\n [1] pour Tournoi       [2] pour Joueurs"
     f = "\n [3] pour Rapports      [4] pour Arrêter"
-    g = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    g = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     menu = a+b+c+x+d+f+g
     print()
     print(menu)
+
+## -- View Tournament Menu --
+def tournament_menu():
+    """ Menu interface """
+    
+    a = "\n---------------- 🔥 MENU TOURNOI 🔥 ---------------"
+    b = "\nTaper [1] pour créer un nouveau tournoi"
+    c = "\n      [2] pour ajouter huit joueurs"
+    d = "\n      [3] pour modifier les données du tournoi"
+    e = "\n      [4] pour modifier les données des joueurs"
+    f = "\n      [5] pour aller au 'MENU JOUEUR'"
+    g = "\n      [6] pour revenir au 'MENU PRINCIPAL'"
+    h = "\n      [7] pour arrêter le programme\n"
+    menu = a+b+c+d+e+f+g+h
+    print(menu)
+
+
+## -- Welcome Message--
+def welcome_msg():
+    print("\nBonjour et bienvenu!")
+
+
+## -- Goodbye msg --
+def byebye():
+    print("\n🥸  Merci d'avoir utilisé ce programme, et à bientôt 👍🤓\n")
+
+
+## -- Error msg --
+def error_msg():
+    print(f"😅 Mauvaise saisie...\nMerci d'essayer à nouveau.\n")
 
