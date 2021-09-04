@@ -1,16 +1,12 @@
 {
     "players_db": {
         "1": {
-            "Nom de famille": "Jacobs",
+            "Nom de famille": "Karl",
             "Pr\u00e9nom": "Marc",
             "Date de naissance": "12/02/1980",
             "Sexe": "H",
             "Classement": 1234,
-            "Score": [
-                1.0,
-                0.5,
-                0.5
-            ],
+            "Score": [],
             "Tournois": []
         },
         "2": {
@@ -19,11 +15,7 @@
             "Date de naissance": "13/04/1987",
             "Sexe": "H",
             "Classement": 2345,
-            "Score": [
-                0.0,
-                0.5,
-                0.5
-            ],
+            "Score": [],
             "Tournois": []
         },
         "3": {
@@ -32,11 +24,7 @@
             "Date de naissance": "23/09/1977",
             "Sexe": "H",
             "Classement": 3445,
-            "Score": [
-                0.5,
-                1.0,
-                0.5
-            ],
+            "Score": [],
             "Tournois": []
         },
         "4": {
@@ -45,11 +33,7 @@
             "Date de naissance": "24/03/1990",
             "Sexe": "F",
             "Classement": 4543,
-            "Score": [
-                0.0,
-                0.5,
-                0.5
-            ],
+            "Score": [],
             "Tournois": []
         },
         "5": {
@@ -58,11 +42,7 @@
             "Date de naissance": "16/08/2000",
             "Sexe": "F",
             "Classement": 1221,
-            "Score": [
-                0.5,
-                0.0,
-                0.5
-            ],
+            "Score": [],
             "Tournois": []
         },
         "6": {
@@ -71,11 +51,7 @@
             "Date de naissance": "14/09/1950",
             "Sexe": "H",
             "Classement": 9999,
-            "Score": [
-                0.5,
-                0.0,
-                0.5
-            ],
+            "Score": [],
             "Tournois": []
         },
         "7": {
@@ -84,11 +60,7 @@
             "Date de naissance": "20/05/2008",
             "Sexe": "F",
             "Classement": 9998,
-            "Score": [
-                1.0,
-                0.5,
-                0.5
-            ],
+            "Score": [],
             "Tournois": []
         },
         "8": {
@@ -97,11 +69,7 @@
             "Date de naissance": "23/08/1987",
             "Sexe": "F",
             "Classement": "4433",
-            "Score": [
-                0.5,
-                1.0,
-                0.5
-            ],
+            "Score": [],
             "Tournois": []
         }
     },
@@ -154,6 +122,14 @@
                 }
             },
             "Joueurs": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
                 "1",
                 "2",
                 "3",

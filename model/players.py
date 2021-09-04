@@ -10,7 +10,7 @@ import pandas as pd
 import datetime
 import pprint
 
-import tournament
+# import tournament
 
 
 """ players variables used in this file script """
@@ -108,7 +108,10 @@ def save_players_data():
     players_table = db.table('players_db')
     players_table.truncate()
     players_table.insert_multiple(all_players_db)
-    tournament.update_tournament_players_info()
+    ## -- Add players indexes from players_db table
+    json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
+    with open(filename, "w") as f:
+        json.dump(json_object, f, indent=4)
 
 
 ## --
@@ -139,7 +142,6 @@ def update_player_lname():
     """ Function to update players last name in db file """
 
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
     while True:
         msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour modifier le 'Nom de famille' d'un joueur, ", end="")
@@ -157,7 +159,6 @@ def update_player_lname():
                 print(f"🎉 Le nouveau 'Nom de famille' de {real_db.at[user_choice, 'Prénom']} est ", end="")
                 print(f"{real_db.at[user_choice, 'Nom de famille']}.")
                 print()
-                view_players_info()
             if int(user_choice) not in range(1,9):
                 print(f"💡 Vous avez tapé [{user_choice}].\n")
                 print()
@@ -167,7 +168,6 @@ def update_player_lname():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
             print()
 
 
@@ -176,7 +176,6 @@ def update_player_fname():
     """ Function to update players first name in db file """
 
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
     while True:
         msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour modifier le 'Prénom' d'un joueur, ", end="")
@@ -194,7 +193,6 @@ def update_player_fname():
                 print(f"🎉 Le nouveau 'Prénom' de {real_db.at[user_choice, 'Nom de famille']} est ", end="")
                 print(f"{real_db.at[user_choice, 'Prénom']}.")
                 print()
-                view_players_info()
             if int(user_choice) not in range(1,9):
                 print(f"💡 Vous avez tapé [{user_choice}].\n")
                 print()
@@ -204,7 +202,6 @@ def update_player_fname():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
             print()
 
 
@@ -213,7 +210,6 @@ def update_player_gender():
     """ Function to update players gender in db file """
 
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
     while True:
         msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour modifier le 'Sexe' d'un joueur, ", end="")
@@ -231,7 +227,6 @@ def update_player_gender():
                 print(f"🎉 Le nouveau 'Sexe' de {real_db.at[user_choice, 'Nom de famille']} est ", end="")
                 print(f"{real_db.at[user_choice, 'Sexe']}.")
                 print()
-                view_players_info()
             if int(user_choice) not in range(1,9):
                 print(f"💡 Vous avez tapé [{user_choice}].\n")
                 print()
@@ -241,7 +236,6 @@ def update_player_gender():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
             print()
 
 
@@ -250,7 +244,6 @@ def update_player_birth_date():
     """ Function to update players birth date in db file """
 
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
     while True:
         msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour modifier la 'Date de naissance' d'un joueur, ", end="")
@@ -268,7 +261,6 @@ def update_player_birth_date():
                 print(f"🎉 La nouvelle 'Date de naissance' de {real_db.at[user_choice, 'Nom de famille']}", end="")
                 print(f" est {real_db.at[user_choice, 'Date de naissance']}.")
                 print()
-                view_players_info()
             if int(user_choice) not in range(1,9):
                 print(f"💡 Vous avez tapé [{user_choice}].\n")
                 print()
@@ -278,7 +270,6 @@ def update_player_birth_date():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
             print()
 
 
@@ -287,7 +278,6 @@ def update_player_rating():
     """ Function to update players rating in db file """
 
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
     while True:
         msg = "veuillez taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour modifier le nombre de points d'un joueur au 'Classement' général, ", end="")
@@ -305,7 +295,6 @@ def update_player_rating():
                 print(f"🎉 Le nouveau nombre de points au 'Classement' général de ", end="")
                 print(f"{real_db.at[user_choice, 'Nom de famille']} est {real_db.at[user_choice, 'Classement']}.")
                 print()
-                view_players_info()
             if int(user_choice) not in range(1,9):
                 print(f"💡 Vous avez tapé [{user_choice}].\n")
                 print()
@@ -315,7 +304,6 @@ def update_player_rating():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
             print()
 
 
@@ -324,7 +312,6 @@ def add_player_score():
     """ Function to add players score in db file """
     
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
     while True:
         msg = "taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour ajouter le 'Score' d'un joueur, ", end="")
@@ -345,7 +332,6 @@ def add_player_score():
                         print(f" au 'Score' de {real_db.at[user_choice, 'Prénom']}", end="")
                         print(f" {real_db.at[user_choice, 'Nom de famille']}")
                         print()
-                        view_players_info()
                     else:
                         print("💥 Merci de saisir 'uniquement' un score de [0], [0.5] ou [1].")
                         continue
@@ -361,7 +347,6 @@ def add_player_score():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
             print()
 
 
@@ -370,7 +355,6 @@ def update_player_score():
     """ Function to update/add players score in db file """
     
     print("\n🚧 Procédons à l'actualisation des données...")
-    view_players_info()
     while True:
         msg = "taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour actualiser le 'Score' d'un joueur, ", end="")
@@ -413,7 +397,6 @@ def update_player_score():
                                     print(f" pour le match n°{update_score}", end="")
                                     print(f" est: {real_db.at[user_choice, 'Score']}")
                                     print()
-                                    view_players_info()
                                 else:
                                     print("💡 Merci de saisir 'uniquement' un score de [0], [0.5] ou [1].")
                                     continue
@@ -447,7 +430,6 @@ def update_player_score():
                             print(f" au 'Score' de {real_db.at[user_choice, 'Prénom']}", end="")
                             print(f" {real_db.at[user_choice, 'Nom de famille']}")
                             print()
-                            view_players_info()
                         else:
                             print("💥 Merci de saisir 'uniquement' un score de [0], [0.5] ou [1].")
                             continue
@@ -463,7 +445,6 @@ def update_player_score():
                 break
         except:
             print(f"\n💥 Erreur de saisie...")
-            view_players_info()
             print()
 
 
@@ -634,7 +615,10 @@ def generate_save_round1_matchups():
         with open(filename, "w") as f:
             json.dump(json_object, f, indent=4)
         o += 1
-    tournament.update_tournament_rounds()
+    ## -- Add players indexes from players_db table
+    json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
+    with open(filename, "w") as f:
+        json.dump(json_object, f, indent=4)
 
 
 ###### --- 2. VIEW ROUND1 MATCHUPS FROM DB --
@@ -776,7 +760,10 @@ def generate_save_round2_matchups():
         with open(filename, "w") as f:
             json.dump(json_object, f, indent=4)
         o += 1
-    tournament.update_tournament_rounds()
+        ## -- Add players indexes from players_db table
+    json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
+    with open(filename, "w") as f:
+        json.dump(json_object, f, indent=4)
 
 
 ###### --- 2. VIEW ROUND2 MATCHUPS FROM DB --
@@ -937,7 +924,10 @@ def generate_save_round3_matchups():
                     json.dump(json_object, f, indent=4)
                 h += 1
         o += 1
-    tournament.update_tournament_rounds()
+    ## -- Add players indexes from players_db table
+    json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
+    with open(filename, "w") as f:
+        json.dump(json_object, f, indent=4)
         ## -- Take 'em back to main menu.
 
 
@@ -1119,7 +1109,10 @@ def generate_save_round4_matchups():
                     json.dump(json_object, f, indent=4)
                 h += 1
         o += 1
-    tournament.update_tournament_rounds()
+    ## -- Add players indexes from players_db table
+    json_object['tournaments_db']['1']['Joueurs'] = [j for j in json_object['players_db']]
+    with open(filename, "w") as f:
+        json.dump(json_object, f, indent=4)
 
 
 ###### --- 2. VIEW ROUND4 MATCHUPS FROM DB --

@@ -263,7 +263,7 @@ def update_players_menu():
 
 ## -- Welcome Message--
 def welcome_msg():
-    print("\nBonjour et bienvenu!")
+    print("\n\t\tBonjour et bienvenu!")
 
 
 ## -- Goodbye msg --

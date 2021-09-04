@@ -20,9 +20,6 @@ if __name__=="__main__":
 
     view.welcome_msg()
 
-
-
-
     """Update Menus"""
 
     ## -- Update Players Menu --
@@ -32,6 +29,7 @@ if __name__=="__main__":
         while True:
             """ Launching Program """
             
+            view.players_info()
             view.update_players_menu()
             user_choice = input("\nTaper votre choix: ")
             if user_choice == "1":
@@ -112,7 +110,7 @@ if __name__=="__main__":
             else:
                 print("\n==================================================")
                 print(f"Vous avez tapé '{user_choice}'.\nChoisissez à nouveau un chiffre sur le menu, svp.\n")
-            
+
 
     """ Starting Menus """
 
@@ -219,6 +217,11 @@ if __name__=="__main__":
 
             elif user_choice == "5":
                 view.players_info()
+                view.tournament_overview_by_players_by_last_and_first_names()
+                view.sorted_players_by_score_and_rating()
+                view.tournament_info()
+                view.all_rounds_info()
+                view.all_matches_info()
                 pass
             elif user_choice == "6":
                 update_players_menu()
