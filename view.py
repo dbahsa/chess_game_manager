@@ -34,7 +34,7 @@ with open(filename, "r") as f:
 """Players infos"""
 
 ## -- View Tournament data with players ranked by indexes (tous les acteurs) -- ok ok!!!
-def view_players_info():
+def players_info():
     """ Function to view tournament info """
     
     print("\n📚 Voici les informations actuelles sur les joueurs\n")
@@ -46,44 +46,76 @@ def view_players_info():
 def tournament_overview_by_players_by_last_and_first_names():
     """View sorted players sorted by last and first names"""
 
-    print('\n🙂 Classement des joueurs par ordre alphabétique:\n')
+    print('\n📚 Classement des joueurs par ordre alphabétique:\n')
     print(players.real_db.sort_values(["Nom de famille", "Prénom"], ascending = (True)))
     print()
-tournament_overview_by_players_by_last_and_first_names()
+# tournament_overview_by_players_by_last_and_first_names()
+
 
 ## -- Func - Ranked Players by score and rating -- ok ok!!!
-def view_sorted_players_by_score_and_rating():
+def sorted_players_by_score_and_rating():
     """View sorted players by score and rating"""
 
-    print('\n🙂 Classement des joueurs par score et par nombre de points au classement général:\n')
+    print('\n📚 Classement des joueurs par score et par nombre de points au classement général:\n')
     k=0
     for u in players.sorted_players_by_score_and_rating:
         print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}\t{u[1]['Score']}")
         k +=1
-view_sorted_players_by_score_and_rating()
+# sorted_players_by_score_and_rating()
+
 
 ## -- Func - Ranked Players by rating, Used ONLY for Round1 __ OK OK !!
-def view_sorted_players_by_rating():
-    print('\n🙂 Classement des joueurs par nombre de points au classement général:\n')
+def sorted_players_by_rating():
+    print('\n📚 Classement des joueurs par nombre de points au classement général:\n')
     k=0
     for u in players.sorted_players_by_rating:
         print(f"N°{k+1}: {u[1]['Prénom'][0] + ' ' + u [1]['Nom de famille']}\t{u[1]['Classement']}")
         k +=1
-view_sorted_players_by_rating()
+# sorted_players_by_rating()
 
 
 """Tournament Infos"""
+
 ## -- View Tournament Info  -- OK OK !!!
-def view_tournament_info():
+def tournament_info():
     """ Function to view tournament info """
     
-    print("\n-- Voici les informations du tournoi actuel --\n")
+    print("\n📚 Voici les informations de l'actuel tournoi: \n")
     h = 1
     for i in json_object['tournaments_db']['1']:
         print(f"{[h]} {i}: {json_object['tournaments_db']['1'][i]}")
         h += 1
-view_tournament_info()
+# tournament_info()
 
+
+## -- View All Rounds Info  -- OK OK !!!
+def all_rounds_info():
+    """ Function to view all rounds info """
+    
+    print("\n📚 Voici les informations de tous les tours de l'actuel tournoi: \n")
+    # pp.pprint(json_object['tournaments_db'])
+    h = 1
+    for i in json_object['tournaments_db']['1']['Tournées']:
+        print(f"{[h]} {i}: {json_object['tournaments_db']['1']['Tournées'][i]}")
+        h += 1
+# all_rounds_info()
+
+
+## -- View All Matches Info  -- OK OK !!!
+def all_matches_info():
+    """ Function to view all rounds info """
+    
+    print("\n📚 Voici les informations de tous les matches de l'actuel tournoi: \n")
+    k = []
+    p =[]
+    for i in players.json_object['tournaments_db']['1']['Tournées']:
+        l = players.json_object['tournaments_db']['1']['Tournées'][f'{i}']['Matches']
+        p.append(i)
+        k.append(l)
+    df = pd.DataFrame(k, index=p)
+    print(df)
+    print()
+all_matches_info()
 
 
 #############################   MATCHES VIEWS #########################
