@@ -258,7 +258,7 @@ def latest_reports_menu():
 def update_tournament_menu_in():
     """ Menu interface """
     
-    a = "\n----------- 🔥 PRISE EN MAIN DU DU TOURNOI 🔥 -------------"
+    a = "\n----------- 🔥 PRISE EN MAIN DU TOURNOI 🔥 -------------"
     b = "\nTaper [1] pour le nom\t[2] pour le lieu\t[3] pour la date"
     c = "\n      [4] pour modifier le nombre de tours"
     d = "\n      [5] pour modifier le contrôle du temps"
@@ -272,7 +272,7 @@ def update_tournament_menu_in():
 def update_players_menu():
     """ Menu interface """
     
-    a = "\n------------------ 🔥 ACTUALISATION DES JOUEURS 🔥 --------------------"
+    a = "\n------------------ 🔥 GESTION DES JOUEURS 🔥 --------------------"
     b = "\nTaper [1] pour le nom\t[2] pour le prénom\t[3] pour le sexe"
     c = "\n      [4] pour modifier la date de naissance"
     d = "\n      [5] pour modifier le nombre de point au classement général"
@@ -280,6 +280,26 @@ def update_players_menu():
     f = "\n      [7] pour effacer tous les scores 🚨"
     g = "\n      [8] pour revenir au 'MENU PRINCIPAL'\n"
     menu = a+b+c+d+e+f+g
+    print(menu)
+
+
+## -- view how rounds are generated
+def compute_next_round_menu():
+    """ Roundx Menu """
+    
+    a = "\n------------------------------------------- 🔥 GESTION DES ROUNDS 🔥 --------------------------------------"
+    b = "\n💡 Pour obtenir les matches de chaque round, il est crucial d'avoir bien saisir dès le départ le \n"
+    c = "classement des joueurs en s'assurant qu'ils n'ont aucun point à leur compteur de score au début du tournoi.\n"
+    d = "\nVoici les étapes à suivre par round.  Taper pour:\n"
+    e = "💥 Round1                    💥 Round2                  💥 Round3                  💥 Round4\n"
+    f = "[1] Réinitialiser Scores  │ [2] Voir Matches Round2  │ [3] Voir Matches Round3  │ [4] Voir Matches Round4\n"
+    g = "    Voir Classement       │                          │                          │\n"
+    h = "    Voir Matches Round1   │                          │                          │\n"
+    i = "[a] Lancer Round1         │ [e] Lancer Round2        │ [h] Lancer Round3        │ [m] Lancer Round4\n"
+    j = "[b] Arrêter Round1        │ [f] Arrêter Round2       │ [i] Arrêter Round3       │ [n] Arrêter Round4\n"
+    k = "[c] Saisir Scores Round1  │ [v] Saisir Scores Round2 │ [k] Saisir Scores Round3 │ [p] Saisir Scores Round4\n"
+    l = "\n[5] Revenir au menu principal\n"
+    menu = a+b+c+d+e+f+g+h+i+j+k+l
     print(menu)
 
 

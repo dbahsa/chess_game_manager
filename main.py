@@ -325,31 +325,25 @@ if __name__=="__main__":
             view.main_menu()
             user_choice = input("\nTaper votre choix: ")
             if user_choice == "1":
-                update_players_menu()
+                update_tournament_menu_out()
             elif user_choice == "2":
                 update_players_menu()
             elif user_choice == "3":
-                update_players_menu()
+                update_tournament_menu_out()
             elif user_choice == "4":
                 update_players_menu()
             elif user_choice == "5":
                 launch_games_menu()
-                players.generate_players_round1_matchup_ref_rating()
-                players.generate_players_matchup_reference_score_and_rating()
-                view.view_round1_matchups()
-                launch_games_menu()
             elif user_choice == "6":
-                view.view_generate_players_round1_matchup_ref_rating_by_index()
-                view.view_round1_matchups()
-                players.update_player_score()
+                stop_games_menu()
             elif user_choice == "7":
-                latest_reports_menu()
+                compute_next_round() ## create step by step way to move from a round to another
             elif user_choice == "8":
                 update_players_menu()
             elif user_choice == "9":
-                tournament.update_tournament_info()
+                latest_reports_menu()
+                pass
             elif user_choice == "0":
-                view.byebye()
                 break
             else:
                 view.error_msg()
