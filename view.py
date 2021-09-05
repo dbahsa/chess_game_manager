@@ -289,7 +289,7 @@ def compute_next_round_menu():
     
     a = "\n------------------------------------------- 🔥 GESTION DES ROUNDS 🔥 --------------------------------------"
     b = "\n💡 Pour obtenir les matches de chaque round, il est crucial d'avoir bien saisir dès le départ le \n"
-    c = "classement des joueurs en s'assurant qu'ils n'ont aucun point à leur compteur de score au début du tournoi.\n"
+    c = "classement des joueurs en s'assurant qu'ils n'ont pas de score au début du tournoi.  Soyez prudent.e!\n"
     d = "\nVoici les étapes à suivre par round.  Taper pour:\n"
     e = "💥 Round1                    💥 Round2                  💥 Round3                  💥 Round4\n"
     f = "[1] Réinitialiser Scores  │ [2] Voir Matches Round2  │ [3] Voir Matches Round3  │ [4] Voir Matches Round4\n"
@@ -299,7 +299,8 @@ def compute_next_round_menu():
     j = "[b] Arrêter Round1        │ [f] Arrêter Round2       │ [i] Arrêter Round3       │ [n] Arrêter Round4\n"
     k = "[c] Saisir Scores Round1  │ [v] Saisir Scores Round2 │ [k] Saisir Scores Round3 │ [p] Saisir Scores Round4\n"
     l = "\n[5] Revenir au menu principal\n"
-    menu = a+b+c+d+e+f+g+h+i+j+k+l
+    m = "🚧 Suivez rigoureusement et respectivement ces étapes pour chaque round pour éviter que le programme s'arrête."
+    menu = a+b+c+d+e+f+g+h+i+j+k+l+m
     print(menu)
 
 

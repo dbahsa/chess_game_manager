@@ -300,7 +300,7 @@ def update_player_rating():
 def add_player_score():
     """ Function to add players score in db file """
     
-    print("\n🚧 Procédons à l'actualisation des données...")
+    print("\n🚧 Procédons à l'ajout de score...")
     while True:
         msg = "taper son numéro d'index entre [1] et [8], ou taper [0] pour revenir au menu pécédent: "
         print("\n🚨 Pour ajouter le 'Score' d'un joueur, ", end="")
@@ -447,6 +447,7 @@ def erase_all_scores():
         json_object['players_db'] = json.loads(data)
         with open(filename, "w") as f:
             json.dump(json_object, f, indent=4)
+    print("Réinitialisation des scores terminée...")
 
 
 """ Var of Sorted Players Data """
@@ -592,7 +593,7 @@ generate_save_round1_matchups()
 
 ###### --- 2. VIEW ROUND1 MATCHUPS FROM DB --
 
-## -- Done ! --- 
+## -- --- 
 def view_round1_matchups():
     """Function to view Round1 Matchups"""
     

@@ -22,6 +22,39 @@ if __name__=="__main__":
 
     """Update Menus"""
 
+    ## -- Compute next round steps -- 
+    def compute_next_round_menu():
+        """ function to compute next round steps"""
+
+        while True:
+            """ Launching Program """
+            
+            view.compute_next_round_menu()
+            user_choice = input("\nTaper votre choix: ")
+            if user_choice == "1":
+                players.erase_all_scores()
+                view.players_info()
+                view.view_round1_matchups()
+            elif user_choice in ["a","e","h","m"]:
+                launch_games_menu()
+            elif user_choice in ["b","f","i","n"]:
+                stop_games_menu()
+            elif user_choice in ["c","v","k","p"]:
+                view.players_info()
+                players.update_player_score()
+            elif user_choice == "2":
+                view.view_round2_matchups()
+            elif user_choice == "3":
+                view.view_round3_matchups()
+            elif user_choice == "4":
+                view.view_round4_matchups()
+            elif user_choice == "5":
+                break
+            else:
+                view.error_msg()
+
+
+
     ## -- Ending time Games Menu --
     def stop_games_menu():
         """ function to launch games per round"""
@@ -30,7 +63,7 @@ if __name__=="__main__":
             """ End Timer """
             
             view.stop_games_menu()
-            user_choice = input("\nTaper votre choix: ")
+            user_choice = input("\nPour arrêter quel round svp? Taper votre choix: ")
             if user_choice == "1":
                 current_time = players.datetime.datetime.now()
                 print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de finir!")
@@ -81,7 +114,7 @@ if __name__=="__main__":
             """ Launching Games """
             
             view.launch_games_menu()
-            user_choice = input("\nTaper votre choix: ")
+            user_choice = input("\nPour quel round svp? Taper votre choix: ")
             if user_choice == "1":
                 current_time = players.datetime.datetime.now()
                 print(f"Il est {current_time.hour}h:{current_time.minute}, les matches viennent de commencer!")
@@ -337,7 +370,7 @@ if __name__=="__main__":
             elif user_choice == "6":
                 stop_games_menu()
             elif user_choice == "7":
-                compute_next_round() ## create step by step way to move from a round to another
+                compute_next_round_menu()
             elif user_choice == "8":
                 update_players_menu()
             elif user_choice == "9":
