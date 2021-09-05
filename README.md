@@ -73,6 +73,7 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
 * Coding: utf-8
 * Environnement virtuel: voir fichier requirements.txt
 * requirements.txt: TinyDB, Pandas, Json, datetime, dataclasses, plus modules/paquets annexes
+* flake8-html 0.4.1 pour aider à la correction des erreurs (génération de fichier flake-html): dans mes fichiers la plupart des erreurs concerne la mise en page, qui est d'ailleurs intentionnelle pour une meilleure lecture et compréhension... qui n'est malheureusement pas tout le temps conforme aux directives PEP 8.  J'ai pu en changer quelques unes, mais à l'avenir sur un projet commun avec plusieurs individus, je m'y conformerais.
 
 #### I. Création de l'environnement virtuel
 * Soit avec le fichier requirements.txt;

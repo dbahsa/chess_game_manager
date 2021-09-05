@@ -69,7 +69,7 @@ class Tournament:
 def add_tournament():
     """ Function to instantiate tournament"""
     
-    print(f"\n🚀 Veuillez entrer les informations suivantes sur le tournoi: ")
+    print("\n🚀 Veuillez entrer les informations suivantes sur le tournoi: ")
     p = Tournament(input("- Nom: "), 
                     input("- Lieu: "),
                     input("- Date, telle que jj/mm/aaaa (ex: 18/02/2022): "),
