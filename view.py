@@ -288,7 +288,7 @@ def compute_next_round_menu():
     """ Roundx Menu """
     
     a = "\n------------------------------------------- 🔥 GESTION DES ROUNDS 🔥 --------------------------------------"
-    b = "\n💡 Pour obtenir les matches de chaque round, il est crucial d'avoir bien saisir dès le départ le \n"
+    b = "\n💡 Pour obtenir les matches de chaque round, il est crucial de bien saisir dès le départ le \n"
     c = "classement des joueurs en s'assurant qu'ils n'ont pas de score au début du tournoi.  Soyez prudent.e!\n"
     d = "\nVoici les étapes à suivre par round.  Taper pour:\n"
     e = "💥 Round1                    💥 Round2                  💥 Round3                  💥 Round4\n"
