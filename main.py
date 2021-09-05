@@ -325,21 +325,13 @@ if __name__=="__main__":
             view.main_menu()
             user_choice = input("\nTaper votre choix: ")
             if user_choice == "1":
-                tournament.add_tournament()
-                tournament.save_tournament_data()
-                players.add_roundx_in_tournament_table()
-                tournament.update_tournament_players_info()
+                update_players_menu()
             elif user_choice == "2":
-                players.add_players()
-                players.save_players_data()
-                players.save_players_indexes_in_tournaments_db()
-                players.generate_players_round1_matchup_ref_rating()
-                players.generate_players_matchup_reference_score_and_rating()
+                update_players_menu()
             elif user_choice == "3":
-                view.all_matches_info()
-                pass
+                update_players_menu()
             elif user_choice == "4":
-                stop_games_menu()
+                update_players_menu()
             elif user_choice == "5":
                 launch_games_menu()
                 players.generate_players_round1_matchup_ref_rating()

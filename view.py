@@ -258,7 +258,7 @@ def latest_reports_menu():
 def update_tournament_menu_in():
     """ Menu interface """
     
-    a = "\n---------------- 🔥 ACTUALISATION DU TOURNOI 🔥 -----------------"
+    a = "\n----------- 🔥 PRISE EN MAIN DU DU TOURNOI 🔥 -------------"
     b = "\nTaper [1] pour le nom\t[2] pour le lieu\t[3] pour la date"
     c = "\n      [4] pour modifier le nombre de tours"
     d = "\n      [5] pour modifier le contrôle du temps"
