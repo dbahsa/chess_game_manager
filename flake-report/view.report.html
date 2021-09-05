@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: view.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="view.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               view.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F401:</strong> 'tournament' imported but unused
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l13">
+                  <tt><i>13</i> <span class="kn">import</span> <span class="nn">tournament</span><span class="o">,</span> <span class="nn">players</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F541">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F541:</strong> f-string is missing placeholders
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l321">
+                  <tt><i>321</i>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;😅 Mauvaise saisie...</span><span class="se">\n</span><span class="s2">Merci d&#39;essayer à nouveau.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E266">
+               <span class="count sev-2">
+                  31
+               </span>
+               <strong>E266:</strong> too many leading '#' for block comment
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l10">
+                  <tt><i>10</i> <span class="c1">## -- PPrint for internal use ONLY</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l16">
+                  <tt><i>16</i> <span class="c1">### PRINTOUTS FROM DB ONLY !!!! ### </span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l18">
+                  <tt><i>18</i> <span class="c1">########################### TOURNAMENT VARIABLES &amp; TOOLS ########################</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l20">
+                  <tt><i>20</i> <span class="c1">## -- &#39;db&#39; allows to generate a DB file, &#39;data.json&#39;, for this app --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l32">
+                  <tt><i>32</i> <span class="c1">########################### TOURNAMENT VIEWS ########################</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l37">
+                  <tt><i>37</i> <span class="c1">## -- View Tournament data with players ranked by indexes (tous les acteurs) -- ok ok!!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l47">
+                  <tt><i>47</i> <span class="c1">## -- View Tournament data with players ranked by last and first names -- ok ok !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l56">
+                  <tt><i>56</i> <span class="c1">## -- Func - Ranked Players by score and rating -- ok ok!!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l67">
+                  <tt><i>67</i> <span class="c1">## -- Func - Ranked Players by rating, Used ONLY for Round1 __ OK OK !!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l78">
+                  <tt><i>78</i> <span class="c1">## -- View Tournament Info  -- OK OK !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l89">
+                  <tt><i>89</i> <span class="c1">## -- View All Rounds Info  -- OK OK !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l102">
+                  <tt><i>102</i> <span class="c1">## -- View All Matches Info  -- OK OK !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l119">
+                  <tt><i>119</i> <span class="c1">#############################   MATCHES VIEWS #########################</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l122">
+                  <tt><i>122</i> <span class="c1">## --  ok ok!!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l135">
+                  <tt><i>135</i> <span class="c1">## -- VIEW ROUND1 MATCHUPS FROM DB --  /!!\ BACK IN CONTROLLER !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l147">
+                  <tt><i>147</i> <span class="c1">### -- VIEW ROUND2 MATCHUPS FROM DB --  /!!\ BACK IN CONTROLLER !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l159">
+                  <tt><i>159</i> <span class="c1">## -- VIEW ROUND3 MATCHUPS FROM DB --  /!!\ BACK IN CONTROLLER !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l171">
+                  <tt><i>171</i> <span class="c1">### -- VIEW ROUND4 MATCHUPS FROM DB --  /!!\ BACK IN CONTROLLER !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l183">
+                  <tt><i>183</i> <span class="c1">############################# MENU VIEWS #########################</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l186">
+                  <tt><i>186</i> <span class="c1">## -- View Main Menu -- OK OK !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l205">
+                  <tt><i>205</i> <span class="c1">## -- Launch Games Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l217">
+                  <tt><i>217</i> <span class="c1">## -- Stop Games Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l229">
+                  <tt><i>229</i> <span class="c1">## -- View Tournament Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l244">
+                  <tt><i>244</i> <span class="c1">## -- View Reports Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l257">
+                  <tt><i>257</i> <span class="c1">## -- View Update Tournament Menu</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l271">
+                  <tt><i>271</i> <span class="c1">## -- view Update Players Menu</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l286">
+                  <tt><i>286</i> <span class="c1">## -- view how rounds are generated</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l309">
+                  <tt><i>309</i> <span class="c1">## -- Welcome Message--</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l314">
+                  <tt><i>314</i> <span class="c1">## -- Goodbye msg --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l319">
+                  <tt><i>319</i> <span class="c1">## -- Error msg --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l323">
+                  <tt><i>323</i> <span class="c1">## -- Contact us msg --</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E501">
+               <span class="count sev-2">
+                  30
+               </span>
+               <strong>E501:</strong> line too long (81 > 79 characters)
+               
+                  (and 15 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Line too long (81 > 79 characters):</p>
+               
+               <a href="view.source.html#l18">
+                  <tt><i>18</i> <span class="c1">########################### TOURNAMENT VARIABLES &amp; TOOLS ########################</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (88 > 79 characters):</p>
+               
+               <a href="view.source.html#l37">
+                  <tt><i>37</i> <span class="c1">## -- View Tournament data with players ranked by indexes (tous les acteurs) -- ok ok!!!</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="view.source.html#l47">
+                  <tt><i>47</i> <span class="c1">## -- View Tournament data with players ranked by last and first names -- ok ok !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (88 > 79 characters):</p>
+               
+               <a href="view.source.html#l52">
+                  <tt><i>52</i>     <span class="nb">print</span><span class="p">(</span><span class="n">players</span><span class="o">.</span><span class="n">real_db</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;Nom de famille&quot;</span><span class="p">,</span> <span class="s2">&quot;Prénom&quot;</span><span class="p">],</span> <span class="n">ascending</span> <span class="o">=</span> <span class="p">(</span><span class="kc">True</span><span class="p">)))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (98 > 79 characters):</p>
+               
+               <a href="view.source.html#l60">
+                  <tt><i>60</i>     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">📚 Classement des joueurs par score et par nombre de points au classement général:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (117 > 79 characters):</p>
+               
+               <a href="view.source.html#l63">
+                  <tt><i>63</i>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;N°</span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Prénom&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">u</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Nom de famille&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Classement&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (85 > 79 characters):</p>
+               
+               <a href="view.source.html#l69">
+                  <tt><i>69</i>     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">📚 Classement des joueurs par nombre de points au classement général:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (100 > 79 characters):</p>
+               
+               <a href="view.source.html#l72">
+                  <tt><i>72</i>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;N°</span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Prénom&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">u</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Nom de famille&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Classement&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (81 > 79 characters):</p>
+               
+               <a href="view.source.html#l93">
+                  <tt><i>93</i>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📚 Voici les informations de tous les tours de l&#39;actuel tournoi: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="view.source.html#l106">
+                  <tt><i>106</i>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📚 Voici les informations de tous les matches de l&#39;actuel tournoi: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (85 > 79 characters):</p>
+               
+               <a href="view.source.html#l110">
+                  <tt><i>110</i>         <span class="n">l</span> <span class="o">=</span> <span class="n">players</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;Matches&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (90 > 79 characters):</p>
+               
+               <a href="view.source.html#l141">
+                  <tt><i>141</i>     <span class="n">d</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round1&quot;</span><span class="p">][</span><span class="s1">&#39;Matches&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="view.source.html#l143">
+                  <tt><i>143</i>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Match</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">) vs. </span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (90 > 79 characters):</p>
+               
+               <a href="view.source.html#l153">
+                  <tt><i>153</i>     <span class="n">d</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round2&quot;</span><span class="p">][</span><span class="s1">&#39;Matches&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="view.source.html#l155">
+                  <tt><i>155</i>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Match</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">) vs. </span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (90 > 79 characters):</p>
+               
+               <a href="view.source.html#l165">
+                  <tt><i>165</i>     <span class="n">d</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round3&quot;</span><span class="p">][</span><span class="s1">&#39;Matches&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="view.source.html#l167">
+                  <tt><i>167</i>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Match</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">) vs. </span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (96 > 79 characters):</p>
+               
+               <a href="view.source.html#l177">
+                  <tt><i>177</i>     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round4&quot;</span><span class="p">][</span><span class="s1">&#39;Matches&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (117 > 79 characters):</p>
+               
+               <a href="view.source.html#l290">
+                  <tt><i>290</i>     <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">------------------------------------------- 🔥 GESTION DES ROUNDS 🔥 --------------------------------------&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (110 > 79 characters):</p>
+               
+               <a href="view.source.html#l291">
+                  <tt><i>291</i>     <span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">💡 Pour obtenir les matches de chaque round, il est crucial d&#39;avoir bien saisir dès le départ le </span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (113 > 79 characters):</p>
+               
+               <a href="view.source.html#l292">
+                  <tt><i>292</i>     <span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;classement des joueurs en s&#39;assurant qu&#39;ils n&#39;ont pas de score au début du tournoi.  Soyez prudent.e!</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (100 > 79 characters):</p>
+               
+               <a href="view.source.html#l294">
+                  <tt><i>294</i>     <span class="n">e</span> <span class="o">=</span> <span class="s2">&quot;💥 Round1                    💥 Round2                  💥 Round3                  💥 Round4</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (117 > 79 characters):</p>
+               
+               <a href="view.source.html#l295">
+                  <tt><i>295</i>     <span class="n">f</span> <span class="o">=</span> <span class="s2">&quot;[1] Réinitialiser Scores  │ [2] Voir Matches Round2  │ [3] Voir Matches Round3  │ [4] Voir Matches Round4</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (93 > 79 characters):</p>
+               
+               <a href="view.source.html#l296">
+                  <tt><i>296</i>     <span class="n">g</span> <span class="o">=</span> <span class="s2">&quot;    Voir Classement       │                          │                          │</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (93 > 79 characters):</p>
+               
+               <a href="view.source.html#l297">
+                  <tt><i>297</i>     <span class="n">h</span> <span class="o">=</span> <span class="s2">&quot;    Voir Matches Round1   │                          │                          │</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (111 > 79 characters):</p>
+               
+               <a href="view.source.html#l298">
+                  <tt><i>298</i>     <span class="n">i</span> <span class="o">=</span> <span class="s2">&quot;[a] Lancer Round1         │ [e] Lancer Round2        │ [h] Lancer Round3        │ [m] Lancer Round4</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (112 > 79 characters):</p>
+               
+               <a href="view.source.html#l299">
+                  <tt><i>299</i>     <span class="n">j</span> <span class="o">=</span> <span class="s2">&quot;[b] Arrêter Round1        │ [f] Arrêter Round2       │ [i] Arrêter Round3       │ [n] Arrêter Round4</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (118 > 79 characters):</p>
+               
+               <a href="view.source.html#l300">
+                  <tt><i>300</i>     <span class="n">k</span> <span class="o">=</span> <span class="s2">&quot;[c] Saisir Scores Round1  │ [v] Saisir Scores Round2 │ [k] Saisir Scores Round3 │ [p] Saisir Scores Round4</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (119 > 79 characters):</p>
+               
+               <a href="view.source.html#l302">
+                  <tt><i>302</i>     <span class="n">m</span> <span class="o">=</span> <span class="s2">&quot;🚧 Suivez rigoureusement et respectivement ces étapes pour chaque round pour éviter que le programme s&#39;arrête.&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (98 > 79 characters):</p>
+               
+               <a href="view.source.html#l325">
+                  <tt><i>325</i>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🚨 Merci de nous joindre pour modifier le nombre de tours, qui par défaut est égal à 4&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W293">
+               <span class="count sev-2">
+                  16
+               </span>
+               <strong>W293:</strong> blank line contains whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l40">
+                  <tt><i>40</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l81">
+                  <tt><i>81</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l92">
+                  <tt><i>92</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l105">
+                  <tt><i>105</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l138">
+                  <tt><i>138</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l150">
+                  <tt><i>150</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l162">
+                  <tt><i>162</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l174">
+                  <tt><i>174</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l189">
+                  <tt><i>189</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l208">
+                  <tt><i>208</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l220">
+                  <tt><i>220</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l232">
+                  <tt><i>232</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l247">
+                  <tt><i>247</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l260">
+                  <tt><i>260</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l274">
+                  <tt><i>274</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l289">
+                  <tt><i>289</i>     </tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E225">
+               <span class="count sev-2">
+                  9
+               </span>
+               <strong>E225:</strong> missing whitespace around operator
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l61">
+                  <tt><i>61</i>     <span class="n">k</span><span class="o">=</span><span class="mi">0</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l64">
+                  <tt><i>64</i>         <span class="n">k</span> <span class="o">+=</span><span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l70">
+                  <tt><i>70</i>     <span class="n">k</span><span class="o">=</span><span class="mi">0</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l73">
+                  <tt><i>73</i>         <span class="n">k</span> <span class="o">+=</span><span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l108">
+                  <tt><i>108</i>     <span class="n">p</span> <span class="o">=</span><span class="p">[]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l144">
+                  <tt><i>144</i>         <span class="n">e</span> <span class="o">+=</span><span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l156">
+                  <tt><i>156</i>         <span class="n">e</span> <span class="o">+=</span><span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l168">
+                  <tt><i>168</i>         <span class="n">e</span> <span class="o">+=</span><span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l180">
+                  <tt><i>180</i>         <span class="n">e</span> <span class="o">+=</span><span class="mi">1</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E302">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>E302:</strong> expected 2 blank lines, found 1
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Expected 2 blank lines, found 1:</p>
+               
+               <a href="view.source.html#l38">
+                  <tt><i>38</i> <span class="k">def</span> <span class="nf">players_info</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Expected 2 blank lines, found 3:</p>
+               
+               <a href="view.source.html#l48">
+                  <tt><i>48</i> <span class="k">def</span> <span class="nf">tournament_overview_by_players_by_last_and_first_names</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Expected 2 blank lines, found 1:</p>
+               
+               <a href="view.source.html#l79">
+                  <tt><i>79</i> <span class="k">def</span> <span class="nf">tournament_info</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Expected 2 blank lines, found 3:</p>
+               
+               <a href="view.source.html#l123">
+                  <tt><i>123</i> <span class="k">def</span> <span class="nf">view_generate_players_round1_matchup_ref_rating_by_index</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Expected 2 blank lines, found 1:</p>
+               
+               <a href="view.source.html#l310">
+                  <tt><i>310</i> <span class="k">def</span> <span class="nf">welcome_msg</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Expected 2 blank lines, found 1:</p>
+               
+               <a href="view.source.html#l324">
+                  <tt><i>324</i> <span class="k">def</span> <span class="nf">contact_us_quick_msg</span><span class="p">():</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E303">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>E303:</strong> too many blank lines (3)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l32">
+                  <tt><i>32</i> <span class="c1">########################### TOURNAMENT VIEWS ########################</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l47">
+                  <tt><i>47</i> <span class="c1">## -- View Tournament data with players ranked by last and first names -- ok ok !!!</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l119">
+                  <tt><i>119</i> <span class="c1">#############################   MATCHES VIEWS #########################</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E251">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E251:</strong> unexpected spaces around keyword / parameter equals
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Unexpected spaces around keyword / parameter equals (in 2 places):</p>
+               
+               <a href="view.source.html#l52">
+                  <tt><i>52</i>     <span class="nb">print</span><span class="p">(</span><span class="n">players</span><span class="o">.</span><span class="n">real_db</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;Nom de famille&quot;</span><span class="p">,</span> <span class="s2">&quot;Prénom&quot;</span><span class="p">],</span> <span class="n">ascending</span> <span class="o">=</span> <span class="p">(</span><span class="kc">True</span><span class="p">)))</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E741">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E741:</strong> ambiguous variable name 'l'
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l110">
+                  <tt><i>110</i>         <span class="n">l</span> <span class="o">=</span> <span class="n">players</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;Matches&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="view.source.html#l301">
+                  <tt><i>301</i>     <span class="n">l</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[5] Revenir au menu principal</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E211">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E211:</strong> whitespace before '['
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l129">
+                  <tt><i>129</i>         <span class="n">x</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Prénom&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">u</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Nom de famille&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E401">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E401:</strong> multiple imports on one line
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l13">
+                  <tt><i>13</i> <span class="kn">import</span> <span class="nn">tournament</span><span class="o">,</span> <span class="nn">players</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E402">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E402:</strong> module level import not at top of file
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l13">
+                  <tt><i>13</i> <span class="kn">import</span> <span class="nn">tournament</span><span class="o">,</span> <span class="nn">players</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W291">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W291:</strong> trailing whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="view.source.html#l16">
+                  <tt><i>16</i> <span class="c1">### PRINTOUTS FROM DB ONLY !!!! ### </span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

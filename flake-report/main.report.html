@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: main.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="main.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               main.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  4
+               </span>
+               <strong>F401:</strong> 'dataclasses.dataclass' imported but unused
+               
+                  (and 3 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'dataclasses.dataclass' imported but unused:</p>
+               
+               <a href="main.source.html#l7">
+                  <tt><i>7</i> <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'dataclasses.field' imported but unused:</p>
+               
+               <a href="main.source.html#l7">
+                  <tt><i>7</i> <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'tinydb.TinyDB' imported but unused:</p>
+               
+               <a href="main.source.html#l8">
+                  <tt><i>8</i> <span class="kn">from</span> <span class="nn">tinydb</span> <span class="kn">import</span> <span class="n">TinyDB</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'pandas as pd' imported but unused:</p>
+               
+               <a href="main.source.html#l9">
+                  <tt><i>9</i> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E501">
+               <span class="count sev-2">
+                  43
+               </span>
+               <strong>E501:</strong> line too long (85 > 79 characters)
+               
+                  (and 16 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Line too long (85 > 79 characters):</p>
+               
+               <a href="main.source.html#l82">
+                  <tt><i>82</i>             <span class="n">user_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Pour arrêter quel round svp? Taper votre choix: &quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (107 > 79 characters):</p>
+               
+               <a href="main.source.html#l85">
+                  <tt><i>85</i>                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Il est </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">, les matches viennent de finir!&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (104 > 79 characters):</p>
+               
+               <a href="main.source.html#l86">
+                  <tt><i>86</i>                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En cas d&#39;erreur, revenir en arrière pour réinitialiser la fin des jeux,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (126 > 79 characters):</p>
+               
+               <a href="main.source.html#l88">
+                  <tt><i>88</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (100 > 79 characters):</p>
+               
+               <a href="main.source.html#l89">
+                  <tt><i>89</i>                 <span class="n">players</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round1&quot;</span><span class="p">][</span><span class="s1">&#39;Temps de fin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (107 > 79 characters):</p>
+               
+               <a href="main.source.html#l94">
+                  <tt><i>94</i>                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Il est </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">, les matches viennent de finir!&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (105 > 79 characters):</p>
+               
+               <a href="main.source.html#l95">
+                  <tt><i>95</i>                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En cas d&#39;erreur, revenir en arrière pour rréinitialiser la fin des jeux,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (126 > 79 characters):</p>
+               
+               <a href="main.source.html#l97">
+                  <tt><i>97</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (100 > 79 characters):</p>
+               
+               <a href="main.source.html#l98">
+                  <tt><i>98</i>                 <span class="n">players</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round2&quot;</span><span class="p">][</span><span class="s1">&#39;Temps de fin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (107 > 79 characters):</p>
+               
+               <a href="main.source.html#l103">
+                  <tt><i>103</i>                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Il est </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">, les matches viennent de finir!&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (104 > 79 characters):</p>
+               
+               <a href="main.source.html#l104">
+                  <tt><i>104</i>                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En cas d&#39;erreur, revenir en arrière pour réinitialiser la fin des jeux,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (126 > 79 characters):</p>
+               
+               <a href="main.source.html#l106">
+                  <tt><i>106</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (100 > 79 characters):</p>
+               
+               <a href="main.source.html#l107">
+                  <tt><i>107</i>                 <span class="n">players</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round3&quot;</span><span class="p">][</span><span class="s1">&#39;Temps de fin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (107 > 79 characters):</p>
+               
+               <a href="main.source.html#l112">
+                  <tt><i>112</i>                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Il est </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">, les matches viennent de finir!&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (104 > 79 characters):</p>
+               
+               <a href="main.source.html#l113">
+                  <tt><i>113</i>                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En cas d&#39;erreur, revenir en arrière pour réinitialiser la fin des jeux,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (126 > 79 characters):</p>
+               
+               <a href="main.source.html#l115">
+                  <tt><i>115</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (100 > 79 characters):</p>
+               
+               <a href="main.source.html#l116">
+                  <tt><i>116</i>                 <span class="n">players</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round4&quot;</span><span class="p">][</span><span class="s1">&#39;Temps de fin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (111 > 79 characters):</p>
+               
+               <a href="main.source.html#l136">
+                  <tt><i>136</i>                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Il est </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">, les matches viennent de commencer!&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (106 > 79 characters):</p>
+               
+               <a href="main.source.html#l137">
+                  <tt><i>137</i>                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En cas d&#39;erreur, revenir en arrière pour réinitialiser le début des jeux,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (126 > 79 characters):</p>
+               
+               <a href="main.source.html#l139">
+                  <tt><i>139</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (103 > 79 characters):</p>
+               
+               <a href="main.source.html#l140">
+                  <tt><i>140</i>                 <span class="n">players</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round1&quot;</span><span class="p">][</span><span class="s1">&#39;Temps de départ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (111 > 79 characters):</p>
+               
+               <a href="main.source.html#l145">
+                  <tt><i>145</i>                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Il est </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">, les matches viennent de commencer!&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (107 > 79 characters):</p>
+               
+               <a href="main.source.html#l146">
+                  <tt><i>146</i>                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En cas d&#39;erreur, revenir en arrière pour rréinitialiser le début des jeux,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (126 > 79 characters):</p>
+               
+               <a href="main.source.html#l148">
+                  <tt><i>148</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (103 > 79 characters):</p>
+               
+               <a href="main.source.html#l149">
+                  <tt><i>149</i>                 <span class="n">players</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round2&quot;</span><span class="p">][</span><span class="s1">&#39;Temps de départ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (111 > 79 characters):</p>
+               
+               <a href="main.source.html#l154">
+                  <tt><i>154</i>                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Il est </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">, les matches viennent de commencer!&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (106 > 79 characters):</p>
+               
+               <a href="main.source.html#l155">
+                  <tt><i>155</i>                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En cas d&#39;erreur, revenir en arrière pour réinitialiser le début des jeux,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (126 > 79 characters):</p>
+               
+               <a href="main.source.html#l157">
+                  <tt><i>157</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (103 > 79 characters):</p>
+               
+               <a href="main.source.html#l158">
+                  <tt><i>158</i>                 <span class="n">players</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round3&quot;</span><span class="p">][</span><span class="s1">&#39;Temps de départ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (111 > 79 characters):</p>
+               
+               <a href="main.source.html#l163">
+                  <tt><i>163</i>                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Il est </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">, les matches viennent de commencer!&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (106 > 79 characters):</p>
+               
+               <a href="main.source.html#l164">
+                  <tt><i>164</i>                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En cas d&#39;erreur, revenir en arrière pour réinitialiser le début des jeux,&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (126 > 79 characters):</p>
+               
+               <a href="main.source.html#l166">
+                  <tt><i>166</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (103 > 79 characters):</p>
+               
+               <a href="main.source.html#l167">
+                  <tt><i>167</i>                 <span class="n">players</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">][</span><span class="s2">&quot;Round4&quot;</span><span class="p">][</span><span class="s1">&#39;Temps de départ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (87 > 79 characters):</p>
+               
+               <a href="main.source.html#l242">
+                  <tt><i>242</i>             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Taper le chiffre de votre choix pour effectuer une modification:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (91 > 79 characters):</p>
+               
+               <a href="main.source.html#l246">
+                  <tt><i>246</i>                     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">[</span><span class="n">h</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">tournament</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (86 > 79 characters):</p>
+               
+               <a href="main.source.html#l253">
+                  <tt><i>253</i>                 <span class="nb">print</span><span class="p">(</span><span class="n">tournament</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Nom du tournoi&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (87 > 79 characters):</p>
+               
+               <a href="main.source.html#l265">
+                  <tt><i>265</i>                 <span class="nb">print</span><span class="p">(</span><span class="n">tournament</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Nombre de tours&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (80 > 79 characters):</p>
+               
+               <a href="main.source.html#l269">
+                  <tt><i>269</i>                 <span class="nb">print</span><span class="p">(</span><span class="n">tournament</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Tournées&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (89 > 79 characters):</p>
+               
+               <a href="main.source.html#l277">
+                  <tt><i>277</i>                 <span class="nb">print</span><span class="p">(</span><span class="n">tournament</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Contrôle du temps&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (83 > 79 characters):</p>
+               
+               <a href="main.source.html#l281">
+                  <tt><i>281</i>                 <span class="nb">print</span><span class="p">(</span><span class="n">tournament</span><span class="o">.</span><span class="n">json_object</span><span class="p">[</span><span class="s1">&#39;tournaments_db&#39;</span><span class="p">][</span><span class="s1">&#39;1&#39;</span><span class="p">][</span><span class="s1">&#39;Description&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (110 > 79 characters):</p>
+               
+               <a href="main.source.html#l289">
+                  <tt><i>289</i>                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vous avez tapé &#39;</span><span class="si">{</span><span class="n">user_choice</span><span class="si">}</span><span class="s2">&#39;.</span><span class="se">\n</span><span class="s2">Choisissez à nouveau un chiffre sur le menu, svp.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (103 > 79 characters):</p>
+               
+               <a href="main.source.html#l336">
+                  <tt><i>336</i>                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;😅 Vous avez entré &#39;</span><span class="si">{</span><span class="n">user_choice</span><span class="si">}</span><span class="s2">&#39;.</span><span class="se">\n</span><span class="s2">🙂 Merci de faire un choix entre 1 et 7.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (92 > 79 characters):</p>
+               
+               <a href="main.source.html#l367">
+                  <tt><i>367</i>     <span class="c1">## -- Main Menu -- /!!!\ Must REMAIN ACTIVE to allow other menus to function properly!!!</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W293">
+               <span class="count sev-2">
+                  12
+               </span>
+               <strong>W293:</strong> blank line contains whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="main.source.html#l31">
+                  <tt><i>31</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l80">
+                  <tt><i>80</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l131">
+                  <tt><i>131</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l182">
+                  <tt><i>182</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l200">
+                  <tt><i>200</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l208">
+                  <tt><i>208</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l238">
+                  <tt><i>238</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l240">
+                  <tt><i>240</i>              </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l249">
+                  <tt><i>249</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l300">
+                  <tt><i>300</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l345">
+                  <tt><i>345</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l373">
+                  <tt><i>373</i>             </tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E225">
+               <span class="count sev-2">
+                  11
+               </span>
+               <strong>E225:</strong> missing whitespace around operator
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="main.source.html#l18">
+                  <tt><i>18</i> <span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="main.source.html#l88">
+                  <tt><i>88</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="main.source.html#l97">
+                  <tt><i>97</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="main.source.html#l106">
+                  <tt><i>106</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="main.source.html#l115">
+                  <tt><i>115</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="main.source.html#l139">
+                  <tt><i>139</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="main.source.html#l148">
+                  <tt><i>148</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="main.source.html#l157">
+                  <tt><i>157</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="main.source.html#l166">
+                  <tt><i>166</i>                 <span class="n">a</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">hour</span><span class="si">}</span><span class="s2">h:</span><span class="si">{</span><span class="n">current_time</span><span class="o">.</span><span class="n">minute</span><span class="si">}</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator (in 2 places):</p>
+               
+               <a href="main.source.html#l245">
+                  <tt><i>245</i>                 <span class="k">if</span> <span class="n">h</span><span class="o">!=</span><span class="mi">5</span> <span class="ow">and</span> <span class="n">h</span><span class="o">!=</span><span class="mi">6</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E266">
+               <span class="count sev-2">
+                  10
+               </span>
+               <strong>E266:</strong> too many leading '#' for block comment
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="main.source.html#l25">
+                  <tt><i>25</i>     <span class="c1">## -- Compute next round steps -- </span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l74">
+                  <tt><i>74</i>     <span class="c1">## -- Ending time Games Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l125">
+                  <tt><i>125</i>     <span class="c1">## -- Launch Game Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l176">
+                  <tt><i>176</i>     <span class="c1">## -- Reports Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l202">
+                  <tt><i>202</i>     <span class="c1">## -- Update Players Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l232">
+                  <tt><i>232</i>     <span class="c1">## -- Update Tournament Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l239">
+                  <tt><i>239</i>             <span class="c1">## w/o menu sys</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l294">
+                  <tt><i>294</i>     <span class="c1">## -- Reports Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l339">
+                  <tt><i>339</i>     <span class="c1">## -- Tournament Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l367">
+                  <tt><i>367</i>     <span class="c1">## -- Main Menu -- /!!!\ Must REMAIN ACTIVE to allow other menus to function properly!!!</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E303">
+               <span class="count sev-2">
+                  8
+               </span>
+               <strong>E303:</strong> too many blank lines (2)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="main.source.html#l74">
+                  <tt><i>74</i>     <span class="c1">## -- Ending time Games Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l125">
+                  <tt><i>125</i>     <span class="c1">## -- Launch Game Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l176">
+                  <tt><i>176</i>     <span class="c1">## -- Reports Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l202">
+                  <tt><i>202</i>     <span class="c1">## -- Update Players Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l232">
+                  <tt><i>232</i>     <span class="c1">## -- Update Tournament Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l292">
+                  <tt><i>292</i>     <span class="sd">&quot;&quot;&quot; Starting Menus &quot;&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l339">
+                  <tt><i>339</i>     <span class="c1">## -- Tournament Menu --</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l367">
+                  <tt><i>367</i>     <span class="c1">## -- Main Menu -- /!!!\ Must REMAIN ACTIVE to allow other menus to function properly!!!</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E301">
+               <span class="count sev-2">
+                  7
+               </span>
+               <strong>E301:</strong> expected 1 blank line, found 0
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="main.source.html#l75">
+                  <tt><i>75</i>     <span class="k">def</span> <span class="nf">stop_games_menu</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l126">
+                  <tt><i>126</i>     <span class="k">def</span> <span class="nf">launch_games_menu</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l177">
+                  <tt><i>177</i>     <span class="k">def</span> <span class="nf">latest_reports_menu</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l203">
+                  <tt><i>203</i>     <span class="k">def</span> <span class="nf">update_players_menu</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l233">
+                  <tt><i>233</i>     <span class="k">def</span> <span class="nf">update_tournament_menu_out</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l340">
+                  <tt><i>340</i>     <span class="k">def</span> <span class="nf">exec_t_menu1</span><span class="p">():</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="main.source.html#l368">
+                  <tt><i>368</i>     <span class="k">def</span> <span class="nf">exec_main_menu1</span><span class="p">():</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E231">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>E231:</strong> missing whitespace after ','
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing whitespace after ',' (in 3 places):</p>
+               
+               <a href="main.source.html#l39">
+                  <tt><i>39</i>             <span class="k">elif</span> <span class="n">user_choice</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;e&quot;</span><span class="p">,</span><span class="s2">&quot;h&quot;</span><span class="p">,</span><span class="s2">&quot;m&quot;</span><span class="p">]:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace after ',' (in 3 places):</p>
+               
+               <a href="main.source.html#l41">
+                  <tt><i>41</i>             <span class="k">elif</span> <span class="n">user_choice</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span><span class="s2">&quot;f&quot;</span><span class="p">,</span><span class="s2">&quot;i&quot;</span><span class="p">,</span><span class="s2">&quot;n&quot;</span><span class="p">]:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E401">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E401:</strong> multiple imports on one line
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="main.source.html#l12">
+                  <tt><i>12</i> <span class="kn">import</span> <span class="nn">tournament</span><span class="o">,</span> <span class="nn">players</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W291">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W291:</strong> trailing whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="main.source.html#l25">
+                  <tt><i>25</i>     <span class="c1">## -- Compute next round steps -- </span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W605">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W605:</strong> invalid escape sequence '\ '
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="main.source.html#l16">
+                  <tt><i>16</i> <span class="sd">&quot;&quot;&quot; START USER/PLAYERS MATCH/ROUNDS SCRIPT /!!!\ &quot;&quot;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>
