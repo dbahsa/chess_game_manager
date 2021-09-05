@@ -266,16 +266,6 @@ def view_tournament_info():
 
 if __name__=="__main__":
 
-    ## -- RESPECT THESE STEPS -- ##
-
-    ## -- Instanttiating tournament ojbects & saving them to db file --
-    # add_tournament()
-    ## -- TinyDB used to handle this task.
-    # save_tournament_data()
-    ## -- json module used to handle 'update' tasks because I couldn't find an alternative to the deprecated 'write_back' function.
-    # view_tournament_info()
-    
-    ## -- Update Tournament Data in DB file -- To be Updated once players.py is done /!!!\
-    # update_tournament_info()
-
     print("\n===================== 👀 ===================\n")
+else:
+    pass

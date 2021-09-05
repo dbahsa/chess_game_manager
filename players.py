@@ -1225,29 +1225,6 @@ def save_round4_scores():
 if __name__=="__main__":
     """Launch program to add/update players, macthes, and rounds"""
 
-    # -- Add & Save Players to DB file --
-    # add_players()
-    # save_players_data()
-    
-    # -- generate/View Round1 Matchups & Save them to db file --
-    # view_unsorted_players_list()
-    # view_sorted_players_list_by_rating()
-    # view_ranked_players_by_rating_only()
-    # view_ranked_players_by_score_and_rating()
-
-    # -- The next functions MUST be initiated in order to save data in db file --
-    # generate_players_matchup_with_reference_rating()
-    # generate_players_matchup_reference_score_and_rating()
-    # generate_matchups()
-    # view_round1_matchups()
-    # save_rounds_in_db()
-    # view_rounds_in_db()
-    # view_ranked_players_by_score_and_rating()
-
-    # -- UPDATE SCORE --
-    # -- creating a function to collect score from the user
-    # -- Save Round1 data in tournaments_db -- 
-
     print("\n===================== 👀 ===================\n")
 
 else:

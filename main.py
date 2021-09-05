@@ -33,15 +33,32 @@ if __name__=="__main__":
             user_choice = input("\nTaper votre choix: ")
             if user_choice == "1":
                 players.erase_all_scores()
+                players.generate_save_round1_matchups()
                 view.players_info()
                 view.view_round1_matchups()
             elif user_choice in ["a","e","h","m"]:
                 launch_games_menu()
             elif user_choice in ["b","f","i","n"]:
                 stop_games_menu()
-            elif user_choice in ["c","v","k","p"]:
+            elif user_choice == "c":
                 view.players_info()
                 players.update_player_score()
+                players.save_round1_matchups()
+                players.generate_save_round2_matchups()
+            elif user_choice == "v":
+                view.players_info()
+                players.update_player_score()
+                players.save_round2_scores()
+                players.generate_save_round3_matchups()
+            elif user_choice == "k":
+                view.players_info()
+                players.update_player_score()
+                players.save_round3_scores()
+                players.generate_save_round4_matchups()
+            elif user_choice == "p":
+                view.players_info()
+                players.update_player_score()
+                players.save_round4_scores()
             elif user_choice == "2":
                 view.view_round2_matchups()
             elif user_choice == "3":
@@ -52,7 +69,6 @@ if __name__=="__main__":
                 break
             else:
                 view.error_msg()
-
 
 
     ## -- Ending time Games Menu --
@@ -381,7 +397,6 @@ if __name__=="__main__":
             else:
                 view.error_msg()
     exec_main_menu1()
-
 
 
 else:
