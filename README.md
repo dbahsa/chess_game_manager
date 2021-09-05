@@ -66,6 +66,8 @@ dont il/elle devra traiter méticuleusement pour le bon fonctionnement de cette 
 
 
 ### PRE-REQUIS
+* 🚨 ALL FILES (main.py, view.py, players.py, tournament.py, and data.json) IN THE PROJECT FOLDER MUST BE OPEN SO THAT THE APP COULD FUNCTION !!!!
+* 🚨 DO NOT DELETE DATA.JSON because it's used in the app as a tutorial for better user experience and fast learning curve tool !!!
 * Langage: Python > 3.8
 * Coding: utf-8
 * Environnement virtuel: voir fichier requirements.txt
